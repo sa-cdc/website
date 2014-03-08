@@ -1,7 +1,7 @@
 website
 =======
 
-San Antonio Christian Dental Clinic
+San Antonio Christian Dental Clinic's website is underdevelopment.  We are repo'ing the nanoc source code on github.
 
 
 
