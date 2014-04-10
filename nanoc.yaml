@@ -58,6 +58,7 @@ data_sources:
     # it will become “/about.html/” instead.
     allow_periods_in_identifiers: false
 
-    # Custom static data source
-    #type: static
-    #items_root: /
+    # Custom static data source, the dash below is really f*ing special!
+  -
+    type: static
+    items_root: /static
