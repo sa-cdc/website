@@ -13,6 +13,15 @@
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
 
+compile '/static/docs/*/', :rep => :thumbnail do
+  filter :thumbnailize, :width => 42
+end
+
+route '/static/docs/*/', :rep => :thumbnail do
+  #item.identifier.chop + '-thumbnail.' + item[:extension]
+  item.identifier.chop + '-thumbnail.png'
+end
+
 passthrough '/static/*'
 
 compile '/stylesheet/' do
