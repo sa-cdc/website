@@ -1,0 +1,22 @@
+* {
+  font-family: Georgia, Palatino, serif;
+}
+
+body {
+  background: url(/imgs/IMG_2240_gray.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+#main {
+  background: rgba(155, 155, 155, 0.9);
+}
+
+#sa-cdc-navbar-collapse {
+  font-size: 2em;
+}
+.carousel-inner > .item > img { margin: 0 auto; }
+footer{
+	border-top: 1px dashed #CCCCCC;
+	margin: 40px 0px;
+	padding: 20px 0px;
+}
