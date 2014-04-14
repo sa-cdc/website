@@ -16,9 +16,7 @@ class Thumbnailize < Nanoc::Filter
       )
     else
         cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:#{output_filename}"
-        p cmd
         out = `#{cmd}`
-        p out
     end
   end
 
