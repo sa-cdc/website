@@ -12,8 +12,16 @@ body {
 }
 
 #sa-cdc-navbar-collapse {
+  padding: 0 0 0 93px;
   font-size: 2em;
 }
+
+.brand {
+  margin: 15px 0px 0px 0px;
+  position: absolute;
+  z-index: 100;
+}
+
 .carousel-inner > .item > img { margin: 0 auto; }
 footer{
 	border-top: 1px dashed #CCCCCC;
