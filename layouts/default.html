@@ -50,7 +50,7 @@
               <% h = { lnk: link_to(page[:title], page.reps[0]) } %>
               <% h.merge!( { precedence: page[:precedence].to_i } ) %>
               <% if @item[:title] == page[:title] %>
-                <% h.merge!({ cls: "active" }) %>
+                <% h.merge!({ cls: "class=\"active\"" }) %>
               <% end %>
               <% bigA.push(h) %>
             <% end %>
