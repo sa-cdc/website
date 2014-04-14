@@ -9,22 +9,14 @@ tags:
 <br>
 
 <ul class="list-inline">
-  <li>
-    <a href="/static/docs/Applicant_Handout_English.pdf">
-      <img src="/static/imgs/pdf_thumbnail.jpg" alt="PDF 1" width="42" height="42">
-    </a>
-    Applicant Handout (English)
-  </li>
-  <li>
-    <a href="/static/docs/Applicant_Handout_Spanish.pdf">
-      <img src="/static/imgs/pdf_thumbnail.jpg" alt="PDF 1" width="42" height="42">
-    </a>
-    Applicant Handout (Spanish)
-  </li>
-  <li>
-    <a href="/static/docs/Clinic_Rules_2014.pdf">
-      <img src="/static/imgs/pdf_thumbnail.jpg" alt="PDF 1" width="42" height="42">
-    </a>
-    Clinic Rules
-  </li>
+  <% docs = @items['/downloads/'].children %>
+  <% docs.each do |doc| %>
+    <li>
+      <% path = doc.path %>
+      <a href="<%= path %>">
+        <img src="<%= doc.path(:rep => :thumbnail) %>">
+        <%= path %>
+      </a>
+    </li>
+  <% end %>
 </ul>

@@ -12,13 +12,14 @@
 #   “content/about.html”). To select all children, grandchildren, … of an
 #   item, use the pattern “/about/*/”; “/about/*” will also select the parent,
 #   because “*” matches zero or more characters.
+#
+# * Files located in /static/ are special, the extension is not auto stripped
 
-compile '/static/docs/*/', :rep => :thumbnail do
+compile '/downloads/*/', :rep => :thumbnail do
   filter :thumbnailize, :width => 42
 end
 
-route '/static/docs/*/', :rep => :thumbnail do
-  #item.identifier.chop + '-thumbnail.' + item[:extension]
+route '/downloads/*/', :rep => :thumbnail do
   item.identifier.chop + '-thumbnail.png'
 end
 
