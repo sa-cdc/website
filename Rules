@@ -15,11 +15,11 @@
 #
 # * Files located in /static/ are special, the extension is not auto stripped
 
-compile '/downloads/*/', :rep => :thumbnail do
+compile '/clinic_info/downloads/*/', :rep => :thumbnail do
   filter :thumbnailize, :width => 42
 end
 
-route '/downloads/*/', :rep => :thumbnail do
+route '/clinic_info/downloads/*/', :rep => :thumbnail do
   item.identifier.chop + '-thumbnail.png'
 end
 
