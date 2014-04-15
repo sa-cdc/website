@@ -6,15 +6,9 @@ tags:
   - sa-cdc
 ---
 
-<h3>Get Involved by Making a Donation or Volunteering</h3><br>
+<h3>Get Involved by Volunteering</h3><br>
 
-<p>As a nonprofit dental health provider, we rely heavily on individual monetary donations and the hard work of volunteers.</p>
-
-<p>If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:bigemf5@gmail.com?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">bigemf5@gmail.com.</a>.  Or, you can click on the link below to make a donation online.  Your contributions are always appreciated!</p>
-
-PLACEHOLDER FOR DONATE NOW BUTTON<br>
-
-<p>If you would like to donate your time as a volunteer, we are need of help in the following areas:</p>
+<p>As a nonprofit dental health provider, we rely heavily on the hard work of volunteers.  If you would like to donate your time as a volunteer, we are need of help in the following areas:</p>
 
 <ul>
   <li>Dentists</li>
@@ -37,20 +31,9 @@ Non-Clinical Needs Include:
 <ol>
   <li>Complete the application form below.  Once complete, you can email it, mail it, or bring it into our office.</li>
   <li>Give us a call at (210) 220-2301.</li>
-  <li>Email us at <a href="mailto:bigemf5@gmail.com?Subject=Interested%20in%20Volunteering" target="_top">bigemf5@gmail.com</a>.</li>
+  <li>Email us at <a href="mailto:#?Subject=Interested%20in%20Volunteering" target="_top">email@sadc.com</a>.</li>
   <li>Come by our office at the address in the footer of this page.</li>
 </ol>
 
-<a href="/downloads/Volunteer_Application.pdf">
-      <img src="/static/imgs/pdf_thumbnail.jpg" alt="PDF 1" width="42" height="42">
-    </a>
-    Volunteer Application
-
-<p>Stay connected!  If you would like to receive our periodic newsletters, click the button below to sign up.</p>
-
-PLACEHOLDER FOR NEWSLETTER (EMMA)
-
-<p>You'll find some of our recent newsletters below.</p>
-
-PLACEHOLDER FOR RECENT NEWSLETTER DOCS
-
+<% h = @items['/clinic_info/downloads/Volunteer_Application/'] %>
+  <a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Volunteer Application
