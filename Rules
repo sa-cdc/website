@@ -16,7 +16,7 @@
 # * Files located in /static/ are special, the extension is not auto stripped
 
 compile '/clinic_info/downloads/*/', :rep => :thumbnail do
-  filter :thumbnailize, :width => 42
+  filter :thumbnailize, :width => 42, :default => @items['/static/imgs/pdf_thumbnail.jpg']
 end
 
 route '/clinic_info/downloads/*/', :rep => :thumbnail do
