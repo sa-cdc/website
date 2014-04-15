@@ -11,13 +11,14 @@ class Thumbnailize < Nanoc::Filter
         '--resampleWidth',
         params[:width].to_s,
         '--out',
-        "png:#{output_filename}",
-        filename
+        output_filename,
+      filename
       )
     else
         cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:#{output_filename}"
         out = `#{cmd}`
     end
   end
+
 
 end
