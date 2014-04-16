@@ -28,3 +28,11 @@ footer{
 	margin: 40px 0px;
 	padding: 20px 0px;
 }
+
+a:link { color: black; }
+
+a:active { color: blue; }
+
+a:visited { color: red; }
+
+

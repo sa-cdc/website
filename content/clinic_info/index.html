@@ -5,10 +5,10 @@ precedence: 1
 tags:
   - sa-cdc
 ---
-    <div class="jumbotron">
-        <h1>San Antonio Christian Dental Clinic</h1>
-        <p class="lead"><i>Since 1986--making a difference in the dental health of those in need</i></p>
-      </div>
+
+        <h1 class="text-center">San Antonio Christian Dental Clinic</h1>
+        <p class="lead text-center"><i>Since 1986--making a difference in the dental health of those in need</i></p>
+
 
       <div class="row marketing">
         <div class="col-lg-6">
@@ -73,8 +73,7 @@ tags:
 
 		<ul class="list-inline">
   		  <li><% report = @items['/clinic_info/downloads/Annual_Report_2013/'] %>
-      <a href="<%= report.path %>"><img src="<%= report.path(:rep => :thumbnail) %>">
-        2012-2013 Annual Report</a>
+      <a href="<%= report.path %>"><img src="<%= report.path(:rep => :thumbnail) %>"></a> 2012-2013 Annual Report
   		  </li>
 		</ul>
         </div>
