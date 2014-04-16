@@ -22,7 +22,12 @@
     <meta http-equiv="refresh" content="20000" /> 
 
     <!-- Thanks Eric!  this seems to fix the scaling issue! -->
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <!--[if gte IE 10]>
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+    <![endif]-->
+    <!--[if !IE]> -->
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+    <!-- <![endif]-->
   </head>
   <body>
     <nav class="navbar navbar-default" role="navigation">
