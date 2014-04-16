@@ -15,9 +15,6 @@
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <!-- Date.js to make the eligibility sheet easier. Should also prove useful when we do scheduling stuff -Browne -->
-    <script src="/static/scripts/date.js"></script>
-
     <!-- you don't need to keep this, but it's cool for stats! -->
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
 

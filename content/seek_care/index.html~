@@ -194,7 +194,7 @@ function getElig(zip, size, income, insurance, bday){
 
   $( "#my-form" ).submit(function( event ) {
     process();
-    event.preventDefault(); 
+    event.preventDefault();
   });
 
   function annualIncomeSelect() {
