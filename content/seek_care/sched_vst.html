@@ -5,34 +5,46 @@ tags:
   - none
 ---
 
-<h3>Schedule a Visit with Us</h3><br>
+<h1 class="text-center">Schedule a Visit with Us</h1>
 
-<p>Important:  You must bring a photo ID with you when you visit our clinic for services.</p>
+<p class="text-center"><em>Important:  You must bring a photo ID with you when you visit our clinic for services.</em></p>
 
-<p>We are located on the Haven for Hope Campus in downtown San Antonio.</p>
+<div class="row">
+        <div class="col-md-4">
 
+<h4 class="text-center">We are located on the Haven for Hope Campus in downtown San Antonio.</h4>
 
+	<p class="text-center">
             1 Haven for Hope Way<br>
             Building 1, Suite 400<br>
             San Antonio, TX 78207<br>
 	    Phone: (210)220-2300<br>
-	    Email: bigemf5@gmail.com<br><br>
+	    Email: <a href="mailto:#" target="_top">email@sabc.com.</a><br><br>
 	    Clinic Hours<br>
             Monday through Friday<br>
- 	    8:30 a.m. to 3:30 p.m.<br><br><br>
+ 	    8:30 a.m. to 3:30 p.m.</p><br>
+
+	</div>
+	<div class="col-md-4">
+
+<h4 class="text-center">There are several ways you can schedule a visit with us.</h4>
+
+<p class="text-center">
+  You can give us a call at (210) 220-2300.</br>
+  You can email us at <a href="mailto:#?Subject=Schedule%20a%20Visit" target="_top">email@sabc.com.</a></br>
+  You can come by our office at the address above.</br>
+</p>
 
 
-<p>There are several ways you can schedule a visit with us.</p>
+	</div>
 
-<ol>
-  <li>You can give us a call at (210) 220-2300.</li>
-  <li>You can email us at <a href="mailto:#?Subject=Schedule%20a%20Visit" target="_top">email@sabc.com.</a></li>
-  <li>You can come by our office at the address above.</li>
-</ol>
+	<div class="col-md-4">
+<h4 class="text-center">Required Reading</h4>
 
-<p>Before visiting, we ask that you please read and understand our Patient Handout and Clinic Rules.  If you cannot access these documents online, we can make them available to you here at the clinic.</p>
+<p class="text-center"><em>Before visiting, we ask that you please read and understand our Patient Handout and Clinic Rules.  If you cannot access these documents online, we can make them available to you here at the clinic.</em></p></br>
 
-<ul class="list-inline">
+
+<ul class="list-inline text-center">
   <% h = @items['/clinic_info/downloads/Applicant_Handout/'] %>
   <li><a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Applicant Handout (English)</li>
   <% h = @items['/clinic_info/downloads/Applicant_Handout_Spanish/'] %>
@@ -40,3 +52,7 @@ tags:
   <% h = @items['/clinic_info/downloads/Clinic_Rules_2014/'] %>
   <li><a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Clinic Rules</li>
 </ul>
+
+
+	</div>
+    </div>

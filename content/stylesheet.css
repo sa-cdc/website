@@ -29,6 +29,7 @@ footer{
 	padding: 20px 0px;
 }
 
+<<<<<<< HEAD
 /* Marketing section of Overview
 -------------------------------------------------- */
 
@@ -63,4 +64,12 @@ footer{
   margin: 0 auto 30px;
   max-height: 145px;
 }
+=======
+a:link { color: black; }
+
+a:active { color: blue; }
+
+a:visited { color: red; }
+
+>>>>>>> 0bb4cac1c058683a738a6722a176a5206ec73e19
 
