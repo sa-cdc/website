@@ -60,7 +60,7 @@
             <% bigA.each do |page| %>
                 <% if(!page[:item].children.empty?) %>
                   <li class="dropdown <%= page[:cls_bald] %>">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= page[:item][:title] %> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= page[:item][:group] %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li> <%= link_to(page[:item][:title], page[:item].reps[0]) %></li>
                       <% page[:item].children.each do |sub| %>
