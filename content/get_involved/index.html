@@ -15,7 +15,7 @@ tags:
     <div class="row">
       <div class="col-sm-4">
         <img src="/static/imgs/The_official_emblem_of_dentistry_(color).png" alt="Sass and Less support" class="bs-docs-featurette-img img-responsive">
-        <h3>Clinical help needed.</h3>
+        <h3>Clinical volunteers</h3>
         <ul>
           <li>Dentists</li>
           <li>Hygienists</li>
@@ -26,23 +26,30 @@ tags:
       </div>
       <div class="col-sm-4">
         <img src="/static/imgs/sheikh_tuhin_Book_Open.png" alt="Responsive across devices" class="bs-docs-featurette-img img-responsive">
-        <h3>Non-clinical help needed.</h3>
+        <h3>Non-clinical volunteers</h3>
         <ul>
           <li>Office Receptionists</li>
           <li>Telephone answering</li>
           <li>Dental record maintenance</li>
-          <li>Database entry * Graphic Design</li>
-          <li>Special Events * Fundraising</li>
+          <li>Database entry</li>
+          <li>Graphic Design</li>
+          <li>Special Events</li>
+          <li>Fundraising</li>
         </ul>
       </div>
       <div class="col-sm-4">
         <img src="/static/imgs/tooth.png" alt="Components" class="bs-docs-featurette-img img-responsive">
-        <h2>Volunteer.</h2>
+        <h3>Get started</h3>
+        <% h = @items['/clinic_info/downloads/Volunteer_Application/'] %>
         <ol>
-          <li>Complete the application form below.  Once complete, you can email it, mail it, or bring it into our office.</li>
-          <li>Give us a call at (210) 220-2301.</li>
-          <li>Email us at <a href="mailto:#?Subject=Interested%20in%20Volunteering" target="_top">email@sadc.com</a>.</li>
-          <li>Come by our office at the address in the footer of this page.</li>
+          <li>Complete <a href="<%= h.path %>">this application form</a></li>
+          <li>Submit it:
+            <ul>
+              <li><a href="mailto:#">email (email@sa-cdc.org)</a></li>
+              <li><a href="#">mail </a></li>
+              <li>bring to the clinic</li>
+            </ul>
+          <li>Questions: (210) 220-2301</li>
         </ol>
       </div>
     </div>
@@ -51,25 +58,3 @@ tags:
   </div>
 </div>
 
-<div class="container">
-<div class="marketing">
-
-
-  <div class="row-fluid">
-    <div class="span4">
-      <img class="marketing-img" src="">
-      
-    </div>
-    <div class="span4">
-    </div>
-    <div class="span4">
-    </div>
-  </div>
-</div> 
-</div>
-  
-
-
-
-<% h = @items['/clinic_info/downloads/Volunteer_Application/'] %>
-  <a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Volunteer Application
