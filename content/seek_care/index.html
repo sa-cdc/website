@@ -115,14 +115,14 @@ function getZipElig(zip){
 }
 function getIncElig(familySize, income){
 	var incomelist = new Array();
-	incomelist[1] = 11170;
-	incomelist[2] = 15130;
-	incomelist[3] = 19090;
-	incomelist[4] = 23050;
-	incomelist[5] = 27010;
-	incomelist[6] = 30970;
-	incomelist[7] = 38890;
-	incomelist[8] = 42850;
+	incomelist[1] = 11670;
+	incomelist[2] = 15730;
+	incomelist[3] = 19970;
+	incomelist[4] = 23850;
+	incomelist[5] = 27910;
+	incomelist[6] = 31970;
+	incomelist[7] = 36030;
+	incomelist[8] = 40090;
         if(familySize > 8){
            familySize = 8;
         }
@@ -196,6 +196,17 @@ function getElig(zip, size, income, insurance, bday){
     process();
     event.preventDefault(); 
   });
+
+$("#annualIncome").blur(function(event){
+   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,''));
+})
+$("#monthlyIncome").blur(function(event){
+   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,''));
+})
+$("#hourlyIncome").blur(function(event){
+   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,''));
+})
+
 
   function annualIncomeSelect() {
       $('#annualIncome').removeAttr("disabled");
