@@ -430,6 +430,7 @@ body {
   line-height: 1.5;
   /*color: #555;*/
   text-align: center;
+  vertical-align top;
   /*background-color: #fff;*/
   border-bottom: 1px solid #e5e5e5;
 }
