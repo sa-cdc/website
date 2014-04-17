@@ -26,21 +26,21 @@ tags:
       <span class="input-group-addon">
         <input type="radio" name="incomeRadio" id="annual" value="annual" checked> Annual Income: $
       </span>
-      <input type="number" class="form-control" id="annualIncome" placeholder="15,000">
+      <input type="text" class="form-control" id="annualIncome" placeholder="15,000">
       <span class="input-group-addon">.00</span>
     </div>
     <div class="input-group monthly">
       <span class="input-group-addon">
         <input type="radio" name="incomeRadio" id="monthly" value="monthly"> Monthly Income: $
       </span>
-      <input type="number" class="form-control" id="monthlyIncome" placeholder="800" disabled>
+      <input type="text" class="form-control" id="monthlyIncome" placeholder="800" disabled>
       <span class="input-group-addon">.00</span>
     </div>
     <div class="input-group hourly">
       <span class="input-group-addon">
         <input type="radio" name="incomeRadio" id="hourly" value="hourly"> Hourly Income: $
       </span>
-      <input type="number" class="form-control" id="hourlyIncome" placeholder="6" disabled>
+      <input type="text" class="form-control" id="hourlyIncome" placeholder="6" disabled>
       <span class="input-group-addon">x Hours per week</span>
       <input type="number" class="form-control" id="hours" placeholder="25" disabled>
     </div>
@@ -197,14 +197,18 @@ function getElig(zip, size, income, insurance, bday){
     event.preventDefault(); 
   });
 
+/*$("#annualIncome").blur(function(event){
+   $("#annualIncome").val(500);
+})*/
+
 $("#annualIncome").blur(function(event){
-   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,''));
+   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,""));
 })
 $("#monthlyIncome").blur(function(event){
-   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,''));
+   $("#monthlyIncome").val($("#monthlyIncome").val().replace(/\,/g,""));
 })
 $("#hourlyIncome").blur(function(event){
-   $("#annualIncome").val($("#annualIncome").val().replace(/\,/g,''));
+   $("#hourlyIncome").val($("#hourlyIncome").val().replace(/\,/g,""));
 })
 
 
