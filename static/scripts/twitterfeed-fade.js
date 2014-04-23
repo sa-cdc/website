@@ -15,7 +15,7 @@ $(document).ready(function () {
 	
 	var headerHTML = '';
 	var loadingHTML = '';
-	loadingHTML += '<div id="loading-container"><img src="static/imgs/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
+	loadingHTML += '<div id="loading-container"><img src="/static/imgs/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
 	
 	$('#twitter-feed').html(loadingHTML);
 	 
@@ -153,7 +153,7 @@ $(document).ready(function () {
             } else {
                 error = 'Uncaught Error.\n' + jqXHR.responseText;
             }	
-       		alert("error: " + error);
+       		//alert("error: " + error);
     });
     
 
