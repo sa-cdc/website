@@ -1,3 +1,4 @@
+/* Provided by Google Fonts */
 * {
   font-family: 'Cabin', 'sans-serif';
 }
@@ -12,8 +13,14 @@ body {
 }
 
 #sa-cdc-navbar-collapse {
-  padding: 0 0 0 93px;
+  padding-left: 180px;
   font-size: 1.5em;
+}
+
+.sa-cdc-utility {
+  padding-right: 80px;
+  font-size: 1em;
+  text-align: right;
 }
 
 .brand {
@@ -27,6 +34,19 @@ footer{
 	border-top: 1px dashed #CCCCCC;
 	margin: 40px 0px;
 	padding: 20px 0px;
+}
+
+@media (min-width: 768px) {
+
+  .row {
+    display: table; 
+   }
+
+  [class*="col-"]{
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+  }
 }
 
 /*

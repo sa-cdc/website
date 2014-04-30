@@ -10,49 +10,35 @@ tags:
 <p class="text-center"><em>Important:  You must bring a photo ID with you when you visit our clinic for services.</em></p>
 
 <div class="row">
-        <div class="col-md-4">
-
-<h4 class="text-center">We are located on the Haven for Hope Campus in downtown San Antonio.</h4>
-
-	<p class="text-center">
-            1 Haven for Hope Way<br>
-            Building 1, Suite 400<br>
-            San Antonio, TX 78207<br>
-	    Phone: (210)220-2300<br>
-	    Email: <a href="mailto:#" target="_top">email@sabc.com.</a><br><br>
-	    Clinic Hours<br>
-            Monday through Friday<br>
- 	    8:30 a.m. to 3:30 p.m.</p><br>
-
-	</div>
-	<div class="col-md-4">
-
-<h4 class="text-center">There are several ways you can schedule a visit with us.</h4>
-
-<p class="text-center">
-  You can give us a call at (210) 220-2300.</br>
-  You can email us at <a href="mailto:#?Subject=Schedule%20a%20Visit" target="_top">email@sabc.com.</a></br>
-  You can come by our office at the address above.</br>
-</p>
-
-
-	</div>
 
 	<div class="col-md-4">
-<h4 class="text-center">Required Reading</h4>
-
-<p class="text-center"><em>Before visiting, we ask that you please read and understand our Patient Handout and Clinic Rules.  If you cannot access these documents online, we can make them available to you here at the clinic.</em></p></br>
-
-
-<ul class="list-inline text-center">
-  <% h = @items['/clinic_info/downloads/Applicant_Handout/'] %>
-  <li><a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Applicant Handout (English)</li>
-  <% h = @items['/clinic_info/downloads/Applicant_Handout_Spanish/'] %>
-  <li><a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Applicant Handout (Spanish)</li>
-  <% h = @items['/clinic_info/downloads/Clinic_Rules_2014/'] %>
-  <li><a href="<%= h.path %>"><img src="<%= h.path(:rep => :thumbnail) %>"></a> Clinic Rules</li>
-</ul>
-
-
+    <img src="" alt="Patient">
+    <h4 class="text-center">Schedule Your Visit Today</h4>
+    <p class="">
+      SACDC welcomes all visitors. After determining your eligibility please call or email us to schedule your visit today.
+      You can come by our office at the address above.</br>
+    </p>
+    <a href="tel://12102202300" class="btn btn-primary active" role="button">(210) 220-2300</a>
+    <a href="mailto:#?Subject=Schedule%20a%20Visit" class="btn btn-primary active" role="button">email@sabc.com.</a>
 	</div>
-    </div>
+
+  <div class="col-md-4">
+    <img src="" alt="Clinic">
+    <h4 class="text-center">Before You Visit</h4>
+	  <p class="text-center">
+      After scheduling your visit, please download our patient application and clinic rules. Make sure to bring these documents and a photo ID with you to your visit.
+    </p>
+    <ul class="list-inline">
+      <li><a href="/clinic_info/downloads/Applicant_Handout/" class="btn btn-primary active" role="button">Applicant Handout</a></li>
+      <li><a href="/clinic_info/downloads/Applicant_Handout_Spanish/" class="btn btn-primary active" role="button">Folleto Solicitante</a></li>
+      <li><a href="/clinic_info/downloads/Clinic_Rules_2014/" class="btn btn-primary active" role="button">Clinic Rules</a></li>
+    </ul>
+	</div>
+	<div class="col-md-4">
+    <img src="" alt="Map">
+    <h4 class="text-center">Location</h4>
+    <p class="">SACDC is located at 1 Haven for Hope Way Building 1, Suite 400, San Antonio, TX 78207. For directions please <a href="">check with Via</a> or get <a href="">directions through Google Maps</a>.</p>
+    <a href="maps.google.com" class="btn btn-primary active" role="button">Map: 1 Haven for Hope Way</a>
+    <a href="" class="btn btn-primary active" role="button">Via Transit</a>
+	</div>
+</div>
