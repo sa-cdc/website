@@ -35,7 +35,7 @@ footer{
 	margin: 40px 0px;
 	padding: 20px 0px;
 }
-
+/*  Attempting to fix height of footer */ /*
 @media (min-width: 768px) {
 
   .row {
@@ -48,6 +48,17 @@ footer{
     vertical-align: top;
   }
 }
+*/
+.demo{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+    background-color:#efefef;
+}
+
+.equal {
+    overflow: hidden; 
+}
+
 
 /*
  * Link colors, make it pop on gray background.
