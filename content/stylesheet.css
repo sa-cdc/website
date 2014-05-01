@@ -8,6 +8,10 @@ body {
   background-size: cover;
 }
 
+.page {
+  text-align: left;
+}
+
 #main {
   background: rgba(155, 155, 155, 0.9);
 }
@@ -35,24 +39,10 @@ footer{
 	margin: 40px 0px;
 	padding: 20px 0px;
 }
-/*  Attempting to fix height of footer */ /*
-@media (min-width: 768px) {
-
-  .row {
-    display: table; 
-   }
-
-  [class*="col-"]{
-    float: none;
-    display: table-cell;
-    vertical-align: top;
-  }
-}
-*/
+/*  Attempting to fix height of footer */
 .demo{
     margin-bottom: -99999px;
     padding-bottom: 99999px;
-    background-color:#efefef;
 }
 
 .equal {
