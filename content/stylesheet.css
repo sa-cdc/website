@@ -49,6 +49,16 @@ footer{
   }
 }
 */
+.demo{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+    background-color:#efefef;
+}
+
+.equal {
+    overflow: hidden; 
+}
+
 
 /*
  * Link colors, make it pop on gray background.
