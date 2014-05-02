@@ -14,9 +14,9 @@ tags:
   <% docs.each do |doc| %>
     <li>
       <% path = doc.path %>
-      <a href="<%= path %>">
-        <img src="<%= doc.path(:rep => :thumbnail) %>">
-        <%= path %>
+      <a href="<%= path %>" style="font-size: 1.5em;">
+        <img src="<%= doc.path(:rep => :thumbnail) %>" style="margin: 5px 5px 5px 5px;">
+        <%= path.sub('/clinic_info/downloads/', '') %>
       </a>
     </li>
   <% end %>
