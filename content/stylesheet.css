@@ -51,6 +51,28 @@ img.social-media {
     max-height: 50px;
 }
 
+img.partner {
+  height: auto;
+  width: auto;
+  max-height: 140px;
+  max-width: 340px;
+}
+
+p.partner {
+  background-color: rgb(87, 82, 82);
+  width: 356px;
+  height: 150px;
+}
+
+/**
+ * Vertical align image.
+ **/
+span.partner {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
 .equal {
     overflow: hidden; 
 }
