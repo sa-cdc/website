@@ -5,113 +5,121 @@ precedence: 3
 tags:
   - sa-cdc
 ---
-<h1 class="text-center">Seeking Dental Care</h1>
-<h3 class="text-center">
-SA-CDC was established in 1986 to provide free dental care for low income and homeless Bexar County adults. Before you schedule a visit, please fill out the form on this page to determine eligibility.</h3>
+<div class="bs-docs-featurette">
+  <div class="container">
+    <h2 class="bs-docs-featurette-title">Seeking Dental Care</h2>
+    <p class="lead">
+      SA-CDC was established in 1986 to provide free dental care for low income and homeless Bexar County adults. Before you schedule a visit, please fill out the form on this page to determine eligibility.
+    </p>
 
-<div class="row">
+    <hr class="half-rule">
 
-  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-6">
 
-<p>All clients must be age 18 or older and reside in San Antonio/Bexar County. Care is provided without regard for race, creed, or gender.</p>
+        <p>All clients must be age 18 or older and reside in San Antonio/Bexar County. Care is provided without regard for race, creed, or gender.</p>
 
-<form role="form" id="my-form">
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon">Zip Code </span>
-      <input type="number" class="form-control" id="zip" placeholder="Enter Zip Code e.g., 78245">
+        <form role="form" id="my-form">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">Zip Code </span>
+              <input type="number" class="form-control" id="zip" placeholder="Enter Zip Code e.g., 78245">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">Birthdate </span>
+              <input type="date" class="form-control" id="birthdate" data-date="05/19/1984">
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <div class="input-group annual">
+              <span class="input-group-addon">
+                <input type="radio" name="incomeRadio" id="annual" value="annual" checked> Annual Income: $
+              </span>
+              <input type="text" class="form-control" id="annualIncome" placeholder="15,000">
+              <span class="input-group-addon">.00</span>
+            </div>
+            <div class="input-group monthly">
+              <span class="input-group-addon">
+                <input type="radio" name="incomeRadio" id="monthly" value="monthly"> Monthly Income: $
+              </span>
+              <input type="text" class="form-control" id="monthlyIncome" placeholder="800" disabled>
+              <span class="input-group-addon">.00</span>
+            </div>
+            <div class="input-group hourly">
+              <span class="input-group-addon">
+                <input type="radio" name="incomeRadio" id="hourly" value="hourly"> Hourly Income: $
+              </span>
+              <input type="text" class="form-control" id="hourlyIncome" placeholder="6" disabled>
+              <span class="input-group-addon">x Hours/week</span>
+              <input type="number" class="form-control" id="hours" placeholder="25" disabled>
+            </div>
+          </div>
+        
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">How many in your family? </span>
+              <input type="number" class="form-control" id="famsize" >
+            </div>
+          </div>
+        
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="ins" value="">
+              Check this box if you have dental insurance
+            </label>
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+        <div class="alert alert-success" id="elig" style="display:none">You are eligible to receive care. Please <a href="/seek_care/sched_vst">schedule a visit.</a></div>
+        <div class="alert alert-danger" id="inelig" style="display:none">You are not eligible to receive care. Please call with any questions.</div>
+
+      </div>
+      <div class="col-md-6">
+        <p>
+          <h3>Clinic Hours</h3>
+          Monday through Friday<br>
+          8:30 a.m. to 3:30 p.m.<br>
+        </p>
+        <hr class="half-rule">
+        <p>
+          <h3>Appointments</h3>
+          Please call (210) 220-2300 for appointments.
+        </p>
+        <hr class="half-rule">
+        <p>
+          <h3>Free Dental Services Include:</h3>
+          <ul style="text-align:center;">
+            <li>Exams</li>
+            <li>X-rays</li>
+            <li>General Dentistry</li>
+            <li>Oral Health Education</li>
+            <li>Cleanings</li>
+            <li>Fillings</li>
+            <li>Extractions and more…</li>
+          </ul>
+        </p>
+        <hr class="half-rule">
+        <p>
+          <h3>Prosthetics Include:</h3>
+          <ul style="text-align:center;">
+            <li>Dentures</li>
+            <li>Bridges</li>
+            <li>Partials</li>
+          </ul>
+          <em>Clients are asked to pay only for the discounted materials cost for prosthetics.</em>
+        </p>
+        <hr class="half-rule">
+
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon">Birthdate </span>
-      <input type="date" class="form-control" id="birthdate" data-date="05/19/1984">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="input-group annual">
-      <span class="input-group-addon">
-        <input type="radio" name="incomeRadio" id="annual" value="annual" checked> Annual Income: $
-      </span>
-      <input type="text" class="form-control" id="annualIncome" placeholder="15,000">
-      <span class="input-group-addon">.00</span>
-    </div>
-    <div class="input-group monthly">
-      <span class="input-group-addon">
-        <input type="radio" name="incomeRadio" id="monthly" value="monthly"> Monthly Income: $
-      </span>
-      <input type="text" class="form-control" id="monthlyIncome" placeholder="800" disabled>
-      <span class="input-group-addon">.00</span>
-    </div>
-    <div class="input-group hourly">
-      <span class="input-group-addon">
-        <input type="radio" name="incomeRadio" id="hourly" value="hourly"> Hourly Income: $
-      </span>
-      <input type="text" class="form-control" id="hourlyIncome" placeholder="6" disabled>
-      <span class="input-group-addon">x Hours/week</span>
-      <input type="number" class="form-control" id="hours" placeholder="25" disabled>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon">How many in your family? </span>
-      <input type="number" class="form-control" id="famsize" >
-    </div>
-  </div>
-
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" name="ins" value="">
-      Check this box if you have dental insurance
-    </label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-
-<div class="alert alert-success" id="elig" style="display:none">You are eligible to receive care. Please <a href="/seek_care/sched_vst">schedule a visit.</a></div>
-<div class="alert alert-danger" id="inelig" style="display:none">You are not eligible to receive care. Please call with any questions.</div>
 
   </div>
-  <div class="col-md-6">
-
-<p>
-Clinic Hours<br>
-Monday through Friday<br>
-8:30 a.m. to 3:30 p.m.<br>
-</p>
-
-<p>
-Please call (210) 220-2300 for appointments.
-</p>
-
-<p>
-Free Dental Services Include:<br>
-Exams<br>
-X-rays<br>
-General Dentistry<br>
-Oral Health Education<br>
-Cleanings<br>
-Fillings<br>
-Extractions and more…<br>
-</p>
-
-<p>
-Prosthetics Include:<br>
-Dentures<br>
-Bridges<br>
-Partials<br>
-</p>
-
-<p>
-Clients are asked to pay only for the discounted materials cost for prosthetics.
-</p>
-
-  </div>
-
 </div>
-
+      
 <script>
 function getZipElig(zip){
 	var ziplist = new Array("78002","78006","78015","78023","78039","78052","78069","78073","78101","78108","78109","78112","78124","78148","78152",
