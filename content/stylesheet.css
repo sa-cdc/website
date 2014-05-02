@@ -45,6 +45,14 @@ footer{
     padding-bottom: 99999px;
 }
 
+.soc_med_height{
+    padding: 10px 0px;
+}
+
+.soc_med_width{
+    padding: 0px 2px 0px 0px;
+}
+
 .equal {
     overflow: hidden; 
 }
