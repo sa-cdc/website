@@ -39,6 +39,12 @@ footer{
 	margin: 40px 0px;
 	padding: 20px 0px;
 }
+
+/*  Attempting to fix carousel gradient */
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
 /*  Attempting to fix height of footer */
 .demo{
     margin-bottom: -99999px;
