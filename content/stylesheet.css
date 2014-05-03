@@ -51,6 +51,11 @@ footer{
     padding-bottom: 99999px;
 }
 
+/* Add margin to buttons by default. */
+.btn {
+  margin: 5px 2px 2px 2px;
+}
+
 /**
  * Adding resoponsiveness to google maps iframe
  * Credit: http://www.smashingmagazine.com/2014/02/27/making-embedded-content-work-in-responsive-design/
