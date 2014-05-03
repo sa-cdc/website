@@ -58,16 +58,18 @@ img.social-media {
 }
 
 img.partner {
-  height: auto;
-  width: auto;
-  max-height: 140px;
-  max-width: 340px;
+  padding: 5% 5% 5% 5%;
+  margin: 0px auto;
+  display:table-cell; 
+  vertical-align:middle;
+  max-height: 160px;
 }
 
 p.partner {
   background-color: rgb(87, 82, 82);
-  width: 356px;
-  height: 150px;
+  max-width: 356px;
+  max-height: 175px;
+  margin: 0px auto;
 }
 
 /**
