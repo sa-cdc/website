@@ -459,6 +459,7 @@ body {
 }
 .bs-docs-featurette-img {
   display: block;
+  border-radius: 5px;
   margin: 0 auto;
   margin-bottom: 20px;
   color: #333;

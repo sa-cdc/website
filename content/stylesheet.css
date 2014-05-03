@@ -14,6 +14,7 @@ body {
 
 #main {
   background: rgba(155, 155, 155, 0.9);
+  border-radius: 5px;
 }
 
 #sa-cdc-navbar-collapse {
@@ -33,7 +34,10 @@ body {
   z-index: 100;
 }
 
-.carousel-inner > .item > img { margin: 0 auto; }
+.carousel-inner > .item > img {
+  margin: 0 auto;
+  border-radius: 5px;
+}
 footer{
 	border-top: 1px dashed #CCCCCC;
 	margin: 40px 0px;
@@ -94,6 +98,7 @@ p.partner {
   max-width: 356px;
   max-height: 175px;
   margin: 0px auto;
+  border-radius: 5px;
 }
 
 /**
