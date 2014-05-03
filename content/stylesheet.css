@@ -38,6 +38,7 @@ body {
   margin: 0 auto;
   border-radius: 5px;
 }
+
 footer{
 	border-top: 1px dashed #CCCCCC;
 	margin: 40px 0px;
@@ -47,6 +48,17 @@ footer{
 /*  Attempting to fix carousel gradient */
 .carousel-control.left, .carousel-control.right {
     background-image: none
+}
+
+/* Attempting to make carousel text pop out */
+.carousel-caption {
+  background: rgba(66, 139, 202, 0.6);
+  border-radius: 5px;
+  padding-top: 0px;
+}
+
+.carouselh3 {
+  margin-top: 7px;
 }
 
 /*  Attempting to fix height of footer */
