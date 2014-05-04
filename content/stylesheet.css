@@ -52,7 +52,7 @@ footer{
 
 /* Attempting to make carousel text pop out */
 .carousel-caption {
-  background: rgba(66, 139, 202, 0.6);
+  background: rgba(155, 155, 155, 0.9);
   border-radius: 5px;
   padding-top: 0px;
 }
