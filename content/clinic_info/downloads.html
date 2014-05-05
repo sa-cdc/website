@@ -1,28 +1,15 @@
 ---
-title: Downloads
+title: Annual Report
 group: Clinic Info
 tags:
   - none
 ---
 
-<div class="bs-docs-featurette">
-  <!-- <div class="container"> **SUSPECT CAUSE OF RIGHT ALIGN ISSUE**-->
-    <h2 class="bs-docs-featurette-title">SA-CDC Download Section</h2>
-    <p class="lead">Forms, documents, and other information for download.</p>
-    <hr class="half-rule">
 
-    <ul class="list-inline">
-      <% docs = @items['/clinic_info/downloads/'].children %>
-      <% docs.each do |doc| %>
-        <li>
-          <% path = doc.path %>
-          <a href="<%= path %>" style="font-size: 1.5em;">
-            <img src="<%= doc.path(:rep => :thumbnail) %>" style="margin: 5px 5px 5px 5px;">
-            <%= path.sub('/clinic_info/downloads/', '') %>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-    <hr class="half-rule">
-  <!-- </div> -->
+<div class="col-md-8 col-md-offset-2">
+  <h3 class="text-center">SACDC Annual Reports</h3>
+    <h5 class="text-center">Starting in 2013, SACDC has put out annual reports in a digital format so that you can learn more about our passion and work! Please feel free to read through the past reports to learn more about who we are and what we do.</h5></br>
+</div>
+<div class="col-md-6 col-md-offset-3">
+      <a href="http://online.fliphtml5.com/egva/dsrs/#p=1" target="_blank"><img src="/static/imgs/Annual_Report.jpg" alt="Sass and Less support" class="bs-docs-featurette-img img-responsive"></a>
 </div>
