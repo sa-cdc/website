@@ -19,7 +19,7 @@ $(document).ready(function () {
 	
 	$('#twitter-feed').html(loadingHTML);
 	 
-    $.getJSON('http://proto.sa-cdc.org/scripts/get-tweets1.php', 
+    $.getJSON('/scripts/get-tweets1.php', 
         function(feeds) {   
 		   //alert(feeds);
             var feedHTML = '';
