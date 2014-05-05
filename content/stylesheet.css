@@ -6,6 +6,7 @@
 body {
   background: url(/static/imgs/IMG_2240_gray.jpg) no-repeat center center fixed;
   background-size: cover;
+  color: white;
 }
 
 .page {
@@ -43,6 +44,7 @@ footer{
 	border-top: 1px dashed #CCCCCC;
 	margin: 40px 0px;
 	padding: 20px 0px;
+  color: black;
 }
 
 /*  Attempting to fix carousel gradient */
