@@ -75,7 +75,7 @@
 
             <%# TODO: Base on method call from above code... %>
             <% bigA.each do |page| %>
-                <% if(!page[:item].children.empty?) %>
+                <% if(!page[:item].children.empty? && page[:item][:title]!= 'Home') %>
                   <li class="dropdown <%= page[:cls_bald] %>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= page[:item][:group] %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
