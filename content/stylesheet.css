@@ -55,10 +55,18 @@ footer{
   background: rgba(155, 155, 155, 0.9);
   border-radius: 5px;
   padding-top: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-bottom: 18px;
 }
 
 h3.carousel {
-  margin-top: 7px;
+  margin-top: 3px;
+}
+
+/*Trying to move pagination dots lower*/
+.carousel-indicators {
+  margin-bottom: 3px;
 }
 
 /*  Attempting to fix height of footer */
@@ -89,6 +97,13 @@ h3.carousel {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+/*Trying to fix linkedIn icon looking smaller than rest*/
+img.linkedIn {
+    margin: 11px 0px 11px 11px;
+    max-width: 61px;
+    max-height: 50px;
 }
 
 img.social-media {
