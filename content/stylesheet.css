@@ -77,6 +77,10 @@ h3.carousel {
     padding-bottom: 99999px;
 }
 
+.equal {
+    overflow: hidden; 
+}
+
 /* Add margin to buttons by default. */
 .btn {
   margin: 5px 2px 2px 2px;
@@ -139,9 +143,6 @@ span.partner {
   height: 100%;
 }
 
-.equal {
-    overflow: hidden; 
-}
 
 
 /*
