@@ -4,8 +4,8 @@
 }
 
 body {
-  <!--background: url(/static/imgs/IMG_2240_gray.jpg) no-repeat center center fixed;-->
-  background: rgba(155, 155, 155, 1.0);
+  /*background: url(/static/imgs/IMG_2240_gray.jpg) no-repeat center center fixed;*/
+  background: rgba(0, 0, 0, 1.0);
   background-size: cover;
   color: #FFF;
   margin-bottom: -40px;
@@ -22,27 +22,19 @@ body {
 }
 
 #main {
-  background: rgba(155, 155, 155, 0);
+  background: rgba(0, 0, 0, 1.0);
   border-radius: 5px;
 }
 
 /*Making black, responsive background*/
-.containerbody {
+.container {
   background: rgba(0, 0, 0, 1.0);
   margin-top:-20px;
   margin-bottom:-40px;
-  margin-right:auto;
-  margin-left:auto;
   padding-left:15px;
   padding-right:15px;
   padding-top:20px;
 }
-  
-  @media (min-width:768px){.containerbody{width:992px}}
-  
-  @media (min-width:992px){.containerbody{width:1200px}}
-  
-  @media (min-width:1200px){.containerbody{width:1280px}}
 
 #sa-cdc-navbar-collapse {
   padding-left: 180px;
@@ -291,17 +283,17 @@ a:visited { color: #0079C1; }
     padding-bottom: 0px;
   }
   .captionleft {
-    max-width: 220px;
+    max-width: 20%;
     top: auto;
-    bottom: 70px;
+    bottom: 15%;
     right: auto;
-    left: 25px;
+    left: 20%;
   }
   .captionright {
-    max-width: 220px;
+    max-width: 20%;
     top: auto;
-    bottom: 70px;
-    right: 25px;
+    bottom: 15%;
+    right: 20%;
     left: auto;
   }
   .brand {
