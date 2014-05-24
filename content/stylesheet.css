@@ -189,6 +189,11 @@ img.social-media {
     max-height: 50px;
 }
 
+.social-media {
+    margin-top: 20px;
+    text-align: center;
+}
+
 img.partner {
   padding: 5% 5% 5% 5%;
   margin: 0px auto;
