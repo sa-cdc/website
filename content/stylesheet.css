@@ -260,6 +260,11 @@ a:visited { color: #0079C1; }
   width: 100px;
   margin: 40px auto;
 }
+
+.full-rule {
+  margin: 40px auto;
+}
+
 .bs-docs-featurette h3 {
   font-weight: normal;
   color: #fff;
