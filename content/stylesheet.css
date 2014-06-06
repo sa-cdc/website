@@ -20,7 +20,15 @@ body {
 .well {
   margin: 0;
   padding: 0;
+  background-color: rgba(0, 116, 178, 1.0);
+  color:#FFF;
 }
+
+.well a:link { color: #FFFFFF; }
+
+.well a:active { color: #5AC1FF; }
+
+.well a:visited { color: #C0C0C0; }
 
 .page {
   text-align: left;
@@ -48,14 +56,17 @@ body {
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover,
 .navbar-default .navbar-nav>.active>a:focus {
     color: #000;
+    height: 80px;
+    padding-top: 25px;
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: #fff
+    color: #fff;
+    padding-top: 25px;
 }
 
 #sa-cdc-navbar-collapse {
-  padding-left: 180px;
+  padding-left: 130px;
   font-size: 1.5em;
 }
 
@@ -71,6 +82,10 @@ body {
   z-index: 100;
   max-height: 72px;
   max-width: 76px;
+}
+
+.container-fluid {
+    height: 60px;
 }
 
 .carousel-inner > .item > img {
@@ -89,7 +104,7 @@ img.frontpageicon {
 }
 
 footer{
-	margin: 40px 0px;
+	margin: 240px 0px 0px 0px;
     color: black;
 }
 
@@ -320,6 +335,12 @@ a:visited { color: #0079C1; }
     max-height: none;
     max-width: none;
   }
+  .container-fluid {
+    height: 80px;
+  }
+  /*.navbar-default {
+    height: 80px;
+  }*/
 }
 @media (min-width: 768px) {
   .bs-docs-featurette {
