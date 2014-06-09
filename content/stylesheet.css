@@ -5,9 +5,9 @@
 
 body {
   /*background: url(/static/imgs/IMG_2240_gray.jpg) no-repeat center center fixed;*/
-  background: rgba(0, 0, 0, 1.0);
+  background: rgba(255, 255, 255, 1.0);
   background-size: cover;
-  color: #FFF;
+  color: #000;
   margin-bottom: -40px;
 }
 
@@ -20,29 +20,53 @@ body {
 .well {
   margin: 0;
   padding: 0;
+  background-color: rgba(0, 116, 178, 1.0);
+  color:#FFF;
 }
+
+.well a:link { color: #FFFFFF; }
+
+.well a:active { color: #5AC1FF; }
+
+.well a:visited { color: #C0C0C0; }
 
 .page {
   text-align: left;
 }
 
 #main {
-  background: rgba(0, 0, 0, 1.0);
+  background: rgba(255, 255, 255, 1.0);
   border-radius: 5px;
 }
 
 /*Making black, responsive background*/
-.container {
+/*.container {
   background: rgba(0, 0, 0, 1.0);
   margin-top:-20px;
   margin-bottom:-40px;
   padding-left:15px;
   padding-right:15px;
   padding-top:20px;
+}*/
+
+.navbar {
+  background-color: rgba(0, 116, 178, 1.0);
+ }
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: #000;
+    height: 80px;
+    padding-top: 25px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+    padding-top: 25px;
 }
 
 #sa-cdc-navbar-collapse {
-  padding-left: 180px;
+  padding-left: 130px;
   font-size: 1.5em;
 }
 
@@ -56,21 +80,16 @@ body {
   margin: 3px 0px 0px 0px;
   position: absolute;
   z-index: 100;
-  max-height: 72px;
-  max-width: 76px;
+  max-height: 53px;
+}
+
+.container-fluid {
+    height: 60px;
 }
 
 .carousel-inner > .item > img {
   margin: 0 auto;
   border-radius: 5px;
-}
-
-img.frontpagepic {
-  border-radius: 30%;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  display:table-cell; 
-  vertical-align:middle;
 }
 
 img.frontpageicon {
@@ -84,7 +103,7 @@ img.frontpageicon {
 }
 
 footer{
-	margin: 40px 0px;
+	margin: 240px 0px 0px 0px;
     color: black;
 }
 
@@ -312,8 +331,10 @@ a:visited { color: #0079C1; }
     left: auto;
   }
   .brand {
-    max-height: none;
-    max-width: none;
+    max-height: 75px;
+  }
+  .container-fluid {
+    height: 80px;
   }
 }
 @media (min-width: 768px) {
