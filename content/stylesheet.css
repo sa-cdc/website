@@ -137,6 +137,12 @@ footer{
   font-size: .5em;
 }
 
+.captionblack a:link { color: #000000; }
+
+.captionblack a:active { color: #000000; }
+
+.captionblack a:visited { color: #000000; }
+
 h3.carousel {
   margin-top: 3px;
 }
