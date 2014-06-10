@@ -260,7 +260,7 @@ a:visited { color: #0079C1; }
 .bs-docs-featurette-title {
   font-size: 30px;
   font-weight: normal;
-  color: #fff;
+  color: #000;
   margin-bottom: 5px;
 }
 .half-rule {
