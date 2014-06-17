@@ -10,6 +10,12 @@ body {
   margin-bottom: -40px;
 }
 
+/*.border1 {
+  border-style: double;
+  border-color: rgb(0, 116, 178);
+  border-width: 8px;
+}*/
+
 .footer-well {
   border-radius:12px;
   background-color:#FFF;
@@ -143,10 +149,6 @@ footer{
 
 .captionblack a:visited { color: #000000; }
 
-h3.carousel {
-  margin-top: 3px;
-}
-
 /*Trying to move pagination dots lower*/
 .carousel-indicators {
   margin-bottom: 3px;
@@ -266,15 +268,18 @@ a:visited { color: #0079C1; }
 .half-rule {
   width: 100px;
   margin: 40px auto;
-}
-
-.full-rule {
-  margin: 40px auto;
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc);
+  background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc);
+  background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc);
+  background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
 }
 
 .bs-docs-featurette h3 {
   font-weight: normal;
-  color: #fff;
+  color: #000;
   margin-bottom: 5px;
 }
 .bs-docs-featurette ul, ol {
@@ -294,6 +299,11 @@ a:visited { color: #0079C1; }
 .bs-docs-featurette-img img {
   display: block;
   margin-bottom: 15px;
+}
+
+h3.carousel {
+  margin-top: 3px;
+  color: #FFF;
 }
 
 @media (min-width: 480px) {
