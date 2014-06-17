@@ -13,7 +13,189 @@ tags:
 
     <hr class="half-rule">
 
-    <p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org.</a>.  Or, you can click on the link below to make a donation on-line.  Your contributions are always appreciated!</p>
+    <form class="form" role="form" id="amount-form" method="post">
+      <div class="form-group">
+        <label class="">Amount</label>
+        <input type="text" name="amount" id="amount"> <!-- Type=CC -->
+      </div>
+      <div class="form-group">
+        <label class="">Recurrence:</label>
+        <label class="">One-time</label>
+        <input type="radio" value="O" name="frequency" id="freq">
+        <label class="">Monthly</label>
+        <input type="radio" value="M" name="frequency" id="freq">
+        <label class="">Weekly</label>
+        <input type="radio" value="W" name="frequency" id="freq">
+        <label class="">Bi-Weekly</label>
+        <input type="radio" value="BW" name="frequency" id="freq">
+        <label class="">Quarterly</label>
+        <input type="radio" value="Q" name="frequency" id="freq">
+        <label class="">Annual</label>
+        <input type="radio" value="A" name="frequency" id="freq">
+      </div>
+    </form>
+
+    <form class="form" role="form" id="type-form" method="post">
+    <div class="row">
+      <div class="form-group col-xs-offset-3 col-xs-2">
+        <label class="control-label">Credit or Debit Card</label>
+        <input type="radio" value="CC" name="accounttype" id="payment">
+      </div>
+      <div class="form-group col-xs-2">
+        <label class="control-label">Checking</label>
+        <input type="radio" value="C" name="accounttype" id="payment">
+      </div>
+      <div class="form-group col-xs-2">
+        <label class="control-label">Savings</label>
+        <input type="radio" value="S" name="accounttype" id="payment">
+      </div>
+</div>
+    </form>
+
+    <form class="CC form-horizontal" style="display:none;" role="form" id="CC-form" method="post">
+      <div class="form-group">
+        <label class="credit debit">Debit Card?</label>
+        <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
+      </div>
+      <div class="form-group">
+        <label>Name (exactly as it appears on card)</label>
+        <input type="text" name="name_on_card" value="Blank Blank"> <!-- Type=CC -->
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-3">
+          <label>Address</label>
+          <input type="text" name="billingaddr1" id="billingAddress" value="Blank"> <!-- Type=CC -->
+        </div>
+        <div class="form-group col-xs-3">
+          <label>City<label>
+          <input type="text" name="billingcity" value="Blank"> <!-- Type=CC -->
+        </div>
+        <div class="form-group col-xs-3">
+          <label>State</label>
+          <input type="text" name="billingstate" value="TX"> <!-- Type=CC -->
+        </div>
+        <div class="form-group col-xs-3">
+          <label>ZIP</label>
+          <input type="text" name="billingzip" value="78241"> <!-- Type=CC -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-4">
+          <label>Expiration Month</label>
+          <input type="text" name="expmonth" value="12"> <!-- Type=CC -->
+        </div>
+        <div class="form-group col-xs-4">
+          <label>Expiration Year</label>
+          <input type="text" name="expyear" value="15"> <!-- Type=CC -->
+        </div>
+        <div class="form-group col-xs-4">
+          <label>Account Number</label>
+          <input type="text" name="accountnumber" value="4012000033330026"> <!-- Always -->
+        </div>
+      </div>
+      <button type="submit" id="submitCC">Donate</button>      
+    </form>
+
+    <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
+      <div class="form-group">
+        <label for="cardType">Account Number</label>
+        <input type="text" name="accountnumber"> <!-- Always -->
+      </div>
+      <div class="form-group">
+        <label for="cardType">Routing Number</label>
+        <input type="text" name="routingnumber"> <!-- Type=C or Type=S -->
+      </div>
+      <button type="submit" id="submitCS" >Donate</button>      
+    </form>
+
+<script>
+$( "input[name=accounttype]" ).change(function() {
+  type = $( "input:radio[name=accounttype]:checked" ).val();
+  if(type == "CC") {
+    $( ".CC" ).css("display", "block");
+    $( ".CS" ).css("display", "none");
+  } else if(type == "C" || type == "S") {
+    $( ".CS" ).css("display", "block");
+    $( ".CC" ).css("display", "none");
+  }
+});
+
+//Set the global sessionid
+var sessionJSON = $.ajax({ url: 'http://sa-cdc.org/scripts/vanco/encrypt.php',
+    dataType: 'jsonp',
+    crossDomain: true,
+    success: function (data) {
+      sessionid = data['sessionid'];
+  }
+});
+
+$('#CC-form').submit(function(event) {
+
+    event.preventDefault(); //End the form submission event now!
+
+    //TODO: Acquire the sessionid through this same method in php!
+    var nvpvarJSON = $.ajax({
+      url: 'http://sa-cdc.org/scripts/vanco/transRed.php',
+      dataType: 'jsonp',
+      crossDomain: true,
+      success: function(data) {
+        var formSer = $( "#CC-form" ).serializeArray();
+        var json = {};
+    
+        jQuery.each(formSer, function() {
+          json[this.name] = this.value || '';
+        });
+        json["accounttype"] = "CC";
+        json["name"] = "Doe,John";
+        json['nvpvar'] = data['nvpvar'];
+        json['sessionid'] = sessionid;
+        //alert(JSON.stringify(json));
+
+        $.ajax({
+          type: "POST",
+          url: "https://www.vancodev.com/cgi-bin/wsnvptest.vps",
+          data: json,
+          dataType: 'jsonp',
+          crossDomain: true,
+          success: function (vancoData) {
+            alert(JSON.stringify(vancoData));
+          },
+          error: function (jqXHR, textStatus, errorThrown, data) {
+            alert(errorThrown);
+          }
+        });
+      },
+      error: function (jqXHR, textStatus, errorThrown, data) {
+        alert(errorThrown);
+      }
+    });
+    
+
+
+    });
+
+  $('#CS-form').submit(function() {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: { "sessionid":sessionid, "nvpvar":nvpvar, "accounttype":"CC", "accountnumber": ccno, "expmonth": 
+        mm, "expyear": yy, "email": email, "name": custname, "billingaddr1": custadd, "billingcity": custcity, 
+        "billingstate": custstate, "billingzip": custzip, "name_on_card": custname
+        },
+        dataType: 'jsonp',
+        async: true,
+        traditional: false,
+        success: function (data) {
+            alert(JSON.stringify(data));
+        },
+        error: function (jqXHR, textStatus, errorThrown, data) {
+            alert(errorThrown);
+        }
+    });
+});
+</script>
+
+    <p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.  Or, you can click on the link below to make a donation on-line.  Your contributions are always appreciated!</p>
 
     <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">DONATE NOW</a>
 
