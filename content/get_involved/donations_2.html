@@ -12,135 +12,149 @@ tags:
 
     <hr class="half-rule">
 
-    <form class="form row" role="form" id="amount-form" method="post">
-      <div class="form-group col-xs-4">
-        <label class="">Clinical Operations Support</label>
-        <input type="text" name="amtOps" id="amtOps"> <!-- Type=CC -->
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="">Direct Patient Care</label>
-        <input type="text" name="amtCare" id="amtCare"> <!-- Type=CC -->
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="">Endowed Support</label>
-        <input type="text" name="amtSpt" id="amtSpt"> <!-- Type=CC -->
-      </div>
-    </form>
-
-    <div class="row">
-      <div class="col-xs-4">
-        <img src="/static/imgs/downArrow.png">
-      </div>
-      <div class="col-xs-4">
-        <img src="/static/imgs/leftArrow.png">
-      </div>
-      <div class="col-xs-4">
-        <img src="/static/imgs/leftArrow.png">
-      </div>
+    <div class="" id="amount-block">
+      <p> Step: <b style="font-size:2em;">1</b> __ 2 __ 3 __ 4 </p>
+      <form class="form row" role="form" id="amount-form" method="post">
+        <div class="col-xs-4">
+          <button type="submit" id="9Amt" value="9">$9</button>
+        </div>
+        <div class="col-xs-4">
+          <button type="button" id="15Amt" value="15">$15</button>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" id="29Amt" value="29">$29</button>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" id="50Amt" value="50">$50</button>
+        </div>
+        <div class="col-xs-4">
+          <button type="submit" id="500Amt" value="500">$500</button>
+        </div>
+        <div class="col-xs-4">
+          <div>Other:</div>
+          <input type="text" name="enteredAmount">
+          <button type="submit" id="customAmt" value="custom">Donate Now</button>
+        </div>
+      </form>
     </div>
 
-    <form class="form row" role="form" id="total-form" method="post">
-      <div class="form-group col-xs-4">
-        <label>Total</label>
-        <label id="total">$0.00</label>
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="">Donation Frequency</label>
-        <select name="frequency" id="freq">
-          <option value="O">One-time</option>
-          <option value="M">Monthly</option>
-          <option value="W">Weekly</option>
-          <option value="BW">Bi-Weekly</option>
-          <option value="Q">Quarterly</option>
-          <option value="A">Annual</option>
-        </select>
-      </div>
-      <div class="form-group col-xs-4">
-        <label>Start Date</label>
-        <input type="text" value="17June2014">
-      </div>
-    </form>
+<script>
+  var transaction = {};
+  $('#amount-form :submit').click(function(event) {
+    event.preventDefault(); //End the form submission event now!
+    var amount = $(this).attr("value");
+    if(amount == "custom") {
+      alert(amount);
+      amount = $('.enteredAmount').text();
+    }
+    transaction["amount"] = amount;
+    $('.amount').text(transaction['amount']);
+    $( "#amount-block" ).css("display", "none");
+    $( "#who-block" ).css("display", "block");
+  });
+</script>
 
-    <form class="form row" role="form" id="type-form" method="post">
-    <div class="col-xs-6">
-      <div>Who are you?</div>
-      <label>First Name</label>
-      <input type="text">
-      <label>Last Name</label>
-      <input type="text">
-      <label>Address 1</label>
-      <input type="text">
-      <label>Address 2</label>
-      <input type="text">
-      <label>City</label>
-      <input type="text">
-      <label>State/Zip</label>
-      <input type="text">/<input type="text">
-      <label>Phone Number</label>
-      <input type="text">
-      <label>Email Address</label>
-      <input type="text">
+    
+    <div class="" id="who-block" style="display:none;">
+      <p> Step: 1 __ <b style="font-size:2em;">2</b> __ 3 __ 4 </p>
+      <p> Please enter your billing information as it appears on your account. </p>
+      <form class="form row" role="form" id="who-form" method="post">
+        <div class="col-xs-6">
+          <div>Ok you want to donate: $<span class="amount"></span></div>
+          <div>Who are you?</div>
+          <label>First Name</label>
+          <input type="text" name="first" value="Matthew">
+          <label>Last Name</label>
+          <input type="text" name="last" value="Doe">
+          <label>Address 1</label>
+          <input type="text" name="addr1" value="1 Heart Way">
+          <label>Address 2</label>
+          <input type="text" name="addr2">
+          <label>City</label>
+          <input type="text" name="city" value="Galveston">
+          <label>State/Zip</label>
+          <input type="text" name="city" value="TX">/<input type="text" name="zip" value="20740">
+          <label>Phone Number</label>
+          <input type="text" name="phone" value="555-555-5555">
+          <label>Email Address</label>
+          <input type="text" name="email" value="m@m.com">
+        </div>
+        <button type="submit">Next</button>
+      </form> 
     </div>
-    <div class="row col-xs-6">
-      <div class="form-group col-xs-4">
-        <label class="control-label">Credit/Debit Card</label>
-        <input type="radio" value="CC" name="accounttype" id="payment">
+
+<script>
+  $('#who-form').submit(function(event) {
+    event.preventDefault(); //End the form submission event now!
+    var who = $("#who-form").serializeArray();
+    $.each(who, function() {
+      transaction[this.name] = this.value || '';
+    });
+    alert(JSON.stringify(transaction));
+    
+    $( "#who-block" ).css("display", "none");
+    $( "#CC-block" ).css("display", "block");
+  });
+</script>
+
+    <form class="form row" role="form" style="display:none;" id="type-form" method="post">
+      <div class="row col-xs-6">
+        <div class="form-group col-xs-4">
+          <label class="control-label">Credit/Debit Card</label>
+          <input type="radio" value="CC" name="accounttype" id="payment">
+        </div>
+        <div class="form-group col-xs-4">
+          <label class="control-label">Checking</label>
+          <input type="radio" value="C" name="accounttype" id="payment">
+        </div>
+        <div class="form-group col-xs-4">
+          <label class="control-label">Savings</label>
+          <input type="radio" value="S" name="accounttype" id="payment">
+        </div>
       </div>
-      <div class="form-group col-xs-4">
-        <label class="control-label">Checking</label>
-        <input type="radio" value="C" name="accounttype" id="payment">
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="control-label">Savings</label>
-        <input type="radio" value="S" name="accounttype" id="payment">
-      </div>
-</div>
     </form>
 
 
-    <form class="CC form-horizontal" style="display:none;" role="form" id="CC-form" method="post">
-      <div class="form-group">
-        <label class="credit debit">Debit Card?</label>
-        <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
-      </div>
-      <div class="form-group">
-        <label>Name (exactly as it appears on card)</label>
-        <input type="text" name="name_on_card" value="Blank Blank"> <!-- Type=CC -->
-      </div>
-      <div class="row">
-        <div class="form-group col-xs-3">
-          <label>Address</label>
-          <input type="text" name="billingaddr1" id="billingAddress" value="Blank"> <!-- Type=CC -->
+    <div class="" id="CC-block" style="display:none;">
+      <p> Step: 1 __ 2 __ <b style="font-size:2em;">3</b> __ 4 </p>
+      <div>Ok you want to donate: $<span class="amount"></span></div>
+      <form class="CC form-horizontal" role="form" id="CC-form" method="post">
+        <div class="form-group">
+          <label class="credit debit">Debit Card?</label>
+          <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
         </div>
-        <div class="form-group col-xs-3">
-          <label>City<label>
-          <input type="text" name="billingcity" value="Blank"> <!-- Type=CC -->
+        <div class="row">
+          <div class="form-group col-xs-4">
+            <label>Account Number</label>
+            <input type="text" name="accountnumber" value="4012000033330026"> <!-- Always -->
+          </div>
+          <div class="form-group col-xs-4">
+            <label>Expiration Month</label>
+            <input type="text" name="expmonth" value="12"> <!-- Type=CC -->
+          </div>
+          <div class="form-group col-xs-4">
+            <label>Expiration Year</label>
+            <input type="text" name="expyear" value="15"> <!-- Type=CC -->
+          </div>
         </div>
-        <div class="form-group col-xs-3">
-          <label>State</label>
-          <input type="text" name="billingstate" value="TX"> <!-- Type=CC -->
-        </div>
-        <div class="form-group col-xs-3">
-          <label>ZIP</label>
-          <input type="text" name="billingzip" value="78241"> <!-- Type=CC -->
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-xs-4">
-          <label>Expiration Month</label>
-          <input type="text" name="expmonth" value="12"> <!-- Type=CC -->
-        </div>
-        <div class="form-group col-xs-4">
-          <label>Expiration Year</label>
-          <input type="text" name="expyear" value="15"> <!-- Type=CC -->
-        </div>
-        <div class="form-group col-xs-4">
-          <label>Account Number</label>
-          <input type="text" name="accountnumber" value="4012000033330026"> <!-- Always -->
-        </div>
-      </div>
-      <button type="submit" id="submitCC">Donate</button>      
-    </form>
+        <button type="submit" id="submitCC">Donate: $<span class="amount"></span></button>     
+      </form>
+    </div>
+
+<script>
+  $('#CC-form').submit(function(event) {
+    event.preventDefault(); //End the form submission event now!
+    $( "#CC-block" ).css("display", "none");
+    $( "#confirm-block" ).css("display", "block");
+  });
+</script>
+
+  <div id="confirm-block" style="display:none;">
+    <p> Step: 1 __ 2 __ 3 __ <b style="font-size:2em;">4</b> </p>
+    Thank you for your generous contribution!  The people of SA thank you!
+    <p>Transaction details....</p>
+    <p>Would you like to make this a re-occuring donation?</p>
+  </div>
 
     <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
       <div class="form-group">
