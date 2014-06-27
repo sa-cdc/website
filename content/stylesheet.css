@@ -84,6 +84,17 @@ body {
   border-radius: 5px;
 }
 
+.tinted {
+  background: #F00;
+  opacity: 0.5;
+}
+
+a.tinted:hover {
+  opacity: 1;
+}
+
+
+
 img.frontpageicon {
   margin-right: auto;
   margin-left: auto;
@@ -304,6 +315,22 @@ a:visited { color: #0079C1; }
 h3.carousel {
   margin-top: 3px;
   color: #FFF;
+}
+
+.carousel-caption-ctr {
+  bottom: none;
+  top: 25%;
+}
+
+.floattext {
+  opacity: 0;
+  font-size: 3em;
+}
+
+a.floattext:hover {
+  color: #FFF;
+  text-decoration: none;
+  opacity: 1;
 }
 
 @media (min-width: 480px) {
