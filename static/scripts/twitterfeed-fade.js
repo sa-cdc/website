@@ -1,13 +1,9 @@
 //JQuery Twitter Feed. Coded by Tom Elliott @ www.webdevdoor.com (2013) based on https://twitter.com/javascripts/blogger.js
 //Requires JSON output from authenticating script: http://www.webdevdoor.com/php/authenticating-twitter-feed-timeline-oauth/
-function test() {
-  alert('hello?');
-}
 
 $(document).ready(function () {
 
 function feedMe(feeds) {   
-  alert(JSON.stringify(feeds));
   var feedHTML = '';
   var displayCounter = 1;         
   for (var i=0; i<feeds.length; i++) {
@@ -144,26 +140,8 @@ function feedMe(feeds) {
     $.ajax({
         url:'http://sa-cdc.org/scripts/get-tweets1.php', 
         dataType: 'jsonp',
-        success: function(feeds){ alert('hi'); }, 
-        error: function(jqXHR, textStatus, errorThrown) {
-		             var error = "";
-                 if (jqXHR.status === 0) {
-                   error = 'Connection problem. Check file path and www vs non-www in getJSON request';
-                 } else if (jqXHR.status == 404) {
-                   error = 'Requested page not found. [404]';
-                 } else if (jqXHR.status == 500) {
-                   error = 'Internal Server Error [500].';
-                 } /*else if (exception === 'parsererror') {
-                   error = 'Requested JSON parse failed.';
-                 } else if (exception === 'timeout') {
-                   error = 'Time out error.';
-                 } else if (exception === 'abort') {
-                   error = 'Ajax request aborted.';
-                 } */else {
-                   error = 'Uncaught Error.\n' + jqXHR.responseText;
-                 }	
-       		       //alert("error: " + error);
-               }
+        success: function(feeds){ feedMe(feeds); }, 
+        error: function(jqXHR, textStatus, errorThrown) { alert('bye: '+errorThrown); }
     });
     
 
