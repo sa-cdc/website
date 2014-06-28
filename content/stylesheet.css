@@ -347,6 +347,10 @@ a.floattext:hover {
 .blackground {
   background-color: #d3d3d3;
   padding: 20px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+  border-width: 5px;
 }
 
 @media (min-width: 480px) {
@@ -477,13 +481,13 @@ a.floattext:hover {
   }
   
   .tinted {
-    background: #F00;
     opacity: 0.5;
   }
 
   .tinted:hover {
     opacity: 1;
   }
+
 }
 
 @media (min-width: 1200px) {
