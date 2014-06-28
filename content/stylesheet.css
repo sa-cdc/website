@@ -120,12 +120,29 @@ footer{
 }
 
 .captionleft {
-  left: 0;
+  left: 10px;
+  right: auto;
   max-width: 150px;
   border-radius: 5px;
   padding-bottom: 0px;
   bottom: 5px;
 }
+
+.captionsmallleft {
+  max-width: 150px;
+  top: auto;
+  bottom: 45%;
+  right: auto;
+  left: 10px;
+  }
+
+.captionsmallright {
+  max-width: 150px;
+  top: auto;
+  bottom: 45%;
+  right: 10px;
+  left: auto;
+  }
 
 .captionattributionright {
   bottom: 0;
@@ -301,9 +318,35 @@ a:visited { color: #0079C1; }
   margin-bottom: 15px;
 }
 
+h4.carousel {
+  opacity: 0;
+}
+
 h3.carousel {
   margin-top: 3px;
   color: #FFF;
+  opacity: 0;
+}
+
+.carousel-caption-ctr {
+  bottom: none;
+  top: 25%;
+}
+
+.floattext {
+  opacity: 0;
+  font-size: 3em;
+}
+
+a.floattext:hover {
+  color: #FFF;
+  text-decoration: none;
+  opacity: 1;
+}
+
+.blackground {
+  background-color: #d3d3d3;
+  padding: 20px;
 }
 
 @media (min-width: 480px) {
@@ -314,17 +357,34 @@ h3.carousel {
   .captionleft {
     max-width: 20%;
     top: auto;
-    bottom: 15%;
+    bottom: 20%;
     right: auto;
     left: 20%;
   }
   .captionright {
     max-width: 20%;
     top: auto;
-    bottom: 15%;
+    bottom: 20%;
     right: 20%;
     left: auto;
   }
+  
+  .captionsmallleft {
+    max-width: 20%;
+    top: auto;
+    bottom: 45%;
+    right: auto;
+    left: 20%;
+    }
+
+  .captionsmallright {
+    max-width: 20%;
+    top: auto;
+    bottom: 45%;
+    right: 20%;
+    left: auto;
+    }
+
   .brand {
     max-height: 75px;
   }
@@ -373,6 +433,17 @@ h3.carousel {
     right: auto;
     left: 400px;
   }
+  .captionsmallleft {
+    opacity: 0;
+    right: 0;
+    left: auto;
+    }
+
+  .captionsmallright {
+    opacity: 0;
+    right: auto;
+    left: 0;
+    }
   .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
     height: 80px;
     padding-top: 25px;
@@ -380,6 +451,12 @@ h3.carousel {
   .navbar-default .navbar-nav>li>a {
     color: #fff;
     padding-top: 25px;
+  }
+  h4.carousel {
+    opacity: 1;
+  }
+  h3.carousel {
+    opacity: 1;
   }
 }
 
@@ -389,14 +466,23 @@ h3.carousel {
     top: auto;
     bottom: 200px;
     right: 550px;
-    left: auto;
+    left: 25px;
   }
   .captionright {
     max-width: 450px;
     top: auto;
     bottom: 200px;
-    right: auto;
+    right: 25px;
     left: 550px;
+  }
+  
+  .tinted {
+    background: #F00;
+    opacity: 0.5;
+  }
+
+  .tinted:hover {
+    opacity: 1;
   }
 }
 
