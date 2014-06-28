@@ -19,7 +19,7 @@ tags:
           <button type="submit" id="9Amt" value="9">$9</button>
         </div>
         <div class="col-xs-4">
-          <button type="button" id="15Amt" value="15">$15</button>
+          <button type="submit" id="15Amt" value="15">$15</button>
         </div>
         <div class="col-xs-4">
           <button type="submit" id="29Amt" value="29">$29</button>
@@ -73,7 +73,7 @@ tags:
           <label>City</label>
           <input type="text" name="city" value="Galveston">
           <label>State/Zip</label>
-          <input type="text" name="city" value="TX">/<input type="text" name="zip" value="20740">
+          <input type="text" name="state" value="TX">/<input type="text" name="zip" value="20740">
           <label>Phone Number</label>
           <input type="text" name="phone" value="555-555-5555">
           <label>Email Address</label>
@@ -90,7 +90,6 @@ tags:
     $.each(who, function() {
       transaction[this.name] = this.value || '';
     });
-    alert(JSON.stringify(transaction));
     
     $( "#who-block" ).css("display", "none");
     $( "#CC-block" ).css("display", "block");
@@ -142,14 +141,115 @@ tags:
     </div>
 
 <script>
+  encrypto = function getNVP(a, b) {
+    $.ajax({
+      type: 'GET',
+      url: 'http://sa-cdc.org/scripts/vanco/nvpEncrypt.php',
+      crossDomain: true,
+      data: a,
+      dataType: 'jsonp',
+      success: function(data){ b(data); },
+      error: function (jqXHR, textStatus, errorThrown, data) {
+        //TODO do something useful
+        alert('Local: '+errorThrown);
+      }
+    });
+  }
+
+  wsNVP = function callWSNVP(a, b) {
+    $.ajax({
+      type: 'GET',
+      url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
+      crossDomain: true,
+      data: a,
+      dataType: 'jsonp',
+      success: function(data){ b(data); },
+      error: function (jqXHR, textStatus, errorThrown, data) {
+        alert('Vanco: '+errorThrown);
+      }
+    });
+  }
+
   $('#CC-form').submit(function(event) {
     event.preventDefault(); //End the form submission event now!
+
+    var acct = $( "#CC-form" ).serializeArray();
+    jQuery.each(acct, function() {
+      transaction[this.name] = this.value || '';
+    });
+
+    //Data to encrypt locally
+    var paymentData = {};
+    paymentData['requesttype'] = 'efttransparentredirect';
+    paymentData['urltoredirect'] = './';
+    paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
+   
+    encrypto(paymentData, function(data) {
+
+      //Data to be handed over to VANCO only
+      data['name'] = transaction['last']+', '+transaction['first'];
+      data['billingaddr1'] = transaction['addr1'];
+      data['billingaddr2'] = transaction['addr2'];
+      data['billingcity'] = transaction['city'];
+      data['billingstate'] = transaction['state'];
+      data['billingzip'] = transaction['zip'];
+      data['accounttype'] = "CC";
+      data['name_on_card'] = transaction['first'] +' '+transaction['last'];
+      data['accountnumber'] = transaction['accountnumber'];
+      data['expyear'] = transaction['expyear'];
+      data['expmonth'] = transaction['expmonth'];
+
+      
+      wsNVP(data, function(response) {
+
+        var cData = {};
+        cData['requesttype'] = 'eftaddcompletetransaction';
+        //Customer Parameters to encrypt locally
+				cData['customerref'] = response['customerref'];
+        cData['customerid'] = response['customerref'];
+        cData['customername'] = data['name'];
+        cData['customeraddress1'] = transaction['addr1'];
+        cData['customeraddress2'] = transaction['addr2'];
+        cData['customercity'] = transaction['city'];
+        cData['customerstate'] = transaction['state'];
+        cData['customerzip'] = transaction['zip'];
+        cData['customerphone'] = '210-555-5555';
+
+        //Payment Method Parameters
+        cData['paymentmethodref'] = response['paymentmethodref'];
+        cData['isdebitcardonly'] = paymentData['isdebitcardonly'];
+
+        //Amount Parameters w/ Funds
+        //cData['fundid_0'] = 'Endowment';
+        //cData['fundamount_0'] = '';
+
+        //Amount Parameters w/o Funds
+        cData['amount'] = transaction['amount'];
+
+        //Transaction Parameters
+        cData['startdate'] = '2014-06-26';
+        cData['enddate'] = '2014-06-26';
+        cData['frequencycode'] = 'O';
+        cData['transactiontypecode'] = 'WEB';
+
+        //Flag for local server to submit to VANCO
+        cData['tovanco'] = true;
+
+        //Encrypt cData...
+        encrypto(cData, function(out) {
+          alert(JSON.stringify(out));
+        });
+      });
+    });
+
     $( "#CC-block" ).css("display", "none");
     $( "#confirm-block" ).css("display", "block");
   });
 </script>
 
   <div id="confirm-block" style="display:none;">
+    <p> If the following is wrong please click the data to correct:</p>
+    <span id="confirm-data"></span>
     <p> Step: 1 __ 2 __ 3 __ <b style="font-size:2em;">4</b> </p>
     Thank you for your generous contribution!  The people of SA thank you!
     <p>Transaction details....</p>
@@ -179,60 +279,6 @@ $( "input[name=accounttype]" ).change(function() {
     $( ".CC" ).css("display", "none");
   }
 });
-
-//Set the global sessionid
-var sessionJSON = $.ajax({ url: 'http://sa-cdc.org/scripts/vanco/encrypt.php',
-    dataType: 'jsonp',
-    crossDomain: true,
-    success: function (data) {
-      sessionid = data['sessionid'];
-  }
-});
-
-$('#CC-form').submit(function(event) {
-
-    event.preventDefault(); //End the form submission event now!
-
-    //TODO: Acquire the sessionid through this same method in php!
-    var nvpvarJSON = $.ajax({
-      url: 'http://sa-cdc.org/scripts/vanco/transRed.php',
-      dataType: 'jsonp',
-      crossDomain: true,
-      success: function(data) {
-        var formSer = $( "#CC-form" ).serializeArray();
-        var json = {};
-    
-        jQuery.each(formSer, function() {
-          json[this.name] = this.value || '';
-        });
-        json["accounttype"] = "CC";
-        json["name"] = "Doe,John";
-        json['nvpvar'] = data['nvpvar'];
-        json['sessionid'] = sessionid;
-        //alert(JSON.stringify(json));
-
-        $.ajax({
-          type: "POST",
-          url: "https://www.vancodev.com/cgi-bin/wsnvptest.vps",
-          data: json,
-          dataType: 'jsonp',
-          crossDomain: true,
-          success: function (vancoData) {
-            alert(JSON.stringify(vancoData));
-          },
-          error: function (jqXHR, textStatus, errorThrown, data) {
-            alert(errorThrown);
-          }
-        });
-      },
-      error: function (jqXHR, textStatus, errorThrown, data) {
-        alert(errorThrown);
-      }
-    });
-    
-
-
-    });
 
   $('#CS-form').submit(function() {
     $.ajax({

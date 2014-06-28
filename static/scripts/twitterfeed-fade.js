@@ -1,34 +1,20 @@
 //JQuery Twitter Feed. Coded by Tom Elliott @ www.webdevdoor.com (2013) based on https://twitter.com/javascripts/blogger.js
 //Requires JSON output from authenticating script: http://www.webdevdoor.com/php/authenticating-twitter-feed-timeline-oauth/
+function test() {
+  alert('hello?');
+}
 
 $(document).ready(function () {
-    var displaylimit = 10;
-    var twitterprofile = "SanAntonioCDC";
-	  var screenname = "San Antonio Christian Dental Clinic";
-    var showdirecttweets = false;
-    var showretweets = true;
-    var showtweetlinks = true;
-    var showprofilepic = true;
-	var showtweetactions = false;
-	var showretweetindicator = false;
-	
-	
-	var headerHTML = '';
-	var loadingHTML = '';
-	loadingHTML += '<div id="loading-container"><img src="/static/imgs/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
-	
-	$('#twitter-feed').html(loadingHTML);
-	 
-    $.getJSON('/scripts/get-tweets1.php', 
-        function(feeds) {   
-		   //alert(feeds);
-            var feedHTML = '';
-            var displayCounter = 1;         
-            for (var i=0; i<feeds.length; i++) {
+
+function feedMe(feeds) {   
+  alert(JSON.stringify(feeds));
+  var feedHTML = '';
+  var displayCounter = 1;         
+  for (var i=0; i<feeds.length; i++) {
 				var tweetscreenname = feeds[i].user.name;
-                var tweetusername = feeds[i].user.screen_name;
-                var profileimage = feeds[i].user.profile_image_url_https;
-                var status = feeds[i].text; 
+        var tweetusername = feeds[i].user.screen_name;
+        var profileimage = feeds[i].user.profile_image_url_https;
+        var status = feeds[i].text; 
 				var isaretweet = false;
 				var isdirect = false;
 				var tweetid = feeds[i].id_str;
@@ -77,7 +63,7 @@ $(document).ready(function () {
 						displayCounter++;
 					}   
 				 }
-            }
+  }
              
             $('#twitter-feed').html(feedHTML);
             //addBlankToURL();
@@ -136,24 +122,48 @@ $(document).ready(function () {
 			
 			animatetweets();
 			
-    }).error(function(jqXHR, textStatus, errorThrown) {
-		var error = "";
-			 if (jqXHR.status === 0) {
-               error = 'Connection problem. Check file path and www vs non-www in getJSON request';
-            } else if (jqXHR.status == 404) {
-                error = 'Requested page not found. [404]';
-            } else if (jqXHR.status == 500) {
-                error = 'Internal Server Error [500].';
-            } else if (exception === 'parsererror') {
-                error = 'Requested JSON parse failed.';
-            } else if (exception === 'timeout') {
-                error = 'Time out error.';
-            } else if (exception === 'abort') {
-                error = 'Ajax request aborted.';
-            } else {
-                error = 'Uncaught Error.\n' + jqXHR.responseText;
-            }	
-       		//alert("error: " + error);
+    }
+
+    var displaylimit = 10;
+    var twitterprofile = "SanAntonioCDC";
+	  var screenname = "San Antonio Christian Dental Clinic";
+    var showdirecttweets = false;
+    var showretweets = true;
+    var showtweetlinks = true;
+    var showprofilepic = true;
+	var showtweetactions = false;
+	var showretweetindicator = false;
+	
+	
+	var headerHTML = '';
+	var loadingHTML = '';
+	loadingHTML += '<div id="loading-container"><img src="/static/imgs/ajax-loader.gif" width="32" height="32" alt="tweet loader" /></div>';
+	
+	$('#twitter-feed').html(loadingHTML);
+	 
+    $.ajax({
+        url:'http://sa-cdc.org/scripts/get-tweets1.php', 
+        dataType: 'jsonp',
+        success: function(feeds){ alert('hi'); }, 
+        error: function(jqXHR, textStatus, errorThrown) {
+		             var error = "";
+                 if (jqXHR.status === 0) {
+                   error = 'Connection problem. Check file path and www vs non-www in getJSON request';
+                 } else if (jqXHR.status == 404) {
+                   error = 'Requested page not found. [404]';
+                 } else if (jqXHR.status == 500) {
+                   error = 'Internal Server Error [500].';
+                 } /*else if (exception === 'parsererror') {
+                   error = 'Requested JSON parse failed.';
+                 } else if (exception === 'timeout') {
+                   error = 'Time out error.';
+                 } else if (exception === 'abort') {
+                   error = 'Ajax request aborted.';
+                 } */else {
+                   error = 'Uncaught Error.\n' + jqXHR.responseText;
+                 }	
+       		       //alert("error: " + error);
+               }
     });
     
 
