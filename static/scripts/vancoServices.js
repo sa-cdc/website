@@ -8,8 +8,8 @@ $('#amount-form :submit').click(function(event) {
   }
   transaction["amount"] = amount;
   $('.amount').text(transaction['amount']);
-  $( "#amount-block" ).css("display", "none");
-  $( "#who-block" ).css("display", "block");
+  $( "#transaction-amount-block" ).css("display", "none");
+  $( "#transaction-who-block" ).css("display", "block");
 });
 
 $('#who-form').submit(function(event) {
@@ -19,8 +19,8 @@ $('#who-form').submit(function(event) {
     transaction[this.name] = this.value || '';
   });
     
-  $( "#who-block" ).css("display", "none");
-  $( "#CC-block" ).css("display", "block");
+  $( "#transaction-who-block" ).css("display", "none");
+  $( "#transaction-CC-block" ).css("display", "block");
 });
 
 encrypto = function getNVP(a, b) {
@@ -123,8 +123,8 @@ $('#CC-form').submit(function(event) {
     });
   });
 
-  $( "#CC-block" ).css("display", "none");
-  $( "#confirm-block" ).css("display", "block");
+  $( "#transaction-CC-block" ).css("display", "none");
+  $( "#transaction-confirm-block" ).css("display", "block");
 });
 
 

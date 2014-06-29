@@ -35,6 +35,8 @@ body {
 
 .well a:visited { color: #C0C0C0; }
 
+.well[id|='transaction'] { color: black; }
+
 .page {
   text-align: left;
 }
