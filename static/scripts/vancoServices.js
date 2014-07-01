@@ -45,6 +45,7 @@ encrypto = function getNVP(a, b) {
 }
 
 wsNVP = function callWSNVP(a, b) {
+  console.log(JSON.stringify(a));
   $.ajax({
     type: 'GET',
     url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
@@ -68,64 +69,54 @@ $('#CC-form').submit(function(event) {
 
   //Data to encrypt locally
   var paymentData = {};
-  paymentData['requesttype'] = 'efttransparentredirect';
-  paymentData['urltoredirect'] = './';
-  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
+  paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
+  //paymentData['requesttype'] = 'datetime';
+  //paymentData['urltoredirect'] = 'http://google.com';
+  //paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
+
+  console.log('paymentData[]: '+JSON.stringify(paymentData));
    
   encrypto(paymentData, function(data) {
 
     //Data to be handed over to VANCO only
-    data['name'] = transaction['last']+', '+transaction['first'];
-    data['billingaddr1'] = transaction['addr1'];
-    data['billingaddr2'] = transaction['addr2'];
-    data['billingcity'] = transaction['city'];
-    data['billingstate'] = transaction['state'];
-    data['billingzip'] = transaction['zip'];
-    data['accounttype'] = "CC";
-    data['name_on_card'] = transaction['first'] +' '+transaction['last'];
-    data['accountnumber'] = transaction['accountnumber'];
-    data['expyear'] = transaction['expyear'];
-    data['expmonth'] = transaction['expmonth'];
+    //data['sameccbillingaddrascust'] = 'Yes';
+    //data['accounttype'] = "CC";
+    //data['name_on_card'] = transaction['first'] +' '+transaction['last'];
+    //data['accountnumber'] = transaction['accountnumber'];
+    //data['expyear'] = transaction['expyear'];
+    //data['expmonth'] = transaction['expmonth'];
+    //data['cvvcode'] = '123'; //TODO...
 
-    wsNVP(data, function(response) {
+    //Customer Parameters
+    // data['customername'] = transaction['last']+', '+transaction['first'];
+    // data['customeraddress1'] = transaction['addr1'];
+    //data['customeraddress2'] = transaction['addr2'];
+    // data['customercity'] = transaction['city'];
+    // data['customerstate'] = transaction['state'];
+    // data['customerzip'] = transaction['zip'];
+    // data['customerphone'] = '2105555555';
 
-      var cData = {};
-      cData['requesttype'] = 'eftaddcompletetransaction';
-      //Customer Parameters to encrypt locally
-      cData['customerref'] = response['customerref'];
-      cData['customerid'] = response['customerref'];
-      cData['customername'] = data['name'];
-      cData['customeraddress1'] = transaction['addr1'];
-      cData['customeraddress2'] = transaction['addr2'];
-      cData['customercity'] = transaction['city'];
-      cData['customerstate'] = transaction['state'];
-      cData['customerzip'] = transaction['zip'];
-      cData['customerphone'] = '210-555-5555';
+    //Amount Parameters w/ Funds
+    //data['fundid_0'] = 'Endowment';
+    //data['fundamount_0'] = '';
 
-      //Payment Method Parameters
-      cData['paymentmethodref'] = response['paymentmethodref'];
-      cData['isdebitcardonly'] = paymentData['isdebitcardonly'];
+    //Amount Parameters w/o Funds
+    // data['amount'] = transaction['amount'];
+    //data['amount'] = '500.00';
 
-      //Amount Parameters w/ Funds
-      //cData['fundid_0'] = 'Endowment';
-      //cData['fundamount_0'] = '';
+    //Transaction Parameters
+    // data['startdate'] = '0000-00-00';
+    //data['enddate'] = '0000-00-00';
+    //data['frequencycode'] = 'O';
+    // data['transactiontypecode'] = 'WEB';
 
-      //Amount Parameters w/o Funds
-      cData['amount'] = transaction['amount'];
+    //Flag for local server to submit to VANCO
+    // data['tovanco'] = true;
 
-      //Transaction Parameters
-      cData['startdate'] = '0000-00-00';
-      //cData['enddate'] = '0000-00-00';
-      cData['frequencycode'] = 'O';
-      cData['transactiontypecode'] = 'WEB';
-
-      //Flag for local server to submit to VANCO
-      cData['tovanco'] = true;
-
-      //Encrypt cData...
-      encrypto(cData, function(out) {
-        alert(JSON.stringify(out));
-      });
+    //Encrypt cData...
+    wsNVP(data, function(out) {
+      console.log('out[]: '+JSON.stringify(out));
+      alert(JSON.stringify(out));
     });
   });
 
