@@ -22,7 +22,6 @@ tags:
     </div>
 
     <div class="well" id="transaction-amount-block">
-      <p> Step: <b style="font-size:2em;">1</b> __ 2 __ 3 __ 4 </p>
       <form class="form row" role="form" id="amount-form" method="post">
         <div class="col-xs-4">
           <button type="submit" value="10">$10</button>
@@ -48,7 +47,6 @@ tags:
     </div>
 
     <div class="well" id="transaction-who-block" style="display:none;">
-      <p> Step: 1 __ <b style="font-size:2em;">2</b> __ 3 __ 4 </p>
       <p> Please enter your billing information as it appears on your account. </p>
       <form class="form row" role="form" id="who-form" method="post">
         <div class="col-xs-6">
@@ -94,7 +92,6 @@ tags:
 
 
     <div class="well" id="transaction-CC-block" style="display:none;">
-      <p> Step: 1 __ 2 __ <b style="font-size:2em;">3</b> __ 4 </p>
       <div>Ok you want to donate: $<span class="amount"></span></div>
       <form class="CC form-horizontal" role="form" id="CC-form" method="post">
         <div class="form-group">
@@ -104,7 +101,7 @@ tags:
         <div class="row">
           <div class="form-group col-xs-4">
             <label>Account Number</label>
-            <input type="text" name="accountnumber" value="4012000033330026"> <!-- Always -->
+            <input type="text" name="accountnumber" value="4111111111111111"> <!-- Always -->
           </div>
           <div class="form-group col-xs-4">
             <label>Expiration Month</label>
@@ -122,10 +119,8 @@ tags:
   <div class="well" id="transaction-confirm-block" style="display:none;">
     <p> If the following is wrong please click the data to correct:</p>
     <span id="confirm-data"></span>
-    <p> Step: 1 __ 2 __ 3 __ <b style="font-size:2em;">4</b> </p>
-    Thank you for your generous contribution!  The people of SA thank you!
-    <p>Transaction details....</p>
-    <p>Would you like to make this a re-occuring donation?</p>
+    <p>Thank you for your generous contribution!  The people of SA thank you!</p>
+    <p>If you would like to make more advanced contributions (recurring) please visit: ...</p>
   </div>
 
     <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">

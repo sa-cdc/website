@@ -1,5 +1,30 @@
 var transaction = {}; //Create the global to store all data
 
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = {}, i, n, v, nv;
+
+    if (query === url || query === "") {
+        return;
+    }
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=");
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) {
+            parms[n] = [];
+        }
+
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
+
 $('#amount-form :submit').click(function(event) {
   event.preventDefault(); //End the form submission event now!
   var amount = $(this).attr("value");
@@ -70,54 +95,69 @@ $('#CC-form').submit(function(event) {
   //Data to encrypt locally
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  //paymentData['requesttype'] = 'datetime';
-  //paymentData['urltoredirect'] = 'http://google.com';
-  //paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
+  paymentData['urltoredirect'] = 'http://google.com';
+  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
 
   console.log('paymentData[]: '+JSON.stringify(paymentData));
+  $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
    
   encrypto(paymentData, function(data) {
 
     //Data to be handed over to VANCO only
-    //data['sameccbillingaddrascust'] = 'Yes';
-    //data['accounttype'] = "CC";
-    //data['name_on_card'] = transaction['first'] +' '+transaction['last'];
-    //data['accountnumber'] = transaction['accountnumber'];
-    //data['expyear'] = transaction['expyear'];
-    //data['expmonth'] = transaction['expmonth'];
-    //data['cvvcode'] = '123'; //TODO...
+    data['sameccbillingaddrascust'] = 'Yes';
+    data['accounttype'] = "CC";
+    data['name_on_card'] = transaction['first'] +' '+transaction['last'];
+    data['accountnumber'] = transaction['accountnumber'];
+    data['expyear'] = transaction['expyear'];
+    data['expmonth'] = transaction['expmonth'];
+    data['cvvcode'] = '123'; //TODO...
 
     //Customer Parameters
-    // data['customername'] = transaction['last']+', '+transaction['first'];
-    // data['customeraddress1'] = transaction['addr1'];
+    data['customername'] = transaction['last']+', '+transaction['first'];
+    data['customeraddress1'] = transaction['addr1'];
     //data['customeraddress2'] = transaction['addr2'];
-    // data['customercity'] = transaction['city'];
-    // data['customerstate'] = transaction['state'];
-    // data['customerzip'] = transaction['zip'];
-    // data['customerphone'] = '2105555555';
+    data['customercity'] = transaction['city'];
+    data['customerstate'] = transaction['state'];
+    data['customerzip'] = transaction['zip'];
+    data['customerphone'] = '2105555555';
 
     //Amount Parameters w/ Funds
     //data['fundid_0'] = 'Endowment';
     //data['fundamount_0'] = '';
 
     //Amount Parameters w/o Funds
-    // data['amount'] = transaction['amount'];
+    data['amount'] = transaction['amount'];
     //data['amount'] = '500.00';
 
     //Transaction Parameters
-    // data['startdate'] = '0000-00-00';
+    data['startdate'] = '0000-00-00';
     //data['enddate'] = '0000-00-00';
     //data['frequencycode'] = 'O';
-    // data['transactiontypecode'] = 'WEB';
+    data['transactiontypecode'] = 'WEB';
 
     //Flag for local server to submit to VANCO
-    // data['tovanco'] = true;
+    data['tovanco'] = true;
 
     //Encrypt cData...
-    wsNVP(data, function(out) {
+    encrypto(data, function(out) {
       console.log('out[]: '+JSON.stringify(out));
-      alert(JSON.stringify(out));
+      console.log(out);
+      done = parseURLParams('?'+out+'#');
+      $( '#confirm-data').text('Confirmation #'+done['transactionref']+'Details: '+done['visamctype'] +' Card: '+done['last4']);
+//requestid=1628036244&
+//startdate=2014-07-01
+//paymentmethodref=7457645
+//clientid=ES15816
+//customerid=7416179
+//last4=1111
+//cardtype=debit
+//visamctype=visa
+//transactionref=16107751
+//customerref=7416179
+//isdebitcardonly=No
+      
     });
+
   });
 
   $( "#transaction-CC-block" ).css("display", "none");
