@@ -13,40 +13,41 @@ tags:
 
     <hr class="half-rule">
 
-    <div calss="well" id="transaction-central">
+    <div class="well row" id="transaction-central">
       <p> Step: <span id="tx-one" style="font-size:2em;">1</span> __
                 <span id="tx-two">2</span> __
                 <span id="tx-three">3</span> __
                 <span id="tx-four">4</span>
       </p>
-    </div>
 
-    <div class="well" id="transaction-amount-block">
-      <form class="form row" role="form" id="amount-form" method="post">
-        <div class="col-xs-4">
-          <button type="submit" value="10">$10</button>
-        </div>
-        <div class="col-xs-4">
-          <button type="submit" value="15">$15</button>
-        </div>
-        <div class="col-xs-4">
-          <button type="submit" value="30">$30</button>
-        </div>
-        <div class="col-xs-4">
-          <button type="submit" value="100">$100</button>
-        </div>
-        <div class="col-xs-4">
-          <button type="submit" value="500">$500</button>
-        </div>
-        <div class="col-xs-4">
-          <div>Other:</div>
-          <input type="text" name="enteredAmount">
-          <button type="submit" id="customAmt" value="custom">Donate Now</button>
-        </div>
-      </form>
-    </div>
+      <div class="col-xs-3 col-xs-offset-4" id="transaction-amount-block">
+        <form class="form row" role="form" id="amount-form" method="post">
+          <div class="col-xs-4">
+            <button type="submit" value="10">$10</button>
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" value="15">$15</button>
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" value="30">$30</button>
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" value="100">$100</button>
+          </div>
+          <div class="col-xs-4">
+            <button type="submit" value="500">$500</button>
+          </div>
+          <div class="col-xs-4">
+            <div>Other:</div>
+            <input type="text" name="enteredAmount">
+          </div>
+          <div class="col-xs-4 col-xs-offset-6">
+            <button type="submit" id="customAmt" value="custom">Next</button>
+          </div>
+        </form>
+      </div>
 
-    <div class="well" id="transaction-who-block" style="display:none;">
+    <div class="" id="transaction-who-block" style="display:none;">
       <p> Please enter your billing information as it appears on your account. </p>
       <form class="form row" role="form" id="who-form" method="post">
         <div class="col-xs-6">
@@ -91,7 +92,7 @@ tags:
     </form>
 
 
-    <div class="well" id="transaction-CC-block" style="display:none;">
+    <div class="" id="transaction-CC-block" style="display:none;">
       <div>Ok you want to donate: $<span class="amount"></span></div>
       <form class="CC form-horizontal" role="form" id="CC-form" method="post">
         <div class="form-group">
@@ -116,7 +117,7 @@ tags:
       </form>
     </div>
 
-  <div class="well" id="transaction-confirm-block" style="display:none;">
+  <div class="" id="transaction-confirm-block" style="display:none;">
     <p> If the following is wrong please click the data to correct:</p>
     <span id="confirm-data"></span>
     <p>Thank you for your generous contribution!  The people of SA thank you!</p>
@@ -134,6 +135,7 @@ tags:
       </div>
       <button type="submit" id="submitCS" >Donate</button>      
     </form>
+    </div>
 
     <p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.  Or, you can click on the link below to make a donation on-line.  Your contributions are always appreciated!</p>
 
