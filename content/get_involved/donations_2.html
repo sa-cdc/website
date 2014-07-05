@@ -20,30 +20,31 @@ tags:
                 <span id="tx-four">4</span>
       </p>
 
-      <div class="col-xs-3 col-xs-offset-4" id="transaction-amount-block">
+      <div class="text-center" id="transaction-amount-block">
         <form class="form row" role="form" id="amount-form" method="post">
-          <div class="col-xs-4">
-            <button type="submit" value="10">$10</button>
-          </div>
-          <div class="col-xs-4">
-            <button type="submit" value="15">$15</button>
-          </div>
-          <div class="col-xs-4">
-            <button type="submit" value="30">$30</button>
-          </div>
-          <div class="col-xs-4">
-            <button type="submit" value="100">$100</button>
-          </div>
-          <div class="col-xs-4">
-            <button type="submit" value="500">$500</button>
-          </div>
-          <div class="col-xs-4">
-            <div>Other:</div>
-            <input type="text" name="enteredAmount">
-          </div>
-          <div class="col-xs-4 col-xs-offset-6">
-            <button type="submit" id="customAmt" value="custom">Next</button>
-          </div>
+          <table class="table">
+            <tr>
+              <td>Operational Support: <input type="number" min=0 max=100 value='0' name="ops-percent">%</td>
+              <td>Patient Care: <input type="number" min=0 max=100 value='0' name="patient-percent">%</td>
+              <td>Discretionary: <input type="number" min=0 max=100 value='100' name="disc-percent">%</td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-default" type="submit" value="10">$10</button></td>
+              <td><button class="btn btn-default" type="submit" value="25">$25</button></td>
+              <td><button class="btn btn-default" type="submit" value="100">$100</button></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-default" type="submit" value="1000">$1000</button></td>
+              <td><button class="btn btn-default" type="submit" value="2500">$2500</button></td>
+              <td><button class="btn btn-default" type="submit" value="10000">$10000</button></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-default" type="submit" value="10000">$10000</button></td>
+              <td><button class="btn btn-default" type="submit" value="25000">$25000</button></td>
+              <td>Other: <input type="text" name="enteredAmount"></td>
+            </tr>
+          </table>
+          <button class="btn btn-default" type="submit" id="customAmt" value="custom">Next</button>
         </form>
       </div>
 

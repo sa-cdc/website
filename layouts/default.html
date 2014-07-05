@@ -40,9 +40,6 @@
     <!-- you don't need to keep this, but it's cool for stats! -->
     <meta name="generator" content="nanoc <%= Nanoc::VERSION %>">
 
-    <!-- remove this refresh tag when we go live, useful for locally tuning appearance when set to low values -->
-    <meta http-equiv="refresh" content="20000" /> 
-
     <!-- Thanks Eric!  this seems to fix the scaling issue! -->
     <!--[if gte IE 10]>
       <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -52,41 +49,41 @@
     <!-- <![endif]-->
   </head>
   <body class="bs-docs-home">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sa-cdc-navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="/" title="Home"><img class="brand" src="/static/imgs/sa-cdc_logo2_sm.gif"></a>
-          <!-- FOR FUTURE SEARCH FUNCTION <p class="navbar-right navbar-text sa-cdc-utility">
-            Search <span class="glyphicon glyphicon-search"></span> -->
-          </p>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="navbar-collapse collapse" id="sa-cdc-navbar-collapse">
-          <ul class="nav navbar-nav">
-            <%# TODO: Move this ERB code to a ruby method... %>
-            <% bigA = Array.new %>
-            <% home_pages = items_with_tag('sa-cdc')  %>
-            <% home_pages.each do |page| %>
-              <% h = { lnk: link_to(page[:title], page.reps[0]) } %>
-              <% h.merge!( { item: page } ) %>
-              <% h.merge!( { precedence: page[:precedence].to_i } ) %>
-              <% if @item[:group] == page[:group] %>
-                <% h.merge!({ cls: "class=\"active\"" }) %>
-                <% h.merge!({ cls_bald: "active" }) %>
+    <div id="main" class="container">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sa-cdc-navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="/" title="Home"><img class="brand" src="/static/imgs/sa-cdc_logo2_sm.gif"></a>
+            <!-- FOR FUTURE SEARCH FUNCTION <p class="navbar-right navbar-text sa-cdc-utility">
+              Search <span class="glyphicon glyphicon-search"></span> -->
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="navbar-collapse collapse" id="sa-cdc-navbar-collapse">
+            <ul class="nav navbar-nav">
+              <%# TODO: Move this ERB code to a ruby method... %>
+              <% bigA = Array.new %>
+              <% home_pages = items_with_tag('sa-cdc')  %>
+              <% home_pages.each do |page| %>
+                <% h = { lnk: link_to(page[:title], page.reps[0]) } %>
+                <% h.merge!( { item: page } ) %>
+                <% h.merge!( { precedence: page[:precedence].to_i } ) %>
+                <% if @item[:group] == page[:group] %>
+                  <% h.merge!({ cls: "class=\"active\"" }) %>
+                  <% h.merge!({ cls_bald: "active" }) %>
+                <% end %>
+                <% bigA.push(h) %>
               <% end %>
-              <% bigA.push(h) %>
-            <% end %>
-            <% bigA.sort_by!{|v| v[:precedence]} %>
-            <% bigA.reverse! %>
+              <% bigA.sort_by!{|v| v[:precedence]} %>
+              <% bigA.reverse! %>
 
-            <%# TODO: Base on method call from above code... %>
-            <% bigA.each do |page| %>
+              <%# TODO: Base on method call from above code... %>
+              <% bigA.each do |page| %>
                 <% if(!page[:item].children.empty? && page[:item][:title]!= 'Home') %>
                   <li class="dropdown <%= page[:cls_bald] %>">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= page[:item][:group] %> <b class="caret"></b></a>
@@ -102,18 +99,13 @@
                     <%= page[:lnk] %>
                   </li>
                 <% end %>
-            <% end %>
-
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-    
-    <div id="main" class="container">
+              <% end %>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
       <%= yield %>
-    </div>
-
-    <footer>
+      <footer>
         <div class="row well">
           <div class="col-md-3 text-center">
             <h5>
@@ -138,5 +130,6 @@
           </div>
         </div> <!-- row -->
     </footer>
+    </div>
   </body>
 </html>

@@ -22,6 +22,16 @@ body {
   color:#333;
 }
 
+#transaction-central.well button{
+  color: black;
+}
+
+#transaction-central.well input{
+  color: black;
+}
+
+/*.well[id|='transaction'] { color: black; }*/
+
 .well {
   margin: 0;
   padding: 0;
@@ -35,7 +45,6 @@ body {
 
 .well a:visited { color: #C0C0C0; }
 
-.well[id|='transaction'] { color: black; }
 
 .page {
   text-align: left;

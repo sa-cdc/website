@@ -139,6 +139,7 @@ $('#CC-form').submit(function(event) {
     data['tovanco'] = true;
 
     //Encrypt cData...
+    //TODO: Send to wsNVP first then decrypt second... (can't let acct go to server)
     encrypto(data, function(out) {
       console.log('out[]: '+JSON.stringify(out));
       console.log(out);
