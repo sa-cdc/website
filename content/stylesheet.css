@@ -33,8 +33,6 @@ body {
 /*.well[id|='transaction'] { color: black; }*/
 
 .well {
-  margin: 0;
-  padding: 0;
   background-color: rgba(0, 116, 178, 1.0);
   color:#FFF;
 }
