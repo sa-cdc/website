@@ -59,15 +59,6 @@ body {
   background-color: rgba(0, 116, 178, 1.0);
  }
 
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover,
-.navbar-default .navbar-nav>.active>a:focus {
-    color: #000;
-}
-
-.navbar-default .navbar-nav>li>a {
-    color: #fff;
-}
-
 #sa-cdc-navbar-collapse {
   padding-left: 130px;
   font-size: 1.5em;
@@ -459,13 +450,12 @@ a.floattext:hover {
     right: auto;
     left: 0;
     }
-  .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-    height: 80px;
-    padding-top: 25px;
-  }
+  /* Applies to the navigation bar to make the active list flush with the bottom */
+  /* TODO: set text-color of dropdown menu to white when in hamburger mode */
   .navbar-default .navbar-nav>li>a {
     color: #fff;
     padding-top: 25px;
+    height: 80px;
   }
   h4.carousel {
     opacity: 1;
