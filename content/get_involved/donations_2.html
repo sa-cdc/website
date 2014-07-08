@@ -27,7 +27,7 @@ tags:
       <div class="col-xs-3" id="tx-four">4</div>
     </div>
 
-    <div class="text-center" id="transaction-amount-block">
+    <div class="text-center" id="transaction-amount-block" style="display:none;">
       <form class="form row" role="form" id="amount-form" method="post">
         <table class="table">
           <tr>
@@ -35,14 +35,25 @@ tags:
               Operational Support:
               <input  class="percent-ops"
               type="number"
-              min=0
-              max=100
+              min=0 max=100
               value='0'
-              name="percent-ops">
-              %
+              name="percent-ops"> %
             </td>
-            <td>Patient Care: <input class="percent-patient" type="number" min=0 max=100 value='0' name="percent-patient">%</td>
-            <td>Discretionary: <input class="percent-disc" type="number" min=0 max=100 value='100' name="percent-disc">%</td>
+            <td>
+              Patient Care:
+              <input class="percent-patient"
+              type="number"
+              min=0 max=100
+              value='0'
+              name="percent-patient">%
+            </td>
+            <td>Discretionary:
+              <input class="percent-disc"
+              type="number"
+              min=0 max=100
+              value='100'
+              name="percent-disc">%
+            </td>
           </tr>
           <tr>
             <td><button class="btn btn-default" type="submit" value="10">$10</button></td>
@@ -64,28 +75,35 @@ tags:
       </form>
     </div>
 
-    <div class="" id="transaction-who-block" style="display:none;">
+    <div class="" id="transaction-who-block">
       <p> Please enter your billing information as it appears on your account. </p>
       <form class="form row" role="form" id="who-form" method="post">
         <div class="col-xs-6">
           <div>Ok you want to donate: $<span class="amount"></span></div>
-          <div>Who are you?</div>
-          <label>First Name</label>
-          <input type="text" name="first" value="Matthew">
-          <label>Last Name</label>
-          <input type="text" name="last" value="Doe">
-          <label>Address 1</label>
-          <input type="text" name="addr1" value="1 Heart Way">
-          <label>Address 2</label>
-          <input type="text" name="addr2">
-          <label>City</label>
-          <input type="text" name="city" value="Galveston">
-          <label>State/Zip</label>
-          <input type="text" name="state" value="TX">/<input type="text" name="zip" value="20740">
-          <label>Phone Number</label>
-          <input type="text" name="phone" value="555-555-5555">
-          <label>Email Address</label>
-          <input type="text" name="email" value="m@m.com">
+          <div class="row">
+            <div class="col-xs-6">
+              <label>First Name</label>
+              <input type="text" name="first" value="Matthew">
+            </div>
+            <div class="col-xs-6">
+              <label>Last Name</label>
+              <input type="text" name="last" value="Doe">
+            </div>
+          </div>
+          <div class="row">
+            <label>Address 1</label>
+            <input type="text" name="addr1" value="1 Heart Way">
+            <label>Address 2</label>
+            <input type="text" name="addr2">
+            <label>City</label>
+            <input type="text" name="city" value="Galveston">
+            <label>State/Zip</label>
+            <input type="text" name="state" value="TX">/<input type="text" name="zip" value="20740">
+            <label>Phone Number</label>
+            <input type="text" name="phone" value="555-555-5555">
+            <label>Email Address</label>
+            <input type="text" name="email" value="m@m.com">
+          </div>
         </div>
         <button type="submit">Next</button>
       </form>
