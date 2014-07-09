@@ -79,17 +79,15 @@ tags:
       <form class="form row" role="form" id="who-form" method="post">
         <fieldset>
           <legend>Billing Information ($<span class="amount"></span>)</legend>
-          <ol class="group">
-            <li>
+          <ol>
+            <li class="first">
               <label for="billing-first">First Name</label>
               <input id="billing-first" type="text" name="first" value="Matthew">
             </li>
-            <li>
+            <li class="last">
               <label for="billing-last">Last Name</label>
               <input id="billing-last" type="text" name="last" value="Doe">
             </li>
-          </ol>
-          <ol>
             <li>
             <label for="billing-addr1">Address Line 1</label>
             <input id="billing-addr1" type="text" name="addr1" value="1 Heart Way">
@@ -102,19 +100,15 @@ tags:
             <label for="billing-city">City</label>
             <input id="billing-city" type="text" name="city" value="Galveston">
             </li>
-          </ol>
-            <ol>
-              <li>
+              <li class="state">
               <label for="billing-state">State</label>
               <input id="billing-state" type="text" name="state" size="2" value="TX">
               </li>
-              <li>
+              <li class="zip">
               <label for="billing-zip">Zip</label>
               <input id="billing-zip" type="text" name="zip"
               size="10" value="20740">
               </li>
-            </ol>
-            <ol>
               <li>
               <label for="billing-phone">Phone Number</label>
               <input id="billing-phone" type="text" name="phone" size="14" value="555-555-5555">

@@ -74,15 +74,16 @@ button {
   cursor: pointer;
 }
 
-.group li, #billing-first, #billing-last {
-  width: 49%;
+li.first, li.last, li.state, li.zip {
+  clear: none;
+  width: 48%;
 }
 
-#billing-first {
+li.first, li.state {
   float: left;
 }
 
-#billing-last {
+li.last, li.zip {
   float: right;
 }
 
