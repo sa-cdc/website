@@ -43,7 +43,54 @@ body {
 
 .well a:visited { color: #C0C0C0; }
 
+/**
+ * Donation form formatting...
+ * 8 July 2014
+ * -Steelio
+ **/
+form ol, form li {
+  list-style: none;
+}
 
+form li {
+  clear: both;
+  margin: 0 0 .75em;
+  padding: 0;
+}
+
+label {
+  display: block;
+  float: left;
+  margin-right: 10px;
+  text-align: right;
+  width: 120px;
+}
+
+label:after {
+  content: ':';
+}
+
+button {
+  cursor: pointer;
+}
+
+.group li, #billing-first, #billing-last {
+  width: 49%;
+}
+
+#billing-first {
+  float: left;
+}
+
+#billing-last {
+  float: right;
+}
+
+
+/**
+ * Some other stuff...
+ *
+ **/
 .page {
   text-align: left;
 }
