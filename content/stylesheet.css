@@ -79,13 +79,24 @@ li.first, li.last, li.state, li.zip {
   width: 48%;
 }
 
+/* A little help from:
+ * http://codepen.io/CrocoDillon/pen/kmGCw
+ * For making this form responsive!
+ */
+
 li.first, li.state {
-  float: left;
+  float: right;
+  display: float;
+  margins: 0 0 .75em;
+  padding: 0 0 0;
 }
 
-li.last, li.zip {
-  float: right;
-}
+/* li.last, li.zip { */
+/*   float: right; */
+/*   display: float; */
+/*   margins: 0 0 0; */
+/*   padding: 0 0 0; */
+/* } */
 
 
 /**
