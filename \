@@ -76,6 +76,7 @@ button {
 
 li.first, li.last, li.state, li.zip {
   clear: none;
+  width: 20%;
 }
 
 /* A little help from:
@@ -83,27 +84,20 @@ li.first, li.last, li.state, li.zip {
  * For making this form responsive!
  */
 
-@media screen and (min-width: 480px) {
-  li.first, li.state {
-    float: left;
-    margin: 0 0 0.75em;
-    padding: 0 0 0;
-  }
-
-  li.last, li.zip {
-    float: left;
-    margin: 0 0 0.75em;
-    padding: 0 0 0;
-  }
-
-  li.last > label {
-    width: 80px;
-  }
-
-  li.zip > label {
-    width: 32px;
-  }
+li.first, li.state {
+  float: left;
+  display: float;
+  margins: 0 0 0;
+  padding: 0 0 0;
 }
+
+li.last, li.zip {
+  float: left;
+  display: float;
+  margins: 0 0 0;
+  padding: 0 0 0;
+}
+
 
 
 
@@ -156,7 +150,7 @@ img.frontpageicon {
   margin-left: auto;
   margin-top: 15px;
   margin-bottom: 15px;
-  display:table-cell;
+  display:table-cell; 
   vertical-align:middle;
   max-height: 240px;
 }
@@ -245,7 +239,7 @@ footer{
 }
 
 .equal {
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 /* Add margin to buttons by default. */
@@ -293,7 +287,7 @@ img.social-media {
 img.partner {
   padding: 5% 5% 5% 5%;
   margin: 0px auto;
-  display:table-cell;
+  display:table-cell; 
   vertical-align:middle;
   max-height: 160px;
 }
@@ -439,7 +433,7 @@ a.floattext:hover {
     right: 20%;
     left: auto;
   }
-
+  
   .captionsmallleft {
     max-width: 20%;
     top: auto;
@@ -545,7 +539,7 @@ a.floattext:hover {
     right: 25px;
     left: 550px;
   }
-
+  
   .tinted {
     opacity: 0.5;
   }
