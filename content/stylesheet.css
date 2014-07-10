@@ -83,7 +83,7 @@ li.first, li.last, li.state, li.zip {
  * For making this form responsive!
  */
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 768px) {
   li.first, li.state {
     float: left;
     margin: 0 0 0.75em;

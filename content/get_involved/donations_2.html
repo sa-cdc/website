@@ -19,7 +19,7 @@ tags:
 <hr class="half-rule">
 
 <div class="row">
-  <div class="col-md-4 col-md-offset-4 well" id="transaction-central">
+  <div class="col-sm-6 col-sm-offset-3 well" id="transaction-central">
     <div class="row">
       <div class="col-xs-3" id="tx-one" style="font-size:2em;">1</div>
       <div class="col-xs-3" id="tx-two">2</div>
@@ -27,7 +27,7 @@ tags:
       <div class="col-xs-3" id="tx-four">4</div>
     </div>
 
-    <div class="text-center" id="transaction-amount-block" style="display:none;">
+    <div class="text-center" id="transaction-amount-block">
       <form class="form row" role="form" id="amount-form" method="post">
         <table class="table">
           <tr>
@@ -75,18 +75,18 @@ tags:
       </form>
     </div>
 
-    <div class="" id="transaction-who-block">
+    <div class="" id="transaction-who-block" style="display:none;">
       <form class="form row" role="form" id="who-form" method="post">
         <fieldset>
           <legend>Billing Information ($<span class="amount"></span>)</legend>
           <ol>
             <li class="first">
-              <label for="billing-first">First Name</label>
-              <input id="billing-first" type="text" name="first" value="Matthew">
+            <label for="billing-first">First Name</label>
+            <input id="billing-first" type="text" name="first" value="Matthew">
             </li>
             <li class="last">
-              <label for="billing-last">Last Name</label>
-              <input id="billing-last" type="text" name="last" value="Doe">
+            <label for="billing-last">Last Name</label>
+            <input id="billing-last" type="text" name="last" value="Doe">
             </li>
             <li>
             <label for="billing-addr1">Address Line 1</label>
@@ -100,96 +100,96 @@ tags:
             <label for="billing-city">City</label>
             <input id="billing-city" type="text" name="city" value="Galveston">
             </li>
-              <li class="state">
-              <label for="billing-state">State</label>
-              <input id="billing-state" type="text" name="state" size="2" value="TX">
-              </li>
-              <li class="zip">
-              <label for="billing-zip">Zip</label>
-              <input id="billing-zip" type="text" name="zip"
-              size="10" value="20740">
-              </li>
-              <li>
-              <label for="billing-phone">Phone Number</label>
-              <input id="billing-phone" type="text" name="phone" size="14" value="555-555-5555">
-              </li>
-              <li>
-              <label for="billing-email">Email Address</label>
-              <input id="billing-email" type="text" name="email" value="m@m.com">
-              </li>
-            </ol>
-            <button type="submit">Next</button>
-          </fieldset>
-        </form>
-      </div>
-
-      <form class="form row" role="form" style="display:none;" id="type-form" method="post">
-        <div class="row col-xs-6">
-          <div class="form-group col-xs-4">
-            <label class="control-label">Credit/Debit Card</label>
-            <input type="radio" value="CC" name="accounttype" id="paymentCC">
-          </div>
-          <div class="form-group col-xs-4">
-            <label class="control-label">Checking</label>
-            <input type="radio" value="C" name="accounttype" id="paymentC">
-          </div>
-          <div class="form-group col-xs-4">
-            <label class="control-label">Savings</label>
-            <input type="radio" value="S" name="accounttype" id="paymentS">
-          </div>
-        </div>
-      </form>
-
-      <div class="" id="transaction-CC-block" style="display:none;">
-        <div>Ok you want to donate: $<span class="amount"></span></div>
-        <form class="CC form-horizontal" role="form" id="CC-form" method="post">
-          <div class="form-group">
-            <label class="credit debit">Debit Card?</label>
-            <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
-          </div>
-          <div class="row">
-            <div class="form-group col-xs-4">
-              <label>Account Number</label>
-              <input type="text" name="accountnumber" value="4111111111111111"> <!-- Always -->
-            </div>
-            <div class="form-group col-xs-4">
-              <label>Expiration Month</label>
-              <input type="text" name="expmonth" value="12"> <!-- Type=CC -->
-            </div>
-            <div class="form-group col-xs-4">
-              <label>Expiration Year</label>
-              <input type="text" name="expyear" value="15"> <!-- Type=CC -->
-            </div>
-          </div>
-          <button type="submit" id="submitCC">Donate: $<span class="amount"></span></button>
-        </form>
-      </div>
-
-      <div class="" id="transaction-confirm-block" style="display:none;">
-        <p> If the following is wrong please click the data to correct:</p>
-        <span id="confirm-data"></span>
-        <p>
-        Thank you for your generous contribution!  The people of SA thank you!
-        </p>
-        <p> For more advanced contributions (recurring) please visit: ...  </p>
-      </div>
-
-      <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
-        <div class="form-group">
-          <label for="cardType">Account Number</label>
-          <input type="text" name="accountnumber"> <!-- Always -->
-        </div>
-        <div class="form-group">
-          <label for="cardType">Routing Number</label>
-          <input type="text" name="routingnumber"> <!-- Type=C or Type=S -->
-        </div>
-        <button type="submit" id="submitCS" >Donate</button>
+            <li class="state">
+            <label for="billing-state">State</label>
+            <input id="billing-state" type="text" name="state" size="2" value="TX">
+            </li>
+            <li class="zip">
+            <label for="billing-zip">Zip</label>
+            <input id="billing-zip" type="text" name="zip"
+            size="10" value="20740">
+            </li>
+            <li>
+            <label for="billing-phone">Phone Number</label>
+            <input id="billing-phone" type="text" name="phone" size="14" value="555-555-5555">
+            </li>
+            <li>
+            <label for="billing-email">Email Address</label>
+            <input id="billing-email" type="text" name="email" value="m@m.com">
+            </li>
+          </ol>
+          <button type="submit">Next</button>
+        </fieldset>
       </form>
     </div>
+
+    <form class="form row" role="form" style="display:none;" id="type-form" method="post">
+      <div class="row col-xs-6">
+        <div class="form-group col-xs-4">
+          <label class="control-label">Credit/Debit Card</label>
+          <input type="radio" value="CC" name="accounttype" id="paymentCC">
+        </div>
+        <div class="form-group col-xs-4">
+          <label class="control-label">Checking</label>
+          <input type="radio" value="C" name="accounttype" id="paymentC">
+        </div>
+        <div class="form-group col-xs-4">
+          <label class="control-label">Savings</label>
+          <input type="radio" value="S" name="accounttype" id="paymentS">
+        </div>
+      </div>
+    </form>
+
+    <div class="" id="transaction-CC-block" style="display:none;">
+      <div>Ok you want to donate: $<span class="amount"></span></div>
+      <form class="CC form-horizontal" role="form" id="CC-form" method="post">
+        <div class="form-group">
+          <label class="credit debit">Debit Card?</label>
+          <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-4">
+            <label>Account Number</label>
+            <input type="text" name="accountnumber" value="4111111111111111"> <!-- Always -->
+          </div>
+          <div class="form-group col-xs-4">
+            <label>Expiration Month</label>
+            <input type="text" name="expmonth" value="12"> <!-- Type=CC -->
+          </div>
+          <div class="form-group col-xs-4">
+            <label>Expiration Year</label>
+            <input type="text" name="expyear" value="15"> <!-- Type=CC -->
+          </div>
+        </div>
+        <button type="submit" id="submitCC">Donate: $<span class="amount"></span></button>
+      </form>
+    </div>
+
+    <div class="" id="transaction-confirm-block" style="display:none;">
+      <p> If the following is wrong please click the data to correct:</p>
+      <span id="confirm-data"></span>
+      <p>
+      Thank you for your generous contribution!  The people of SA thank you!
+      </p>
+      <p> For more advanced contributions (recurring) please visit: ...  </p>
+    </div>
+
+    <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
+      <div class="form-group">
+        <label for="cardType">Account Number</label>
+        <input type="text" name="accountnumber"> <!-- Always -->
+      </div>
+      <div class="form-group">
+        <label for="cardType">Routing Number</label>
+        <input type="text" name="routingnumber"> <!-- Type=C or Type=S -->
+      </div>
+      <button type="submit" id="submitCS" >Donate</button>
+    </form>
   </div>
+</div>
 
-  <p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.  Or, you can click on the link below to make a donation on-line.  Your contributions are always appreciated!</p>
+<p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.  Or, you can click on the link below to make a donation on-line.  Your contributions are always appreciated!</p>
 
-  <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">DONATE NOW</a>
+<a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">DONATE NOW</a>
 
-  <hr class="half-rule">
+<hr class="half-rule">
