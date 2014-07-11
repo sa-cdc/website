@@ -170,7 +170,7 @@ li.first, li.last, li.state, li.zip {
   border-radius: 0px 0px 5px 5px;
 }
 
-img.frontpageicon {
+img.frontpage {
   margin-right: auto;
   margin-left: auto;
   margin-top: 15px;
@@ -178,6 +178,10 @@ img.frontpageicon {
   display:table-cell;
   vertical-align:middle;
   max-height: 240px;
+}
+
+h3.frontpage {
+  margin: 40px 10px;
 }
 
 footer {
@@ -365,10 +369,10 @@ a:visited { color: #0079C1; }
 }
 
 .bs-docs-featurette-title {
-  font-size: 30px;
+  /*font-size: 30px;*/
   font-weight: normal;
   color: #000;
-  margin-bottom: 5px;
+  margin: 30px 10px;
 }
 .half-rule {
   width: 100px;
