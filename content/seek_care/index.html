@@ -148,14 +148,15 @@ function getIncElig(familySize, income){
 	var incomelist = new Array();
 	incomelist[1] = 11670;
 	incomelist[2] = 15730;
-	incomelist[3] = 19970;
+	incomelist[3] = 19790;
 	incomelist[4] = 23850;
 	incomelist[5] = 27910;
 	incomelist[6] = 31970;
 	incomelist[7] = 36030;
 	incomelist[8] = 40090;
-        if(familySize > 8){
-           familySize = 8;
+    incomelist[9] = 44150;
+        if(familySize > 9){
+           familySize = 9;
         }
         if (income >= incomelist[familySize]){
                 return "ineligible";
