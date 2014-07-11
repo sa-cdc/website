@@ -12,91 +12,44 @@ tags:
 
     <hr class="half-rule">
 
-    <form class="form row" role="form" id="amount-form" method="post">
-      <div class="form-group col-xs-4">
-        <label class="">Clinical Operations Support</label>
-        <input type="text" name="amtOps" id="amtOps"> <!-- Type=CC -->
+    <form class="form" role="form" id="amount-form" method="post">
+      <div class="form-group">
+        <label class="">Amount</label>
+        <input type="text" name="amount" id="amount"> <!-- Type=CC -->
       </div>
-      <div class="form-group col-xs-4">
-        <label class="">Direct Patient Care</label>
-        <input type="text" name="amtCare" id="amtCare"> <!-- Type=CC -->
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="">Endowed Support</label>
-        <input type="text" name="amtSpt" id="amtSpt"> <!-- Type=CC -->
+      <div class="form-group">
+        <label class="">Recurrence:</label>
+        <label class="">One-time</label>
+        <input type="radio" value="O" name="frequency" id="freq">
+        <label class="">Monthly</label>
+        <input type="radio" value="M" name="frequency" id="freq">
+        <label class="">Weekly</label>
+        <input type="radio" value="W" name="frequency" id="freq">
+        <label class="">Bi-Weekly</label>
+        <input type="radio" value="BW" name="frequency" id="freq">
+        <label class="">Quarterly</label>
+        <input type="radio" value="Q" name="frequency" id="freq">
+        <label class="">Annual</label>
+        <input type="radio" value="A" name="frequency" id="freq">
       </div>
     </form>
 
+    <form class="form" role="form" id="type-form" method="post">
     <div class="row">
-      <div class="col-xs-4">
-        <img src="/static/imgs/downArrow.png">
-      </div>
-      <div class="col-xs-4">
-        <img src="/static/imgs/leftArrow.png">
-      </div>
-      <div class="col-xs-4">
-        <img src="/static/imgs/leftArrow.png">
-      </div>
-    </div>
-
-    <form class="form row" role="form" id="total-form" method="post">
-      <div class="form-group col-xs-4">
-        <label>Total</label>
-        <label id="total">$0.00</label>
-      </div>
-      <div class="form-group col-xs-4">
-        <label class="">Donation Frequency</label>
-        <select name="frequency" id="freq">
-          <option value="O">One-time</option>
-          <option value="M">Monthly</option>
-          <option value="W">Weekly</option>
-          <option value="BW">Bi-Weekly</option>
-          <option value="Q">Quarterly</option>
-          <option value="A">Annual</option>
-        </select>
-      </div>
-      <div class="form-group col-xs-4">
-        <label>Start Date</label>
-        <input type="text" value="17June2014">
-      </div>
-    </form>
-
-    <form class="form row" role="form" id="type-form" method="post">
-    <div class="col-xs-6">
-      <div>Who are you?</div>
-      <label>First Name</label>
-      <input type="text">
-      <label>Last Name</label>
-      <input type="text">
-      <label>Address 1</label>
-      <input type="text">
-      <label>Address 2</label>
-      <input type="text">
-      <label>City</label>
-      <input type="text">
-      <label>State/Zip</label>
-      <input type="text">/<input type="text">
-      <label>Phone Number</label>
-      <input type="text">
-      <label>Email Address</label>
-      <input type="text">
-    </div>
-    <div class="row col-xs-6">
-      <div class="form-group col-xs-4">
-        <label class="control-label">Credit/Debit Card</label>
+      <div class="form-group col-xs-offset-3 col-xs-2">
+        <label class="control-label">Credit or Debit Card</label>
         <input type="radio" value="CC" name="accounttype" id="payment">
       </div>
-      <div class="form-group col-xs-4">
+      <div class="form-group col-xs-2">
         <label class="control-label">Checking</label>
         <input type="radio" value="C" name="accounttype" id="payment">
       </div>
-      <div class="form-group col-xs-4">
+      <div class="form-group col-xs-2">
         <label class="control-label">Savings</label>
         <input type="radio" value="S" name="accounttype" id="payment">
       </div>
 </div>
     </form>
-
 
     <form class="CC form-horizontal" style="display:none;" role="form" id="CC-form" method="post">
       <div class="form-group">
