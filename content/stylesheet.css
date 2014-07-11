@@ -3,8 +3,18 @@
   font-family: 'Cabin', 'sans-serif';
 }
 
+.container {
+  padding: 0;
+  border: 1px solid black;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 body {
-  background: rgba(255, 255, 255, 1.0);
+  background: rgba(205, 205, 205, 1.0);
   background-size: cover;
   color: #000;
   margin-bottom: -40px;
@@ -16,11 +26,11 @@ body {
   border-width: 8px;
 }*/
 
-.footer-well {
+/*.footer-well {
   border-radius:12px;
   background-color:#FFF;
   color:#333;
-}
+}*/
 
 #transaction-central.well button{
   color: black;
@@ -35,6 +45,12 @@ body {
 .well {
   background-color: rgba(0, 116, 178, 1.0);
   color:#FFF;
+}
+
+footer .well {
+  border: none;
+  padding: 19px 0px 19px 0px;
+  margin-bottom: 0;
 }
 
 .well a:link { color: #FFFFFF; }
@@ -121,7 +137,10 @@ li.first, li.last, li.state, li.zip {
 }
 
 .navbar {
+  margin-bottom: 0;
+  border: none;
   background-color: rgba(0, 116, 178, 1.0);
+  border-radius: 4px 4px 0px 0px;
  }
 
 #sa-cdc-navbar-collapse {
@@ -148,7 +167,7 @@ li.first, li.last, li.state, li.zip {
 
 .carousel-inner > .item > img {
   margin: 0 auto;
-  border-radius: 5px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 img.frontpageicon {
@@ -161,9 +180,11 @@ img.frontpageicon {
   max-height: 240px;
 }
 
-footer{
+footer {
 	margin: 240px 0px 0px 0px;
-    color: black;
+    border-radius: 4px;
+    border: none;
+    background-color: #0074B2;
 }
 
 /*  Attempting to fix carousel gradient */
@@ -286,7 +307,7 @@ img.social-media {
 }
 
 .social-media {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     text-align: center;
 }
 
@@ -361,11 +382,6 @@ a:visited { color: #0079C1; }
   background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
 }
 
-.bs-docs-featurette h3 {
-  font-weight: normal;
-  color: #000;
-  margin-bottom: 5px;
-}
 .bs-docs-featurette ul, ol {
   text-align: left;
 }
