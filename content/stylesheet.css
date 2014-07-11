@@ -489,6 +489,11 @@ a.floattext:hover {
 }
 
 @media (min-width: 768px) {
+
+  #sa-cdc-navbar-collapse {
+    font-size: 1.1em;
+  }
+
   .bs-docs-featurette {
     padding-top:    0px;
     padding-bottom: 0px;
@@ -555,6 +560,11 @@ a.floattext:hover {
 }
 
 @media (min-width: 992px) {
+  
+  #sa-cdc-navbar-collapse {
+    font-size: 1.5em;
+  }
+
   .captionleft {
     max-width: 450px;
     top: auto;
