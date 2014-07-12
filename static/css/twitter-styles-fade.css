@@ -60,10 +60,16 @@ img  {
   }
 }
 
+
 .twitter-text span {
   margin:0px;
   line-height:15px;   
 }
+
+div.twitter-message {
+  margin-left: 20px;
+}
+
 .twitter-text a,  h1 a {
   color: #00acee;
   text-decoration: none;

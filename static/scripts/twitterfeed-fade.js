@@ -45,7 +45,7 @@ function feedMe(feeds) {
 						}
 									 
 						feedHTML += '<div class="twitter-article" id="tw'+displayCounter+'"> '; 										                 
-						feedHTML += '<div class="twitter-text"><span><img width="30" height="auto" src="/static/imgs/soc_med/Twitter.png"><span class="tweetprofilelink"><strong><a href="https://twitter.com/'+tweetusername+'" target="_blank">'+tweetscreenname+'</a></strong> <a href="https://twitter.com/'+tweetusername+'" target="_blank">@'+tweetusername+'</a></span><span class="tweet-time"><a href="https://twitter.com/'+tweetusername+'/status/'+tweetid+'" target="_blank">'+relative_time(feeds[i].created_at)+'</a></span><br/>'+status+'</span>';
+						feedHTML += '<div class="twitter-text"><span><img width="30" height="auto" src="/static/imgs/soc_med/Twitter.png"><span class="tweetprofilelink"><strong><a href="https://twitter.com/'+tweetusername+'" target="_blank">'+tweetscreenname+'</a></strong> <a href="https://twitter.com/'+tweetusername+'" target="_blank">@'+tweetusername+'</a></span><span class="tweet-time"><a href="https://twitter.com/'+tweetusername+'/status/'+tweetid+'" target="_blank">'+relative_time(feeds[i].created_at)+'</a></span><br/><div class="twitter-message">'+status+'</div></span>';
 						
 						if ((isaretweet == true) && (showretweetindicator == true)) {
 							feedHTML += '<div id="retweet-indicator"></div>';
