@@ -70,16 +70,16 @@ form ol, form li {
 
 form li {
   clear: both;
-  margin: 0 0 .75em;
+  margin: 0 0 0;
   padding: 0;
 }
 
 label {
   display: block;
-  float: left;
+  /* float: left; */
   margin-right: 10px;
-  text-align: right;
-  width: 120px;
+  margin-bottom: 0px;
+  text-align: left;
 }
 
 label:after {
@@ -102,13 +102,13 @@ li.first, li.last, li.state, li.zip {
 @media screen and (min-width: 768px) {
   li.first, li.state {
     float: left;
-    margin: 0 0 0.75em;
+    margin: 0 0 0;
     padding: 0 0 0;
   }
 
   li.last, li.zip {
     float: left;
-    margin: 0 0 0.75em;
+    margin: 0 0 5;
     padding: 0 0 0;
   }
 
