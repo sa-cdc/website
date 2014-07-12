@@ -5,7 +5,7 @@ img  {
 
 #loading-container {
   padding:16px 0px 16px 0px;
-  text-align:center;  
+  text-align:center;
 }
 
 #twitter-feed {
@@ -19,7 +19,7 @@ img  {
   margin:0px;
   padding:9px 0px 9px 0px;
   font-size:18px;
-  font-weight:lighter;    
+  font-weight:lighter;
 }
 #twitter-header {
   background-color:#FFF;
@@ -29,17 +29,17 @@ img  {
 }
 .twitter-article, #loading-container {
   width:100%;
-  float:left; 
+  float:left;
   padding:8px 0px 0px 0px;
   position:relative;
-} 
+}
 .twitter-pic {
   position:absolute;
 }
 
 .twitter-pic img {
   float:left;
-  border-radius:7px;  
+  border-radius:7px;
   border:none;
 
 }
@@ -63,7 +63,7 @@ img  {
 
 .twitter-text span {
   margin:0px;
-  line-height:15px;   
+  line-height:15px;
 }
 
 div.twitter-message {
@@ -99,38 +99,38 @@ div.twitter-message {
 #twitter-actions {
   width:75px;
   float:right;
-  margin-right:5px;   
+  margin-right:5px;
   margin-top:3px;
   display:none;
 }
 .intent {
   width:25px;
   height:16px;
-  float:left; 
+  float:left;
 }
 .intent a{
   width:25px;
   height:16px;
   display:block;
   background-image:url(../images/tweet-actions.png);
-  float:left; 
-} 
+  float:left;
+}
 .intent a:hover{
   background-position:-25px 0px;
-} 
+}
 
 #intent-retweet a{
   background-position:0px -17px;
-} 
+}
 #intent-retweet a:hover{
   background-position:-25px -17px;
-} 
+}
 #intent-fave a{
   background-position:0px -36px;
-} 
+}
 #intent-fave a:hover{
   background-position:-25px -36px;
-} 
+}
 
 /* -------- RETWEET INDICATOR ------*/
 #retweet-indicator {
