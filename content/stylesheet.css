@@ -64,21 +64,20 @@ footer .well {
  * 8 July 2014
  * -Steelio
  **/
-form ol, form li {
+form ul, form ol, form li {
+  clear: both;
   list-style: none;
 }
 
 form li {
-  clear: both;
-  margin: 0 0 0;
-  padding: 0;
+  float: left;
+  padding: 0 0 5px 0;
 }
 
 label {
   display: block;
-  /* float: left; */
-  margin-right: 10px;
   margin-bottom: 0px;
+  margin-right: 10px;
   text-align: left;
 }
 
@@ -90,8 +89,36 @@ button {
   cursor: pointer;
 }
 
+form > fieldset > button {
+  width: 100%;
+}
+
+li.donation, li.bucket {
+  clear: none;
+}
+
+li.donation > * {
+  font-size: 1.9em;
+  height: 2em;
+  margin: 4.5px;
+  width: 5em;
+}
+
+ul.bucket > li {
+  border-right: 1px solid black;
+  clear: none;
+  float: left;
+  width: 33%;
+}
+
 li.first, li.last, li.state, li.zip {
   clear: none;
+  padding: 0 5px 0 0;
+}
+
+#transaction-central h3 {
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 /* A little help from:
@@ -102,14 +129,12 @@ li.first, li.last, li.state, li.zip {
 @media screen and (min-width: 768px) {
   li.first, li.state {
     float: left;
-    margin: 0 0 0;
-    padding: 0 0 0;
+    padding: 0 5px 0 0;
   }
 
   li.last, li.zip {
     float: left;
-    margin: 0 0 5;
-    padding: 0 0 0;
+    padding: 0 5px 0 0;
   }
 
   li.last > label {

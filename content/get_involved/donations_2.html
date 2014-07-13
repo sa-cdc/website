@@ -8,18 +8,16 @@ tags:
 
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
 <div class="bs-docs-featurette border1">
-  <h2 class="bs-docs-featurette-title">
+  <h3 class="bs-docs-featurette-title">
     Help our Mission by Making a Monetary Donation
-  </h2>
-  <p class="lead">
-  As a nonprofit dental health provider, we rely heavily on individual monetary donations to provide services to those in need.
-  </p>
+  </h3>
+  <!-- <p class="lead"> -->
+  <!-- As a nonprofit dental health provider, we rely heavily on individual monetary donations to provide services to those in need. -->
+  <!-- </p> -->
 </div>
 
-<hr class="half-rule">
-
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2 well" id="transaction-central">
+<div class="row text-center">
+  <div class="col-lg-8 col-lg-offset-2  col-md-8 col-md-offset-2 well" id="transaction-central">
     <div class="row">
       <div class="col-xs-3" id="tx-one" style="font-size:2em;">1</div>
       <div class="col-xs-3" id="tx-two">2</div>
@@ -27,55 +25,61 @@ tags:
       <div class="col-xs-3" id="tx-four">4</div>
     </div>
 
-    <div class="text-center" id="transaction-amount-block">
-      <form class="form row" role="form" id="amount-form" method="post">
-        <table class="table">
-          <tr>
-            <td>
-              Operational Support:
-              <input  class="percent-ops"
-              type="number"
-              min=0 max=100
-              value='0'
-              name="percent-ops"> %
-            </td>
-            <td>
-              Patient Care:
-              <input class="percent-patient"
-              type="number"
-              min=0 max=100
-              value='0'
-              name="percent-patient">%
-            </td>
-            <td>Discretionary:
-              <input class="percent-disc"
-              type="number"
-              min=0 max=100
-              value='100'
-              name="percent-disc">%
-            </td>
-          </tr>
-          <tr>
-            <td><button class="btn btn-default" type="submit" value="10">$10</button></td>
-            <td><button class="btn btn-default" type="submit" value="25">$25</button></td>
-            <td><button class="btn btn-default" type="submit" value="100">$100</button></td>
-          </tr>
-          <tr>
-            <td><button class="btn btn-default" type="submit" value="1000">$1000</button></td>
-            <td><button class="btn btn-default" type="submit" value="2500">$2500</button></td>
-            <td><button class="btn btn-default" type="submit" value="10000">$10000</button></td>
-          </tr>
-          <tr>
-            <td><button class="btn btn-default" type="submit" value="10000">$10000</button></td>
-            <td><button class="btn btn-default" type="submit" value="25000">$25000</button></td>
-            <td>Other: <input type="text" name="enteredAmount"></td>
-          </tr>
-        </table>
-        <button class="btn btn-default" type="submit" id="customAmt" value="custom">Next</button>
+    <div class="text-center" id="transaction-amount-block" style="display:none;">
+      <form class="form" role="form" id="amount-form" method="post">
+        <fieldset>
+          <h3>Tell us how to use your donation (choose one)</h3>
+          <ul class="bucket">
+            <li>
+            <h4>
+              <input type="radio" min=0 max=100 value='0' name="dist">
+              Operational Support
+            </h4>
+            <p>Helps cover administrative costs associated with scheduling
+            patients, adertising, and records.</p>
+            </li>
+            <li>
+            <h4>
+              <input type="radio" min=0 max=100 value='0' name="dist">
+              Patient Care
+            </h4>
+            <p>Applied to patient treatment, medical supplies, and minimal
+            staffing.</p>
+            </li>
+            <li>
+            <h4>
+              <input type="radio" min=0 max=100 value='100' name="dist" checked>
+              Discretionary
+            </h4>
+            <p>Empowers us to spend your donation where it is most needed to
+            sustain the mission --endowment...</p>
+            </li>
+          </ul>
+          <h3> Select an amount to donate. </h3>
+          <ol>
+            <li class="donation"><button type="submit"
+              value="10">$10</button></li>
+            <li class="donation"><button type="submit"
+              value="25">$25</button></li>
+            <li class="donation"><button type="submit"
+              value="100">$100</button></li>
+            <li class="donation"><button type="submit"
+              value="1000">$1K</button></li>
+            <li class="donation"><button type="submit"
+              value="2500">$2.5K</button></li>
+            <li class="donation"><button type="submit"
+              value="10000">$10K</button></li>
+            <li class="donation"><button type="submit"
+              value="1000000">$1M</button></li>
+            <li class="donation"><input type="text" name="enteredAmount"
+            placeholder="Custom"></li>
+          </ol>
+          <button class="btn btn-default" type="submit" id="customAmt" value="custom">Next</button>
+        </fieldset>
       </form>
     </div>
 
-    <div class="" id="transaction-who-block" style="display:none;">
+    <div id="transaction-who-block">
       <form class="form row" role="form" id="who-form" method="post">
         <fieldset>
           <legend>Billing Information ($<span class="amount"></span>)</legend>
