@@ -25,6 +25,11 @@ function parseURLParams(url) {
     return parms;
 }
 
+function toggleBreadCrumb(a, b) {
+  a.removeClass('active');
+  b.addClass('active');
+}
+
 $('#amount-form :submit').click(function(event) {
   event.preventDefault(); //End the form submission event now!
   var amount = $(this).attr("value");
@@ -35,9 +40,8 @@ $('#amount-form :submit').click(function(event) {
   $('.amount').text(transaction['amount']);
   $( "#transaction-amount-block" ).css("display", "none");
   $( "#transaction-who-block" ).css("display", "block");
- 
-  $( '#tx-one').css({"color": "grey"});
-  $( '#tx-two').css({"font-size": "2em"});
+
+  toggleBreadCrumb( $( '#tx-one'), $( '#tx-two'));
 });
 
 $('#who-form').submit(function(event) {
@@ -50,8 +54,7 @@ $('#who-form').submit(function(event) {
   $( "#transaction-who-block" ).css("display", "none");
   $( "#transaction-CC-block" ).css("display", "block");
 
-  $( '#tx-two').css({"color": "grey"});
-  $( '#tx-three').css({"font-size": "2em"});
+  toggleBreadCrumb($( '#tx-two'), $( '#tx-three'));
 });
 
 encrypto = function getNVP(a, b) {
@@ -164,8 +167,7 @@ $('#CC-form').submit(function(event) {
   $( "#transaction-CC-block" ).css("display", "none");
   $( "#transaction-confirm-block" ).css("display", "block");
 
-  $( '#tx-three').css({"color": "grey"});
-  $( '#tx-four').css({"font-size": "2em"});
+  toggleBreadCrumb( $( '#tx-three'), $( '#tx-four'));
 });
 
 

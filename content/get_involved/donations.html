@@ -18,11 +18,12 @@ tags:
 
 <div class="row text-center">
   <div class="col-lg-8 col-lg-offset-2  col-md-8 col-md-offset-2 well" id="transaction-central">
-    <div class="row">
-      <div class="col-xs-3" id="tx-one" style="font-size:2em;">1</div>
-      <div class="col-xs-3" id="tx-two">2</div>
-      <div class="col-xs-3" id="tx-three">3</div>
-      <div class="col-xs-3" id="tx-four">4</div>
+    <div style="width: 100%;">
+      <span class="active breadcrumb" id="tx-one">1</span>
+      <span class="breadcrumb" id="tx-two">2</span>
+      <span class="breadcrumb" id="tx-three">3</span>
+      <span class="breadcrumb" id="tx-four">4</span>
+      <span style="display: block; clear: both; float: none;"></span>
     </div>
 
     <div class="text-center" id="transaction-amount-block" style="display:none;">
@@ -55,6 +56,7 @@ tags:
             sustain the mission --endowment...</p>
             </li>
           </ul>
+ 
           <h3> Select an amount to donate. </h3>
           <ol>
             <li class="donation"><button type="submit"
@@ -74,16 +76,17 @@ tags:
             <li class="donation"><input type="text" name="enteredAmount"
             placeholder="Custom"></li>
           </ol>
+
           <button class="btn btn-default" type="submit" id="customAmt" value="custom">Next</button>
         </fieldset>
       </form>
     </div>
 
-    <div id="transaction-who-block">
+    <div id="transaction-who-block" style="display:none;">
       <form class="form row" role="form" id="who-form" method="post">
         <fieldset>
           <legend>Billing Information ($<span class="amount"></span>)</legend>
-          <ol>
+          <ol style="padding: 0 25%">
             <li class="first">
             <label for="billing-first">First Name</label>
             <input id="billing-first" type="text" name="first" value="Matthew">
@@ -92,15 +95,15 @@ tags:
             <label for="billing-last">Last Name</label>
             <input id="billing-last" type="text" name="last" value="Doe">
             </li>
-            <li>
+            <li class="addr1">
             <label for="billing-addr1">Address Line 1</label>
             <input id="billing-addr1" type="text" name="addr1" value="1 Heart Way">
             </li>
-            <li>
+            <li class="addr2">
             <label for="billing-addr2">Address Line 2</label>
             <input id="billing-addr2" type="text" name="addr2">
             </li>
-            <li>
+            <li class="city">
             <label for="billing-city">City</label>
             <input id="billing-city" type="text" name="city" value="Galveston">
             </li>
@@ -144,27 +147,25 @@ tags:
       </div>
     </form>
 
-    <div class="" id="transaction-CC-block" style="display:none;">
+    <div class="" id="transaction-CC-block">
       <div>Ok you want to donate: $<span class="amount"></span></div>
       <form class="CC form-horizontal" role="form" id="CC-form" method="post">
-        <div class="form-group">
+        <span class="form-group">
           <label class="credit debit">Debit Card?</label>
           <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
-        </div>
-        <div class="row">
-          <div class="form-group col-xs-4">
-            <label>Account Number</label>
-            <input type="text" name="accountnumber" value="4111111111111111"> <!-- Always -->
-          </div>
-          <div class="form-group col-xs-4">
-            <label>Expiration Month</label>
-            <input type="text" name="expmonth" value="12"> <!-- Type=CC -->
-          </div>
-          <div class="form-group col-xs-4">
-            <label>Expiration Year</label>
-            <input type="text" name="expyear" value="15"> <!-- Type=CC -->
-          </div>
-        </div>
+        </span>
+        <span>
+          <label>Account Number</label>
+          <input type="text" size="15" name="accountnumber" value="4111111111111111"> <!-- Always -->
+        </span>
+        <span>
+          <label>Expiration Month</label>
+          <input type="text" size="2" name="expmonth" value="12"> <!-- Type=CC -->
+        </span>
+        <span>
+          <label>Expiration Year</label>
+          <input type="text" size="2" name="expyear" value="15"> <!-- Type=CC -->
+        </span>
         <button type="submit" id="submitCC">Donate: $<span class="amount"></span></button>
       </form>
     </div>

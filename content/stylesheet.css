@@ -64,6 +64,27 @@ footer .well {
  * 8 July 2014
  * -Steelio
  **/
+span.breadcrumb {
+  clear: none;
+  float: left;
+  display:block;
+  background:#b8b8b8;
+  width:25px;
+  margin:5px 10.5%;
+  color:#fff;
+  padding:4px;
+  border-radius:5em;
+  text-align:center;
+  font-weight:bold;
+  -webkit-transition:color 0.25s linear, background-color 0.25s linear;
+  -moz-transition:color 0.25s linear, background-color 0.25s linear;
+  transition:color 0.25s linear, background-color 0.25s linear;
+}
+
+span.active {
+  background: green;
+}
+
 form ul, form ol, form li {
   clear: both;
   list-style: none;
@@ -71,7 +92,7 @@ form ul, form ol, form li {
 
 form li {
   float: left;
-  padding: 0 0 5px 0;
+  padding: 5px  5px 5px 5px;
 }
 
 label {
@@ -111,14 +132,25 @@ ul.bucket > li {
   width: 33%;
 }
 
-li.first, li.last, li.state, li.zip {
+li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
   clear: none;
   padding: 0 5px 0 0;
 }
 
 #transaction-central h3 {
+  clear: both;
   margin-top: 0;
   padding-top: 10px;
+}
+
+#transaction-who-block {
+  width: 100%;
+}
+
+#transaction-CC-block span {
+  clear: both;
+  float: left;
+  margin-left: 0;
 }
 
 /* A little help from:
@@ -127,12 +159,18 @@ li.first, li.last, li.state, li.zip {
  */
 
 @media screen and (min-width: 768px) {
-  li.first, li.state {
+
+  li.first, li.city, li.addr1 {
     float: left;
+    clear: left;
     padding: 0 5px 0 0;
   }
 
-  li.last, li.zip {
+  li.state {
+    float: left;
+    clear: none;
+
+  li.last, li.zip, li.addr2 {
     float: left;
     padding: 0 5px 0 0;
   }
