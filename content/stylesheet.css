@@ -169,6 +169,7 @@ li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
   li.state {
     float: left;
     clear: none;
+  }
 
   li.last, li.zip, li.addr2 {
     float: left;
