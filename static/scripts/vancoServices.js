@@ -25,37 +25,110 @@ function parseURLParams(url) {
     return parms;
 }
 
-function toggleBreadCrumb(a, b) {
-  a.removeClass('active');
-  b.addClass('active');
+function toggleBreadCrumb(a) {
+  $('[id^=tx-]').removeClass('active');
+  a.addClass('active');
 }
 
-$('#amount-form :submit').click(function(event) {
-  event.preventDefault(); //End the form submission event now!
-  var amount = $(this).attr("value");
-  if(amount == "custom") {
-    amount = $('.enteredAmount').text();
+function toggleDisplay(a) {
+  $( "[id^=transaction-]" ).css("display", "none");
+  a.css("display", "block");
+}
+
+function toggleAmount() {
+  toggleDisplay( $('#transaction-amount-block') );
+  toggleBreadCrumb( $('#tx-one'));
+}
+
+function toggleWho() {
+  if(transaction['amount'] || transaction['fundamount']) {
+    toggleDisplay( $('#transaction-who-block') );
+    toggleBreadCrumb( $('#tx-two'));
+  } else {
+    alert('Must select a non-zero amount!');
   }
-  transaction["amount"] = amount;
-  $('.amount').text(transaction['amount']);
-  $( "#transaction-amount-block" ).css("display", "none");
-  $( "#transaction-who-block" ).css("display", "block");
+}
 
-  toggleBreadCrumb( $( '#tx-one'), $( '#tx-two'));
+function togglePayment() {
+
+  invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
+  invalidAmount &= !transaction['fundamount'] || transaction['fundamount'] <= 0;
+  invalidWho = !transaction['last']  ||
+               !transaction['first'] ||
+               !transaction['addr1'] ||
+               !transaction['city']  ||
+               !transaction['state'] ||
+               !transaction['zip'];
+
+  if(invalidAmount) {
+    alert('Must select a non-zero amount!');
+  }
+  if(invalidWho) {
+    alert('Must specify complete billing address!');
+  }
+
+  if(!invalidWho && !invalidAmount) {
+    toggleDisplay( $('#transaction-CC-block') );
+    toggleBreadCrumb( $('#tx-three'));
+  }
+}
+
+function toggleConfirm() {
+
+  $('#tx-one').unbind('click');
+  $('#tx-two').unbind('click');
+  $('#tx-three').unbind('click');
+
+  toggleDisplay( $('#transaction-confirm-block') );
+  toggleBreadCrumb( $('#tx-four'));
+}
+
+function submitAmount(event, obj) {
+    event.preventDefault(); //End the form submission event now!
+    var amount = $(obj).attr("value");
+    if(amount == "custom") {
+      amount = document.getElementById('enteredAmount').value;
+    }
+    $('.amount').text(amount);
+
+    var fund = $("input:radio[name=dist]:checked").val();
+    if(fund == '3') {
+      transaction["amount"] = amount;
+    } else {
+      transaction['fundid'] = fund;
+      transaction['fundamount'] = amount;
+    }
+
+    toggleWho();
+}
+
+function submitWho(event) {
+    event.preventDefault(); //End the form submission event now!
+    var who = $("#who-form").serializeArray();
+    $.each(who, function() {
+      transaction[this.name] = this.value || '';
+    });
+
+    togglePayment();
+}
+
+$('#tx-one').click(function() {
+  toggleAmount();
+});
+$('#tx-two').click(function() {
+  toggleWho();
+});
+$('#tx-three').click(function() {
+  togglePayment();
+});
+$('#tx-four').click(function() {
+  //toggleConfirm();
 });
 
-$('#who-form').submit(function(event) {
-  event.preventDefault(); //End the form submission event now!
-  var who = $("#who-form").serializeArray();
-  $.each(who, function() {
-    transaction[this.name] = this.value || '';
-  });
-    
-  $( "#transaction-who-block" ).css("display", "none");
-  $( "#transaction-CC-block" ).css("display", "block");
+$('#amount-form :submit').click(function(event) {submitAmount(event, this); });
+$('#who-form').submit(          function(event) {submitWho(event);    });
+$('#CC-form').submit(           function(event) {submitPayment(event);});
 
-  toggleBreadCrumb($( '#tx-two'), $( '#tx-three'));
-});
 
 encrypto = function getNVP(a, b) {
   $.ajax({
@@ -87,88 +160,71 @@ wsNVP = function callWSNVP(a, b) {
   });
 }
 
-$('#CC-form').submit(function(event) {
-  event.preventDefault(); //End the form submission event now!
+function submitPayment(event) {
+    event.preventDefault(); //End the form submission event now!
 
-  var acct = $( "#CC-form" ).serializeArray();
-  jQuery.each(acct, function() {
-    transaction[this.name] = this.value || '';
-  });
-
-  //Data to encrypt locally
-  var paymentData = {};
-  paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = 'http://google.com';
-  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
-
-  console.log('paymentData[]: '+JSON.stringify(paymentData));
-  $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
-   
-  encrypto(paymentData, function(data) {
-
-    //Data to be handed over to VANCO only
-    data['sameccbillingaddrascust'] = 'Yes';
-    data['accounttype'] = "CC";
-    data['name_on_card'] = transaction['first'] +' '+transaction['last'];
-    data['accountnumber'] = transaction['accountnumber'];
-    data['expyear'] = transaction['expyear'];
-    data['expmonth'] = transaction['expmonth'];
-    data['cvvcode'] = '123'; //TODO...
-
-    //Customer Parameters
-    data['customername'] = transaction['last']+', '+transaction['first'];
-    data['customeraddress1'] = transaction['addr1'];
-    //data['customeraddress2'] = transaction['addr2'];
-    data['customercity'] = transaction['city'];
-    data['customerstate'] = transaction['state'];
-    data['customerzip'] = transaction['zip'];
-    data['customerphone'] = '2105555555';
-
-    //Amount Parameters w/ Funds
-    //data['fundid_0'] = 'Endowment';
-    //data['fundamount_0'] = '';
-
-    //Amount Parameters w/o Funds
-    data['amount'] = transaction['amount'];
-    //data['amount'] = '500.00';
-
-    //Transaction Parameters
-    data['startdate'] = '0000-00-00';
-    //data['enddate'] = '0000-00-00';
-    //data['frequencycode'] = 'O';
-    data['transactiontypecode'] = 'WEB';
-
-    //Flag for local server to submit to VANCO
-    data['tovanco'] = true;
-
-    //Encrypt cData...
-    //TODO: Send to wsNVP first then decrypt second... (can't let acct go to server)
-    encrypto(data, function(out) {
-      console.log('out[]: '+JSON.stringify(out));
-      console.log(out);
-      done = parseURLParams('?'+out+'#');
-      $( '#confirm-data').text('Confirmation #'+done['transactionref']+'Details: '+done['visamctype'] +' Card: '+done['last4']);
-//requestid=1628036244&
-//startdate=2014-07-01
-//paymentmethodref=7457645
-//clientid=ES15816
-//customerid=7416179
-//last4=1111
-//cardtype=debit
-//visamctype=visa
-//transactionref=16107751
-//customerref=7416179
-//isdebitcardonly=No
-      
+    var acct = $( "#CC-form" ).serializeArray();
+    jQuery.each(acct, function() {
+      transaction[this.name] = this.value || '';
     });
 
-  });
+    //Data to encrypt locally
+    var paymentData = {};
+    paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
+    paymentData['urltoredirect'] = 'http://google.com';
+    paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
 
-  $( "#transaction-CC-block" ).css("display", "none");
-  $( "#transaction-confirm-block" ).css("display", "block");
+    console.log('paymentData[]: '+JSON.stringify(paymentData));
+    $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
 
-  toggleBreadCrumb( $( '#tx-three'), $( '#tx-four'));
-});
+    encrypto(paymentData, function(data) {
+
+      //Data to be handed over to VANCO only
+      data['sameccbillingaddrascust'] = 'Yes';
+      data['accounttype'] = "CC";
+      data['name_on_card'] = transaction['first'] +' '+transaction['last'];
+      data['accountnumber'] = transaction['accountnumber'];
+      data['expyear'] = transaction['expyear'];
+      data['expmonth'] = transaction['expmonth'];
+      data['cvvcode'] = transaction['cvvcode'];
+
+      //Customer Parameters
+      data['customername'] = transaction['last']+', '+transaction['first'];
+      data['customeraddress1'] = transaction['addr1'];
+      //data['customeraddress2'] = transaction['addr2'];
+      data['customercity'] = transaction['city'];
+      data['customerstate'] = transaction['state'];
+      data['customerzip'] = transaction['zip'];
+      data['customerphone'] = transaction['phone'];
+
+      if(transaction['amount']) {
+        data['amount'] = transaction['amount'];
+      } else {
+        var id = transaction['fundid'];
+        data['fundid_'+id] = id;
+        data['fundamount_'+id] = transaction['fundamount'];
+      }
+
+      //Transaction Parameters
+      data['startdate'] = '0000-00-00';
+      data['transactiontypecode'] = 'WEB';
+
+      //Flag for local server to submit to VANCO
+      data['tovanco'] = true;
+
+      console.log('data[]: '+JSON.stringify(data));
+      //Encrypt cData...
+      //TODO: Send to wsNVP first then decrypt second... (can't let acct go to server)
+      encrypto(data, function(out) {
+        console.log('out[]: '+JSON.stringify(out));
+        console.log(out);
+        done = parseURLParams('?'+out+'#');
+        $( '#confirm-data').text('Confirmation #'+done['transactionref']+'Details: '+done['visamctype'] +' Card: '+done['last4']);
+      });
+    });
+
+    toggleConfirm();
+}
 
 
 //TODO: Evaluate what parts of these are still needed...
@@ -196,7 +252,7 @@ $('#CS-form').submit(function() {
               "email": email,
               "name": custname,
               "billingaddr1": custadd,
-              "billingcity": custcity, 
+              "billingcity": custcity,
               "billingstate": custstate,
               "billingzip": custzip,
               "name_on_card": custname },

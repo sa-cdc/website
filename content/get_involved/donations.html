@@ -11,22 +11,20 @@ tags:
   <h3 class="bs-docs-featurette-title">
     Help our Mission by Making a Monetary Donation
   </h3>
-  <!-- <p class="lead"> -->
-  <!-- As a nonprofit dental health provider, we rely heavily on individual monetary donations to provide services to those in need. -->
-  <!-- </p> -->
 </div>
 
 <div class="row text-center">
-  <div class="col-lg-8 col-lg-offset-2  col-md-8 col-md-offset-2 well" id="transaction-central">
+  <div class="col-lg-8 col-lg-offset-2  col-md-8 col-md-offset-2 well"
+    id="donation-central">
     <div style="width: 100%;">
       <span class="active breadcrumb" id="tx-one">1</span>
       <span class="breadcrumb" id="tx-two">2</span>
       <span class="breadcrumb" id="tx-three">3</span>
       <span class="breadcrumb" id="tx-four">4</span>
-      <span style="display: block; clear: both; float: none;"></span>
+      <span class="amount" style="display: block; clear: both; float: none;">0</span>
     </div>
 
-    <div class="text-center" id="transaction-amount-block" style="display:none;">
+    <div class="text-center" id="transaction-amount-block">
       <form class="form" role="form" id="amount-form" method="post">
         <fieldset>
           <h3>Tell us how to use your donation (choose one)</h3>
@@ -34,29 +32,43 @@ tags:
             <li>
             <h4>
               <input type="radio" min=0 max=100 value='0' name="dist">
-              Operational Support
+              Operations Support
             </h4>
-            <p>Helps cover administrative costs associated with scheduling
-            patients, adertising, and records.</p>
+            <p>
+              Help us continue to provide high quality staff and support
+              structures so that we can grow the clinic
+            </p>
             </li>
             <li>
             <h4>
-              <input type="radio" min=0 max=100 value='0' name="dist">
+              <input type="radio" min=0 max=100 value='1' name="dist">
               Patient Care
             </h4>
-            <p>Applied to patient treatment, medical supplies, and minimal
-            staffing.</p>
+            <p>
+            Give the gift of a new smile by helping us cover the cost of direct
+            patient services
+            </p>
             </li>
             <li>
             <h4>
-              <input type="radio" min=0 max=100 value='100' name="dist" checked>
+              <input type="radio" min=0 max=100 value='2' name="dist">
+              Endowment
+            </h4>
+            <p>
+              Help us continue to fund the clinic in perpetuity
+            </p>
+            </li>
+            <li>
+            <h4>
+              <input type="radio" min=0 max=100 value='3' name="dist" checked>
               Discretionary
             </h4>
-            <p>Empowers us to spend your donation where it is most needed to
-            sustain the mission --endowment...</p>
+            <p>
+              Help us fund the projects with the greatest needs
+            </p>
             </li>
           </ul>
- 
+
           <h3> Select an amount to donate. </h3>
           <ol>
             <li class="donation"><button type="submit"
@@ -74,7 +86,7 @@ tags:
             <li class="donation"><button type="submit"
               value="1000000">$1M</button></li>
             <li class="donation"><input type="text" name="enteredAmount"
-            placeholder="Custom"></li>
+            id="enteredAmount" placeholder="Custom"></li>
           </ol>
 
           <button class="btn btn-default" type="submit" id="customAmt" value="custom">Next</button>
@@ -85,7 +97,7 @@ tags:
     <div id="transaction-who-block" style="display:none;">
       <form class="form row" role="form" id="who-form" method="post">
         <fieldset>
-          <legend>Billing Information ($<span class="amount"></span>)</legend>
+          <legend>Billing Information</legend>
           <ol style="padding: 0 25%">
             <li class="first">
             <label for="billing-first">First Name</label>
@@ -99,10 +111,10 @@ tags:
             <label for="billing-addr1">Address Line 1</label>
             <input id="billing-addr1" type="text" name="addr1" value="1 Heart Way">
             </li>
-            <li class="addr2">
-            <label for="billing-addr2">Address Line 2</label>
-            <input id="billing-addr2" type="text" name="addr2">
-            </li>
+            <!-- <li class="addr2"> -->
+            <!-- <label for="billing-addr2">Address Line 2</label> -->
+            <!-- <input id="billing-addr2" type="text" name="addr2"> -->
+            <!-- </li> -->
             <li class="city">
             <label for="billing-city">City</label>
             <input id="billing-city" type="text" name="city" value="Galveston">
@@ -147,36 +159,47 @@ tags:
       </div>
     </form>
 
-    <div class="" id="transaction-CC-block">
-      <div>Ok you want to donate: $<span class="amount"></span></div>
+    <div id="transaction-CC-block" style="display: none;">
       <form class="CC form-horizontal" role="form" id="CC-form" method="post">
-        <span class="form-group">
-          <label class="credit debit">Debit Card?</label>
-          <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
-        </span>
-        <span>
-          <label>Account Number</label>
-          <input type="text" size="15" name="accountnumber" value="4111111111111111"> <!-- Always -->
-        </span>
-        <span>
-          <label>Expiration Month</label>
-          <input type="text" size="2" name="expmonth" value="12"> <!-- Type=CC -->
-        </span>
-        <span>
-          <label>Expiration Year</label>
-          <input type="text" size="2" name="expyear" value="15"> <!-- Type=CC -->
-        </span>
-        <button type="submit" id="submitCC">Donate: $<span class="amount"></span></button>
+        <fieldset>
+          <legend>Billing Information</legend>
+          <ol class="payment">
+            <li>
+            <label class="credit debit">Debit Card?</label>
+            <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
+            </li>
+            <li>
+            <label>Account Number</label>
+            <input type="text" size="15" name="accountnumber" value="4111111111111111"> <!-- Always -->
+            </li>
+            <li>
+              <label>CVV</label>
+              <input type="text" size='4' name="cvvcode" value='123'>
+            </li>
+            <li>
+            <span> Expiration </span>
+            <label>Month/Year</label>
+            <select name="expmonth">
+              <% for month in (1..12) %>
+              <option value="<%= month %>"> <%= month %> </option>
+              <% end %>
+            </select>
+            <select name="expyear">
+              <% for year in (2014..2040) %>
+              <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
+              <% end %>
+            </select>
+            </li>
+          </ol>
+          <button class="amount" type="submit" id="submitCC" style="width: 100%;"></button>
+        </fieldset>
       </form>
     </div>
 
     <div class="" id="transaction-confirm-block" style="display:none;">
-      <p> If the following is wrong please click the data to correct:</p>
+      <p> Thank you for your generous contribution!  The people of SA thank you! </p>
+      <p> Please print the following for your records:</p>
       <span id="confirm-data"></span>
-      <p>
-      Thank you for your generous contribution!  The people of SA thank you!
-      </p>
-      <p> For more advanced contributions (recurring) please visit: ...  </p>
     </div>
 
     <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
@@ -190,11 +213,16 @@ tags:
       </div>
       <button type="submit" id="submitCS" >Donate</button>
     </form>
+
+<hr class="half-rule">
+
+<p class="text-center">For those interested in reoccurring gifts or splitting your gift so that it can support more than one aspect of the clinic, please click here:
+  <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">DONATE NOW</a>
+</p>
   </div>
 </div>
 
-<p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.  Or, you can click on the link below to make a donation on-line.  Your contributions are always appreciated!</p>
+<p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.</p>
 
-<a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">DONATE NOW</a>
 
 <hr class="half-rule">

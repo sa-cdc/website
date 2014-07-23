@@ -32,15 +32,9 @@ body {
   color:#333;
 }*/
 
-#transaction-central.well button{
+#donation-central.well input, #donation-central.well button, #donation-central.well select {
   color: black;
 }
-
-#transaction-central.well input{
-  color: black;
-}
-
-/*.well[id|='transaction'] { color: black; }*/
 
 .well {
   background-color: rgba(0, 116, 178, 1.0);
@@ -129,7 +123,7 @@ ul.bucket > li {
   border-right: 1px solid black;
   clear: none;
   float: left;
-  width: 33%;
+  width: 25%;
 }
 
 li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
@@ -137,7 +131,7 @@ li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
   padding: 0 5px 0 0;
 }
 
-#transaction-central h3 {
+#donation-central h3 {
   clear: both;
   margin-top: 0;
   padding-top: 10px;
@@ -151,6 +145,11 @@ li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
   clear: both;
   float: left;
   margin-left: 0;
+}
+
+ol.payment > li {
+  clear: none;
+  float: left;
 }
 
 /* A little help from:
@@ -185,6 +184,18 @@ li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
   }
 }
 
+
+button.amount::before {
+  content: "Submit Donation: $";
+}
+
+.amount::before {
+  content: "$";
+}
+
+.amount {
+  font-size: 1.5em;
+}
 
 
 /**
