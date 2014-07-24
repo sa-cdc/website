@@ -108,11 +108,16 @@ form > fieldset > button {
   width: 100%;
 }
 
-li.donation, li.bucket {
+/* TODO: Improve centering buttons */
+ol.donation {
+  padding-left: 8%;
+}
+
+ol.donation > li {
   clear: none;
 }
 
-li.donation > * {
+ol.donation > li > * {
   font-size: 1.9em;
   height: 2em;
   margin: 4.5px;
@@ -123,7 +128,7 @@ ul.bucket > li {
   border-right: 1px solid black;
   clear: none;
   float: left;
-  width: 25%;
+  width: 170px;
 }
 
 li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {

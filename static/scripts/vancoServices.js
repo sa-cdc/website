@@ -1,5 +1,6 @@
 var transaction = {}; //Create the global to store all data
 
+
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
         queryEnd   = url.indexOf("#") + 1 || url.length + 1,
