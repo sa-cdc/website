@@ -53,6 +53,10 @@ footer .well {
 
 .well a:visited { color: #C0C0C0; }
 
+.btn {
+  margin-bottom: 5px;
+}
+
 /**
  * Donation form formatting...
  * 8 July 2014
