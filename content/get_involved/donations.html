@@ -8,12 +8,12 @@ tags:
 
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
 <div class="bs-docs-featurette border1">
-  <h3 class="bs-docs-featurette-title">
+  <h3 class="donate bs-docs-featurette-title">
     Help our Mission by Making a Monetary Donation
   </h3>
 </div>
 
-<div class="row text-center">
+<div class="donate row text-center">
   <div class="col-lg-8 col-lg-offset-2  col-md-8 col-md-offset-2 well"
     id="donation-central">
     <div style="width: 100%;">
@@ -160,7 +160,7 @@ tags:
     </form>
 
     <div id="transaction-CC-block" style="display: none;">
-      <form class="CC form-horizontal" role="form" id="CC-form" method="post">
+      <form class="CC form-horizontal" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
           <legend>Billing Information</legend>
           <ol class="payment">
@@ -191,16 +191,17 @@ tags:
             </select>
             </li>
           </ol>
+          <span id="fields"></span>
           <button class="amount" type="submit" id="submitCC" style="width: 100%;"></button>
         </fieldset>
       </form>
     </div>
 
-    <div class="" id="transaction-confirm-block" style="display:none;">
-      <p> Thank you for your generous contribution!  The people of SA thank you! </p>
-      <p> Please print the following for your records:</p>
-      <span id="confirm-data"></span>
-    </div>
+    <form id="hiddenForm" role="form"
+      action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get"
+      style="display: none;">
+    </form>
+
 
     <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
       <div class="form-group">
@@ -216,13 +217,26 @@ tags:
 
 <hr class="half-rule">
 
-<p class="text-center">For those interested in reoccurring gifts or splitting your gift so that it can support more than one aspect of the clinic, please click here:
-  <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">DONATE NOW</a>
+<p class="text-center">For those interested in reoccurring gifts or splitting
+your gift so that it can support more than one aspect of the clinic, please <a
+  href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3"
+  class="btn btn-primary active" role="button" target="_blank">click here</a>
 </p>
   </div>
 </div>
 
-<p class="text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.</p>
+<div id="transaction-confirm-block" class="center-block" style="display:none; width:350px;">
+  <img src="/static/imgs/pic-content/smile_sign.jpg" width="100%">
+  <p> Keep this receipt for your records.</p>
+  <div class="text-center">San Antonio Christian Dental Clinic</div>
+  <div class="text-center">1 Haven for Hope Way</div>
+  <div class="text-center">San Antonio, Texas 78xxx</div>
+  <div class="text-center">210.555.5555</div>
+  <span id="confirm"></span>
+  <p class="text-center"> Thank you for your donation!</p>
+</div>
+
+<p class="donate text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.</p>
 
 
-<hr class="half-rule">
+<hr class="donate half-rule">
