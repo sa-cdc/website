@@ -593,6 +593,7 @@ h3.carousel {
     font-size: 1.1em;
   }
 
+  /* Return dark color to nav-bar for larger displays */
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
     color: #777;
   }
