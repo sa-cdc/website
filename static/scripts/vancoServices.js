@@ -1,5 +1,18 @@
 var transaction = {}; //Create the global to store all data
 
+function getQueryParams(qs) {
+  qs = qs.split("+").join(" ");
+  var params = {},
+      tokens,
+      re = /[?&]?([^=]+)=([^&]*)/g;
+
+  while (tokens = re.exec(qs)) {
+    params[decodeURIComponent(tokens[1])]
+      = decodeURIComponent(tokens[2]);
+  }
+
+  return params;
+}
 
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
@@ -42,7 +55,7 @@ function toggleAmount() {
 }
 
 function toggleWho() {
-  if(transaction['amount'] || transaction['fundamount']) {
+  if(transaction['amount']) {
     toggleDisplay( $('#transaction-who-block') );
     toggleBreadCrumb( $('#tx-two'));
   } else {
@@ -53,7 +66,6 @@ function toggleWho() {
 function togglePayment() {
 
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
-  invalidAmount &= !transaction['fundamount'] || transaction['fundamount'] <= 0;
   invalidWho = !transaction['last']  ||
                !transaction['first'] ||
                !transaction['addr1'] ||
@@ -82,6 +94,8 @@ function toggleConfirm() {
 
   toggleDisplay( $('#transaction-confirm-block') );
   toggleBreadCrumb( $('#tx-four'));
+
+  $('.donate').css('display', 'none');
 }
 
 function submitAmount(event, obj) {
@@ -93,11 +107,9 @@ function submitAmount(event, obj) {
     $('.amount').text(amount);
 
     var fund = $("input:radio[name=dist]:checked").val();
-    if(fund == '3') {
-      transaction["amount"] = amount;
-    } else {
+    transaction['amount'] = amount;
+    if(fund != '3') {
       transaction['fundid'] = fund;
-      transaction['fundamount'] = amount;
     }
 
     toggleWho();
@@ -148,6 +160,13 @@ encrypto = function getNVP(a, b) {
 
 wsNVP = function callWSNVP(a, b) {
   console.log(JSON.stringify(a));
+  var p = $.param(a);
+  console.log(p);
+  /* What I have to do */
+  window.location.replace('https://www.vancodev.com/cgi-bin/wsnvptest.vps?'.p);
+
+  /*
+   * What I would like to do...
   $.ajax({
     type: 'GET',
     url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
@@ -159,72 +178,75 @@ wsNVP = function callWSNVP(a, b) {
       alert('Vanco: '+errorThrown);
     }
   });
+  */
 }
 
 function submitPayment(event) {
-    event.preventDefault(); //End the form submission event now!
+  event.preventDefault(); //End the form submission event now!
 
-    var acct = $( "#CC-form" ).serializeArray();
-    jQuery.each(acct, function() {
-      transaction[this.name] = this.value || '';
+  var acct = $( "#CC-form" ).serializeArray();
+  jQuery.each(acct, function() {
+    transaction[this.name] = this.value || '';
+  });
+
+  //Data to encrypt locally
+  var paymentData = {};
+  paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
+  paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
+  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
+  paymentData['amount'] = transaction['amount'];
+
+  console.log('paymentData[]: '+JSON.stringify(paymentData));
+  $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
+
+  encrypto(paymentData, function(data) {
+    //Data to be handed over to VANCO only
+    data['sameccbillingaddrascust'] = 'Yes';
+    data['accounttype'] = "CC"; //TODO: add forms of payment
+    data['name_on_card'] = transaction['first'] +' '+transaction['last'];
+    data['accountnumber'] = transaction['accountnumber'];
+    data['expyear'] = transaction['expyear'];
+    data['expmonth'] = transaction['expmonth'];
+    data['cvvcode'] = transaction['cvvcode'];
+    //Customer Parameters
+    data['customername'] = transaction['last']+', '+transaction['first'];
+    data['customeraddress1'] = transaction['addr1'];
+    //data['customeraddress2'] = transaction['addr2'];
+    data['customercity'] = transaction['city'];
+    data['customerstate'] = transaction['state'];
+    data['customerzip'] = transaction['zip'];
+    data['customerphone'] = transaction['phone'];
+    if(transaction['amount']) {
+      data['amount'] = transaction['amount'];
+    } else {
+      var id = transaction['fundid'];
+      data['fundid_'+id] = id;
+      data['fundamount_'+id] = transaction['amount'];
+    }
+    //Transaction Parameters
+    data['startdate'] = '0000-00-00';
+    data['transactiontypecode'] = 'WEB';
+
+    /* Store the data to #hiddenForm */
+    jQuery.each(data, function(index, value) {
+      var input = $("<input>").attr("type", "hidden").attr("name", index).val(value);
+      $('#hiddenForm').append($(input));
     });
+    $('#hiddenForm').submit();
+  });
 
-    //Data to encrypt locally
-    var paymentData = {};
-    paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-    paymentData['urltoredirect'] = 'http://google.com';
-    paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
+  toggleConfirm();
+}
 
-    console.log('paymentData[]: '+JSON.stringify(paymentData));
-    $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
+var $_GET = getQueryParams(document.location.search);
+if($_GET['transactionref']) {
+  $('.amount').text($_GET['requestid'].substring(10));
 
-    encrypto(paymentData, function(data) {
-
-      //Data to be handed over to VANCO only
-      data['sameccbillingaddrascust'] = 'Yes';
-      data['accounttype'] = "CC";
-      data['name_on_card'] = transaction['first'] +' '+transaction['last'];
-      data['accountnumber'] = transaction['accountnumber'];
-      data['expyear'] = transaction['expyear'];
-      data['expmonth'] = transaction['expmonth'];
-      data['cvvcode'] = transaction['cvvcode'];
-
-      //Customer Parameters
-      data['customername'] = transaction['last']+', '+transaction['first'];
-      data['customeraddress1'] = transaction['addr1'];
-      //data['customeraddress2'] = transaction['addr2'];
-      data['customercity'] = transaction['city'];
-      data['customerstate'] = transaction['state'];
-      data['customerzip'] = transaction['zip'];
-      data['customerphone'] = transaction['phone'];
-
-      if(transaction['amount']) {
-        data['amount'] = transaction['amount'];
-      } else {
-        var id = transaction['fundid'];
-        data['fundid_'+id] = id;
-        data['fundamount_'+id] = transaction['fundamount'];
-      }
-
-      //Transaction Parameters
-      data['startdate'] = '0000-00-00';
-      data['transactiontypecode'] = 'WEB';
-
-      //Flag for local server to submit to VANCO
-      data['tovanco'] = true;
-
-      console.log('data[]: '+JSON.stringify(data));
-      //Encrypt cData...
-      //TODO: Send to wsNVP first then decrypt second... (can't let acct go to server)
-      encrypto(data, function(out) {
-        console.log('out[]: '+JSON.stringify(out));
-        console.log(out);
-        done = parseURLParams('?'+out+'#');
-        $( '#confirm-data').text('Confirmation #'+done['transactionref']+'Details: '+done['visamctype'] +' Card: '+done['last4']);
-      });
-    });
-
-    toggleConfirm();
+  toggleConfirm();
+  console.log('confirm: '+JSON.stringify($_GET));
+  $('#confirm').append('<p>Post Date: '+$_GET['&startdate']+'</p>');
+  $('#confirm').append('<p>Confirmation: '+$_GET['transactionref']+'</p>');
+  $('#confirm').html('<p>Card: '+$_GET['visamctype']+' #XXXXXXXXXXX'+$_GET['last4']+'</p>');
 }
 
 
