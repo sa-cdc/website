@@ -115,14 +115,38 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
+$().ready(function() {
+  var form = $("#who-form");
+  form.validate({
+    highlight: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+      $(glyph_e).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+    },
+    unhighlight: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+    },
+    success: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+    }
+  });
+});
+
 function submitWho(event) {
     event.preventDefault(); //End the form submission event now!
-    var who = $("#who-form").serializeArray();
-    $.each(who, function() {
-      transaction[this.name] = this.value || '';
-    });
 
-    togglePayment();
+    var form = $("#who-form");
+    if(form.valid()) {
+      var who = form.serializeArray();
+      $.each(who, function() {
+        transaction[this.name] = this.value || '';
+      });
+      togglePayment();
+    }
 }
 
 $('#tx-one').click(function() {
@@ -246,7 +270,7 @@ if($_GET['transactionref']) {
   console.log('confirm: '+JSON.stringify($_GET));
   $('#confirm').append('<p>Post Date: '+$_GET['&startdate']+'</p>');
   $('#confirm').append('<p>Confirmation: '+$_GET['transactionref']+'</p>');
-  $('#confirm').html('<p>Card: '+$_GET['visamctype']+' #XXXXXXXXXXX'+$_GET['last4']+'</p>');
+  $('#confirm').append('<p>Card: '+$_GET['visamctype']+' #XXXXXXXXXXX'+$_GET['last4']+'</p>');
 }
 
 

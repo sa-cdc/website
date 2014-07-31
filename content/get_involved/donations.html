@@ -5,7 +5,8 @@ precedence: 1
 tags:
 - service
 ---
-
+<script type="text/javascript"
+  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>4
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
 <div class="bs-docs-featurette border1">
   <h3 class="donate bs-docs-featurette-title">
@@ -99,42 +100,52 @@ tags:
         <fieldset>
           <legend>Billing Information</legend>
           <ol style="padding: 0 25%">
-            <li class="first">
-            <label for="billing-first">First Name</label>
-            <input id="billing-first" type="text" name="first" value="Matthew">
+            <li class="first form-group has-feedback">
+            <label class="control-label" for="billing-first">First Name</label>
+            <input class="input-sm form-control" id="billing-first" type="text" name="first" required>
+            <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
             </li>
-            <li class="last">
-            <label for="billing-last">Last Name</label>
-            <input id="billing-last" type="text" name="last" value="Doe">
+            <li class="last form-group has-feedback">
+            <label class="control-label" for="billing-last">Last Name</label>
+            <input class="input-sm form-control" id="billing-last" type="text" name="last" required>
+            <span id="billing-last_glyph" class="glyphicon form-control-feedback"></span>
             </li>
-            <li class="addr1">
-            <label for="billing-addr1">Address Line 1</label>
-            <input id="billing-addr1" type="text" name="addr1" value="1 Heart Way">
+            <li class="addr1 form-group has-feedback">
+            <label class="control-label" for="billing-addr1">Address Line 1</label>
+            <input class="input-sm form-control" id="billing-addr1" type="text" name="addr1" required>
+            <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
             </li>
             <!-- <li class="addr2"> -->
             <!-- <label for="billing-addr2">Address Line 2</label> -->
             <!-- <input id="billing-addr2" type="text" name="addr2"> -->
             <!-- </li> -->
-            <li class="city">
-            <label for="billing-city">City</label>
-            <input id="billing-city" type="text" name="city" value="Galveston">
+            <li class="city form-group has-feedback">
+            <label class="control-label" for="billing-city">City</label>
+            <input class="input-sm form-control" id="billing-city" type="text" name="city" required>
+            <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
             </li>
-            <li class="state">
-            <label for="billing-state">State</label>
-            <input id="billing-state" type="text" name="state" size="2" value="TX">
+            <li class="state form-group has-feedback">
+            <label class="control-label" for="billing-state">State</label>
+            <input class="input-sm form-control" id="billing-state" type="text" name="state" size="2"
+            minlength="2" maxlength="2" required>
+            <span id="billing-state_glyph" class="glyphicon form-control-feedback"></span>
             </li>
-            <li class="zip">
-            <label for="billing-zip">Zip</label>
-            <input id="billing-zip" type="text" name="zip"
-            size="10" value="20740">
+            <li class="zip form-group has-feedback">
+            <label class="control-label" for="billing-zip">Zip</label>
+            <input class="input-sm form-control" id="billing-zip" type="text" name="zip"
+            size="10" maxlength="10" required>
+            <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
             </li>
-            <li>
-            <label for="billing-phone">Phone Number</label>
-            <input id="billing-phone" type="text" name="phone" size="14" value="555-555-5555">
+            <li class="form-group has-feedback">
+            <label class="control-label" for="billing-phone">Phone Number</label>
+            <input class="input-sm form-control" id="billing-phone" type="text" name="phone" size="14"
+            maxlength="14">
+            <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
             </li>
-            <li>
-            <label for="billing-email">Email Address</label>
-            <input id="billing-email" type="text" name="email" value="m@m.com">
+            <li class="form-group has-feedback">
+            <label class="control-label" for="billing-email">Email Address</label>
+            <input class="input-sm form-control" id="billing-email" type="text" name="email">
+            <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
             </li>
           </ol>
           <button type="submit">Next</button>
@@ -227,7 +238,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
 
 <div id="transaction-confirm-block" class="center-block" style="display:none; width:350px;">
   <img src="/static/imgs/pic-content/smile_sign.jpg" width="100%">
-  <p> Keep this receipt for your records.</p>
+  <p> Keep this smile for your records.</p>
   <div class="text-center">San Antonio Christian Dental Clinic</div>
   <div class="text-center">1 Haven for Hope Way</div>
   <div class="text-center">San Antonio, Texas 78xxx</div>
