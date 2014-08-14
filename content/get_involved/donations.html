@@ -6,7 +6,8 @@ tags:
 - service
 ---
 <script type="text/javascript"
-  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>4
+  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/scripts/errorcodes.json" defer></script>
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
 <div class="bs-docs-featurette border1">
   <h3 class="donate bs-docs-featurette-title">
@@ -99,56 +100,76 @@ tags:
       <form class="form row" role="form" id="who-form" method="post">
         <fieldset>
           <legend>Billing Information</legend>
-          <ol style="padding: 0 25%">
-            <li class="first form-group has-feedback">
-            <label class="control-label" for="billing-first">First Name</label>
-            <input class="input-sm form-control" id="billing-first" type="text" name="first" required>
-            <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <li class="last form-group has-feedback">
-            <label class="control-label" for="billing-last">Last Name</label>
-            <input class="input-sm form-control" id="billing-last" type="text" name="last" required>
-            <span id="billing-last_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <li class="addr1 form-group has-feedback">
-            <label class="control-label" for="billing-addr1">Address Line 1</label>
-            <input class="input-sm form-control" id="billing-addr1" type="text" name="addr1" required>
-            <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <!-- <li class="addr2"> -->
-            <!-- <label for="billing-addr2">Address Line 2</label> -->
-            <!-- <input id="billing-addr2" type="text" name="addr2"> -->
-            <!-- </li> -->
-            <li class="city form-group has-feedback">
-            <label class="control-label" for="billing-city">City</label>
-            <input class="input-sm form-control" id="billing-city" type="text" name="city" required>
-            <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <li class="state form-group has-feedback">
-            <label class="control-label" for="billing-state">State</label>
-            <input class="input-sm form-control" id="billing-state" type="text" name="state" size="2"
-            minlength="2" maxlength="2" required>
-            <span id="billing-state_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <li class="zip form-group has-feedback">
-            <label class="control-label" for="billing-zip">Zip</label>
-            <input class="input-sm form-control" id="billing-zip" type="text" name="zip"
-            size="10" maxlength="10" required>
-            <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <li class="form-group has-feedback">
-            <label class="control-label" for="billing-phone">Phone Number</label>
-            <input class="input-sm form-control" id="billing-phone" type="text" name="phone" size="14"
-            maxlength="14">
-            <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-            <li class="form-group has-feedback">
-            <label class="control-label" for="billing-email">Email Address</label>
-            <input class="input-sm form-control" id="billing-email" type="text" name="email">
-            <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
-            </li>
-          </ol>
-          <button type="submit">Next</button>
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-first">First Name</label>
+                <input class="form-control" id="billing-first" type="text" name="first" required>
+                <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-xs-4">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-last">Last Name</label>
+                <input class="form-control" id="billing-last" type="text" name="last" required>
+                <span id="billing-last_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="addr1 form-group has-feedback">
+                <label class="control-label" for="billing-addr1">Address Line 1</label>
+                <input class="form-control" id="billing-addr1" type="text" name="addr1" required>
+                <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+              <!-- <div class="addr2"> -->
+                <!-- <label for="billing-addr2">Address Line 2</label> -->
+                <!-- <input id="billing-addr2" type="text" name="addr2"> -->
+                <!-- </div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+            <div class="city form-group has-feedback">
+              <label class="control-label" for="billing-city">City</label>
+              <input class="form-control" id="billing-city" type="text" name="city" required>
+              <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
+            </div>
+          </div>
+            <div class="col-xs-2">
+            <div class="form-group">
+              <label id="billing-state_glyph" class="control-label glyphicon" for="billing-state">State</label>
+              <input class="form-control" id="billing-state" type="text" name="state" minlength="2" maxlength="2" required>
+            </div>
+          </div>
+            <div class="col-xs-2">
+            <div class="input-md form-group">
+              <label id="billing-zip_glyph" class="control-label glyphicon" for="billing-zip">Zip</label>
+              <input class="form-control" id="billing-zip" type="number" name="zip"
+              minlength="5" maxlength="10" required>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="billing-phone">Phone Number</label>
+              <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
+              <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
+            </div>
+            </div>
+            <div class="col-xs-4">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="billing-email">Email Address</label>
+              <input class="form-control" id="billing-email" type="text" name="email">
+              <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <button type="submit">Next</button>
+          </div>
         </fieldset>
       </form>
     </div>
@@ -171,37 +192,54 @@ tags:
     </form>
 
     <div id="transaction-CC-block" style="display: none;">
-      <form class="CC form-horizontal" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CC form form-horizontal" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
           <legend>Billing Information</legend>
-          <ol class="payment">
-            <li>
-            <label class="credit debit">Debit Card?</label>
-            <input type="checkbox" name="isdebitcardonly" id="cardType"> <!-- Type=CC -->
-            </li>
-            <li>
-            <label>Account Number</label>
-            <input type="text" size="15" name="accountnumber" value="4111111111111111"> <!-- Always -->
-            </li>
-            <li>
-              <label>CVV</label>
-              <input type="text" size='4' name="cvvcode" value='123'>
-            </li>
-            <li>
-            <span> Expiration </span>
-            <label>Month/Year</label>
-            <select name="expmonth">
-              <% for month in (1..12) %>
-              <option value="<%= month %>"> <%= month %> </option>
-              <% end %>
-            </select>
-            <select name="expyear">
-              <% for year in (2014..2040) %>
-              <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
-              <% end %>
-            </select>
-            </li>
-          </ol>
+          <div class="row">
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label class="control-label credit debit">Check if Debit Card?</label>
+                <input class="form-control" type="checkbox"
+                name="isdebitcardonly" id="cardType">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group has-feedback">
+                <label class="control-label">Account Number</label>
+                <input class="form-control" type="text" size="16"
+                id="accountnumber" name="accountnumber"
+                value="4111111111111111" minlength="15" maxlength="16" required> 
+                <span id="accountnumber_glyph" class="glyphicon form-control-feedback"></span>
+            </div>
+            </div>
+            <div class="col-xs-1">
+              <div class="form-group">
+                <label id="cvvcode_glyph" class="control-label glyphicon">CVV</label>
+                <input class="form-control" type="text" id="cvvcode" name="cvvcode" value='123'
+                minlength="3" maxlength="4" required>
+              </div>
+            </div>
+            <div class="col-xs-1">
+              <div class="form-group">
+                <label id="expmonth_glyph" class="control-label glyphicon">Expiration</label>
+                <select class="form-control" id="expmonth" name="expmonth" required>
+                  <% for month in (1..12) %>
+                  <option value="<%= month %>"> <%= month %> </option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-2">
+              <div class="form-group">
+                <label id="expyear_glyph" class="control-label glyphicon">Date</label>
+                <select class="form-control" id="expyear" name="expyear" required>
+                  <% for year in (2014..2040) %>
+                  <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </div>
           <span id="fields"></span>
           <button class="amount" type="submit" id="submitCC" style="width: 100%;"></button>
         </fieldset>
@@ -245,6 +283,13 @@ your gift so that it can support more than one aspect of the clinic, please <a
   <div class="text-center">210.555.5555</div>
   <span id="confirm"></span>
   <p class="text-center"> Thank you for your donation!</p>
+</div>
+
+<div id="transaction-error-block" class="center-block" style="display: none;">
+  <div>We were unable to process your transaction for the following reason(s):
+  <ul id="error"> </ul>
+  <div>Try either: <ul><li><a href="/get_involved/donations">Restarting</a> your transaction</li><li>Donate directly
+      through <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">Vanco Services</a></li>
 </div>
 
 <p class="donate text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.</p>

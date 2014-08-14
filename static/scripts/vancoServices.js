@@ -98,6 +98,14 @@ function toggleConfirm() {
   $('.donate').css('display', 'none');
 }
 
+function toggleError() {
+  $('#tx-one').unbind('click');
+  $('#tx-two').unbind('click');
+  $('#tx-three').unbind('click');
+  toggleDisplay( $('#transaction-error-block') );
+  $('.donate').css('display', 'none');
+}
+
 function submitAmount(event, obj) {
     event.preventDefault(); //End the form submission event now!
     var amount = $(obj).attr("value");
@@ -116,8 +124,7 @@ function submitAmount(event, obj) {
 }
 
 $().ready(function() {
-  var form = $("#who-form");
-  form.validate({
+  jQuery.validator.setDefaults({
     highlight: function (element) {
       var glyph_e = "#"+$(element).attr("id")+"_glyph";
       $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
@@ -134,6 +141,8 @@ $().ready(function() {
       $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
     }
   });
+  $("#who-form").validate();
+  $("#CC-form").validate();
 });
 
 function submitWho(event) {
@@ -207,6 +216,11 @@ wsNVP = function callWSNVP(a, b) {
 
 function submitPayment(event) {
   event.preventDefault(); //End the form submission event now!
+  
+  var form = $("#CC-form");
+  if(!form.valid()) {
+    return;
+  }
 
   var acct = $( "#CC-form" ).serializeArray();
   jQuery.each(acct, function() {
@@ -272,6 +286,14 @@ if($_GET['transactionref']) {
   $('#confirm').append('<p>Confirmation: '+$_GET['transactionref']+'</p>');
   $('#confirm').append('<p>Card: '+$_GET['visamctype']+' #XXXXXXXXXXX'+$_GET['last4']+'</p>');
 }
+if($_GET['&errorlist']) {
+  toggleError();
+  errors = $_GET['&errorlist'].split(',');
+  //Assumes errorCodes.json is loaded...
+  errors.forEach(function(e) {
+    $('#error').append('<li>' + errorCodes[e] + '</li>\n');
+  });
+}
 
 
 //TODO: Evaluate what parts of these are still needed...
@@ -314,4 +336,3 @@ $('#CS-form').submit(function() {
              }
   });
 });
-
