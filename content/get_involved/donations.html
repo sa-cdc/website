@@ -145,7 +145,8 @@ tags:
           </div>
             <div class="col-xs-2">
             <div class="input-md form-group">
-              <label id="billing-zip_glyph" class="control-label glyphicon" for="billing-zip">Zip</label>
+              <label id="billing-zip_glyph" class="control-label glyphicon"
+                for="billing-zip">Zip Code</label>
               <input class="form-control" id="billing-zip" type="number" name="zip"
               minlength="5" maxlength="10" required>
             </div>
@@ -173,23 +174,34 @@ tags:
         </fieldset>
       </form>
     </div>
-
-    <form class="form row" role="form" style="display:none;" id="type-form" method="post">
-      <div class="row col-xs-6">
-        <div class="form-group col-xs-4">
-          <label class="control-label">Credit/Debit Card</label>
-          <input type="radio" value="CC" name="accounttype" id="paymentCC">
-        </div>
-        <div class="form-group col-xs-4">
-          <label class="control-label">Checking</label>
-          <input type="radio" value="C" name="accounttype" id="paymentC">
-        </div>
-        <div class="form-group col-xs-4">
-          <label class="control-label">Savings</label>
-          <input type="radio" value="S" name="accounttype" id="paymentS">
-        </div>
-      </div>
-    </form>
+<!-- style="display:none;" -->
+    <div id="transaction-payment-block" >
+      <form class="form form-horizontal" role="form" id="type-form" method="post">
+        <fieldset>
+          <legend>Select Payment Method</legend>
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label class="control-label">Credit/Debit Card</label>
+                <input type="radio" value="CC" name="accounttype" id="paymentCC">
+              </div>
+            </div>
+            <div class-"col-xs-3">
+              <div class="form-group">
+                <label class="control-label">Checking</label>
+                <input type="radio" value="C" name="accounttype" id="paymentC">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label class="control-label">Savings</label>
+                <input type="radio" value="S" name="accounttype" id="paymentS">
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
 
     <div id="transaction-CC-block" style="display: none;">
       <form class="CC form form-horizontal" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
@@ -252,17 +264,28 @@ tags:
     </form>
 
 
-    <form class="CS form-horizontal" style="display:none;" role="form" id="CS-form" method="post">
-      <div class="form-group">
-        <label for="cardType">Account Number</label>
-        <input type="text" name="accountnumber"> <!-- Always -->
-      </div>
-      <div class="form-group">
-        <label for="cardType">Routing Number</label>
-        <input type="text" name="routingnumber"> <!-- Type=C or Type=S -->
-      </div>
-      <button type="submit" id="submitCS" >Donate</button>
-    </form>
+    <div id="transaction-CS-block" style="display: none;">
+      <form role="form" id="CS-form" method="post">
+        <fieldset>
+          <legend id="typelabel"></legend>
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="cardType">Account Number</label>
+                <input type="text" name="accountnumber"> <!-- Always -->
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label for="cardType">Routing Number</label>
+                <input type="text" name="routingnumber"> <!-- Type=C or Type=S -->
+              </div>
+            </div>
+          </div>
+          <button type="submit" id="submitCS" >Donate</button>
+        </fieldset>
+      </form>
+    </div>
 
 <hr class="half-rule">
 

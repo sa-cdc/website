@@ -81,7 +81,7 @@ function togglePayment() {
   }
 
   if(!invalidWho && !invalidAmount) {
-    toggleDisplay( $('#transaction-CC-block') );
+    toggleDisplay( $('#transaction-payment-block') );
     toggleBreadCrumb( $('#tx-three'));
   }
 }
@@ -300,11 +300,16 @@ if($_GET['&errorlist']) {
 $( "input[name=accounttype]" ).change(function() {
   type = $( "input:radio[name=accounttype]:checked" ).val();
   if(type == "CC") {
-    $( ".CC" ).css("display", "block");
-    $( ".CS" ).css("display", "none");
+    $( "#transaction-CC-block" ).css("display", "block");
+    $( "#transaction-CS-block" ).css("display", "none");
   } else if(type == "C" || type == "S") {
-    $( ".CS" ).css("display", "block");
-    $( ".CC" ).css("display", "none");
+    if(type == "C") {
+      $('#typelabel').text("Enter Checking Account Numbers");
+    } else {
+      $('#typelabel').text("Enter Saving Account Numbers");
+    }
+    $( "#transaction-CS-block" ).css("display", "block");
+    $( "#transaction-CC-block" ).css("display", "none");
   }
 });
 

@@ -93,14 +93,6 @@ form li {
   padding: 5px  5px 5px 5px;
 }
 
-/*label {
-  display: block;
-  margin-bottom: 0px;
-  margin-right: 10px;
-  text-align: left;
-}
-*/
-
 button {
   cursor: pointer;
 }
@@ -141,12 +133,6 @@ li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
   clear: both;
   margin-top: 0;
   padding-top: 10px;
-}
-
-#transaction-CC-block span {
-  clear: both;
-  float: left;
-  margin-left: 0;
 }
 
 ol.payment > li {
