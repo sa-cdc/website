@@ -174,25 +174,25 @@ tags:
         </fieldset>
       </form>
     </div>
-<!-- style="display:none;" -->
-    <div id="transaction-payment-block" >
+
+    <div id="transaction-payment-block" style="display:none;">
       <form class="form form-horizontal" role="form" id="type-form" method="post">
         <fieldset>
           <legend>Select Payment Method</legend>
           <div class="row">
-            <div class="col-xs-3">
+            <div class="col-lg-3">
               <div class="form-group">
                 <label class="control-label">Credit/Debit Card</label>
                 <input type="radio" value="CC" name="accounttype" id="paymentCC">
               </div>
             </div>
-            <div class-"col-xs-3">
+            <div class="col-lg-3">
               <div class="form-group">
                 <label class="control-label">Checking</label>
                 <input type="radio" value="C" name="accounttype" id="paymentC">
               </div>
             </div>
-            <div class="col-xs-3">
+            <div class="col-lg-3">
               <div class="form-group">
                 <label class="control-label">Savings</label>
                 <input type="radio" value="S" name="accounttype" id="paymentS">
@@ -217,10 +217,10 @@ tags:
             </div>
             <div class="col-xs-3">
               <div class="form-group has-feedback">
-                <label class="control-label">Account Number</label>
+                <label class="control-label glyphicon">Account Number</label>
                 <input class="form-control" type="text" size="16"
                 id="accountnumber" name="accountnumber"
-                value="4111111111111111" minlength="15" maxlength="16" required> 
+                value="4111111111111111" minlength="15" maxlength="16" required>
                 <span id="accountnumber_glyph" class="glyphicon form-control-feedback"></span>
             </div>
             </div>
@@ -253,6 +253,8 @@ tags:
             </div>
           </div>
           <span id="fields"></span>
+          <input type="hidden" name="accounttype" id="accounttype"
+          value="CC">
           <button class="amount" type="submit" id="submitCC" style="width: 100%;"></button>
         </fieldset>
       </form>
@@ -264,25 +266,62 @@ tags:
     </form>
 
 
-    <div id="transaction-CS-block" style="display: none;">
-      <form role="form" id="CS-form" method="post">
+    <div id="transaction-C-block" style="display: none;">
+      <form class="CS form form-horizontal" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
           <legend id="typelabel"></legend>
           <div class="row">
             <div class="col-xs-3">
               <div class="form-group">
-                <label for="cardType">Account Number</label>
-                <input type="text" name="accountnumber"> <!-- Always -->
+                <label id="acct_glyph" class="control-label glyphicon"
+                  for="acctNumber">Account Number</label>
+                <input class="form-control" type="text" id="accountnumber"
+                name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
               </div>
             </div>
             <div class="col-xs-3">
               <div class="form-group">
-                <label for="cardType">Routing Number</label>
-                <input type="text" name="routingnumber"> <!-- Type=C or Type=S -->
+                <label id="rtg_glyph" class="control-label glyphicon"
+                  for="routingNumber">Routing Number</label>
+                <input class="form-control" type="text" id="routingnumber"
+                name="routingnumber" minlength="9" maxlength="9" required> <!-- Type=C or Type=S -->
               </div>
             </div>
           </div>
-          <button type="submit" id="submitCS" >Donate</button>
+          <input type="hidden" name="accounttype" id="accounttype"
+          value="C">
+          <button class="amount" type="submit" id="submitC" style="width:
+            100%;"></button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="transaction-S-block" style="display: none;">
+      <form class="CS form form-horizontal" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+        <fieldset>
+          <legend id="typelabel"></legend>
+          <div class="row">
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label id="acct_glyph" class="control-label glyphicon"
+                  for="acctNumber">Account Number</label>
+                <input class="form-control" type="text" id="accountnumber"
+                name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
+              </div>
+            </div>
+            <div class="col-xs-3">
+              <div class="form-group">
+                <label id="rtg_glyph" class="control-label glyphicon"
+                  for="routingNumber">Routing Number</label>
+                <input class="form-control" type="text" id="routingnumber"
+                name="routingnumber" minlength="9" maxlength="9" required> <!-- Type=C or Type=S -->
+              </div>
+            </div>
+          </div>
+          <input type="hidden" name="accounttype" id="accounttype"
+          value="S">
+          <button class="amount" type="submit" id="submitS" style="width:
+            100%;"></button>
         </fieldset>
       </form>
     </div>
