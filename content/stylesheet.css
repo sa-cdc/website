@@ -62,13 +62,14 @@ footer .well {
  * 8 July 2014
  * -Steelio
  **/
+
 span.breadcrumb {
   clear: none;
   float: left;
   display:block;
   background:#b8b8b8;
   width:25px;
-  margin:5px 10.5%;
+  margin:5px 8.5%;
   color:#fff;
   padding:4px;
   border-radius:5em;
@@ -98,7 +99,8 @@ button {
 }
 
 form > fieldset > button {
-  width: 100%;
+  width: 90%;
+  align-content: center;
 }
 
 /* TODO: Improve centering buttons */
@@ -118,10 +120,8 @@ ol.donation > li > * {
 }
 
 ul.bucket > li {
-  border-right: 1px solid black;
-  clear: none;
   float: left;
-  width: 170px;
+  text-align: left;
 }
 
 li.first, li.last, li.city, li.state, li.zip, li.addr1, li.addr2 {
@@ -183,6 +183,8 @@ button.amount::before {
 
 .amount {
   font-size: 1.5em;
+  width: 90%;
+  align-content: center;
 }
 
 
@@ -425,7 +427,7 @@ a:visited { color: #0079C1; }
   font-size: 16px;
   line-height: 1.5;
   text-align: center;
-  vertical-align top;
+  vertical-align: top;
 }
 /* .bs-docs-featurette + .bs-docs-footer { */
 /*   margin-top: 0; */
@@ -557,6 +559,9 @@ h3.carousel {
   .container-fluid {
     min-height: 80px;
   }
+  span.breadcrumb {
+    margin:5px 9.5%;
+  }
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -645,6 +650,13 @@ h3.carousel {
   padding-right: 100px;
   text-align: left;
   }
+  span.breadcrumb {
+    margin:5px 10.5%;
+  }
+  ul.bucket > li {
+    clear: none;
+    width: 25%;
+  }
 }
 
 @media (min-width: 992px) {
@@ -675,7 +687,6 @@ h3.carousel {
   .tinted:hover {
     opacity: 1;
   }
-
 }
 
 @media (min-width: 1200px) {

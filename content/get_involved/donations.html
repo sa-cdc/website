@@ -16,8 +16,7 @@ tags:
 </div>
 
 <div class="donate row text-center">
-  <div class="col-lg-8 col-lg-offset-2  col-md-8 col-md-offset-2 well"
-    id="donation-central">
+  <div class="col-md-8 col-md-offset-2 well" id="donation-central" style="padding: 19px 0px;">
     <div style="width: 100%;">
       <span class="active breadcrumb" id="tx-one">1</span>
       <span class="breadcrumb" id="tx-two">2</span>
@@ -101,14 +100,14 @@ tags:
         <fieldset>
           <legend>Billing Information</legend>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-sm-5">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-first">First Name</label>
                 <input class="form-control" id="billing-first" type="text" name="first" required>
                 <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-sm-7">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-last">Last Name</label>
                 <input class="form-control" id="billing-last" type="text" name="last" required>
@@ -117,7 +116,7 @@ tags:
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-sm-8">
               <div class="addr1 form-group has-feedback">
                 <label class="control-label" for="billing-addr1">Address Line 1</label>
                 <input class="form-control" id="billing-addr1" type="text" name="addr1" required>
@@ -130,20 +129,20 @@ tags:
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-sm-6">
             <div class="city form-group has-feedback">
               <label class="control-label" for="billing-city">City</label>
               <input class="form-control" id="billing-city" type="text" name="city" required>
               <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
             </div>
           </div>
-            <div class="col-xs-2">
+            <div class="col-sm-2">
             <div class="form-group">
               <label id="billing-state_glyph" class="control-label glyphicon" for="billing-state">State</label>
               <input class="form-control" id="billing-state" type="text" name="state" minlength="2" maxlength="2" required>
             </div>
           </div>
-            <div class="col-xs-2">
+            <div class="col-sm-4">
             <div class="input-md form-group">
               <label id="billing-zip_glyph" class="control-label glyphicon"
                 for="billing-zip">Zip Code</label>
@@ -153,14 +152,14 @@ tags:
           </div>
           </div>
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-sm-6">
             <div class="form-group has-feedback">
               <label class="control-label" for="billing-phone">Phone Number</label>
               <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
               <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
             </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-sm-6">
             <div class="form-group has-feedback">
               <label class="control-label" for="billing-email">Email Address</label>
               <input class="form-control" id="billing-email" type="text" name="email">
@@ -169,7 +168,7 @@ tags:
           </div>
           </div>
           <div class="row">
-            <button type="submit">Next</button>
+            <button class="btn btn-default" type="submit" style="width: 90%; align-content: center;">Next</button>
           </div>
         </fieldset>
       </form>
@@ -255,7 +254,7 @@ tags:
           <span id="fields"></span>
           <input type="hidden" name="accounttype" id="accounttype"
           value="CC">
-          <button class="amount" type="submit" id="submitCC" style="width: 100%;"></button>
+          <button class="amount btn btn-default" type="submit" id="submitCC"></button>
         </fieldset>
       </form>
     </div>
@@ -290,8 +289,7 @@ tags:
           </div>
           <input type="hidden" name="accounttype" id="accounttype"
           value="C">
-          <button class="amount" type="submit" id="submitC" style="width:
-            100%;"></button>
+          <button class="amount btn btn-default" type="submit" id="submitC"></button>
         </fieldset>
       </form>
     </div>
@@ -320,8 +318,7 @@ tags:
           </div>
           <input type="hidden" name="accounttype" id="accounttype"
           value="S">
-          <button class="amount" type="submit" id="submitS" style="width:
-            100%;"></button>
+          <button class="amount btn btn-default" type="submit" id="submitS"></button>
         </fieldset>
       </form>
     </div>
