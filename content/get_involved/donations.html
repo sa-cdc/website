@@ -179,19 +179,19 @@ tags:
         <fieldset>
           <legend>Select Payment Method</legend>
           <div class="row">
-            <div class="col-lg-3">
+            <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label">Credit/Debit Card</label>
                 <input type="radio" value="CC" name="accounttype" id="paymentCC">
               </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label">Checking</label>
                 <input type="radio" value="C" name="accounttype" id="paymentC">
               </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label">Savings</label>
                 <input type="radio" value="S" name="accounttype" id="paymentS">
@@ -207,30 +207,32 @@ tags:
         <fieldset>
           <legend>Billing Information</legend>
           <div class="row">
-            <div class="col-xs-2">
+            <div class="col-sm-5 col-sm-offset-1">
+              <div class="form-group has-feedback">
+                <label class="control-label glyphicon">Account Number</label>
+                <input class="form-control" type="text" size="16"
+                  id="accountnumber" name="accountnumber"
+                  value="4111111111111111" minlength="15" maxlength="16" required>
+                  <span id="accountnumber_glyph" class="glyphicon form-control-feedback"></span>
+                  </div>
+            </div>
+            <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label credit debit">Check if Debit Card?</label>
                 <input class="form-control" type="checkbox"
                 name="isdebitcardonly" id="cardType">
               </div>
             </div>
-            <div class="col-xs-3">
-              <div class="form-group has-feedback">
-                <label class="control-label glyphicon">Account Number</label>
-                <input class="form-control" type="text" size="16"
-                id="accountnumber" name="accountnumber"
-                value="4111111111111111" minlength="15" maxlength="16" required>
-                <span id="accountnumber_glyph" class="glyphicon form-control-feedback"></span>
-            </div>
-            </div>
-            <div class="col-xs-1">
+          </div>
+          <div class="row">
+            <div class="col-xs-3 col-xs-offset-1">
               <div class="form-group">
                 <label id="cvvcode_glyph" class="control-label glyphicon">CVV</label>
                 <input class="form-control" type="text" id="cvvcode" name="cvvcode" value='123'
                 minlength="3" maxlength="4" required>
               </div>
             </div>
-            <div class="col-xs-1">
+            <div class="col-xs-3">
               <div class="form-group">
                 <label id="expmonth_glyph" class="control-label glyphicon">Expiration</label>
                 <select class="form-control" id="expmonth" name="expmonth" required>
@@ -240,7 +242,7 @@ tags:
                 </select>
               </div>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-4">
               <div class="form-group">
                 <label id="expyear_glyph" class="control-label glyphicon">Date</label>
                 <select class="form-control" id="expyear" name="expyear" required>
@@ -270,7 +272,7 @@ tags:
         <fieldset>
           <legend id="typelabel"></legend>
           <div class="row">
-            <div class="col-xs-3">
+            <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group">
                 <label id="acct_glyph" class="control-label glyphicon"
                   for="acctNumber">Account Number</label>
@@ -278,7 +280,7 @@ tags:
                 name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
               </div>
             </div>
-            <div class="col-xs-3">
+            <div class="col-sm-5">
               <div class="form-group">
                 <label id="rtg_glyph" class="control-label glyphicon"
                   for="routingNumber">Routing Number</label>
@@ -299,7 +301,7 @@ tags:
         <fieldset>
           <legend id="typelabel"></legend>
           <div class="row">
-            <div class="col-xs-3">
+            <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group">
                 <label id="acct_glyph" class="control-label glyphicon"
                   for="acctNumber">Account Number</label>
@@ -307,7 +309,7 @@ tags:
                 name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
               </div>
             </div>
-            <div class="col-xs-3">
+            <div class="col-sm-5">
               <div class="form-group">
                 <label id="rtg_glyph" class="control-label glyphicon"
                   for="routingNumber">Routing Number</label>
@@ -330,6 +332,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
   href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3"
   class="btn btn-primary active" role="button" target="_blank">click here</a>
 </p>
+<p> Secure transaction provided by <a href="www.vancoservices.com" target="_blank"> Vanco Services, LLC.</a></p>
   </div>
 </div>
 

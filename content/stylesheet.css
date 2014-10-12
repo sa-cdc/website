@@ -187,6 +187,11 @@ button.amount::before {
   align-content: center;
 }
 
+.form-horizontal .form-group {
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
 
 /**
  * Some other stuff...
