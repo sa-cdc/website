@@ -219,8 +219,7 @@ tags:
             <div class="col-sm-4">
               <div class="form-group">
                 <label class="control-label credit debit">Check if Debit Card?</label>
-                <input class="form-control" type="checkbox"
-                name="isdebitcardonly" id="cardType">
+                <input class="form-control" type="checkbox" name="isdebitcardonly">
               </div>
             </div>
           </div>
@@ -228,7 +227,7 @@ tags:
             <div class="col-xs-3 col-xs-offset-1">
               <div class="form-group">
                 <label id="cvvcode_glyph" class="control-label glyphicon">CVV</label>
-                <input class="form-control" type="text" id="cvvcode" name="cvvcode" value='123'
+                <input class="form-control" type="text" name="cvvcode" value='123'
                 minlength="3" maxlength="4" required>
               </div>
             </div>
@@ -254,8 +253,7 @@ tags:
             </div>
           </div>
           <span id="fields"></span>
-          <input type="hidden" name="accounttype" id="accounttype"
-          value="CC">
+          <input type="hidden" name="accounttype" value="CC">
           <button class="amount btn btn-default" type="submit" id="submitCC"></button>
         </fieldset>
       </form>
@@ -270,7 +268,7 @@ tags:
     <div id="transaction-C-block" style="display: none;">
       <form class="CS form form-horizontal" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
-          <legend id="typelabel"></legend>
+          <legend>Enter Checking Account Numbers</legend>
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group">
@@ -289,8 +287,7 @@ tags:
               </div>
             </div>
           </div>
-          <input type="hidden" name="accounttype" id="accounttype"
-          value="C">
+          <input type="hidden" name="accounttype" value="C">
           <button class="amount btn btn-default" type="submit" id="submitC"></button>
         </fieldset>
       </form>
@@ -299,7 +296,7 @@ tags:
     <div id="transaction-S-block" style="display: none;">
       <form class="CS form form-horizontal" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
-          <legend id="typelabel"></legend>
+          <legend>Enter Savings Account Numbers</legend>
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group">
@@ -318,8 +315,7 @@ tags:
               </div>
             </div>
           </div>
-          <input type="hidden" name="accounttype" id="accounttype"
-          value="S">
+          <input type="hidden" name="accounttype" value="S">
           <button class="amount btn btn-default" type="submit" id="submitS"></button>
         </fieldset>
       </form>
