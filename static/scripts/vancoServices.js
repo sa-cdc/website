@@ -82,6 +82,9 @@ function togglePayment() {
 
   if(!invalidWho && !invalidAmount) {
     toggleDisplay( $('#transaction-payment-block') );
+    $('#paymentCC').prop('checked', false);
+    $('#paymentC').prop('checked', false);
+    $('#paymentS').prop('checked', false);
     toggleBreadCrumb( $('#tx-three'));
   }
 }
@@ -124,6 +127,22 @@ function submitAmount(event, obj) {
 }
 
 $().ready(function() {
+
+  //Do a AJAX reques against vanco to test the connection
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
+    timeout: 4000,
+    crossDomain: true,
+    dataType: 'jsonp',
+    contentType: 'application/html',
+    error: function (jqXHR, textStatus, errorThrown, data) {
+      response = errorThrown == "timeout" ? 'Unreachable! The rest of the page will function up-until submit...' : '';
+      $('#alertfield').text(response);
+    }
+  });
+
   jQuery.validator.setDefaults({
     highlight: function (element) {
       var glyph_e = "#"+$(element).attr("id")+"_glyph";
@@ -174,10 +193,10 @@ $('#tx-four').click(function() {
 });
 
 $('#amount-form :submit').click(function(event) {submitAmount(event, this); });
-$('#who-form').submit(          function(event) {submitWho(event);    });
-$('#CC-form').submit(           function(event) {submitPayment(event);});
-$('#C-form').submit(           function(event) {submitCPayment(event);});
-$('#S-form').submit(           function(event) {submitSPayment(event);});
+$('#who-form').submit(          function(event) {submitWho(event);          });
+$('#CC-form').submit(           function(event) {submitPayment(event, this);});
+$('#C-form').submit(            function(event) {submitPayment(event, this);});
+$('#S-form').submit(            function(event) {submitPayment(event, this);});
 
 
 encrypto = function getNVP(a, b) {
@@ -218,15 +237,15 @@ wsNVP = function callWSNVP(a, b) {
   */
 }
 
-function submitSPayment(event) {
+function submitPayment(event, me) {
   event.preventDefault(); //End the form submission event now!
-  
-  var form = $("#S-form");
+
+  var form = $( me );
   if(!form.valid()) {
     return;
   }
 
-  var acct = $( "#S-form" ).serializeArray();
+  var acct = $( me ).serializeArray();
   jQuery.each(acct, function() {
     transaction[this.name] = this.value || '';
   });
@@ -235,124 +254,11 @@ function submitSPayment(event) {
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
   paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
-  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
-  paymentData['amount'] = transaction['amount'];
+  if( 'isdebitcardonly' in transaction )
+    paymentData['isdebitcardonly'] = transaction['isdebitcardonly'] == 'on' ? 'Yes':'No';
+  else
+    paymentData['isdebitcardonly'] = 'No';
 
-  console.log('paymentData[]: '+JSON.stringify(paymentData));
-  $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
-
-  encrypto(paymentData, function(data) {
-    //Data to be handed over to VANCO only
-    data['accountnumber'] = transaction['accountnumber'];
-    data['accounttype'] = transaction['accounttype'];
-    data['routingnumber'] = transaction['routingnumber'];
-
-    //Customer Parameters
-    data['customername'] = transaction['last']+', '+transaction['first'];
-    data['customeraddress1'] = transaction['addr1'];
-    //data['customeraddress2'] = transaction['addr2'];
-    data['customercity'] = transaction['city'];
-    data['customerstate'] = transaction['state'];
-    data['customerzip'] = transaction['zip'];
-    data['customerphone'] = transaction['phone'];
-    if(transaction['amount']) {
-      data['amount'] = transaction['amount'];
-    } else {
-      var id = transaction['fundid'];
-      data['fundid_'+id] = id;
-      data['fundamount_'+id] = transaction['amount'];
-    }
-    //Transaction Parameters
-    data['startdate'] = '0000-00-00';
-    data['transactiontypecode'] = 'WEB';
-
-    /* Store the data to #hiddenForm */
-    jQuery.each(data, function(index, value) {
-      var input = $("<input>").attr("type", "hidden").attr("name", index).val(value);
-      $('#hiddenForm').append($(input));
-    });
-    $('#hiddenForm').submit();
-  });
-
-  toggleConfirm();
-}
-function submitCPayment(event) {
-  event.preventDefault(); //End the form submission event now!
-  
-  var form = $("#C-form");
-  if(!form.valid()) {
-    return;
-  }
-
-  var acct = $( "#C-form" ).serializeArray();
-  jQuery.each(acct, function() {
-    transaction[this.name] = this.value || '';
-  });
-
-  //Data to encrypt locally
-  var paymentData = {};
-  paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
-  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
-  paymentData['amount'] = transaction['amount'];
-
-  console.log('paymentData[]: '+JSON.stringify(paymentData));
-  $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
-
-  encrypto(paymentData, function(data) {
-    //Data to be handed over to VANCO only
-    data['accountnumber'] = transaction['accountnumber'];
-    data['accounttype'] = transaction['accounttype'];
-    data['routingnumber'] = transaction['routingnumber'];
-
-    //Customer Parameters
-    data['customername'] = transaction['last']+', '+transaction['first'];
-    data['customeraddress1'] = transaction['addr1'];
-    //data['customeraddress2'] = transaction['addr2'];
-    data['customercity'] = transaction['city'];
-    data['customerstate'] = transaction['state'];
-    data['customerzip'] = transaction['zip'];
-    data['customerphone'] = transaction['phone'];
-    if(transaction['amount']) {
-      data['amount'] = transaction['amount'];
-    } else {
-      var id = transaction['fundid'];
-      data['fundid_'+id] = id;
-      data['fundamount_'+id] = transaction['amount'];
-    }
-    //Transaction Parameters
-    data['startdate'] = '0000-00-00';
-    data['transactiontypecode'] = 'WEB';
-
-    /* Store the data to #hiddenForm */
-    jQuery.each(data, function(index, value) {
-      var input = $("<input>").attr("type", "hidden").attr("name", index).val(value);
-      $('#hiddenForm').append($(input));
-    });
-    $('#hiddenForm').submit();
-  });
-
-  toggleConfirm();
-}
-
-function submitPayment(event) {
-  event.preventDefault(); //End the form submission event now!
-  
-  var form = $("#CC-form");
-  if(!form.valid()) {
-    return;
-  }
-
-  var acct = $( "#CC-form" ).serializeArray();
-  jQuery.each(acct, function() {
-    transaction[this.name] = this.value || '';
-  });
-
-  //Data to encrypt locally
-  var paymentData = {};
-  paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
-  paymentData['isdebitcardonly'] = 'isdebitcardonly' in transaction ?'Yes':'No';
   paymentData['amount'] = transaction['amount'];
 
   console.log('paymentData[]: '+JSON.stringify(paymentData));
@@ -402,13 +308,26 @@ function submitPayment(event) {
   toggleConfirm();
 }
 
+/* EXAMPLES ...
+ *
+ * confirm: //Credit
+ * {"requestid":"3962297830100","&ccavsresp":"Y","paymentmethodref":"15750739","cccvvresp":"M","ccauthcode":"60439C","startdate":"2014-10-16","clientid":"ES15816","customerid":"14940186","last4":"1111","cardtype":"debit","visamctype":"visa","transactionref":"16117740","customerref":"14940186","isdebitcardonly":"No"}
+ * 
+ * confirm: //Checking
+ * {"requestid":"1646117130100","&startdate":"2014-10-21","paymentmethodref":"15750740","clientid":"ES15816","customerid":"14940187","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117741","customerref":"14940187","isdebitcardonly":"No"} 
+ * 
+ * confirm: //Saving
+ * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"} 
+*/
+
 var $_GET = getQueryParams(document.location.search);
 if($_GET['transactionref']) {
+  $_GET['startdate'] = '&startdate' in $_GET ? $_GET['&startdate']:$_GET['startdate'];
   $('.amount').text($_GET['requestid'].substring(10));
 
   toggleConfirm();
   console.log('confirm: '+JSON.stringify($_GET));
-  $('#confirm').append('<p>Post Date: '+$_GET['&startdate']+'</p>');
+  $('#confirm').append('<p>Post Date: '+$_GET['startdate']+'</p>');
   $('#confirm').append('<p>Confirmation: '+$_GET['transactionref']+'</p>');
   if(!empty($_GET['cardtype'])) {
     $('#confirm').append('<p>Card: '+$_GET['visamctype']+' #XXXXXXXXXXX'+$_GET['last4']+'</p>');
@@ -425,8 +344,6 @@ if($_GET['&errorlist']) {
   });
 }
 
-
-//TODO: Evaluate what parts of these are still needed...
 $( "input[name=accounttype]" ).change(function() {
   type = $( "input:radio[name=accounttype]:checked" ).val();
   if(type == "CC") {
@@ -434,13 +351,11 @@ $( "input[name=accounttype]" ).change(function() {
     $( "#transaction-C-block" ).css("display", "none");
     $( "#transaction-S-block" ).css("display", "none");
   } else if(type == "C") {
-      $('#typelabel').text("Enter Checking Account Numbers");
       $('#accounttype').val('C');
       $( "#transaction-C-block" ).css("display", "block");
       $( "#transaction-S-block" ).css("display", "none");
       $( "#transaction-CC-block" ).css("display", "none");
-  } else if(type =="S") {
-      $('#typelabel').text("Enter Saving Account Numbers");
+  } else if(type == "S") {
       $('#accounttype').val('S');
       $( "#transaction-C-block" ).css("display", "none");
       $( "#transaction-S-block" ).css("display", "block");
