@@ -137,17 +137,21 @@ tags:
             </div>
           </div>
             <div class="col-sm-2">
-            <div class="form-group">
-              <label id="billing-state_glyph" class="control-label glyphicon" for="billing-state">State</label>
+            <div class="form-group has-feedback">
+              <!--<label id="billing-state_glyph" class="control-label glyphicon" for="billing-state">State</label>-->
+              <label class="control-label" for="billing-city">State</label>
               <input class="form-control" id="billing-state" type="text" name="state" minlength="2" maxlength="2" required>
+              <span id="billing-state_glyph" class="glyphicon form-control-feedback"></span>
             </div>
           </div>
             <div class="col-sm-4">
-            <div class="input-md form-group">
-              <label id="billing-zip_glyph" class="control-label glyphicon"
-                for="billing-zip">Zip Code</label>
+            <div class="input-md form-group has-feedback">
+              <!--<label id="billing-zip_glyph" class="control-label glyphicon"
+                for="billing-zip">Zip Code</label>-->
+              <label class="control-label" for="billing-zip">Zip Code</label>
               <input class="form-control" id="billing-zip" type="number" name="zip"
               minlength="5" maxlength="10" required>
+              <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
             </div>
           </div>
           </div>
@@ -203,17 +207,16 @@ tags:
     </div>
 
     <div id="transaction-CC-block" style="display: none;">
-      <form class="CC form form-horizontal" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CC form" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
           <legend>Billing Information</legend>
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group has-feedback">
-                <label class="control-label glyphicon">Account Number</label>
-                <input class="form-control" type="text" size="16"
-                  id="accountnumber" name="accountnumber"
-                  value="4111111111111111" minlength="15" maxlength="16" required>
-                  <span id="accountnumber_glyph" class="glyphicon form-control-feedback"></span>
+                <!--<label class="control-label glyphicon">Account Number</label>-->
+                <label class="control-label" for="acctnumber">Account Number</label>
+                <input class="form-control" id="acctnumber" name="accountnumber" type="text" size="16" value="4111111111111111" minlength="15" maxlength="16" required>
+                <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
                   </div>
             </div>
             <div class="col-sm-4">
@@ -225,30 +228,42 @@ tags:
           </div>
           <div class="row">
             <div class="col-xs-3 col-xs-offset-1">
+<<<<<<< HEAD
               <div class="form-group">
                 <label id="cvvcode_glyph" class="control-label glyphicon">CVV</label>
                 <input class="form-control" type="text" name="cvvcode" value='123'
+=======
+              <div class="form-group has-feedback">
+                <!--<label id="cvvcode_glyph" class="control-label glyphicon">CVV</label>-->
+                <label class="control-label" for="cvv">CVV</label>
+                <input class="form-control" type="text" id="cvv" name="cvvcode" value='123'
+>>>>>>> 3f9e688eeffffd47e04cae005188c7f2e4d40c69
                 minlength="3" maxlength="4" required>
+                <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-xs-3">
-              <div class="form-group">
-                <label id="expmonth_glyph" class="control-label glyphicon">Expiration</label>
-                <select class="form-control" id="expmonth" name="expmonth" required>
+              <div class="form-group has-feedback">
+                <!--<label id="expmonth_glyph" class="control-label glyphicon">Expiration</label>-->
+                <label class="control-label" for="expmth">Expiration</label>
+                <select class="form-control" id="expmth" name="expmonth" required>
                   <% for month in (1..12) %>
                   <option value="<%= month %>"> <%= month %> </option>
                   <% end %>
                 </select>
+                <span id="expmth_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-xs-4">
-              <div class="form-group">
-                <label id="expyear_glyph" class="control-label glyphicon">Date</label>
-                <select class="form-control" id="expyear" name="expyear" required>
+              <div class="form-group has-feedback">
+                <!--<label id="expyear_glyph" class="control-label glyphicon">Date</label>-->
+                <label class="control-label" for="expyr">Date</label>
+                <select class="form-control" id="expyr" name="expyear" required>
                   <% for year in (2014..2040) %>
                   <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
                   <% end %>
                 </select>
+                <span id="expyr_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
           </div>
@@ -266,24 +281,28 @@ tags:
 
 
     <div id="transaction-C-block" style="display: none;">
-      <form class="CS form form-horizontal" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CS form" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
           <legend>Enter Checking Account Numbers</legend>
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
-              <div class="form-group">
-                <label id="acct_glyph" class="control-label glyphicon"
-                  for="acctNumber">Account Number</label>
-                <input class="form-control" type="text" id="accountnumber"
+              <div class="form-group has-feedback">
+                <!--<label id="acct_glyph" class="control-label glyphicon"
+                  for="acctNumber">Account Number</label>-->
+                <label class="control-label" for="cacctnumber">Account Number</label>
+                <input class="form-control" type="text" id="cacctnumber"
                 name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
+                <span id="cacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-5">
-              <div class="form-group">
-                <label id="rtg_glyph" class="control-label glyphicon"
-                  for="routingNumber">Routing Number</label>
-                <input class="form-control" type="text" id="routingnumber"
+              <div class="form-group has-feedback">
+                <!--<label id="rtg_glyph" class="control-label glyphicon"
+                  for="routingNumber">Routing Number</label>-->
+                <label class="control-label" for="rtgnumber">Routing Number</label>
+                <input class="form-control" type="text" id="rtgnumber"
                 name="routingnumber" minlength="9" maxlength="9" required> <!-- Type=C or Type=S -->
+                <span id="rtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
           </div>
@@ -294,24 +313,28 @@ tags:
     </div>
 
     <div id="transaction-S-block" style="display: none;">
-      <form class="CS form form-horizontal" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CS form" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
           <legend>Enter Savings Account Numbers</legend>
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
-              <div class="form-group">
-                <label id="acct_glyph" class="control-label glyphicon"
-                  for="acctNumber">Account Number</label>
-                <input class="form-control" type="text" id="accountnumber"
+              <div class="form-group has-feedback">
+                <!--<label id="acct_glyph" class="control-label glyphicon"
+                  for="acctNumber">Account Number</label>-->
+                <label class="control-label" for="sacctnumber">Account Number</label>
+                <input class="form-control" type="text" id="sacctnumber"
                 name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
+                <span id="sacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-5">
-              <div class="form-group">
-                <label id="rtg_glyph" class="control-label glyphicon"
-                  for="routingNumber">Routing Number</label>
-                <input class="form-control" type="text" id="routingnumber"
+              <div class="form-group has-feedback">
+                <!--<label id="rtg_glyph" class="control-label glyphicon"
+                  for="routingNumber">Routing Number</label>-->
+                <label class="control-label" for="srtgnumber">Routing Number</label>
+                <input class="form-control" type="text" id="srtgnumber"
                 name="routingnumber" minlength="9" maxlength="9" required> <!-- Type=C or Type=S -->
+                <span id="srtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
           </div>
