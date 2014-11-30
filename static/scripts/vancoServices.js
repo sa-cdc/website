@@ -1,3 +1,7 @@
+//Testing: https://stripe.com/docs/testing
+//http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
+//http://www.getcreditcardnumbers.com/
+//http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
 
 function getQueryParams(qs) {
@@ -52,6 +56,7 @@ function toggleDisplay(a) {
 function toggleAmount() {
   toggleDisplay( $('#transaction-amount-block') );
   toggleBreadCrumb( $('#tx-one'));
+  $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function toggleWho() {
@@ -59,8 +64,9 @@ function toggleWho() {
     toggleDisplay( $('#transaction-who-block') );
     toggleBreadCrumb( $('#tx-two'));
   } else {
-    alert('Must select a non-zero amount!');
+    alert('Please choose an amount to donate.');
   }
+  $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function togglePayment() {
@@ -73,11 +79,12 @@ function togglePayment() {
                !transaction['state'] ||
                !transaction['zip'];
 
-  if(invalidAmount) {
-    alert('Must select a non-zero amount!');
-  }
-  if(invalidWho) {
-    alert('Must specify complete billing address!');
+  if(invalidAmount && invalidWho) {
+    alert('Please choose an amount to donate and input your billing address.');
+  } else if(invalidWho) {
+    alert('Please input billing address.');
+  } else if(invalidAmount) {
+    alert('Please choose an amount to donate.');
   }
 
   if(!invalidWho && !invalidAmount) {
@@ -87,6 +94,7 @@ function togglePayment() {
     $('#paymentS').prop('checked', false);
     toggleBreadCrumb( $('#tx-three'));
   }
+  $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function toggleConfirm() {
@@ -99,6 +107,7 @@ function toggleConfirm() {
   toggleBreadCrumb( $('#tx-four'));
 
   $('.donate').css('display', 'none');
+  $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function toggleError() {
@@ -117,9 +126,9 @@ function submitAmount(event, obj) {
     }
     $('.amount').text(amount);
 
-    var fund = $("input:radio[name=dist]:checked").val();
+    var fund = $("input:radio[name=fundid]:checked").val();
     transaction['amount'] = amount;
-    if(fund != '3') {
+    if(fund != 'none') {
       transaction['fundid'] = fund;
     }
 
@@ -128,20 +137,32 @@ function submitAmount(event, obj) {
 
 $().ready(function() {
 
-  //Do a AJAX reques against vanco to test the connection
+  //AJAX request to test Vanco connection
+  //$("element[id$='txtTitle']")
+    $("div[id$='_init']").css("display", "block");
+    var fakeData = {'requesttype': 'efttransparentredirect',
+                    'isdebitcardonly': 'No',
+                    'amount': '1'};
 
-  $.ajax({
-    type: 'GET',
-    url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
-    timeout: 4000,
-    crossDomain: true,
-    dataType: 'jsonp',
-    contentType: 'application/html',
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      response = errorThrown == "timeout" ? 'Unreachable! The rest of the page will function up-until submit...' : '';
-      $('#alertfield').text(response);
-    }
-  });
+    encrypto(fakeData, function(data) {
+      $.ajax({
+        type: 'GET',
+        url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
+        timeout: 4000,
+        crossDomain: true,
+        data: data,
+        dataType: 'jsonp',
+        success: function(data){
+          $('#donationApp').css("display", "block");
+          $("div[id$='_init']").css("display", "none");
+        },
+        error: function (jqXHR, textStatus, errorThrown, data) {
+          $("div[id$='_init']").css("display", "none");
+          $('#failedToLoad').css("display", "block");
+          $('#vanco').css("display", "block");
+        }
+      });
+    });
 
   jQuery.validator.setDefaults({
     highlight: function (element) {
@@ -158,7 +179,9 @@ $().ready(function() {
       var glyph_e = "#"+$(element).attr("id")+"_glyph";
       $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
       $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    }
+    },
+    errorContainer: "#errors",
+    errorLabelContainer: "#errors"
   });
   $("#who-form").validate();
   $("#CC-form").validate();
@@ -179,18 +202,10 @@ function submitWho(event) {
     }
 }
 
-$('#tx-one').click(function() {
-  toggleAmount();
-});
-$('#tx-two').click(function() {
-  toggleWho();
-});
-$('#tx-three').click(function() {
-  togglePayment();
-});
-$('#tx-four').click(function() {
-  //toggleConfirm();
-});
+$('#tx-one').click(function() { toggleAmount(); });
+$('#tx-two').click(function() { toggleWho(); });
+$('#tx-three').click(function() { togglePayment(); });
+$('#tx-four').click(function() { /*toggleConfirm();*/ });
 
 $('#amount-form :submit').click(function(event) {submitAmount(event, this); });
 $('#who-form').submit(          function(event) {submitWho(event);          });
@@ -198,6 +213,24 @@ $('#CC-form').submit(           function(event) {submitPayment(event, this);});
 $('#C-form').submit(            function(event) {submitPayment(event, this);});
 $('#S-form').submit(            function(event) {submitPayment(event, this);});
 
+$( "input[name=accounttype]" ).change(function() {
+  type = $( "input:radio[name=accounttype]:checked" ).val();
+  if(type == "CC") {
+    $( "#transaction-CC-block" ).css("display", "block");
+    $( "#transaction-C-block" ).css("display", "none");
+    $( "#transaction-S-block" ).css("display", "none");
+  } else if(type == "C") {
+      $('#accounttype').val('C');
+      $( "#transaction-C-block" ).css("display", "block");
+      $( "#transaction-S-block" ).css("display", "none");
+      $( "#transaction-CC-block" ).css("display", "none");
+  } else if(type == "S") {
+      $('#accounttype').val('S');
+      $( "#transaction-C-block" ).css("display", "none");
+      $( "#transaction-S-block" ).css("display", "block");
+      $( "#transaction-CC-block" ).css("display", "none");
+  }
+});
 
 encrypto = function getNVP(a, b) {
   $.ajax({
@@ -215,14 +248,6 @@ encrypto = function getNVP(a, b) {
 }
 
 wsNVP = function callWSNVP(a, b) {
-  console.log(JSON.stringify(a));
-  var p = $.param(a);
-  console.log(p);
-  /* What I have to do */
-  window.location.replace('https://www.vancodev.com/cgi-bin/wsnvptest.vps?'.p);
-
-  /*
-   * What I would like to do...
   $.ajax({
     type: 'GET',
     url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
@@ -234,7 +259,6 @@ wsNVP = function callWSNVP(a, b) {
       alert('Vanco: '+errorThrown);
     }
   });
-  */
 }
 
 function submitPayment(event, me) {
@@ -249,6 +273,7 @@ function submitPayment(event, me) {
   jQuery.each(acct, function() {
     transaction[this.name] = this.value || '';
   });
+  console.log('transaction[]: '+JSON.stringify(transaction));
 
   //Data to encrypt locally
   var paymentData = {};
@@ -264,6 +289,7 @@ function submitPayment(event, me) {
   console.log('paymentData[]: '+JSON.stringify(paymentData));
   $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
 
+  //Adds nvp to the 'data' sent to the anonymous function
   encrypto(paymentData, function(data) {
     //Data to be handed over to VANCO only
     data['accountnumber'] = transaction['accountnumber'];
@@ -286,23 +312,72 @@ function submitPayment(event, me) {
     data['customerstate'] = transaction['state'];
     data['customerzip'] = transaction['zip'];
     data['customerphone'] = transaction['phone'];
-    if(transaction['amount']) {
-      data['amount'] = transaction['amount'];
-    } else {
-      var id = transaction['fundid'];
+    var id = transaction['fundid'];
+    if(id != 'none') {
       data['fundid_'+id] = id;
       data['fundamount_'+id] = transaction['amount'];
+    } else {
+      data['amount'] = transaction['amount'];
     }
     //Transaction Parameters
     data['startdate'] = '0000-00-00';
     data['transactiontypecode'] = 'WEB';
 
-    /* Store the data to #hiddenForm */
-    jQuery.each(data, function(index, value) {
-      var input = $("<input>").attr("type", "hidden").attr("name", index).val(value);
-      $('#hiddenForm').append($(input));
+    wsNVP(data, function(result) {
+      /*
+      {
+        "ccavsresp":"Y",
+        "paymentmethodref":15751344,
+        "cccvvresp":"M",
+        "startdate":"2014-11-22",
+        "clientid":"ES15816",
+        "isdebitcardonly":"No",
+        "ccauthcode":"60439C",
+        "cardtype":"debit",
+        "requestid":"7056993710100",
+        "transactionref":16121072,
+        "last4":"1111",
+        "visamctype":"visa",
+        "customerref":14940770,
+        "customerid":"14940770"
+      }
+      */
+      // This is where we trigger the writing of the receipt!
+      if(result['transactionref']) {
+        $('.amount').text(result['requestid'].substring(10));
+
+        toggleConfirm();
+        console.log('confirm: '+JSON.stringify(result));
+        $('#confirm').append('<p>Post Date: '+result['startdate']+'</p>');
+        $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
+        if(result['cardtype']) {
+          $('#confirm').append('<p>Card: '+result['visamctype']+' #XXXXXXXXXXX'+result['last4']+'('+result['cardtype']+')</p>');
+        } else {
+          $('#confirm').append('<p>Account: XXXXXX'+result['last4']+'</p>');
+        }
+        var id = transaction['fundid'];
+        funds = {
+          "0001" : "Operations Support",
+          "0002" : "Patient Care",
+          "0003" : "Endowment" };
+        if(id == '0001' || id == '0002' || id == '0003') {
+
+          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
+          $('#confirm').append('<p>Funding: '+funds[id]+' at the SA-CDC</p>');
+        } else {
+          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
+        }
+      }
+
+      if(result['errorlist']) {
+        toggleError();
+        errors = result['errorlist'].split(',');
+        //Assumes errorCodes.json is loaded...
+        errors.forEach(function(e) {
+          $('#error').append('<li>' + errorCodes[e] + '</li>\n');
+        });
+      }
     });
-    $('#hiddenForm').submit();
   });
 
   toggleConfirm();
@@ -312,53 +387,12 @@ function submitPayment(event, me) {
  *
  * confirm: //Credit
  * {"requestid":"3962297830100","&ccavsresp":"Y","paymentmethodref":"15750739","cccvvresp":"M","ccauthcode":"60439C","startdate":"2014-10-16","clientid":"ES15816","customerid":"14940186","last4":"1111","cardtype":"debit","visamctype":"visa","transactionref":"16117740","customerref":"14940186","isdebitcardonly":"No"}
- * 
+ *
  * confirm: //Checking
- * {"requestid":"1646117130100","&startdate":"2014-10-21","paymentmethodref":"15750740","clientid":"ES15816","customerid":"14940187","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117741","customerref":"14940187","isdebitcardonly":"No"} 
- * 
+ * {"requestid":"1646117130100","&startdate":"2014-10-21","paymentmethodref":"15750740","clientid":"ES15816","customerid":"14940187","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117741","customerref":"14940187","isdebitcardonly":"No"}
+ *
  * confirm: //Saving
- * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"} 
+ * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"}
 */
 
-var $_GET = getQueryParams(document.location.search);
-if($_GET['transactionref']) {
-  $_GET['startdate'] = '&startdate' in $_GET ? $_GET['&startdate']:$_GET['startdate'];
-  $('.amount').text($_GET['requestid'].substring(10));
 
-  toggleConfirm();
-  console.log('confirm: '+JSON.stringify($_GET));
-  $('#confirm').append('<p>Post Date: '+$_GET['startdate']+'</p>');
-  $('#confirm').append('<p>Confirmation: '+$_GET['transactionref']+'</p>');
-  if(!empty($_GET['cardtype'])) {
-    $('#confirm').append('<p>Card: '+$_GET['visamctype']+' #XXXXXXXXXXX'+$_GET['last4']+'</p>');
-  } else {
-    $('#confirm').append('<p>Account: XXXXXX'+$_GET['last4']+'</p>');
-  }
-}
-if($_GET['&errorlist']) {
-  toggleError();
-  errors = $_GET['&errorlist'].split(',');
-  //Assumes errorCodes.json is loaded...
-  errors.forEach(function(e) {
-    $('#error').append('<li>' + errorCodes[e] + '</li>\n');
-  });
-}
-
-$( "input[name=accounttype]" ).change(function() {
-  type = $( "input:radio[name=accounttype]:checked" ).val();
-  if(type == "CC") {
-    $( "#transaction-CC-block" ).css("display", "block");
-    $( "#transaction-C-block" ).css("display", "none");
-    $( "#transaction-S-block" ).css("display", "none");
-  } else if(type == "C") {
-      $('#accounttype').val('C');
-      $( "#transaction-C-block" ).css("display", "block");
-      $( "#transaction-S-block" ).css("display", "none");
-      $( "#transaction-CC-block" ).css("display", "none");
-  } else if(type == "S") {
-      $('#accounttype').val('S');
-      $( "#transaction-C-block" ).css("display", "none");
-      $( "#transaction-S-block" ).css("display", "block");
-      $( "#transaction-CC-block" ).css("display", "none");
-  }
-});

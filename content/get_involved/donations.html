@@ -5,8 +5,8 @@ precedence: 1
 tags:
 - service
 ---
-<script type="text/javascript"
-  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/scripts/jquery.xslt.js" defer></script>
 <script type="text/javascript" src="/static/scripts/errorcodes.json" defer></script>
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
 <div class="bs-docs-featurette border1">
@@ -16,161 +16,180 @@ tags:
   </h3>
 </div>
 
-<div class="donate row text-center">
+<p class="text-center" id="vanco" style="display:none;">For those interested in reoccurring gifts or splitting
+your gift so that it can support more than one aspect of the clinic, please <a
+  href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0="
+  class="btn btn-primary active" role="button" target="_blank">click here</a>
+</p>
+
+<div class="row text-center">
+  <div class="col-sm-4 col-sm-offset-4" id="text_init">
+    Loading donation form
+  </div>
+  <div class="col-sm-4 col-sm-offset-4" id="spinner_init">
+    <img src="/static/imgs/ajax-loader.gif" alt="loading" width=10%> 
+  </div>
+  <div class="col-sm-6 col-sm-offset-3" id="failedToLoad" style="display: none;">
+    The secure banking service cannot be reached from your current connection.
+  </div>
+</div>
+
+
+<div class="donate row text-center" id="donationApp" style="display: none;">
   <div class="col-md-8 col-md-offset-2 well" id="donation-central" style="padding: 19px 0px;">
-    <div style="width: 100%;">
-      <span class="active breadcrumb" id="tx-one">1</span>
-      <span class="breadcrumb" id="tx-two">2</span>
-      <span class="breadcrumb" id="tx-three">3</span>
-      <span class="breadcrumb" id="tx-four">4</span>
-      <span class="amount" style="display: block; clear: both; float: none;">0</span>
+    <div class="row">
+      <div class="col-xs-1 col-xs-offset-2 active stage click" id="tx-one">1</div>
+      <div class="col-xs-1 col-xs-offset-2 stage click" id="tx-two">2</div>
+      <div class="col-xs-1 col-xs-offset-2 stage click" id="tx-three">3</div>
+      <div class="col-xs-1 col-xs-offset-2 stage" id="tx-four">4</div>
+      <div class="col-xs-12 amount">0</div>
     </div>
 
-    <div class="text-center" id="transaction-amount-block">
+    <div id="transaction-amount-block">
       <form class="form" role="form" id="amount-form" method="post">
         <fieldset>
           <h3>Tell us how to use your donation (choose one)</h3>
-          <ul class="bucket">
-            <li>
-            <h4>
-              <input type="radio" min=0 max=100 value='0' name="dist">
-              Operations Support
-            </h4>
-            <p>
-              Help us continue to provide high quality staff and support
-              structures so that we can grow the clinic
-            </p>
-            </li>
-            <li>
-            <h4>
-              <input type="radio" min=0 max=100 value='1' name="dist">
-              Patient Care
-            </h4>
-            <p>
-            Give the gift of a new smile by helping us cover the cost of direct
-            patient services
-            </p>
-            </li>
-            <li>
-            <h4>
-              <input type="radio" min=0 max=100 value='2' name="dist">
-              Endowment
-            </h4>
-            <p>
-              Help us continue to fund the clinic in perpetuity
-            </p>
-            </li>
-            <li>
-            <h4>
-              <input type="radio" min=0 max=100 value='3' name="dist" checked>
-              Discretionary
-            </h4>
-            <p>
-              Help us fund the projects with the greatest needs
-            </p>
-            </li>
-          </ul>
+          <div class="row text-left">
+            <label class="col-md-4">
+              <h4>
+                <input type="radio" value='0001' name="fundid" checked>
+                Operations Support
+              </h4>
+              <p>
+                Help us continue to provide high quality staff and support
+                structures so that we can grow the clinic
+              </p>
+            </label>
+            <label class="col-md-4">
+              <h4>
+                <input type="radio" value='0002' name="fundid" autocomplete="off">
+                Patient Care
+              </h4>
+              <p>
+                Give the gift of a new smile by helping us cover the cost of direct
+                patient services
+              </p>
+            </label>
+            <label class="col-md-4">
+              <h4>
+                <input type="radio" value='0003' name="fundid" autocomplete="off">
+                Endowment
+              </h4>
+              <p>
+                Help us continue to fund the clinic in perpetuity
+              </p>
+            </label>
+          </div>
 
           <h3> Select an amount to donate. </h3>
-          <ol class="donation">
-            <li><button type="submit"
-              value="10">$10</button></li>
-            <li><button type="submit"
-              value="25">$25</button></li>
-            <li><button type="submit"
-              value="100">$100</button></li>
-            <li><button type="submit"
-              value="1000">$1K</button></li>
-            <li><button type="submit"
-              value="2500">$2.5K</button></li>
-            <li><button type="submit"
-              value="10000">$10K</button></li>
-            <li><button type="submit"
-              value="1000000">$1M</button></li>
-            <li><input type="text" name="enteredAmount"
-            id="enteredAmount" placeholder="Custom"></li>
-          </ol>
+          <div class="row">
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="10">
+              $10
+            </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="25">
+              $25
+            </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="100">
+              $100
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="1000">
+              $1K
+            </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="2500">
+              $2.5K
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="10000">
+              $10K
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="50000">
+              $50K
+            </button>
+            <div class="col-md-3 input-group">
+              <input class="form-control input-lg" type="text"
+              name="enteredAmount" id="enteredAmount" placeholder="Custom">
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="submit" id="customAmt" value="custom">Go</button>
+              </span>
+            </div>
+          </div>
 
-          <button class="btn btn-default" type="submit" id="customAmt" value="custom">Next</button>
         </fieldset>
       </form>
     </div>
-
+<!-- Good example to hel improve:
+     view-source:http://bootstrapvalidator.com/examples/bootstrap-select/ -->
+<style type="text/css">
+#transaction-who-block .form-control-feedback {
+      /* Adjust feedback icon position */
+      right: -25px;
+}
+</style>
+   <span id="errors" style="display: none;"></span>
     <div id="transaction-who-block" style="display:none;">
-      <form class="form row" role="form" id="who-form" method="post">
+      <form class="form" role="form" id="who-form" method="post">
         <fieldset>
           <legend>Billing Information</legend>
-          <div class="row">
-            <div class="col-sm-5">
+          <div class="row text-left">
+            <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-first">First Name</label>
                 <input class="form-control" id="billing-first" type="text" name="first" required>
                 <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-last">Last Name</label>
                 <input class="form-control" id="billing-last" type="text" name="last" required>
                 <span id="billing-last_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-8">
-              <div class="addr1 form-group has-feedback">
+            <div class="col-sm-12">
+              <div class="form-group has-feedback">
                 <label class="control-label" for="billing-addr1">Address Line 1</label>
                 <input class="form-control" id="billing-addr1" type="text" name="addr1" required>
                 <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
               </div>
-              <!-- <div class="addr2"> -->
-                <!-- <label for="billing-addr2">Address Line 2</label> -->
-                <!-- <input id="billing-addr2" type="text" name="addr2"> -->
-                <!-- </div> -->
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-            <div class="city form-group has-feedback">
-              <label class="control-label" for="billing-city">City</label>
-              <input class="form-control" id="billing-city" type="text" name="city" required>
-              <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
+            <div class="col-sm-7">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-city">City</label>
+                <input class="form-control" id="billing-city" type="text" name="city" required>
+                <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
             </div>
-          </div>
+            <div class="col-sm-3">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-state">State</label>
+                <select class="form-control" name="state" id="billing-state">
+                  <option value="">State</option>
+                  <%= state_helper %>
+                </select>
+                <span id="billing-state_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
             <div class="col-sm-2">
-            <div class="form-group has-feedback">
-              <!--<label id="billing-state_glyph" class="control-label glyphicon" for="billing-state">State</label>-->
-              <label class="control-label" for="billing-city">State</label>
-              <input class="form-control" id="billing-state" type="text" name="state" minlength="2" maxlength="2" required>
-              <span id="billing-state_glyph" class="glyphicon form-control-feedback"></span>
-            </div>
-          </div>
-            <div class="col-sm-4">
-            <div class="input-md form-group has-feedback">
-              <!--<label id="billing-zip_glyph" class="control-label glyphicon"
-                for="billing-zip">Zip Code</label>-->
-              <label class="control-label" for="billing-zip">Zip Code</label>
-              <input class="form-control" id="billing-zip" type="number" name="zip"
-              minlength="5" maxlength="10" required>
-              <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
-            </div>
-          </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-            <div class="form-group has-feedback">
-              <label class="control-label" for="billing-phone">Phone Number</label>
-              <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
-              <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
-            </div>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-zip">Zip Code</label>
+                <input class="form-control" id="billing-zip" type="text" name="zip"
+                pattern="[0-9]{5}(?:-[0-9]{4})" required>
+                <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
             </div>
             <div class="col-sm-6">
-            <div class="form-group has-feedback">
-              <label class="control-label" for="billing-email">Email Address</label>
-              <input class="form-control" id="billing-email" type="text" name="email">
-              <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-phone">Phone Number</label>
+                <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
+                <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
             </div>
-          </div>
+            <div class="col-sm-6">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-email">Email Address</label>
+                <input class="form-control" id="billing-email" type="text" name="email">
+                <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
           </div>
           <div class="row">
             <button class="btn btn-default" type="submit" style="width: 90%; align-content: center;">Next</button>
@@ -216,9 +235,11 @@ tags:
               <div class="form-group has-feedback">
                 <!--<label class="control-label glyphicon">Account Number</label>-->
                 <label class="control-label" for="acctnumber">Account Number</label>
-                <input class="form-control" id="acctnumber" name="accountnumber" type="text" size="16" value="4111111111111111" minlength="15" maxlength="16" required>
+                <input class="form-control" id="acctnumber" name="accountnumber"
+                type="text" size="16" value="4111111111111111"
+                pattern="[0-9]{15,16}" required>
                 <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
-                  </div>
+              </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
@@ -230,35 +251,32 @@ tags:
           <div class="row">
             <div class="col-xs-3 col-xs-offset-1">
               <div class="form-group has-feedback">
-                <!--<label id="cvvcode_glyph" class="control-label glyphicon">CVV</label>-->
                 <label class="control-label" for="cvv">CVV</label>
                 <input class="form-control" type="text" id="cvv" name="cvvcode" value='123'
-                minlength="3" maxlength="4" required>
+                pattern="[0-9]{3,4}" required>
                 <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-xs-3">
               <div class="form-group has-feedback">
-                <!--<label id="expmonth_glyph" class="control-label glyphicon">Expiration</label>-->
                 <label class="control-label" for="expmth">Expiration</label>
                 <select class="form-control" id="expmth" name="expmonth" required>
+                  <option value="">Month</option>
                   <% for month in (1..12) %>
                   <option value="<%= month %>"> <%= month %> </option>
                   <% end %>
                 </select>
-                <span id="expmth_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-xs-4">
               <div class="form-group has-feedback">
-                <!--<label id="expyear_glyph" class="control-label glyphicon">Date</label>-->
                 <label class="control-label" for="expyr">Date</label>
                 <select class="form-control" id="expyr" name="expyear" required>
+                  <option value="">Year</option>
                   <% for year in (2014..2040) %>
                   <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
                   <% end %>
                 </select>
-                <span id="expyr_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
           </div>
@@ -268,12 +286,6 @@ tags:
         </fieldset>
       </form>
     </div>
-
-    <form id="hiddenForm" role="form"
-      action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get"
-      style="display: none;">
-    </form>
-
 
     <div id="transaction-C-block" style="display: none;">
       <form class="CS form" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
@@ -286,7 +298,7 @@ tags:
                   for="acctNumber">Account Number</label>-->
                 <label class="control-label" for="cacctnumber">Account Number</label>
                 <input class="form-control" type="text" id="cacctnumber"
-                name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
+                name="accountnumber" pattern="[0-9]{1,17}" required> <!-- Always -->
                 <span id="cacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -296,7 +308,7 @@ tags:
                   for="routingNumber">Routing Number</label>-->
                 <label class="control-label" for="rtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="rtgnumber"
-                name="routingnumber" minlength="9" maxlength="9" required> <!-- Type=C or Type=S -->
+                name="routingnumber" pattern="[0-9]{9}" required> <!-- Type=C or Type=S -->
                 <span id="rtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -318,7 +330,7 @@ tags:
                   for="acctNumber">Account Number</label>-->
                 <label class="control-label" for="sacctnumber">Account Number</label>
                 <input class="form-control" type="text" id="sacctnumber"
-                name="accountnumber" minlength="1" maxlength="17" required> <!-- Always -->
+                name="accountnumber" pattern="[0-9]{1,17}" required> <!-- Always -->
                 <span id="sacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -328,7 +340,7 @@ tags:
                   for="routingNumber">Routing Number</label>-->
                 <label class="control-label" for="srtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="srtgnumber"
-                name="routingnumber" minlength="9" maxlength="9" required> <!-- Type=C or Type=S -->
+                name="routingnumber" pattern="[0-9]{9}" required> <!-- Type=C or Type=S -->
                 <span id="srtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -339,33 +351,33 @@ tags:
       </form>
     </div>
 
-<hr class="half-rule">
+    <hr class="half-rule">
 
-<p class="text-center">For those interested in reoccurring gifts or splitting
-your gift so that it can support more than one aspect of the clinic, please <a
-  href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3"
-  class="btn btn-primary active" role="button" target="_blank">click here</a>
-</p>
-<p> Secure transaction provided by <a href="www.vancoservices.com" target="_blank"> Vanco Services, LLC.</a></p>
+    <p> Secure transaction provided by <a href="www.vancoservices.com" target="_blank"> Vanco Services, LLC.</a></p>
   </div>
 </div>
 
 <div id="transaction-confirm-block" class="center-block" style="display:none; width:350px;">
-  <img src="/static/imgs/pic-content/smile_sign.jpg" width="100%">
+  <img src="/static/imgs/pic-content/smile_sign.jpg" width=100% alt="Smile!">
   <p> Keep this smile for your records.</p>
   <div class="text-center">San Antonio Christian Dental Clinic</div>
   <div class="text-center">1 Haven for Hope Way</div>
   <div class="text-center">San Antonio, Texas 78xxx</div>
   <div class="text-center">210.555.5555</div>
   <span id="confirm"></span>
+  <br>
+  <span id="debug"></span>
   <p class="text-center"> Thank you for your donation!</p>
 </div>
 
 <div id="transaction-error-block" class="center-block" style="display: none;">
   <div>We were unable to process your transaction for the following reason(s):
     <ul id="error"> </ul>
-    <div>Try either: <ul><li><a href="/get_involved/donations">Restarting</a> your transaction</li><li>Donate directly
-      through <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3" class="btn btn-primary active" role="button" target="_blank">Vanco Services</a></li>
+    <div>Try either:
+      <ul>
+        <li><a href="/get_involved/donations">Restarting</a> your transaction</li>
+        <li>Donate directly through <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=" class="btn btn-primary active" role="button" target="_blank">Vanco Services</a></li>
+      </ul>
     </div>
   </div>
 </div>
