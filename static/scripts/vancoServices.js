@@ -106,7 +106,6 @@ function toggleConfirm() {
   toggleDisplay( $('#transaction-confirm-block') );
   toggleBreadCrumb( $('#tx-four'));
 
-  $('.donate').css('display', 'none');
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
@@ -115,7 +114,6 @@ function toggleError() {
   $('#tx-two').unbind('click');
   $('#tx-three').unbind('click');
   toggleDisplay( $('#transaction-error-block') );
-  $('.donate').css('display', 'none');
 }
 
 function submitAmount(event, obj) {
@@ -142,7 +140,7 @@ $().ready(function() {
     $("div[id$='_init']").css("display", "block");
     var fakeData = {'requesttype': 'efttransparentredirect',
                     'isdebitcardonly': 'No',
-                    'amount': '1'};
+                    'amount': '0'};
 
     encrypto(fakeData, function(data) {
       $.ajax({
@@ -287,7 +285,8 @@ function submitPayment(event, me) {
   paymentData['amount'] = transaction['amount'];
 
   console.log('paymentData[]: '+JSON.stringify(paymentData));
-  $( '#confirm-data').append('<img src="/static/imgs/ajax-loader.gif" width="42">');
+  //$( "#transaction-loading").css('display', 'block');
+  toggleDisplay($('#transaction-loading'));
 
   //Adds nvp to the 'data' sent to the anonymous function
   encrypto(paymentData, function(data) {
@@ -343,12 +342,13 @@ function submitPayment(event, me) {
       }
       */
       // This is where we trigger the writing of the receipt!
+      $("#transaction-loading").css('block','none');
       if(result['transactionref']) {
         $('.amount').text(result['requestid'].substring(10));
 
         toggleConfirm();
         console.log('confirm: '+JSON.stringify(result));
-        $('#confirm').append('<p>Post Date: '+result['startdate']+'</p>');
+        $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
           $('#confirm').append('<p>Card: '+result['visamctype']+' #XXXXXXXXXXX'+result['last4']+'('+result['cardtype']+')</p>');
@@ -380,7 +380,6 @@ function submitPayment(event, me) {
     });
   });
 
-  toggleConfirm();
 }
 
 /* EXAMPLES ...

@@ -178,16 +178,17 @@ your gift so that it can support more than one aspect of the clinic, please <a
             </div>
             <div class="col-sm-6">
               <div class="form-group has-feedback">
-                <label class="control-label" for="billing-phone">Phone Number</label>
-                <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
-                <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
+                <label class="control-label" for="billing-email">Email Address</label>
+                <input class="form-control" id="billing-email" type="text"
+                name="email" required>
+                <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group has-feedback">
-                <label class="control-label" for="billing-email">Email Address</label>
-                <input class="form-control" id="billing-email" type="text" name="email">
-                <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
+                <label class="control-label" for="billing-phone">Phone Number</label>
+                <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
+                <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
           </div>
@@ -351,36 +352,51 @@ your gift so that it can support more than one aspect of the clinic, please <a
       </form>
     </div>
 
+    <div id="transaction-loading" style="display: none;">
+      <div class="row">
+        <div class="col-xs-2 col-xs-offset-5">
+          <img src="/static/imgs/ajax-loader.gif" class="img-responsive">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="transaction-confirm-block" class="center-block"
+      style="display:none;">
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+          <img src="/static/imgs/pic-content/smile_sign.jpg"
+          class="img-responsive" alt="Smile!">
+        </div>
+      </div>
+      <p> Keep this smile for your records.</p>
+      <span id="confirm"></span>
+      <p class="text-center"> Thank you for your donation!</p>
+      <div class="text-center">San Antonio Christian Dental Clinic</div>
+      <div class="text-center">1 Haven for Hope Way</div>
+      <div class="text-center">San Antonio, Texas 78xxx</div>
+      <div class="text-center">210.555.5555</div>
+    </div>
+
+    <div id="transaction-error-block" class="center-block" style="display: none;">
+      <div>We were unable to process your transaction for the following reason(s):
+        <ul id="error"> </ul>
+        <div>Try either:
+          <ul>
+            <li><a href="/get_involved/donations">Restarting</a> your transaction</li>
+            <li>Donate directly through <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=" class="btn btn-primary active" role="button" target="_blank">Vanco Services</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <hr class="half-rule">
 
     <p> Secure transaction provided by <a href="www.vancoservices.com" target="_blank"> Vanco Services, LLC.</a></p>
   </div>
 </div>
 
-<div id="transaction-confirm-block" class="center-block" style="display:none; width:350px;">
-  <img src="/static/imgs/pic-content/smile_sign.jpg" width=100% alt="Smile!">
-  <p> Keep this smile for your records.</p>
-  <div class="text-center">San Antonio Christian Dental Clinic</div>
-  <div class="text-center">1 Haven for Hope Way</div>
-  <div class="text-center">San Antonio, Texas 78xxx</div>
-  <div class="text-center">210.555.5555</div>
-  <span id="confirm"></span>
-  <br>
-  <span id="debug"></span>
-  <p class="text-center"> Thank you for your donation!</p>
-</div>
-
-<div id="transaction-error-block" class="center-block" style="display: none;">
-  <div>We were unable to process your transaction for the following reason(s):
-    <ul id="error"> </ul>
-    <div>Try either:
-      <ul>
-        <li><a href="/get_involved/donations">Restarting</a> your transaction</li>
-        <li>Donate directly through <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=" class="btn btn-primary active" role="button" target="_blank">Vanco Services</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <p class="donate text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.</p>
 
