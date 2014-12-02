@@ -6,6 +6,7 @@ tags:
   - service 
 ---
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
 <script type="text/javascript" src="/static/scripts/jquery.xslt.js" defer></script>
 <script type="text/javascript" src="/static/scripts/errorcodes.json" defer></script>
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
@@ -153,7 +154,8 @@ your gift so that it can support more than one aspect of the clinic, please <a
             <div class="col-sm-12">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-addr1">Address Line 1</label>
-                <input class="form-control" id="billing-addr1" type="text" name="addr1" required>
+                <input class="form-control" id="billing-addr1" type="text"
+                name="addr1" pattern="^\d+ .*$" required>
                 <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -177,7 +179,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
               <div class="form-group">
                 <label class="control-label" for="billing-zip">Zip Code</label>
                 <input class="form-control" id="billing-zip" type="text" name="zip"
-                pattern="[0-9]{5}(?:-[0-9]{4})" required>
+                pattern="^[0-9]{5}(?:-[0-9]{4}){0,1}$" required>
                 <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -243,7 +245,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
                 <label class="control-label" for="acctnumber">Account Number</label>
                 <input class="form-control" id="acctnumber" name="accountnumber"
                 type="text" size="16" value="4111111111111111"
-                pattern="[0-9]{15,16}" required>
+                pattern="^[0-9]{15,16}$" required>
                 <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -259,7 +261,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
               <div class="form-group has-feedback">
                 <label class="control-label" for="cvv">CVV</label>
                 <input class="form-control" type="text" id="cvv" name="cvvcode" value='123'
-                pattern="[0-9]{3,4}" required>
+                pattern="^[0-9]{3,4}$" required>
                 <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -300,11 +302,9 @@ your gift so that it can support more than one aspect of the clinic, please <a
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group has-feedback">
-                <!--<label id="acct_glyph" class="control-label glyphicon"
-                  for="acctNumber">Account Number</label>-->
                 <label class="control-label" for="cacctnumber">Account Number</label>
                 <input class="form-control" type="text" id="cacctnumber"
-                name="accountnumber" pattern="[0-9]{1,17}" required> <!-- Always -->
+                name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
                 <span id="cacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -314,7 +314,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
                   for="routingNumber">Routing Number</label>-->
                 <label class="control-label" for="rtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="rtgnumber"
-                name="routingnumber" pattern="[0-9]{9}" required> <!-- Type=C or Type=S -->
+                name="routingnumber" pattern="^[0-9]{9}$" required> <!-- Type=C or Type=S -->
                 <span id="rtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -332,21 +332,17 @@ your gift so that it can support more than one aspect of the clinic, please <a
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group has-feedback">
-                <!--<label id="acct_glyph" class="control-label glyphicon"
-                  for="acctNumber">Account Number</label>-->
                 <label class="control-label" for="sacctnumber">Account Number</label>
                 <input class="form-control" type="text" id="sacctnumber"
-                name="accountnumber" pattern="[0-9]{1,17}" required> <!-- Always -->
+                name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
                 <span id="sacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-5">
               <div class="form-group has-feedback">
-                <!--<label id="rtg_glyph" class="control-label glyphicon"
-                  for="routingNumber">Routing Number</label>-->
                 <label class="control-label" for="srtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="srtgnumber"
-                name="routingnumber" pattern="[0-9]{9}" required> <!-- Type=C or Type=S -->
+                name="routingnumber" pattern="^[0-9]{9}$" required> <!-- Type=C or Type=S -->
                 <span id="srtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -364,7 +360,6 @@ your gift so that it can support more than one aspect of the clinic, please <a
         </div>
       </div>
     </div>
-
 
 
     <div id="transaction-confirm-block" class="center-block"

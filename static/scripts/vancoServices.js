@@ -162,6 +162,8 @@ $().ready(function() {
       });
     });
 
+
+
   jQuery.validator.setDefaults({
     highlight: function (element) {
       var glyph_e = "#"+$(element).attr("id")+"_glyph";
@@ -181,10 +183,39 @@ $().ready(function() {
     errorContainer: "#errors",
     errorLabelContainer: "#errors"
   });
+
+  $("#amount-form").validate();
   $("#who-form").validate();
   $("#CC-form").validate();
   $("#C-form").validate();
   $("#S-form").validate();
+
+   //Amount Form
+   $("#enteredAmount").rules("add", {
+     minlength: 1,
+     maxlength: 5
+   });
+   //Billing Information (Who Block)
+   $("#billing-first").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-last").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-city").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-email").rules("add", {
+     required: true,
+     email: true
+   });
+   $("#billing-phone").rules("add", {
+     required: true,
+     phoneUS: true
+   });
 });
 
 function submitWho(event) {
