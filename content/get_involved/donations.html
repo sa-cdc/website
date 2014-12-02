@@ -89,42 +89,48 @@ your gift so that it can support more than one aspect of the clinic, please <a
             <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="25">
               $25
             </button>
-            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="100">
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="50">
+              $50
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="100">
               $100
             </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="250">
+              $250
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="500">
+              $500
+            </button>
             <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="1000">
-              $1K
-            </button>
-            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="2500">
-              $2.5K
-            </button>
-            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="10000">
-              $10K
-            </button>
-            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="50000">
-              $50K
+              $1,000
             </button>
             <div class="col-md-3 input-group">
-              <input class="form-control input-lg" type="text"
-              name="enteredAmount" id="enteredAmount" placeholder="Custom">
+              <input class="form-control input-lg" type="text" name="enteredAmount" id="enteredAmount" placeholder="Other">
               <span class="input-group-btn">
                 <button class="btn btn-default btn-lg" type="submit" id="customAmt" value="custom">Go</button>
               </span>
             </div>
           </div>
-
         </fieldset>
       </form>
+      <h3>Cost of common patient care procedures</h3>
+      <div class="row text-left">
+        <div class="col-xs-4 col-xs-offset-1">
+          <ul class="list-group">
+            <li class="list-group-item">
+              Dental Cleaning
+              <span class="badge"> $50</span>
+            </li>
+            <li class="list-group-item">
+              X-ray
+              <span class="badge">$40</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-<!-- Good example to hel improve:
-     view-source:http://bootstrapvalidator.com/examples/bootstrap-select/ -->
-<style type="text/css">
-#transaction-who-block .form-control-feedback {
-      /* Adjust feedback icon position */
-      right: -25px;
-}
-</style>
-   <span id="errors" style="display: none;"></span>
+
+    <span id="errors" style="display: none;"></span>
     <div id="transaction-who-block" style="display:none;">
       <form class="form" role="form" id="who-form" method="post">
         <fieldset>
@@ -159,17 +165,16 @@ your gift so that it can support more than one aspect of the clinic, please <a
               </div>
             </div>
             <div class="col-sm-3">
-              <div class="form-group has-feedback">
+              <div class="form-group">
                 <label class="control-label" for="billing-state">State</label>
                 <select class="form-control" name="state" id="billing-state">
                   <option value="">State</option>
                   <%= state_helper %>
                 </select>
-                <span id="billing-state_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-2">
-              <div class="form-group has-feedback">
+              <div class="form-group">
                 <label class="control-label" for="billing-zip">Zip Code</label>
                 <input class="form-control" id="billing-zip" type="text" name="zip"
                 pattern="[0-9]{5}(?:-[0-9]{4})" required>
@@ -259,7 +264,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
               </div>
             </div>
             <div class="col-xs-3">
-              <div class="form-group has-feedback">
+              <div class="form-group">
                 <label class="control-label" for="expmth">Expiration</label>
                 <select class="form-control" id="expmth" name="expmonth" required>
                   <option value="">Month</option>
@@ -270,7 +275,7 @@ your gift so that it can support more than one aspect of the clinic, please <a
               </div>
             </div>
             <div class="col-xs-4">
-              <div class="form-group has-feedback">
+              <div class="form-group">
                 <label class="control-label" for="expyr">Date</label>
                 <select class="form-control" id="expyr" name="expyear" required>
                   <option value="">Year</option>

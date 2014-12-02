@@ -271,7 +271,7 @@ function submitPayment(event, me) {
   jQuery.each(acct, function() {
     transaction[this.name] = this.value || '';
   });
-  console.log('transaction[]: '+JSON.stringify(transaction));
+  //console.log('transaction[]: '+JSON.stringify(transaction));
 
   //Data to encrypt locally
   var paymentData = {};
@@ -284,7 +284,7 @@ function submitPayment(event, me) {
 
   paymentData['amount'] = transaction['amount'];
 
-  console.log('paymentData[]: '+JSON.stringify(paymentData));
+  //console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
   toggleDisplay($('#transaction-loading'));
 
@@ -347,7 +347,7 @@ function submitPayment(event, me) {
         $('.amount').text(result['requestid'].substring(10));
 
         toggleConfirm();
-        console.log('confirm: '+JSON.stringify(result));
+        //console.log('confirm: '+JSON.stringify(result));
         $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
