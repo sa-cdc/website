@@ -17,26 +17,33 @@ tags:
   </h3>
 </div>
 
-<p class="text-center" id="vanco" style="display:none;">For those interested in reoccurring gifts or splitting
-your gift so that it can support more than one aspect of the clinic, please <a
-  href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0="
-  class="btn btn-primary active" role="button" target="_blank">click here</a>
-</p>
-
-<div class="row text-center">
-  <div class="col-sm-4 col-sm-offset-4" id="text_init">
-    Loading donation form
-  </div>
-  <div class="col-sm-4 col-sm-offset-4" id="spinner_init">
-    <img src="/static/imgs/ajax-loader.gif" alt="loading" width=10%> 
-  </div>
-  <div class="col-sm-6 col-sm-offset-3" id="failedToLoad" style="display: none;">
-    The secure banking service cannot be reached from your current connection.
+<div class="row text-center" id="loading_init">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-info" role="alert">
+      <p>Loading donation form</p>
+      <p><img src="/static/imgs/ajax-loader.gif" alt="loading" width=10%> </p>
+    </div>
   </div>
 </div>
 
+<div class="row text-left hidden" id="failedToLoad">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-danger" role="alert">
+      <h4>
+        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+        Unable to reach secure banking service
+      </h4>
+      <p>Contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a></p>
+      <p>Donate through 3rd party: 
+        <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0="
+          target="_blank">
+          click here
+        </a>
+    </div>
+  </div>
+</div>
 
-<div class="donate row text-center" id="donationApp" style="display: none;">
+<div class="hidden donate row text-center" id="donationApp">
   <div class="col-md-8 col-md-offset-2 well" id="donation-central" style="padding: 19px 0px;">
     <div class="row">
       <div class="col-xs-1 col-xs-offset-2 active stage click" id="tx-one">1</div>
@@ -131,7 +138,8 @@ your gift so that it can support more than one aspect of the clinic, please <a
       </div>
     </div>
 
-    <span id="errors" style="display: none;"></span>
+    <!-- Give somewhere for jQuery.validate to put errors for now... -->
+    <span class="hidden" id="errors"></span>
     <div id="transaction-who-block" style="display:none;">
       <form class="form" role="form" id="who-form" method="post">
         <fieldset>
@@ -398,7 +406,10 @@ your gift so that it can support more than one aspect of the clinic, please <a
 </div>
 
 
-<p class="donate text-center">If you would like to make a monetary donation, please contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.</p>
+<p class="donate text-center">
+  For donation information, please contact us via telephone at (210) 220-2300 or email at
+  <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.
+</p>
 
 
 <hr class="donate half-rule">

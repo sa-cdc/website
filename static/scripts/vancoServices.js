@@ -151,13 +151,12 @@ $().ready(function() {
         data: data,
         dataType: 'jsonp',
         success: function(data){
-          $('#donationApp').css("display", "block");
-          $("div[id$='_init']").css("display", "none");
+          $('#donationApp').removeClass("hidden");
+          $("#loading_init").addClass("hidden");
         },
         error: function (jqXHR, textStatus, errorThrown, data) {
-          $("div[id$='_init']").css("display", "none");
-          $('#failedToLoad').css("display", "block");
-          $('#vanco').css("display", "block");
+          $("#loading_init").addClass("hidden");
+          $('#failedToLoad').removeClass("hidden");
         }
       });
     });
