@@ -103,6 +103,10 @@ function toggleConfirm() {
   $('#tx-two').unbind('click');
   $('#tx-three').unbind('click');
 
+  $('#tx-one').removeClass('click');
+  $('#tx-two').removeClass('click');
+  $('#tx-three').removeClass('click');
+
   toggleDisplay( $('#transaction-confirm-block') );
   toggleBreadCrumb( $('#tx-four'));
 
@@ -114,6 +118,10 @@ function toggleError() {
   $('#tx-two').unbind('click');
   $('#tx-three').unbind('click');
   toggleDisplay( $('#transaction-error-block') );
+
+  $('#tx-one').removeClass('click');
+  $('#tx-two').removeClass('click');
+  $('#tx-three').removeClass('click');
 }
 
 function submitAmount(event, obj) {

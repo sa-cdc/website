@@ -7,7 +7,6 @@ tags:
 ---
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-<script type="text/javascript" src="/static/scripts/jquery.xslt.js" defer></script>
 <script type="text/javascript" src="/static/scripts/errorcodes.json" defer></script>
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
 <div class="bs-docs-featurette border1">
@@ -249,11 +248,10 @@ tags:
           <div class="row">
             <div class="col-sm-5 col-sm-offset-1">
               <div class="form-group has-feedback">
-                <!--<label class="control-label glyphicon">Account Number</label>-->
-                <label class="control-label" for="acctnumber">Account Number</label>
+                <label class="control-label" for="acctnumber">Credit Card Number</label>
                 <input class="form-control" id="acctnumber" name="accountnumber"
-                type="text" size="16" value="4111111111111111"
-                pattern="^[0-9]{15,16}$" required>
+                type="text" size="16" 
+                x-autocompletetype="cc-number" pattern="^[0-9]{15,16}$" required>
                 <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -268,7 +266,7 @@ tags:
             <div class="col-xs-3 col-xs-offset-1">
               <div class="form-group has-feedback">
                 <label class="control-label" for="cvv">CVV</label>
-                <input class="form-control" type="text" id="cvv" name="cvvcode" value='123'
+                <input class="form-control" type="text" id="cvv" name="cvvcode" 
                 pattern="^[0-9]{3,4}$" required>
                 <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
               </div>
