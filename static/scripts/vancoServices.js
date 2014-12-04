@@ -220,7 +220,6 @@ $().ready(function() {
      email: true
    });
    $("#billing-phone").rules("add", {
-     required: true,
      phoneUS: true
    });
 });
@@ -381,11 +380,11 @@ function submitPayment(event, me) {
       */
       // This is where we trigger the writing of the receipt!
       $("#transaction-loading").css('block','none');
+      //console.log('confirm: '+JSON.stringify(result));
       if(result['transactionref']) {
-        $('.amount').text(result['requestid'].substring(10));
+        $('.amount').text(transaction['amount']);
 
         toggleConfirm();
-        //console.log('confirm: '+JSON.stringify(result));
         $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
