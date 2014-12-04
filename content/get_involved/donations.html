@@ -220,60 +220,65 @@ tags:
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label">Credit/Debit Card</label>
-                <input type="radio" value="CC" name="accounttype" id="paymentCC">
+                <label class="control-label">
+                  Credit/Debit Card
+                  <input type="radio" value="CC" name="accounttype" id="paymentCC">
+                </label>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label">Checking</label>
-                <input type="radio" value="C" name="accounttype" id="paymentC">
+                <label class="control-label">
+                  Checking
+                  <input type="radio" value="C" name="accounttype" id="paymentC">
+                </label>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
-                <label class="control-label">Savings</label>
-                <input type="radio" value="S" name="accounttype" id="paymentS">
+                <label class="control-label">
+                  Savings
+                  <input type="radio" value="S" name="accounttype" id="paymentS">
+                </label>
               </div>
             </div>
           </div>
         </fieldset>
       </form>
+      <div class="full-rule"></div>
     </div>
 
     <div id="transaction-CC-block" style="display: none;">
       <form class="CC form" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
-          <legend>Billing Information</legend>
-          <div class="row">
-            <div class="col-sm-5 col-sm-offset-1">
+          <div class="row text-left">
+            <div class="col-xs-offset-4 col-xs-4">
               <div class="form-group has-feedback">
                 <label class="control-label" for="acctnumber">Credit Card Number</label>
-                <input class="form-control" id="acctnumber" name="accountnumber"
-                type="text" size="16" 
-                x-autocompletetype="cc-number" pattern="^[0-9]{15,16}$" required>
+                <input class="form-control" id="acctnumber" name="accountnumber" type="text" size="16" x-autocompletetype="cc-number" pattern="^[0-9]{15,16}$" required>
                 <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
+                <div class="pull-right">
+                  <label>
+                    Debit card:
+                    <input type="checkbox" name="isdebitcardonly">
+                  </label>
+                </div>
               </div>
             </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label class="control-label credit debit">Check if Debit Card?</label>
-                <input class="form-control" type="checkbox" name="isdebitcardonly">
-              </div>
+            <div class="col-xs-offset-4 col-xs-8">
+              <label class="control-label" for="cvv">Security Code (CVV)</label>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-3 col-xs-offset-1">
+            <div class="col-xs-offset-4 col-xs-2">
               <div class="form-group has-feedback">
-                <label class="control-label" for="cvv">CVV</label>
                 <input class="form-control" type="text" id="cvv" name="cvvcode" 
                 pattern="^[0-9]{3,4}$" required>
                 <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
-            <div class="col-xs-3">
+            <div class="clearfix"></div>
+            <div class="col-xs-offset-4 col-xs-8"><label>Expiration Date</label></div>
+            <div class="col-xs-offset-4 col-xs-2">
               <div class="form-group">
-                <label class="control-label" for="expmth">Expiration</label>
                 <select class="form-control" id="expmth" name="expmonth" required>
                   <option value="">Month</option>
                   <% for month in (1..12) %>
@@ -282,12 +287,11 @@ tags:
                 </select>
               </div>
             </div>
-            <div class="col-xs-4">
+            <div class="col-xs-2">
               <div class="form-group">
-                <label class="control-label" for="expyr">Date</label>
                 <select class="form-control" id="expyr" name="expyear" required>
                   <option value="">Year</option>
-                  <% for year in (2014..2040) %>
+                  <% for year in (2014..2027) %>
                   <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
                   <% end %>
                 </select>
@@ -304,17 +308,16 @@ tags:
     <div id="transaction-C-block" style="display: none;">
       <form class="CS form" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
-          <legend>Enter Checking Account Numbers</legend>
-          <div class="row">
-            <div class="col-sm-5 col-sm-offset-1">
+          <div class="row text-left">
+            <div class="col-sm-4 col-sm-offset-4">
               <div class="form-group has-feedback">
-                <label class="control-label" for="cacctnumber">Account Number</label>
+                <label class="control-label" for="cacctnumber">Checking Account Number</label>
                 <input class="form-control" type="text" id="cacctnumber"
                 name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
                 <span id="cacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-3 col-sm-offset-4">
               <div class="form-group has-feedback">
                 <!--<label id="rtg_glyph" class="control-label glyphicon"
                   for="routingNumber">Routing Number</label>-->
@@ -334,17 +337,16 @@ tags:
     <div id="transaction-S-block" style="display: none;">
       <form class="CS form" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
         <fieldset>
-          <legend>Enter Savings Account Numbers</legend>
-          <div class="row">
-            <div class="col-sm-5 col-sm-offset-1">
+          <div class="row text-left">
+            <div class="col-sm-4 col-sm-offset-4">
               <div class="form-group has-feedback">
-                <label class="control-label" for="sacctnumber">Account Number</label>
+                <label class="control-label" for="sacctnumber">Savings Account Number</label>
                 <input class="form-control" type="text" id="sacctnumber"
                 name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
                 <span id="sacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-3 col-sm-offset-4">
               <div class="form-group has-feedback">
                 <label class="control-label" for="srtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="srtgnumber"
