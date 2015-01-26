@@ -18,3 +18,4 @@ We will consistently conduct ourselves with honesty and justice in all relations
 We will exhibit the highest standards of performance within the scope of our services.
 
 We will exercise wisdom in the just use of our talents and our resources in a collaborative manner.
+Hotfix version 2.0.1
