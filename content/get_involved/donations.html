@@ -5,27 +5,411 @@ precedence: 1
 tags:
   - service 
 ---
-<div class="bs-docs-featurette">
-  <h2 class="bs-docs-featurette-title">Help our Mission by Making a
-    Monetary Donation</h2>
-  <p class="lead">As a nonprofit dental health provider, we rely
-  heavily on individual monetary donations to provide services to those in
-  need.</p>
-
-  <hr class="half-rule">
-
-  <p class="text-center">If you would like to make a monetary
-  donation, please contact us via telephone at (210) 220-2300 or
-  email at <a
-    href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation"
-    target="_top">info@sachristiandental.org.</a>.  Or, you can click on
-  the link below to make a donation on-line.  Your contributions are
-  always appreciated!</p>
-
-  <a
-    href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3"
-    class="btn btn-primary active" role="button" target="_blank">DONATE
-    NOW</a>
-
-  <hr class="half-rule">
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+<script type="text/javascript" src="/static/scripts/errorcodes.json" defer></script>
+<script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
+<div class="bs-docs-featurette border1">
+  <span id="alertfield"></span>
+  <h3 class="donate bs-docs-featurette-title">
+    Help our Mission by Making a Monetary Donation
+  </h3>
 </div>
+
+<div class="row text-center" id="loading_init">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-info" role="alert">
+      <p>Loading donation form</p>
+      <p><img src="/static/imgs/ajax-loader.gif" alt="loading" width=10%> </p>
+    </div>
+  </div>
+</div>
+
+<div class="row text-left hidden" id="failedToLoad">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-danger" role="alert">
+      <h4>
+        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+        Unable to reach secure banking service
+      </h4>
+      <p>Contact us via telephone at (210) 220-2300 or email at <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a></p>
+      <p>Donate through 3rd party: 
+        <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0="
+          target="_blank">
+          click here
+        </a>
+    </div>
+  </div>
+</div>
+
+<div class="hidden donate row text-center" id="donationApp">
+  <div class="col-md-8 col-md-offset-2 well" id="donation-central" style="padding: 19px 0px;">
+    <div class="row">
+      <div class="col-xs-1 col-xs-offset-2 active stage click" id="tx-one">1</div>
+      <div class="col-xs-1 col-xs-offset-2 stage click" id="tx-two">2</div>
+      <div class="col-xs-1 col-xs-offset-2 stage click" id="tx-three">3</div>
+      <div class="col-xs-1 col-xs-offset-2 stage" id="tx-four">4</div>
+      <div class="col-xs-12 amount">0</div>
+    </div>
+
+    <div id="transaction-amount-block">
+      <form class="form" role="form" id="amount-form" method="post">
+        <fieldset>
+          <h3>Tell us how to use your donation (choose one)</h3>
+          <div class="row text-left">
+            <label class="col-md-4">
+              <h4>
+                <input type="radio" value='0001' name="fundid" checked>
+                Operations Support
+              </h4>
+              <p>
+                Help us continue to provide high quality staff and support
+                structures so that we can grow the clinic
+              </p>
+            </label>
+            <label class="col-md-4">
+              <h4>
+                <input type="radio" value='0002' name="fundid" autocomplete="off">
+                Patient Care
+              </h4>
+              <p>
+                Give the gift of a new smile by helping us cover the cost of direct
+                patient services
+              </p>
+            </label>
+            <label class="col-md-4">
+              <h4>
+                <input type="radio" value='0003' name="fundid" autocomplete="off">
+                Endowment
+              </h4>
+              <p>
+                Help us continue to fund the clinic in perpetuity
+              </p>
+            </label>
+          </div>
+
+          <h3> Select an amount to donate. </h3>
+          <div class="row">
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="10">
+              $10
+            </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="25">
+              $25
+            </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="50">
+              $50
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="100">
+              $100
+            </button>
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" value="250">
+              $250
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="500">
+              $500
+            </button>
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" value="1000">
+              $1,000
+            </button>
+            <div class="col-md-3 input-group">
+              <input class="form-control input-lg" type="text" name="enteredAmount" id="enteredAmount" placeholder="Other">
+              <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" type="submit" id="customAmt" value="custom">Go</button>
+              </span>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <h3>Cost of common patient care procedures</h3>
+      <div class="row text-left">
+        <div class="col-xs-4 col-xs-offset-1">
+          <ul class="list-group">
+            <li class="list-group-item">
+              Dental Cleaning
+              <span class="badge"> $50</span>
+            </li>
+            <li class="list-group-item">
+              X-ray
+              <span class="badge">$40</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Give somewhere for jQuery.validate to put errors for now... -->
+    <span class="hidden" id="errors"></span>
+    <div id="transaction-who-block" style="display:none;">
+      <form class="form" role="form" id="who-form" method="post">
+        <fieldset>
+          <legend>Billing Information</legend>
+          <div class="row text-left">
+            <div class="col-sm-6">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-first">First Name</label>
+                <input class="form-control" id="billing-first" type="text" name="first" required>
+                <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-last">Last Name</label>
+                <input class="form-control" id="billing-last" type="text" name="last" required>
+                <span id="billing-last_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-addr1">Address Line 1</label>
+                <input class="form-control" id="billing-addr1" type="text"
+                name="addr1" pattern="^\d+ .*$" required>
+                <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-7">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-city">City</label>
+                <input class="form-control" id="billing-city" type="text" name="city" required>
+                <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="control-label" for="billing-state">State</label>
+                <select class="form-control" name="state" id="billing-state">
+                  <option value="">State</option>
+                  <%= state_helper %>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="billing-zip">Zip Code</label>
+                <input class="form-control" id="billing-zip" type="text" name="zip"
+                pattern="^[0-9]{5}(?:-[0-9]{4}){0,1}$" required>
+                <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-email">Email Address</label>
+                <input class="form-control" id="billing-email" type="text"
+                name="email" required>
+                <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="billing-phone">Phone Number</label>
+                <input class="form-control" id="billing-phone" type="text" name="phone" maxlength="14">
+                <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-default" type="submit" style="width: 90%; align-content: center;">Next</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="transaction-payment-block" style="display:none;">
+      <form class="form form-horizontal" role="form" id="type-form" method="post">
+        <fieldset>
+          <legend>Select Payment Method</legend>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="control-label">
+                  Credit/Debit Card
+                  <input type="radio" value="CC" name="accounttype" id="paymentCC">
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="control-label">
+                  Checking
+                  <input type="radio" value="C" name="accounttype" id="paymentC">
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label class="control-label">
+                  Savings
+                  <input type="radio" value="S" name="accounttype" id="paymentS">
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <div class="full-rule"></div>
+    </div>
+
+    <div id="transaction-CC-block" style="display: none;">
+      <form class="CC form" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+        <fieldset>
+          <div class="row text-left">
+            <div class="col-xs-offset-4 col-xs-4">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="acctnumber">Credit Card Number</label>
+                <input class="form-control" id="acctnumber" name="accountnumber" type="text" size="16" x-autocompletetype="cc-number" pattern="^[0-9]{15,16}$" required>
+                <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
+                <div class="pull-right">
+                  <label>
+                    Debit card:
+                    <input type="checkbox" name="isdebitcardonly">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-offset-4 col-xs-8">
+              <label class="control-label" for="cvv">Security Code (CVV)</label>
+            </div>
+            <div class="col-xs-offset-4 col-xs-2">
+              <div class="form-group has-feedback">
+                <input class="form-control" type="text" id="cvv" name="cvvcode" 
+                pattern="^[0-9]{3,4}$" required>
+                <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-offset-4 col-xs-8"><label>Expiration Date</label></div>
+            <div class="col-xs-offset-4 col-xs-2">
+              <div class="form-group">
+                <select class="form-control" id="expmth" name="expmonth" required>
+                  <option value="">Month</option>
+                  <% for month in (1..12) %>
+                  <option value="<%= month %>"> <%= month %> </option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-xs-2">
+              <div class="form-group">
+                <select class="form-control" id="expyr" name="expyear" required>
+                  <option value="">Year</option>
+                  <% for year in (2014..2027) %>
+                  <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+          </div>
+          <span id="fields"></span>
+          <input type="hidden" name="accounttype" value="CC">
+          <button class="amount btn btn-default" type="submit" id="submitCC"></button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="transaction-C-block" style="display: none;">
+      <form class="CS form" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+        <fieldset>
+          <div class="row text-left">
+            <div class="col-sm-4 col-sm-offset-4">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="cacctnumber">Checking Account Number</label>
+                <input class="form-control" type="text" id="cacctnumber"
+                name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
+                <span id="cacctnumber_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-3 col-sm-offset-4">
+              <div class="form-group has-feedback">
+                <!--<label id="rtg_glyph" class="control-label glyphicon"
+                  for="routingNumber">Routing Number</label>-->
+                <label class="control-label" for="rtgnumber">Routing Number</label>
+                <input class="form-control" type="text" id="rtgnumber"
+                name="routingnumber" pattern="^[0-9]{9}$" required> <!-- Type=C or Type=S -->
+                <span id="rtgnumber_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" name="accounttype" value="C">
+          <button class="amount btn btn-default" type="submit" id="submitC"></button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="transaction-S-block" style="display: none;">
+      <form class="CS form" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+        <fieldset>
+          <div class="row text-left">
+            <div class="col-sm-4 col-sm-offset-4">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="sacctnumber">Savings Account Number</label>
+                <input class="form-control" type="text" id="sacctnumber"
+                name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
+                <span id="sacctnumber_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+            <div class="col-sm-3 col-sm-offset-4">
+              <div class="form-group has-feedback">
+                <label class="control-label" for="srtgnumber">Routing Number</label>
+                <input class="form-control" type="text" id="srtgnumber"
+                name="routingnumber" pattern="^[0-9]{9}$" required> <!-- Type=C or Type=S -->
+                <span id="srtgnumber_glyph" class="glyphicon form-control-feedback"></span>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" name="accounttype" value="S">
+          <button class="amount btn btn-default" type="submit" id="submitS"></button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="transaction-loading" style="display: none;">
+      <div class="row">
+        <div class="col-xs-2 col-xs-offset-5">
+          <img src="/static/imgs/ajax-loader.gif" class="img-responsive">
+        </div>
+      </div>
+    </div>
+
+
+    <div id="transaction-confirm-block" class="center-block"
+      style="display:none;">
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+          <img src="/static/imgs/pic-content/smile_sign.jpg"
+          class="img-responsive" alt="Smile!">
+        </div>
+      </div>
+      <p> Keep this smile for your records.</p>
+      <span id="confirm"></span>
+      <p class="text-center"> Thank you for your donation!</p>
+      <div class="text-center">San Antonio Christian Dental Clinic</div>
+      <div class="text-center">1 Haven for Hope Way</div>
+      <div class="text-center">San Antonio, Texas 78xxx</div>
+      <div class="text-center">210.555.5555</div>
+    </div>
+
+    <div id="transaction-error-block" class="center-block" style="display: none;">
+      <div>We were unable to process your transaction for the following reason(s):
+        <ul id="error"> </ul>
+        <div>Try either:
+          <ul>
+            <li><a href="/get_involved/donations">Restarting</a> your transaction</li>
+            <li>Donate directly through <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=" class="btn btn-primary active" role="button" target="_blank">Vanco Services</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <hr class="half-rule">
+
+    <p> Secure transaction provided by <a href="www.vancoservices.com" target="_blank"> Vanco Services, LLC.</a></p>
+  </div>
+</div>
+
+
+<p class="donate text-center">
+  For donation information, please contact us via telephone at (210) 220-2300 or email at
+  <a href="mailto:info@sachristiandental.org?Subject=Would%20Like%20to%20Make%20a%20Donation" target="_top">info@sachristiandental.org</a>.
+</p>
+
+
+<hr class="donate half-rule">
