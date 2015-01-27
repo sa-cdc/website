@@ -4,6 +4,14 @@
 //http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
 
+function ucwords(str,force){
+  str=force ? str.toLowerCase() : str;
+  return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+      function(firstLetter){
+        return firstLetter.toUpperCase();
+      });
+}
+
 function getQueryParams(qs) {
   qs = qs.split("+").join(" ");
   var params = {},
@@ -189,6 +197,11 @@ $().ready(function() {
     },
     errorContainer: "#errors",
     errorLabelContainer: "#errors"
+  });
+
+  $("input").not("#billing-email").focusout(function() {
+        var cp_value= ucwords($(this).val(),true) ;
+            $(this).val(cp_value );
   });
 
   $("#amount-form").validate();
