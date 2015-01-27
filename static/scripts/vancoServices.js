@@ -332,8 +332,6 @@ function submitPayment(event, me) {
   else
     paymentData['isdebitcardonly'] = 'No';
 
-  paymentData['amount'] = transaction['amount'];
-
   //console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
   toggleDisplay($('#transaction-loading'));
@@ -362,6 +360,7 @@ function submitPayment(event, me) {
     data['customerzip'] = transaction['zip'];
     data['customerphone'] = transaction['phone'];
     var id = transaction['fundid'];
+    console.log(id);
     if(id != 'none') {
       data['fundid_'+id] = id;
       data['fundamount_'+id] = transaction['amount'];
