@@ -397,6 +397,7 @@ function submitPayment(event, me) {
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
+        findSolution(7,transaction['amount']);
         $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
