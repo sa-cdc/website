@@ -11,6 +11,9 @@
 # Mac OS X
 *.DS_Store
 
+# Ignore sensitive conf.inc file
+conf.inc
+
 # Ignore nanoc generated content
 output/**
 tmp/**
