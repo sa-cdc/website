@@ -14,6 +14,7 @@ var W = 76;
 
 function subsetSum(W, p) {
   //Start Init
+  console.log(W);
   var m = new Array();
   for( var i = 0; i<=p.length; i++) {
     m[i] = new Array();
@@ -35,9 +36,9 @@ function subsetSum(W, p) {
   return m;
 }
 
-var M = subsetSum(W, p);
+//var M = subsetSum(W, p);
 var O = new Array();
-function findSolution(i, w) {
+function findSolution(i, w, M) {
   if(i==0) {
     return O;
   } else if(M[i][w] > M[i-1][w]) {
@@ -45,9 +46,9 @@ function findSolution(i, w) {
     O.push(i);
     a = M[i-1][w];
     b = p[i] + M[i-1][w-p[i]];
-    a>b?findSolution(i-1,w):findSolution(i-1,w-p[i]);
+    a>b?findSolution(i-1,w,M):findSolution(i-1,w-p[i],M);
   } else {
-    findSolution(i-1,w);
+    findSolution(i-1,w,M);
   }
 }
 
