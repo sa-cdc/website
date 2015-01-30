@@ -13,7 +13,7 @@ error_reporting(E_ALL);
  * constant VANCO_WSNVP
  * constant VANCO_WS
  */
-require('../../config.inc');
+require('../config.inc');
 
 function urlsafe_b64encode($string)
 {
