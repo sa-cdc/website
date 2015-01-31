@@ -4,6 +4,14 @@
 //http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
 
+function ucwords(str,force){
+  str=force ? str.toLowerCase() : str;
+  return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+      function(firstLetter){
+        return firstLetter.toUpperCase();
+      });
+}
+
 function getQueryParams(qs) {
   qs = qs.split("+").join(" ");
   var params = {},
@@ -191,6 +199,11 @@ $().ready(function() {
     errorLabelContainer: "#errors"
   });
 
+  $("input").not("#billing-email").focusout(function() {
+        var cp_value= ucwords($(this).val(),true) ;
+            $(this).val(cp_value );
+  });
+
   $("#amount-form").validate();
   $("#who-form").validate();
   $("#CC-form").validate();
@@ -270,7 +283,7 @@ $( "input[name=accounttype]" ).change(function() {
 encrypto = function getNVP(a, b) {
   $.ajax({
     type: 'GET',
-    url: 'http://sa-cdc.org/scripts/vanco/nvpEncrypt.php',
+    url: '/static/scripts/vanco/nvpEncrypt.php',
     crossDomain: true,
     data: a,
     dataType: 'jsonp',
@@ -313,13 +326,11 @@ function submitPayment(event, me) {
   //Data to encrypt locally
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
+  paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
   if( 'isdebitcardonly' in transaction )
     paymentData['isdebitcardonly'] = transaction['isdebitcardonly'] == 'on' ? 'Yes':'No';
   else
     paymentData['isdebitcardonly'] = 'No';
-
-  paymentData['amount'] = transaction['amount'];
 
   //console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
@@ -349,6 +360,7 @@ function submitPayment(event, me) {
     data['customerzip'] = transaction['zip'];
     data['customerphone'] = transaction['phone'];
     var id = transaction['fundid'];
+    console.log(id);
     if(id != 'none') {
       data['fundid_'+id] = id;
       data['fundamount_'+id] = transaction['amount'];
@@ -385,6 +397,9 @@ function submitPayment(event, me) {
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
+        var M = subsetSum(transaction['amount'], p);
+        console.log(M);
+        findSolution(7,transaction['amount'], M);
         $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {

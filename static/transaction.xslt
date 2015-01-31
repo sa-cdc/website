@@ -56,7 +56,7 @@
           </xsl:otherwise>
         </xsl:choose>
         <div>
-          <a href='/scripts/vanco/queryTrans.php'>Return to Confirmation checker</a>
+          <a href='/static/scripts/vanco/queryTrans.php'>Return to Confirmation checker</a>
         </div>
       </body>
     </html>
