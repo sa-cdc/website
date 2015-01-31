@@ -283,7 +283,7 @@ $( "input[name=accounttype]" ).change(function() {
 encrypto = function getNVP(a, b) {
   $.ajax({
     type: 'GET',
-    url: 'http://sa-cdc.org/scripts/vanco/nvpEncrypt.php',
+    url: '/static/scripts/vanco/nvpEncrypt.php',
     crossDomain: true,
     data: a,
     dataType: 'jsonp',
@@ -326,7 +326,7 @@ function submitPayment(event, me) {
   //Data to encrypt locally
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
+  paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
   if( 'isdebitcardonly' in transaction )
     paymentData['isdebitcardonly'] = transaction['isdebitcardonly'] == 'on' ? 'Yes':'No';
   else
