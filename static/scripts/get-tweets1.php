@@ -11,7 +11,7 @@ require_once("twitteroauth/twitteroauth.php"); //Path to twitteroauth library
  * $accesstoken
  * $accesstokensecret
  */
-require_once("../../conf.inc");
+require_once("../config.inc");
 
 $notweets = 30; # Twitter appears to be auto-limiting to 10 results...
 
