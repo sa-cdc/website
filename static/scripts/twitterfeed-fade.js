@@ -138,7 +138,7 @@ function feedMe(feeds) {
 	$('#twitter-feed').html(loadingHTML);
 	 
     $.ajax({
-        url:'http://sa-cdc.org/scripts/get-tweets1.php', 
+        url:'//sachristiandental.org/scripts/get-tweets1.php', 
         dataType: 'jsonp',
         success: function(feeds){ feedMe(feeds); }, 
         error: function(jqXHR, textStatus, errorThrown) { alert('bye: '+errorThrown); }
