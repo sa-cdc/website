@@ -21,3 +21,4 @@ We will exercise wisdom in the just use of our talents and our resources in a co
 Hotfix version 2.0.1
 Hotfix version 2.0.2
 Hotfix version 2.0.3
+Released version 2.0.4

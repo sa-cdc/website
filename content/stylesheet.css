@@ -25,6 +25,10 @@ body {
   margin-bottom: -40px;
 }
 
+.current-report {
+  padding-bottom: 150px;
+}
+
 .well {
   background-color: rgba(0, 116, 178, 1.0);
   color:#FFF;
@@ -254,10 +258,11 @@ img.social-media {
 }
 
 img.partner {
-  padding: 5% 5% 5% 5%;
-  margin: 0px auto;
-  display:table-cell;
-  vertical-align:middle;
+  background-color: #fff;
+  border-style: solid;
+  border-width: 10px;
+  border-color: rgb(87, 82, 82);
+  margin: auto;
   max-height: 160px;
 }
 
