@@ -3,6 +3,7 @@
 //http://www.getcreditcardnumbers.com/
 //http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
+var P = {Dentures: 50, Pulling: 100, "Root Canal": 500, GoldTooth: 20, Cavity: 30, Nicegrill: 1000, Cleaning: 5};
 
 function ucwords(str,force){
   str=force ? str.toLowerCase() : str;
@@ -360,7 +361,7 @@ function submitPayment(event, me) {
     data['customerzip'] = transaction['zip'];
     data['customerphone'] = transaction['phone'];
     var id = transaction['fundid'];
-    console.log(id);
+    //console.log(id);
     if(id != 'none') {
       data['fundid_'+id] = id;
       data['fundamount_'+id] = transaction['amount'];
@@ -397,9 +398,10 @@ function submitPayment(event, me) {
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
-        var M = subsetSum(transaction['amount'], p);
-        console.log(M);
-        findSolution(7,transaction['amount'], M);
+        var procedures = runSubset(P, transaction['amount']);
+        for( set in procedures ){
+          $('#purchased').append('<span class="badge">'+set['freq']+' X '+set['label']+'</span>');
+        }
         $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
