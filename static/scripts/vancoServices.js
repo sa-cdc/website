@@ -398,9 +398,9 @@ function submitPayment(event, me) {
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
-        var procedures = runSubset(P, transaction['amount']);
-        for( set in procedures ){
-          $('#purchased').append('<span class="badge">'+set['freq']+' X '+set['label']+'</span>');
+        var procs = runSubset(P, transaction['amount']);
+        for(var i=0; i<proc.length; i++ ) {
+          $('#purchased').append('<span class="badge">'+proc[i]['freq']+' X '+proc[i]['label']+'</span>');
         }
         $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
