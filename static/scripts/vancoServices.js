@@ -398,7 +398,7 @@ function submitPayment(event, me) {
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
-        var procs = runSubset(P, transaction['amount']);
+        var proc = runSubset(P, transaction['amount']);
         for(var i=0; i<proc.length; i++ ) {
           $('#purchased').append('<span class="badge">'+proc[i]['freq']+' X '+proc[i]['label']+'</span>');
         }
