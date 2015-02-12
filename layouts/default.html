@@ -4,20 +4,32 @@
     <meta charset="utf-8">
     <title>SA CDC - <%= @item[:title] %></title>
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
+    <!-- Font: Fall-back is any san-serif font, set in style.css -->
     <link href='//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-    <!-- Latest compiled and minified CSS -->
+
+    <!-- JQuery -->
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/static/lib/jquery.min.js">\x3C/script>')</script>
+    <!-- Bootstrap JS -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script>$.fn.modal || document.write('<script src="/static/lib/bootstrap.min.js">\x3C/script>')</script>
+
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script>
+      $(document).ready(function() {
+        var bodyColor = $('body').css('color');
+        //TODO: because we override the body.css color this always returns true
+        if(bodyColor != 'rgb(51, 51, 51)') {
+          $("head").prepend('<link rel="stylesheet" href="/static/css/bootstrap.min.css">');
+        }
+      });
+    </script>
 
-    <!-- Optional theme -->
-    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css"> -->
-
+    <!-- Local Styles -->
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/static/css/twitter-styles-fade.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <% if(@item[:title]=="Eligibility") %>
       <!-- Date.js to make the eligibility sheet easier. Should also prove useful when we do scheduling stuff -Browne -->
