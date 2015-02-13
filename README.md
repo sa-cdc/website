@@ -23,3 +23,4 @@ Hotfix version 2.0.2
 Hotfix version 2.0.3
 Hotfix version 2.0.4
 Hotfix version 2.0.5
+Hotfix version 2.0.6

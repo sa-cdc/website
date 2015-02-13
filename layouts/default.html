@@ -16,16 +16,8 @@
     <script>$.fn.modal || document.write('<script src="/static/lib/bootstrap.min.js">\x3C/script>')</script>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <script>
-      $(document).ready(function() {
-        var bodyColor = $('body').css('color');
-        //TODO: because we override the body.css color this always returns true
-        if(bodyColor != 'rgb(51, 51, 51)') {
-          $("head").prepend('<link rel="stylesheet" href="/static/css/bootstrap.min.css">');
-        }
-      });
-    </script>
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
     <!-- Local Styles -->
     <link rel="stylesheet" href="/style.css">
