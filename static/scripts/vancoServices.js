@@ -322,19 +322,24 @@ function submitPayment(event, me) {
   jQuery.each(acct, function() {
     transaction[this.name] = this.value || '';
   });
-  console.log('transaction[]: '+JSON.stringify(transaction));
+  //console.log('transaction[]: '+JSON.stringify(transaction));
 
   //Data to encrypt locally
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
   paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
+  /*
+   * 26 March 2015:  Seems that Vanco is not setup to handle debit cards;
+   * removing debit option for users;
   if( 'isdebitcardonly' in transaction && transaction['isdebitcardonly'].toLowerCase() == 'debit'.toLowerCase() ) {
     paymentData['isdebitcardonly'] = 'Yes';
   } else {
     paymentData['isdebitcardonly'] = 'No';
   }
+  */
+  paymentData['isdebitcardonly'] = 'No';
 
-  console.log('paymentData[]: '+JSON.stringify(paymentData));
+  //console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
   toggleDisplay($('#transaction-loading'));
 
