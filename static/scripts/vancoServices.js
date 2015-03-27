@@ -399,6 +399,7 @@ function submitPayment(event, me) {
       */
       // This is where we trigger the writing of the receipt!
       $("#transaction-loading").css('block','none');
+      $("#status-bar").addClass("hidden");
       //console.log('confirm: '+JSON.stringify(result));
       if(result['transactionref']) {
         var id = transaction['fundid'];
