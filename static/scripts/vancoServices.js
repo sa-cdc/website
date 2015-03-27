@@ -328,10 +328,11 @@ function submitPayment(event, me) {
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
   paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
-  if( 'isdebitcardonly' in transaction )
-    paymentData['isdebitcardonly'] = transaction['isdebitcardonly'] == 'on' ? 'Yes':'No';
-  else
+  if( 'isdebitcardonly' in transaction && transaction['isdebitcardonly'] == 'debit' ) {
+    paymentData['isdebitcardonly'] = 'Yes';
+  } else {
     paymentData['isdebitcardonly'] = 'No';
+  }
 
   console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
