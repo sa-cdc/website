@@ -322,7 +322,7 @@ function submitPayment(event, me) {
   jQuery.each(acct, function() {
     transaction[this.name] = this.value || '';
   });
-  //console.log('transaction[]: '+JSON.stringify(transaction));
+  console.log('transaction[]: '+JSON.stringify(transaction));
 
   //Data to encrypt locally
   var paymentData = {};
