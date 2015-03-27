@@ -328,7 +328,7 @@ function submitPayment(event, me) {
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
   paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
-  if( 'isdebitcardonly' in transaction && transaction['isdebitcardonly'] == 'debit' ) {
+  if( 'isdebitcardonly' in transaction && transaction['isdebitcardonly'].toLowerCase() == 'debit'.toLowerCase() ) {
     paymentData['isdebitcardonly'] = 'Yes';
   } else {
     paymentData['isdebitcardonly'] = 'No';
