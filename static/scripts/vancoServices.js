@@ -401,32 +401,32 @@ function submitPayment(event, me) {
       $("#transaction-loading").css('block','none');
       //console.log('confirm: '+JSON.stringify(result));
       if(result['transactionref']) {
+        var id = transaction['fundid'];
+        funds = {
+          "0001" : "General Operations",
+          "0002" : "Direct Patient Care",
+          "0003" : "Endowment Fund" };
+        if(id == '0001' || id == '0002' || id == '0003') {
+          $('#confirm').append('<p>NAMEVAR, thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
+          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
+        } else {
+          $('#confirm').append('<p>NAMEVAR, thanks for supporting the San Antonio Christian Dental Clinic.</p>');
+          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
+        }
+
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
         var proc = runSubset(P, transaction['amount']);
         for(var i=0; i<proc.length; i++ ) {
-          $('#purchased').append('<span class="badge">'+proc[i]['freq']+' X '+proc[i]['label']+'</span>');
+          $('#purchased').append('<div class="badge">'+proc[i]['label']+'('+proc[i]['freq']+')</div>');
         }
-        $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
+        $('#confirm').html('<p>Donation Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
-          $('#confirm').append('<p>Card: '+result['visamctype']+' #XXXXXXXXXXX'+result['last4']+'('+result['cardtype']+')</p>');
-        } else {
-          $('#confirm').append('<p>Account: XXXXXX'+result['last4']+'</p>');
+          $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
         }
-        var id = transaction['fundid'];
-        funds = {
-          "0001" : "Operations Support",
-          "0002" : "Patient Care",
-          "0003" : "Endowment" };
-        if(id == '0001' || id == '0002' || id == '0003') {
-
-          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
-          $('#confirm').append('<p>Funding: '+funds[id]+' at the SA-CDC</p>');
-        } else {
-          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
-        }
+        $('#confirm').append('<p>Account Last Four: '+result['last4']+'</p>');
       }
 
       if(result['errorlist']) {
