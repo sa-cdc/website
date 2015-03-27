@@ -333,7 +333,7 @@ function submitPayment(event, me) {
   else
     paymentData['isdebitcardonly'] = 'No';
 
-  //console.log('paymentData[]: '+JSON.stringify(paymentData));
+  console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
   toggleDisplay($('#transaction-loading'));
 
