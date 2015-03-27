@@ -407,10 +407,10 @@ function submitPayment(event, me) {
           "0002" : "Direct Patient Care",
           "0003" : "Endowment Fund" };
         if(id == '0001' || id == '0002' || id == '0003') {
-          $('#confirm').append('<p>NAMEVAR, thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
+          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
           $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
         } else {
-          $('#confirm').append('<p>NAMEVAR, thanks for supporting the San Antonio Christian Dental Clinic.</p>');
+          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
           $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
         }
 
@@ -419,9 +419,9 @@ function submitPayment(event, me) {
         toggleConfirm();
         var proc = runSubset(P, transaction['amount']);
         for(var i=0; i<proc.length; i++ ) {
-          $('#purchased').append('<div class="badge">'+proc[i]['label']+'('+proc[i]['freq']+')</div>');
+          $('#purchased').append('<p class="badge">'+proc[i]['label']+'('+proc[i]['freq']+')</p>');
         }
-        $('#confirm').html('<p>Donation Date: '+result['startdate']+'</p>');
+        $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
           $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
