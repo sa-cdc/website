@@ -1,3 +1,4 @@
 <?php
-  print '{Success}';
+  $input= json_decode( $_POST, TRUE ); //convert JSON into array
+  print_r(json_encode($input));
 ?>
