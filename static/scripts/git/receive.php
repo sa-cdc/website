@@ -1,11 +1,11 @@
 <?php
   print_r($_POST);
   print "\n";
-  $input = json_decode( $_POST, TRUE ); //convert JSON into array
+  $input = json_decode( $_POST['payload'], TRUE ); //convert JSON into array
   print_r(json_encode($input));
   print "\n";
   
-  $myFile = "/status";
+  $myFile = "../../../status";
   $fh = fopen($myFile, 'w') or die("can't open file");
   $stringData = '';
   
