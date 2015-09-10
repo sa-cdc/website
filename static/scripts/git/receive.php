@@ -14,9 +14,9 @@
       //print 'change received on master';
       $stringData = "master\n";
       break;
-    case 'refs/heads/experimental':
+    case 'refs/heads/stage':
       //print 'change received on dev';
-      $stringData = "experimental\n";
+      $stringData = "stage\n";
       break;
     default:
       //print 'change received not affecting master or dev branches';
