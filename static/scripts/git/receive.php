@@ -5,7 +5,7 @@
   //print_r(json_encode($input));
   //print "\n";
   
-  $myFile = "/status";
+  $myFile = $_SERVER['DOCUMENT_ROOT']."/status";
   $fh = fopen($myFile, 'w') or die("can't open file");
   $stringData = '';
   
