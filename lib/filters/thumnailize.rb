@@ -11,7 +11,7 @@ class Thumbnailize < Nanoc::Filter
       cmd = "ls >> #{output_filename}"
       p "Could not do anything because 'convert' -- part of imageMagick not found. Printing output of ls to file instead."
     else
-      cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:/tmp/#{output_filename}"
+      cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:#{output_filename}"
     end
     out = `#{cmd}`
   end
