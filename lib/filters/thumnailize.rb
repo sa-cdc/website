@@ -11,10 +11,9 @@ class Thumbnailize < Nanoc::Filter
       cmd = "ls >> #{output_filename}"
       p "Could not do anything because 'convert' -- part of imageMagick not found. Printing output of ls to file instead."
     else
-      #cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:#{output_filename}"
+      cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:#{output_filename}"
     end
-    #out = `#{cmd}`
-    out = #{filename}
+    out = `#{cmd}`
   end
 
   # Cross-platform way of finding an executable in the $PATH.
