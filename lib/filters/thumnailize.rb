@@ -13,7 +13,8 @@ class Thumbnailize < Nanoc::Filter
     else
       #cmd = "convert -flatten -thumbnail #{params[:width].to_s} #{filename}[0] png:#{output_filename}"
     end
-    out = `#{cmd}`
+    #out = `#{cmd}`
+    out = #{filename}
   end
 
   # Cross-platform way of finding an executable in the $PATH.
