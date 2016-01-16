@@ -264,7 +264,7 @@ $('#S-form').submit(            function(event) {submitPayment(event, this);});
 
 $( "input[name=accounttype]" ).change(function() {
   type = $( "input:radio[name=accounttype]:checked" ).val();
-  if(type == "CC") {
+  if(type == "T") {
     $( "#transaction-CC-block" ).css("display", "block");
     $( "#transaction-C-block" ).css("display", "none");
     $( "#transaction-S-block" ).css("display", "none");
@@ -349,7 +349,7 @@ function submitPayment(event, me) {
     data['accountnumber'] = transaction['accountnumber'];
     data['accounttype'] = transaction['accounttype'];
     //Credit Card Specific Info
-    if(data['accounttype'] == "CC") {
+    if(data['accounttype'] == "T") {
       data['sameccbillingaddrascust'] = 'Yes';
       data['name_on_card'] = transaction['first'] +' '+transaction['last'];
       data['expyear'] = transaction['expyear'];
