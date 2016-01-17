@@ -175,20 +175,16 @@ function getElig(zip, size, income, insurance, bday){
         if (getZipElig(zip) == "eligible" && getIncElig(size, income) == "eligible" && getInsureElig(insurance) == "eligible" && getAgeElig(bday) == "eligible" ){
 	        $("#elig").css("display", "block");
 	        $("#inelig").css("display", "none");
+	        return "eligible"
 	}
 	else{
 	        $("#elig").css("display", "none");
 	        $("#inelig").css("display", "block");
+	        return "ineligible"
 	}
 }
 
   function process() {
-  	ga('send', {
-		'hitType': 'event',
-		'eventCategory': 'eligibility',
-		'eventAction': 'Submit Eligibility',
-		'eventValue': 100
-	});
     var zip = $( "#zip" ).val();
     var birthdate = $( "#birthdate" ).val();
     var famsize = $( "#famsize" ).val();
@@ -213,7 +209,13 @@ function getElig(zip, size, income, insurance, bday){
         income = 0;
         break;
     }
-    getElig(zip, famsize, income, insurance, birthdate);
+    var a = getElig(zip, famsize, income, insurance, birthdate);
+    ga('send', {
+		'hitType': 'event',
+		'eventCategory': 'eligibility',
+		'eventAction': a,
+		'eventValue': 100
+	});
   }
 
   $( "#my-form" ).submit(function( event ) {
