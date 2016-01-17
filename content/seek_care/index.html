@@ -183,6 +183,12 @@ function getElig(zip, size, income, insurance, bday){
 }
 
   function process() {
+  	ga(‘send’, {
+		‘hitType’: ‘event’,
+		‘eventCategory’: ‘eligibility’,
+		‘eventAction’: ‘Submit Eligibility’,
+		‘eventValue’: 100
+	});
     var zip = $( "#zip" ).val();
     var birthdate = $( "#birthdate" ).val();
     var famsize = $( "#famsize" ).val();
