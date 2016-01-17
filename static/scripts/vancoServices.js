@@ -350,6 +350,7 @@ function submitPayment(event, me) {
     data['accounttype'] = transaction['accounttype'];
     //Credit Card Specific Info
     if(data['accounttype'] == "T") {
+      data['accounttype'] == 'CC';
       data['sameccbillingaddrascust'] = 'Yes';
       data['name_on_card'] = transaction['first'] +' '+transaction['last'];
       data['expyear'] = transaction['expyear'];
