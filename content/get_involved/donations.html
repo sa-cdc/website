@@ -290,7 +290,7 @@ tags:
               <div class="form-group">
                 <select class="form-control" id="expyr" name="expyear" required>
                   <option value="">Year</option>
-                  <% for year in (2014..2027) %>
+                  <% for year in (Time.new.year..(Time.new.year + 5)) %>
                   <option value="<%= year.to_s[2..3] %>"> <%= year %> </option>
                   <% end %>
                 </select>
