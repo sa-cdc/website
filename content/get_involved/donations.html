@@ -23,7 +23,12 @@ tags:
 
   <a
     href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0=&ver=3"
-    class="btn btn-primary active" role="button" target="_blank">DONATE
+    class="btn btn-primary active" role="button" target="_blank" onclick="ga('send', {
+		'hitType': 'event',
+		'eventCategory': 'donation',
+		'eventAction': 'VancoPage-donations.html',
+		'eventValue': 100
+	});">DONATE
     NOW</a>
 
   <hr class="half-rule">
