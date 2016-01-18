@@ -6,7 +6,7 @@ tags:
 ---
 
 <script>
-  var active = Math.floor(Math.random()) + 1;
+  var active = Math.floor(Math.random()) * 3;
   //$( "div.item" ).eq(active).addClass("active");
   console.log("Active Elemet: "+active);
   $.fn.log = function() {
