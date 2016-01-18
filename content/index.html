@@ -9,7 +9,11 @@ tags:
   var active = Math.floor(Math.random()) + 1;
   //$( "div.item" ).eq(active).addClass("active");
   console.log("Active Elemet: "+active);
-  console.log($( "div.item" ).eq(active));
+  $.fn.log = function() {
+  console.log.apply(console, this);
+  return this;
+};
+  $( "div.item" ).log();
 </script>
 
 <div class="bs-docs-featurette">
