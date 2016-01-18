@@ -210,11 +210,12 @@ function getElig(zip, size, income, insurance, bday){
         break;
     }
     var a = getElig(zip, famsize, income, insurance, birthdate);
+    var value = a=='eligible'?100:20;
     ga('send', {
 		'hitType': 'event',
 		'eventCategory': 'eligibility',
 		'eventAction': a,
-		'eventValue': 100
+		'eventValue': value
 	});
   }
 
