@@ -1,5 +1,5 @@
 <?php
-
+init_set('display_errors', 'Off');
 /**
  * config.php provides:
  *
