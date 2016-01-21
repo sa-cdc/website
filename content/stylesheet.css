@@ -285,6 +285,13 @@ a:active { color: #5AC1FF; }
 a:visited { color: #0079C1; }
 
 /*
+ * List modifiers
+ */
+ ul.cross {
+ 	list-style: url('https://upload.wikimedia.org/wikipedia/commons/b/bd/Ap_icon.png') disc;
+ }
+
+/*
  *  Featurettes...
  */
 .bs-docs-featurette {
