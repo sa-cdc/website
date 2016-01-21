@@ -3,6 +3,15 @@
 //http://www.getcreditcardnumbers.com/
 //http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
+var P = {Dentures: 50, Pulling: 100, "Root Canal": 500, GoldTooth: 20, Cavity: 30, Nicegrill: 1000, Cleaning: 5};
+
+function ucwords(str,force){
+  str=force ? str.toLowerCase() : str;
+  return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+      function(firstLetter){
+        return firstLetter.toUpperCase();
+      });
+}
 
 function getQueryParams(qs) {
   qs = qs.split("+").join(" ");
@@ -191,6 +200,11 @@ $().ready(function() {
     errorLabelContainer: "#errors"
   });
 
+  $("input").not("#billing-email").focusout(function() {
+        var cp_value= ucwords($(this).val(),true) ;
+            $(this).val(cp_value );
+  });
+
   $("#amount-form").validate();
   $("#who-form").validate();
   $("#CC-form").validate();
@@ -250,7 +264,7 @@ $('#S-form').submit(            function(event) {submitPayment(event, this);});
 
 $( "input[name=accounttype]" ).change(function() {
   type = $( "input:radio[name=accounttype]:checked" ).val();
-  if(type == "CC") {
+  if(type == "T") {
     $( "#transaction-CC-block" ).css("display", "block");
     $( "#transaction-C-block" ).css("display", "none");
     $( "#transaction-S-block" ).css("display", "none");
@@ -270,7 +284,7 @@ $( "input[name=accounttype]" ).change(function() {
 encrypto = function getNVP(a, b) {
   $.ajax({
     type: 'GET',
-    url: 'http://sa-cdc.org/scripts/vanco/nvpEncrypt.php',
+    url: '/static/scripts/vanco/nvpEncrypt.php',
     crossDomain: true,
     data: a,
     dataType: 'jsonp',
@@ -313,13 +327,17 @@ function submitPayment(event, me) {
   //Data to encrypt locally
   var paymentData = {};
   paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = 'http://sa-cdc.org/scripts/vanco/confirm.php';
-  if( 'isdebitcardonly' in transaction )
-    paymentData['isdebitcardonly'] = transaction['isdebitcardonly'] == 'on' ? 'Yes':'No';
-  else
+  paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
+  /*
+   * 26 March 2015:  Seems that Vanco is not setup to handle debit cards;
+   * removing debit option for users;
+  if( 'isdebitcardonly' in transaction && transaction['isdebitcardonly'].toLowerCase() == 'debit'.toLowerCase() ) {
+    paymentData['isdebitcardonly'] = 'Yes';
+  } else {
     paymentData['isdebitcardonly'] = 'No';
-
-  paymentData['amount'] = transaction['amount'];
+  }
+  */
+  paymentData['isdebitcardonly'] = 'No';
 
   //console.log('paymentData[]: '+JSON.stringify(paymentData));
   //$( "#transaction-loading").css('display', 'block');
@@ -349,6 +367,7 @@ function submitPayment(event, me) {
     data['customerzip'] = transaction['zip'];
     data['customerphone'] = transaction['phone'];
     var id = transaction['fundid'];
+    //console.log(id);
     if(id != 'none') {
       data['fundid_'+id] = id;
       data['fundamount_'+id] = transaction['amount'];
@@ -380,30 +399,35 @@ function submitPayment(event, me) {
       */
       // This is where we trigger the writing of the receipt!
       $("#transaction-loading").css('block','none');
+      $("#status-bar").addClass("hidden");
       //console.log('confirm: '+JSON.stringify(result));
       if(result['transactionref']) {
+        var id = transaction['fundid'];
+        funds = {
+          "0001" : "General Operations",
+          "0002" : "Direct Patient Care",
+          "0003" : "Endowment Fund" };
+        if(id == '0001' || id == '0002' || id == '0003') {
+          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
+          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
+        } else {
+          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
+          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
+        }
+
         $('.amount').text(transaction['amount']);
 
         toggleConfirm();
-        $('#confirm').html('<p>Post Date: '+result['startdate']+'</p>');
+        var proc = runSubset(P, transaction['amount']);
+        for(var i=0; i<proc.length; i++ ) {
+          $('#purchased').append('<p><span class="badge">'+proc[i]['label']+' ('+proc[i]['freq']+')</span></p>');
+        }
+        $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
         $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
         if(result['cardtype']) {
-          $('#confirm').append('<p>Card: '+result['visamctype']+' #XXXXXXXXXXX'+result['last4']+'('+result['cardtype']+')</p>');
-        } else {
-          $('#confirm').append('<p>Account: XXXXXX'+result['last4']+'</p>');
+          $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
         }
-        var id = transaction['fundid'];
-        funds = {
-          "0001" : "Operations Support",
-          "0002" : "Patient Care",
-          "0003" : "Endowment" };
-        if(id == '0001' || id == '0002' || id == '0003') {
-
-          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
-          $('#confirm').append('<p>Funding: '+funds[id]+' at the SA-CDC</p>');
-        } else {
-          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
-        }
+        $('#confirm').append('<p>Account Last Four: '+result['last4']+'</p>');
       }
 
       if(result['errorlist']) {

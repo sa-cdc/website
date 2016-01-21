@@ -26,7 +26,8 @@ module DefaultHelper
     bigA.each do |page|
       if(!page[:item].children.empty? && page[:item][:title]!= 'Home')
         result << "<li class=\"dropdown #{page[:cls_bald]}\"> <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">  #{page[:item][:group]} <b class=\"caret\"></b></a> <ul class=\"dropdown-menu\"> <li>  #{link_to(page[:item][:title], page[:item].reps[0])} </li>"
-        page[:item].children.each do |sub|
+        subpages = page[:item].children - items_with_tag('no-link')
+        subpages.each do |sub|
           result << "<li> #{link_to(sub[:title], sub.reps[0])}</li>"
         end
         result << "</ul> </li>"
