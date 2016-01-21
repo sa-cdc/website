@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <title>SA CDC - <%= @item[:title] %></title>
     <link rel="shortcut icon" href="/static/imgs/favicon.ico" type="image/x-icon" />
-    <!-- Font: Fall-back is any san-serif font, set in style.css -->
-    <!--<link href='//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
-
 
     <!-- JQuery -->
     <script src="//code.jquery.com/jquery.min.js"></script>
@@ -22,11 +19,8 @@
     <!-- Local Styles -->
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/static/css/twitter-styles-fade.css">
-
-    <% if(@item[:title]=="Eligibility") %>
-      <!-- Date.js to make the eligibility sheet easier. Should also prove useful when we do scheduling stuff -Browne -->
-      <script src="/static/scripts/date.js" defer></script>
-    <% end %>
+    
+    <!-- Custom Scripts -->
     <script src="/static/scripts/generic.js" defer></script>
     <script src="/static/scripts/twitterfeed-fade.js" defer></script>
 
