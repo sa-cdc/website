@@ -162,7 +162,7 @@ $().ready(function() {
     encrypto(fakeData, function(data) {
       $.ajax({
         type: 'GET',
-        url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
+        url: 'https://www.vancodev.com/cgi-bin/wsnvp.vps',
         timeout: 4000,
         crossDomain: true,
         data: data,
@@ -299,7 +299,7 @@ encrypto = function getNVP(a, b) {
 wsNVP = function callWSNVP(a, b) {
   $.ajax({
     type: 'GET',
-    url: 'https://www.vancodev.com/cgi-bin/wsnvptest.vps',
+    url: 'https://www.vancodev.com/cgi-bin/wsnvp.vps',
     crossDomain: true,
     data: a,
     dataType: 'jsonp',
