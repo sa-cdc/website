@@ -1,4 +1,6 @@
 <?php
+init_set('display_errors','Off');
+
 session_start();
 require_once("twitteroauth/twitteroauth.php"); //Path to twitteroauth library
  
