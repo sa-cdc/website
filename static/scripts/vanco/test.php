@@ -5,5 +5,5 @@ require('vancoFunctions.inc');
 //$result = array('output' => open_session_test());
 //header('Content-Type: text/html');
 //echo '<html>'.json_encode($result).'</html>';
-echo open_session_test();
+echo print_r(open_session_test());
 ?>
