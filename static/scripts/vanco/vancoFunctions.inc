@@ -124,13 +124,13 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
 function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
   $result = array();
   $session = load_open_session($key);
-  
-  if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
+  return $session;
+  /*if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
     $request = "requesttype=login&userid=$user_id&password=$password";
     $result = post($request, $key, $session = FALSE, $user_id, $password);
     return 'x';
   }
-  return $session;
+  return $session;*/
   /*  $shm = shmop_open(0xF44, "c", 0644, 58);
     shmop_write($shm, time(), 48);
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
