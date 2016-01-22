@@ -128,6 +128,7 @@ function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $ke
   if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
     $request = "requesttype=login&userid=$user_id&password=$password";
     $result = post($request, $key, $session = FALSE, $user_id, $password);
+    return 'x';
   }
   /*  $shm = shmop_open(0xF44, "c", 0644, 58);
     shmop_write($shm, time(), 48);
