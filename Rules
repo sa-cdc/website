@@ -49,7 +49,7 @@ route '/stylesheet/' do
   '/style.css'
 end
 
-route 'gala2016'
+route '/gala2016/' do
   item.identifier + 'index.html'
 end
 
