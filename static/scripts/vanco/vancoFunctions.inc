@@ -130,6 +130,7 @@ function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $ke
     $result = post($request, $key, $session = FALSE, $user_id, $password);
     return 'x';
   }
+  return 'y';
   /*  $shm = shmop_open(0xF44, "c", 0644, 58);
     shmop_write($shm, time(), 48);
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
@@ -139,7 +140,7 @@ function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $ke
     $result['requestid'] = "none";
   }
   */
-  return $result['sessionid'];
+  //return $result['sessionid'];
 }
 
 #Only works if a session is currently active and not > 24 hours old
