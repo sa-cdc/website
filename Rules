@@ -23,6 +23,10 @@
 #  item.identifier.chop + '-thumbnail.png'
 #end
 
+preprocess do
+  RedirectGenerator.generate(config[:redirects], items)
+end
+
 passthrough '/static/*'
 
 compile '/stylesheet/' do
@@ -61,11 +65,3 @@ route '*' do
 end
 
 layout '*', :erb
-
-preprocess do
-  RedirectGenerator.generate(config[:redirects], items)
-end
-
-route '/*' do
-  item.identifier + 'index.html'
-end
