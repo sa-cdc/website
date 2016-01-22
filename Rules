@@ -23,14 +23,13 @@
 #  item.identifier.chop + '-thumbnail.png'
 #end
 
-preprocess do
-  RedirectGenerator.generate(config[:redirects], items)
-end
-
 passthrough '/static/*'
 
 compile '/stylesheet/' do
   # don’t filter or layout
+end
+
+compile '/gala2016/' do
 end
 
 compile '/bootstrap/*' do
@@ -48,6 +47,10 @@ end
 
 route '/stylesheet/' do
   '/style.css'
+end
+
+route 'gala2016'
+  item.identifier + 'index.html'
 end
 
 route '/bootstrap/*' do
