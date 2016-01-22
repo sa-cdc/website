@@ -98,8 +98,8 @@ function isValidSession($session, $key=VANCO_KEY) {
   $request['nvpvar'] = my_pack("requesttype=datetime&requestid=".generateRequestID(), $key);
   $request['sessionid'] = $session;
   $data = new_post($request, VANCO_WSNVP);
-  
-  return !(preg_match('/Invalid Request/', $data));
+  return $data;
+  //return !(preg_match('/Invalid Request/', $data));
 }
 
 function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
