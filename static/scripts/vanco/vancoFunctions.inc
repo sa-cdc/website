@@ -91,7 +91,8 @@ function new_post($request,$url) {
   curl_setopt($ch, CURLOPT_POST, 1);
   curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-  return curl_exec($ch);
+  return curl_getinfo($ch);
+  //return curl_exec($ch);
 }
 
 function isValidSession($session, $key=VANCO_KEY) {
