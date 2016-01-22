@@ -130,7 +130,7 @@ function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $ke
     $result = post($request, $key, $session = FALSE, $user_id, $password);
     return 'x';
   }
-  return isValidSession($session, $key);
+  return $session;
   /*  $shm = shmop_open(0xF44, "c", 0644, 58);
     shmop_write($shm, time(), 48);
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
