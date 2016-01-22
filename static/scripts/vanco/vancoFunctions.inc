@@ -95,7 +95,7 @@ function new_post($request,$url) {
 }
 
 function isValidSession($session, $key=VANCO_KEY) {
-  $request['nvpvar'] = my_pack("requesttype=datetim&requestid=".generateRequestID(), $key);
+  $request['nvpvar'] = my_pack("requesttype=datetime&requestid=".generateRequestID(), $key);
   $request['sessionid'] = $session;
   $data = new_post($request, VANCO_WSNVP);
   return $data;
