@@ -50,7 +50,7 @@ route '/stylesheet/' do
 end
 
 route '/gala2016/' do
-  '/get_involved/gala2016register/index.html'
+  '/get_involved/gala2016register/'
 end
 
 route '/bootstrap/*' do
