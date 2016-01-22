@@ -102,14 +102,6 @@ function isValidSession($session, $key=VANCO_KEY) {
   return !(preg_match('/(Invalid Request)/', $data));
 }
 
-function isValidSessionTest($session, $key=VANCO_KEY) {
-  $request['nvpvar'] = my_pack("requesttype=datetime&requestid=".generateRequestID(), $key);
-  $request['sessionid'] = $session;
-  $data = new_post($request, VANCO_WSNVP);
-  
-  return $data;
-}
-
 function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
   $result = array();
   $session = load_open_session($key);
@@ -133,10 +125,11 @@ function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $ke
   $result = array();
   $session = load_open_session($key);
   
-  /*if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
+  if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
     $request = "requesttype=login&userid=$user_id&password=$password";
     $result = post($request, $key, $session = FALSE, $user_id, $password);
-    $shm = shmop_open(0xF44, "c", 0644, 58);
+  }
+  /*  $shm = shmop_open(0xF44, "c", 0644, 58);
     shmop_write($shm, time(), 48);
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
     shmop_close($shm);
@@ -144,9 +137,8 @@ function open_session_test($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $ke
     $result['sessionid'] = $session;
     $result['requestid'] = "none";
   }
-  
-  return $result['sessionid'];*/
-  return $session;
+  */
+  return $result['sessionid'];
 }
 
 #Only works if a session is currently active and not > 24 hours old
