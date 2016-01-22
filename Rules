@@ -61,3 +61,11 @@ route '*' do
 end
 
 layout '*', :erb
+
+preprocess do
+  RedirectGenerator.generate(config[:redirects], items)
+end
+
+route '/*' do
+  item.identifier + 'index.html'
+end
