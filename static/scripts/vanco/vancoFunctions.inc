@@ -99,10 +99,10 @@ function isValidSession($session, $key=VANCO_KEY) {
   $request['sessionid'] = $session;
   $data = new_post($request, VANCO_WSNVP);
   
-  $out = print_r($data);
+  /*$out = print_r($data);
   $myfile = fopen("test.txt", "w") or die("Unable to open file!");
   fwrite($myfile, $data);
-  fclose($myfile);
+  fclose($myfile);*/
   
   return preg_match('/(nvpvar)/', $data);
 }
