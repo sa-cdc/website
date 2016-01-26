@@ -2,7 +2,7 @@
 
 require('vancoFunctions.inc');
 
-if(!isset($_GET['test']) && !isset($_GET['tovanco'])) {
+if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
 
   $data  = "requestid=".generateRequestID()."&";
   $data .= "clientid=".VANCO_CLIENT_ID."&";
@@ -42,10 +42,15 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco'])) {
   header('Content-Type: application/json');
   echo $_GET['callback'] . '('.json_encode($result).')';
   
+} elseif(isset($_GET['url'])) {
+  $urls = array();
+  $urls['nvp'] = VANCO_WSNVP;
+  $urls['xml'] = VANCO_WS;
+  header('Content-Type: application/json');
+  echo $_GET['callback'] . '('.json_encode($urls).')';
+  
 } else {
-
   echo "Encrypting: \"".$_GET['data']."\"\n";
   echo my_pack($_GET['data']);
-  
 }
 ?>
