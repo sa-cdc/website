@@ -106,8 +106,9 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
   $session = load_open_session($key);
   
   if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
+    clear_open_session();
     $request = "requesttype=login&userid=$user_id&password=$password";
-    $result = post($request, $key, $session = FALSE, $user_id, $password);
+    $result = post($request, $key, $session = false, $user_id, $password);
     $shm = shmop_open(0xF44, "c", 0644, 58);
     shmop_write($shm, time(), 48);
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
