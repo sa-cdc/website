@@ -113,6 +113,10 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
     shmop_write($shm, time(), 48);
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
     shmop_close($shm);
+    $myfile = fopen("test.txt", "w") or die("Unable to open file!");
+    fwrite($myfile, $result['sessionid']);
+    fwrite($myfile, "\n$session");
+    fclose($myfile);
   } else {
     $result['sessionid'] = $session;
     $result['requestid'] = "none";
