@@ -105,7 +105,7 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
   $result = array();
   $session = load_open_session($key);
   
-  if(!isValidSession($session, $key)) {  //If session invalid then then request a new one.
+  if($session == null||$session=''||!isValidSession($session, $key)) {  //If session invalid then then request a new one.
     clear_open_session();
     $request = "requesttype=login&userid=$user_id&password=$password";
     $result = post($request, $key, $session = false, $user_id, $password);
