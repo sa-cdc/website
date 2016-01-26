@@ -6,10 +6,11 @@ tags:
   - sa-cdc
 ---
 <script src="/static/scripts/bootbox.min.js"></script>
+<script src="/static/scripts/date.js" defer></script>
 <div class="bs-docs-featurette">
     <h2 class="bs-docs-featurette-title">Seeking Dental Care</h2>
     <p class="lead">
-      SACDC provides free dental care for low income and homeless Bexar County
+      San Antonio Christian Dental Clinic provides free dental care for low income and homeless Bexar County
       adults. Before you schedule a visit, please fill out the form on this
       page.**
     </p>
@@ -175,10 +176,12 @@ function getElig(zip, size, income, insurance, bday){
         if (getZipElig(zip) == "eligible" && getIncElig(size, income) == "eligible" && getInsureElig(insurance) == "eligible" && getAgeElig(bday) == "eligible" ){
 	        $("#elig").css("display", "block");
 	        $("#inelig").css("display", "none");
+	        return "eligible"
 	}
 	else{
 	        $("#elig").css("display", "none");
 	        $("#inelig").css("display", "block");
+	        return "ineligible"
 	}
 }
 
@@ -207,7 +210,14 @@ function getElig(zip, size, income, insurance, bday){
         income = 0;
         break;
     }
-    getElig(zip, famsize, income, insurance, birthdate);
+    var a = getElig(zip, famsize, income, insurance, birthdate);
+    var value = a=='eligible'?100:20;
+    ga('send', {
+		'hitType': 'event',
+		'eventCategory': 'eligibility',
+		'eventAction': a,
+		'eventValue': value
+	});
   }
 
   $( "#my-form" ).submit(function( event ) {

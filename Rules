@@ -15,18 +15,21 @@
 #
 # * Files located in /static/ are special, the extension is not auto stripped
 
-compile '/clinic_info/downloads/*/', :rep => :thumbnail do
-  filter :thumbnailize, :width => 42, :default => @items['/static/imgs/pdf_thumbnail.jpg']
-end
+#compile '/clinic_info/downloads/*/', :rep => :thumbnail do
+#  filter :thumbnailize, :width => 42, :default => @items['/static/imgs/pdf_thumbnail.jpg']
+#end
 
-route '/clinic_info/downloads/*/', :rep => :thumbnail do
-  item.identifier.chop + '-thumbnail.png'
-end
+#route '/clinic_info/downloads/*/', :rep => :thumbnail do
+#  item.identifier.chop + '-thumbnail.png'
+#end
 
 passthrough '/static/*'
 
 compile '/stylesheet/' do
   # don’t filter or layout
+end
+
+compile '/gala2016/' do
 end
 
 compile '/bootstrap/*' do
@@ -44,6 +47,10 @@ end
 
 route '/stylesheet/' do
   '/style.css'
+end
+
+route '/gala2016/' do
+  item.identifier + 'index.html'
 end
 
 route '/bootstrap/*' do

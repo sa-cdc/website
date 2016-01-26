@@ -5,16 +5,22 @@ precedence: 1
 tags:
   - service 
 ---
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+<div class="bs-docs-featurette">
+  <h2 class="bs-docs-featurette-title">Help our Mission by Making a Donation</h2>
+  <p class="lead">As a nonprofit dental health provider, we rely
+  heavily on individual monetary donations to provide services to those in
+  need.</p>
+
+  <hr class="half-rule">
+
+<script type="text/javascript" src="/static/lib/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/lib/additional-methods.min.js"></script>
 <script type="text/javascript" src="/static/scripts/errorcodes.json" defer></script>
 <script type="text/javascript" src="/static/scripts/subsetsum.js" defer></script>
 <script type="text/javascript" src="/static/scripts/vancoServices.js" defer></script>
+
 <div class="bs-docs-featurette border1">
   <span id="alertfield"></span>
-  <h3 class="donate bs-docs-featurette-title">
-    Help our Mission by Making a Monetary Donation
-  </h3>
 </div>
 
 <div class="row text-center" id="loading_init">
@@ -246,7 +252,7 @@ tags:
     </div>
 
     <div id="transaction-CC-block" style="display: none;">
-      <form class="CC form" role="form" id="CC-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CC form" role="form" id="CC-form" action="https://vancoservices.com/cgi-bin/wsnvp.vps" method="get">
         <fieldset>
           <div class="row text-left">
             <div class="col-sm-offset-4 col-xs-12 col-sm-4">
@@ -297,7 +303,7 @@ tags:
     </div>
 
     <div id="transaction-C-block" style="display: none;">
-      <form class="CS form" role="form" id="C-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CS form" role="form" id="C-form" action="https://vancoservices.com/cgi-bin/wsnvp.vps" method="get">
         <fieldset>
           <div class="row text-left">
             <div class="col-sm-4 col-sm-offset-4">
@@ -326,7 +332,7 @@ tags:
     </div>
 
     <div id="transaction-S-block" style="display: none;">
-      <form class="CS form" role="form" id="S-form" action="https://www.vancodev.com/cgi-bin/wsnvptest.vps" method="get">
+      <form class="CS form" role="form" id="S-form" action="https://vancoservices.com/cgi-bin/wsnvp.vps" method="get">
         <fieldset>
           <div class="row text-left">
             <div class="col-sm-4 col-sm-offset-4">

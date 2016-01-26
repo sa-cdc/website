@@ -6,15 +6,20 @@ tags:
 ---
 
 <div class="bs-docs-featurette">
-  <div id="show" class="row carousel slide" data-ride="carousel">
+  <div id="show" class="row carousel slide" data-ride="carousel" data-interval="1200000">
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-      <div class="item active">
+      <div class="item">
         <img src="static/imgs/pic-content/frontpage1.jpg" alt="A">
           <div class="carousel-caption captionleft">
             <h3 class="carousel frontpage">Help us Bring Back A Smile</h3>
             <h4 class="carousel">Jason was in so much pain he was unable to work</h4>
-                <a href="/get_involved/donations/" class="btn btn-primary active" role="button">Donate Now</a>
+                <a href="/get_involved/donations/" class="btn btn-primary active" role="button" onclick="ga('send', {
+		'hitType': 'event',
+		'eventCategory': 'donation',
+		'eventAction': 'CarouselToDonation-Jason',
+		'eventValue': 10
+	});">Donate Now</a>
                 <a href="/stories/story1/" class="btn btn-primary active" role="button">Learn More</a>
           </div>
           <div class="carousel-caption captionsmallleft">
@@ -29,7 +34,12 @@ tags:
           <div class="carousel-caption captionright">
             <h3 class="carousel frontpage">Dental Care for Those in Need</h3>
             <h4 class="carousel">A new smile helped Ricardo continue on his path to recovery</h4>
-                <a href="/get_involved/donations/" class="btn btn-primary active" role="button">Donate Now</a>
+                <a href="/get_involved/donations/" class="btn btn-primary active" role="button" onclick="ga('send', {
+		'hitType': 'event',
+		'eventCategory': 'donation',
+		'eventAction': 'CarouselToDonation-Ricardo',
+		'eventValue': 10
+	});">Donate Now</a>
                 <a href="/stories/story2/" class="btn btn-primary active" role="button">Learn More</a>
           </div>
           <div class="carousel-caption captionsmallright">
@@ -46,7 +56,12 @@ tags:
           <div class="carousel-caption captionleft">
             <h3 class="carousel frontpage">The Need is Great</h3>
             <h4 class="carousel">When Monica needed emergency extractions, SACDC jumped in to help</h4>
-                <a href="/get_involved/donations/" class="btn btn-primary active" role="button">Donate Now</a>
+                <a href="/get_involved/donations/" class="btn btn-primary active" role="button" onclick="ga('send', {
+		'hitType': 'event',
+		'eventCategory': 'donation',
+		'eventAction': 'CarouselToDonation-Monica',
+		'eventValue': 10
+	});">Donate Now</a>
                 <a href="/stories/story3/" class="btn btn-primary active" role="button">Learn More</a>
           </div>
           <div class="carousel-caption captionsmallleft">
@@ -60,10 +75,16 @@ tags:
         </div>
     </div>
   </div>
+  
+  <script>
+    var active = Math.floor(Math.random() * 3);
+    $( "div.item" ).eq(active).addClass("active");
+    //console.log(active);
+  </script>
 
 <div class="row">
   <div class="col-md-10 col-md-offset-1">
-    <h3 class="frontpage">The San Antonio Christian Dental Clinic is on a mission to extend Christ's healing by providing charitable dental care to under-served Bexar County adults</h3>
+    <h3 class="frontpage">San Antonio Christian Dental Clinic is on a mission to extend Christ's healing by providing charitable dental care to underserved Bexar County adults</h3>
   </div>
 </div>
 
