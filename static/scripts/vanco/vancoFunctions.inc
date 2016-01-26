@@ -98,15 +98,18 @@ function isValidSession($session, $key=VANCO_KEY) {
   $request['nvpvar'] = my_pack("requesttype=datetime&requestid=".generateRequestID(), $key);
   $request['sessionid'] = $session;
   $data = new_post($request, VANCO_WSNVP);
+  
+  $out = print_r($data);
+  $myfile = fopen("test.txt", "w") or die("Unable to open file!");
+  fwrite($myfile, $data);
+  fclose($myfile);
+  
   return !(preg_match('/(Invalid Request)/', $data));
 }
 
 function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
-  close_session();
   $result = array();
   $session = load_open_session($key);
-  $myfile = fopen("test.txt", "w") or die("Unable to open file!");
-  fwrite($myfile, isValidSession($session, $key)."\n");
   if(!$session || !isValidSession($session, $key)) {  //If session invalid then then request a new one.
     clear_open_session();
     $request = "requesttype=login&userid=$user_id&password=$password";
@@ -119,9 +122,6 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
     $result['sessionid'] = $session;
     $result['requestid'] = "none";
   }
-    
-    fwrite($myfile, urlsafe_b64encode($result['sessionid']));
-    fclose($myfile);
     
   return $result['sessionid'];
 }
