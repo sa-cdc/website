@@ -150,10 +150,14 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
+var VANCO_URL = [];
+function getVancoNVP_URL() {
+  return VANCO_URL['nvp'];
+}
+
 $().ready(function() {
 
   //Pull the proper Vanco URL (production/test)
-  var VANCO_URL = [];
   $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
@@ -168,10 +172,6 @@ $().ready(function() {
       alert('Local: '+errorThrown);
     }
   });
-  
-  function getVancoNVP_URL() {
-    return VANCO_URL['nvp'];
-  }
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
