@@ -169,7 +169,7 @@ $().ready(function() {
     }
   });
   
-  getVancoNVP_URL() {
+  function getVancoNVP_URL() {
     return VANCO_URL['nvp'];
   }
 
