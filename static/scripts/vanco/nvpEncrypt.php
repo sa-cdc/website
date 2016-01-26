@@ -2,7 +2,7 @@
 
 require('vancoFunctions.inc');
 
-if(!isset($_GET['test']) && !isset($_GET['tovanco'])) {
+if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
 
   $data  = "requestid=".generateRequestID()."&";
   $data .= "clientid=".VANCO_CLIENT_ID."&";
