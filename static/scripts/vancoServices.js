@@ -168,6 +168,10 @@ $().ready(function() {
       alert('Local: '+errorThrown);
     }
   });
+  
+  getVancoNVP_URL() {
+    return VANCO_URL['nvp'];
+  }
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
