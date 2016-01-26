@@ -104,7 +104,7 @@ function isValidSession($session, $key=VANCO_KEY) {
   fwrite($myfile, $data);
   fclose($myfile);
   
-  return !(preg_match('/(Invalid Request)/', $data));
+  return preg_match('/(nvpvar)/', $data);
 }
 
 function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
