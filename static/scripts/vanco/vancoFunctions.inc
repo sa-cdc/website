@@ -118,7 +118,7 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
     $result['requestid'] = "none";
   }
     $myfile = fopen("test.txt", "w") or die("Unable to open file!");
-    fwrite($myfile, urlsafe_b64encode$result['sessionid']));
+    fwrite($myfile, urlsafe_b64encode($result['sessionid']));
     fclose($myfile);
     
   return $result['sessionid'];
