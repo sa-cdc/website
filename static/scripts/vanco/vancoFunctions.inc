@@ -102,6 +102,7 @@ function isValidSession($session, $key=VANCO_KEY) {
 }
 
 function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
+  close_session();
   $result = array();
   $session = load_open_session($key);
   $myfile = fopen("test.txt", "w") or die("Unable to open file!");
