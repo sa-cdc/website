@@ -104,7 +104,8 @@ function isValidSession($session, $key=VANCO_KEY) {
 function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VANCO_KEY) {
   $result = array();
   $session = load_open_session($key);
-  
+  $myfile = fopen("test.txt", "w") or die("Unable to open file!");
+  fwrite($myfile, urlsafe_b64encode($session)."\n");
   if(!$session || !isValidSession($session, $key)) {  //If session invalid then then request a new one.
     clear_open_session();
     $request = "requesttype=login&userid=$user_id&password=$password";
@@ -117,7 +118,7 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
     $result['sessionid'] = $session;
     $result['requestid'] = "none";
   }
-    $myfile = fopen("test.txt", "w") or die("Unable to open file!");
+    
     fwrite($myfile, urlsafe_b64encode($result['sessionid']));
     fclose($myfile);
     
