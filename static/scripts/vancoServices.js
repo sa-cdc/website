@@ -158,7 +158,7 @@ $().ready(function() {
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     data: {'url': '1'},
-    dataType: 'json',
+    dataType: 'jsonp',
     success: function(data){
       VANCO_URL['nvp'] = data['nvp'];
       VANCO_URL['xml'] = data['xml'];
