@@ -162,6 +162,8 @@ $().ready(function() {
     success: function(data){
       VANCO_URL['nvp'] = data['nvp'];
       VANCO_URL['xml'] = data['xml'];
+      alert('Vanco NVP: '+data['nvp']);
+      alert('Vanco XML: '+data['xml']);
     },
     error: function (jqXHR, textStatus, errorThrown, data) {
       //TODO do something useful
