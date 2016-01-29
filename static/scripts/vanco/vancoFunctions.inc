@@ -129,7 +129,7 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
 
 #Only works if a session is currently active and not > 24 hours old
 function load_open_session($key=VANCO_KEY) {
-  $shm = shmop_open(0xF44, "c", 0644, 58);
+  $shm = shmop_open(VANCO_MEM, "c", 0644, 58);
   $session = shmop_read($shm, 0, 48);
   $age = time() - shmop_read($shm, 48, 10);
   shmop_close($shm);
@@ -141,7 +141,7 @@ function load_open_session($key=VANCO_KEY) {
 }
 
 function clear_open_session() {
-  $shm = shmop_open(0xF44, "c", 0644, 48);
+  $shm = shmop_open(VANCO_MEM, "c", 0644, 48);
   $result = shmop_delete($shm);
   shmop_close($shm);
   return $result;
