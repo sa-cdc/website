@@ -163,6 +163,7 @@ $().ready(function() {
       VANCO_URL['nvp'] = data['nvp'];
       VANCO_URL['xml'] = data['xml'];
       VANCO_URL['dev'] = data['dev'];
+          alert(VANCO_URL['nvp']);
       $('.vanco_nvp').attr('action', data['nvp']);
       $('.vanco_xml').attr('action', data['xml']);
       if(VANCO_URL['dev']=="yes") {
@@ -184,8 +185,6 @@ $().ready(function() {
                     'isdebitcardonly': 'No',
                     'amount': '0'};
 
-    alert(VANCO_URL['nvp']);
-    
     encrypto(fakeData, function(data) {
       $.ajax({
         type: 'GET',
