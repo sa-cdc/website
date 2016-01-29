@@ -23,12 +23,12 @@
 #  item.identifier.chop + '-thumbnail.png'
 #end
 
-compile '/static/test/' do
+compile '/static/test.txt/' do
   filter :vanco_url
   layout 'default'
 end
 
-route '/static/test/' do
+route '/static/test.txt/' do
   '/static/test.txt'
 end
 
