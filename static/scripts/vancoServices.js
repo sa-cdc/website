@@ -173,8 +173,7 @@ $().ready(function() {
   });
   
   if(VANCO_URL['dev']=="yes") {
-    $(div[id='dev-warning']).removeClass('hidden');
-    $(div[id='dev-warning']).addClass('show');
+    $("div[id='dev-warning']").removeClass('hidden');
   }
 
   //AJAX request to test Vanco connection
