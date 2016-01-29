@@ -162,6 +162,7 @@ $().ready(function() {
     success: function(data){
       VANCO_URL['nvp'] = data['nvp'];
       VANCO_URL['xml'] = data['xml'];
+      VANCO_URL['dev'] = data['dev'];
       $('.vanco_nvp').attr('action', data['nvp']);
       $('.vanco_xml').attr('action', data['xml']);
     },
@@ -170,6 +171,10 @@ $().ready(function() {
       alert('Local: '+errorThrown);
     }
   });
+  
+  if(VANCO_URL['dev']=="yes") {
+    $(div[id='dev-warning']).removeClass('hidden').addClass('show');
+  }
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
