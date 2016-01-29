@@ -165,6 +165,9 @@ $().ready(function() {
       VANCO_URL['dev'] = data['dev'];
       $('.vanco_nvp').attr('action', data['nvp']);
       $('.vanco_xml').attr('action', data['xml']);
+      if(VANCO_URL['dev']=="yes") {
+        $("#dev-warning").removeClass('hidden');
+      }
     },
     error: function (jqXHR, textStatus, errorThrown, data) {
       //TODO do something useful
@@ -172,9 +175,7 @@ $().ready(function() {
     }
   });
   
-  if(VANCO_URL['dev']=="yes") {
-    $("#dev-warning").removeClass('hidden');
-  }
+
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
