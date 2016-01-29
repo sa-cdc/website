@@ -176,9 +176,7 @@ $().ready(function() {
       //TODO do something useful
       alert('Local: '+errorThrown);
     }
-  }).responstText;
-  
-  alert(VANCO_URL['nvp']);
+  });
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
