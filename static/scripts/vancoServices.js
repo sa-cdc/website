@@ -184,7 +184,7 @@ $().ready(function() {
                     'isdebitcardonly': 'No',
                     'amount': '0'};
 
-    alert(VANCO_URL['dev']);
+    alert(VANCO_URL['nvp']);
     
     encrypto(fakeData, function(data) {
       $.ajax({
