@@ -27,6 +27,10 @@ compile '/static/scripts/vancoServices/' do
   filter :vanco_url
 end
 
+route '/static/scripts/vancoServices/' do
+  '/static/scripts/vancoServices.js'
+end
+
 passthrough '/static/*'
 
 compile '/stylesheet/' do
