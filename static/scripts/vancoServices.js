@@ -162,11 +162,12 @@ function setVancoURLs(data) {
 $().ready(function() {
 
   //Pull the proper Vanco URL (production/test)
-  $.ajax({
+  var VANCO_URL = $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     data: {'url': '1'},
     dataType: 'jsonp',
+    async: false,
     success: function(data){
       setVancoURLs(data);
     },
@@ -174,7 +175,7 @@ $().ready(function() {
       //TODO do something useful
       alert('Local: '+errorThrown);
     }
-  });
+  }).responstText;
   
   alert(window.VANCO_URL['nvp']);
 
