@@ -25,10 +25,9 @@
 
 compile '/static/test.txt/' do
   filter :vanco_url
-  layout 'default'
 end
 
-route '/static/test.txt/' do
+route '/static/test/' do
   '/static/test.txt'
 end
 
