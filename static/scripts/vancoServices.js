@@ -160,7 +160,7 @@ $().ready(function() {
     data: {'url': '1'},
     dataType: 'jsonp',
     success: function(data){
-      VANCO_URL['nvp'] = data['nvp']+'';
+      VANCO_URL['nvp'] = JSON.parse(JSON.stringify(data['nvp']));
       VANCO_URL['xml'] = data['xml']+'';
       VANCO_URL['dev'] = data['dev']+'';
       $('.vanco_nvp').attr('action', data['nvp']);
