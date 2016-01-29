@@ -23,7 +23,7 @@
 #  item.identifier.chop + '-thumbnail.png'
 #end
 
-compile 'test.txt' do
+compile '/content/test.txt' do
   filter :vanco_url
 end
 
