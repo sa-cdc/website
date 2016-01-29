@@ -8,6 +8,7 @@
  * constant VANCO_CLIENT_ID
  * constant VANCO_WSNVP
  * constant VANCO_WS
+ * constant VANCO_MEM
  */
 require('../config.inc');
 
@@ -114,8 +115,8 @@ function open_session($user_id=VANCO_USER_ID, $password=VANCO_PASSWORD, $key=VAN
     clear_open_session();
     $request = "requesttype=login&userid=$user_id&password=$password";
     $result = post($request, $key, $session = false, $user_id, $password);
-    $shm = shmop_open(0xF44, "c", 0644, 58);
-    shmop_write($shm, time(), 48);
+    $shm = shmop_open(VANCO_MEM, "c", 0644, 58); //
+    shmop_write($shm, time(), 48); // Set the timer to now, starting at the 48th byte
     shmop_write($shm, encrypt($result['sessionid'], $key), 0); #Store ecrypted session to shared memory
     shmop_close($shm);
   } else {
