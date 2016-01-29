@@ -153,7 +153,7 @@ function submitAmount(event, obj) {
 $().ready(function() {
 
   //Pull the proper Vanco URL (production/test)
-  var VANCO_URL = [];
+  var VANCO_URL = {};
   $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
