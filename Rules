@@ -23,9 +23,9 @@
 #  item.identifier.chop + '-thumbnail.png'
 #end
 
-#compile '*/test.txt' do
-  #filter :vanco_url
-#end
+compile '/test/' do
+  filter :vanco_url
+end
 
 passthrough '/static/*'
 
@@ -45,7 +45,6 @@ compile '*' do
     # don’t filter binary items
   else
     filter :erb
-    filter :vanco_url
     layout 'default'
   end
 end
