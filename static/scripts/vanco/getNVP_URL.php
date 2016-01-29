@@ -1,4 +1,4 @@
 <?php
   require_once('../config.inc');
-  echo VANCO_NVP;
+  echo VANCO_WSNVP;
 ?>
