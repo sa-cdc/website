@@ -160,10 +160,9 @@ $().ready(function() {
     data: {'url': '1'},
     dataType: 'jsonp',
     success: function(data){
-      VANCO_URL['nvp'] = data['nvp'];
-      VANCO_URL['xml'] = data['xml'];
-      VANCO_URL['dev'] = data['dev'];
-          alert(VANCO_URL['nvp']);
+      VANCO_URL['nvp'] = data['nvp']+'';
+      VANCO_URL['xml'] = data['xml']+'';
+      VANCO_URL['dev'] = data['dev']+'';
       $('.vanco_nvp').attr('action', data['nvp']);
       $('.vanco_xml').attr('action', data['xml']);
       if(VANCO_URL['dev']=="yes") {
@@ -176,7 +175,7 @@ $().ready(function() {
     }
   });
   
-
+          alert(VANCO_URL['nvp']);
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
