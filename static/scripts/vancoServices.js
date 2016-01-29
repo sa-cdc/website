@@ -153,19 +153,17 @@ function submitAmount(event, obj) {
 $().ready(function() {
 
   //Pull the proper Vanco URL (production/test)
-  var VANCO_URL = {};
+  var VANCO_URL;
   $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     data: {'url': '1'},
     dataType: 'jsonp',
     success: function(data){
-      VANCO_URL['nvp'] = JSON.parse(JSON.stringify(data['nvp']));
-      VANCO_URL['xml'] = data['xml']+'';
-      VANCO_URL['dev'] = data['dev']+'';
+      VANCO_URL = data;
       $('.vanco_nvp').attr('action', data['nvp']);
       $('.vanco_xml').attr('action', data['xml']);
-      if(VANCO_URL['dev']=="yes") {
+      if(data['dev']=="yes") {
         $("#dev-warning").removeClass('hidden');
       }
     },
