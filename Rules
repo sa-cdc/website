@@ -23,6 +23,10 @@
 #  item.identifier.chop + '-thumbnail.png'
 #end
 
+compile '/static/scripts/vancoservices.js' do
+  filter :vanco_url
+end
+
 passthrough '/static/*'
 
 compile '/stylesheet/' do
