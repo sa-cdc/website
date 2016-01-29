@@ -157,7 +157,7 @@ function setVancoURLs(data) {
   if(data['dev']=="yes") {
     $("#dev-warning").removeClass('hidden');
   }
-  VANCO_URL = data;
+  VANCO_URL = JSON.parse(JSON.stringify(data));
 }
 
 $().ready(function() {
