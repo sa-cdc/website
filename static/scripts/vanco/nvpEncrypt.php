@@ -46,6 +46,7 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
   $urls = array();
   $urls['nvp'] = VANCO_WSNVP;
   $urls['xml'] = VANCO_WS;
+  $urls['dev'] = VANCO_DEV_MODE;
   header('Content-Type: application/json');
   echo $_GET['callback'] . '('.json_encode($urls).')';
   
