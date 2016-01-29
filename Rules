@@ -27,10 +27,6 @@ compile '/test.txt' do
   filter :vanco_url
 end
 
-route '/test.txt' do
-  item.identifier
-end
-
 passthrough '/static/*'
 
 compile '/stylesheet/' do
