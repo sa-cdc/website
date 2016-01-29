@@ -150,14 +150,13 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
-var VANCO_URL;
 function setVancoURLs(data) {
   $('.vanco_nvp').attr('action', data['nvp']);
   $('.vanco_xml').attr('action', data['xml']);
   if(data['dev']=="yes") {
     $("#dev-warning").removeClass('hidden');
   }
-  VANCO_URL = JSON.parse(JSON.stringify(data));
+  window.VANCO_URL = JSON.parse(JSON.stringify(data));
 }
 
 $().ready(function() {
@@ -170,7 +169,6 @@ $().ready(function() {
     dataType: 'jsonp',
     success: function(data){
       setVancoURLs(data);
-      VANCO_URL = data;
     },
     error: function (jqXHR, textStatus, errorThrown, data) {
       //TODO do something useful
@@ -178,7 +176,7 @@ $().ready(function() {
     }
   });
   
-  alert(VANCO_URL['nvp']);
+  alert(window.VANCO_URL['nvp']);
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
