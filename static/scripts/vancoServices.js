@@ -150,18 +150,19 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
+var VANCO_URL;
 function setVancoURLs(data) {
   $('.vanco_nvp').attr('action', data['nvp']);
   $('.vanco_xml').attr('action', data['xml']);
   if(data['dev']=="yes") {
     $("#dev-warning").removeClass('hidden');
   }
+  VANCO_URL = data;
 }
 
 $().ready(function() {
 
   //Pull the proper Vanco URL (production/test)
-  var VANCO_URL;
   $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
@@ -176,6 +177,8 @@ $().ready(function() {
       alert('Local: '+errorThrown);
     }
   });
+  
+  alert(VANCO_URL['nvp']);
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
