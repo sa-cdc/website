@@ -175,7 +175,9 @@ $().ready(function() {
     }
   });
   
-          alert(VANCO_URL['nvp']);
+          alert('NVP: '+VANCO_URL['nvp']);
+          alert('XML: '+VANCO_URL['xml']);
+          alert('Dev: '+VANCO_URL['dev']);
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
