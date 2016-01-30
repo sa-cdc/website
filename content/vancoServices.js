@@ -150,33 +150,15 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
-var VANCO_URL;
-function setVancoURLs(data) {
-  $('.vanco_nvp').attr('action', data['nvp']);
-  $('.vanco_xml').attr('action', data['xml']);
-  if(data['dev']=="yes") {
-    $("#dev-warning").removeClass('hidden');
-  }
-  VANCO_URL = JSON.parse(JSON.stringify(data));
-}
+
 
 $().ready(function() {
-
-  //Pull the proper Vanco URL (production/test)
-  $.ajax({
-    type: 'GET',
-    url: '/static/scripts/vanco/nvpEncrypt.php',
-    data: {'url': '1'},
-    dataType: 'jsonp',
-    async: false,
-    success: function(data){
-      setVancoURLs(data);
-    },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      //TODO do something useful
-      alert('Local: '+errorThrown);
-    }
-  });
+  $('.vanco_nvp').attr('action', VANCO_WSNVP);
+  $('.vanco_xml').attr('action', VANCO_XML);
+  if(VANCO_DEV_MODE=="yes") {
+    $("#dev-warning").removeClass('hidden');
+  }
+}
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
@@ -188,7 +170,7 @@ $().ready(function() {
     encrypto(fakeData, function(data) {
       $.ajax({
         type: 'GET',
-        url: VANCO_URL['nvp'],
+        url: 'VANCO_WSNVP',
         timeout: 4000,
         crossDomain: true,
         data: data,
@@ -325,7 +307,7 @@ encrypto = function getNVP(a, b) {
 wsNVP = function callWSNVP(a, b) {
   $.ajax({
     type: 'GET',
-    url: VANCO_URL['nvp'],
+    url: VANCO_WSNVP,
     crossDomain: true,
     data: a,
     dataType: 'jsonp',
