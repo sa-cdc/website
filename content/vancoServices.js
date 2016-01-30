@@ -158,7 +158,6 @@ $().ready(function() {
   if(VANCO_DEV_MODE=="yes") {
     $("#dev-warning").removeClass('hidden');
   }
-}
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
