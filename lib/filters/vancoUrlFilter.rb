@@ -6,7 +6,7 @@ class VancoURLFilter < Nanoc::Filter
     branch = `basename $PWD`
     data = `cat ~/conf.inc.#{branch}`
     #GREP data for what we need...
-    m = /^VANCO_WSNVP$/.match(data)
+    m = /^.*VANCO_WSNVP.*$/.match(data)
     url = "\'" + m[0] + "\'"
     content.gsub('VANCO_WSNVP', url)
   end
