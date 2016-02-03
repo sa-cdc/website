@@ -3,7 +3,8 @@ class VancoURLFilter < Nanoc::Filter
 
   def run(content, params = {})
     #url = `php -f ./static/scripts/vanco/getNVP_URL.php`
-    url = `basename $PWD`
+    branch = `basename $PWD`
+    url = `echo $PWD`
     url = "\'" + url + "\'"
     content.gsub('VANCO_WSNVP', url)
   end
