@@ -10,8 +10,11 @@ class VancoURLFilter < Nanoc::Filter
     xml_url = /^.*VANCO_WS\',\s*\'(.*)\'.*$/.match(data)
     dev_mode = /^.*VANCO_DEV_MODE\',\s*\'(.*)\'.*$/.match(data)
     
-    content.gsub('VANCO_WSNVP', nvp_url[1])
-    content.gsub('VANCO_XML', xml_url[1])
-    content.gsub('VANCO_DEV_MODE', dev_mode[1])
+    if nvp_url != nil
+      content.gsub('VANCO_WSNVP', nvp_url[1])
+    if xml_url != nil
+      content.gsub('VANCO_XML', xml_url[1])
+    if dev_mode != nil
+      content.gsub('VANCO_DEV_MODE', dev_mode[1])
   end
 end
