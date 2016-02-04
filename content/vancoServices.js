@@ -153,9 +153,9 @@ function submitAmount(event, obj) {
 
 
 $().ready(function() {
-  $('.vanco_nvp').attr('action', VANCO_WSNVP);
-  $('.vanco_xml').attr('action', VANCO_XML);
-  if(VANCO_DEV_MODE=="yes") {
+  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
+  $('.vanco_xml').attr('action', 'VANCO_XML');
+  if('VANCO_DEV_MODE'=="yes") {
     $("#dev-warning").removeClass('hidden');
   }
 
@@ -306,7 +306,7 @@ encrypto = function getNVP(a, b) {
 wsNVP = function callWSNVP(a, b) {
   $.ajax({
     type: 'GET',
-    url: VANCO_WSNVP,
+    url: 'VANCO_WSNVP',
     crossDomain: true,
     data: a,
     dataType: 'jsonp',
