@@ -10,7 +10,7 @@ class VancoURLFilter < Nanoc::Filter
     xml_url = /^.*VANCO_WS\',\s*\'(.*)\'.*$/.match(data)
     dev_mode = /^.*VANCO_DEV_MODE\',\s*\'(.*)\'.*$/.match(data)
 
-  content.gsub('VANCO_WSNVP', nvp_url[1])
+  content = content.gsub('VANCO_WSNVP', nvp_url[1])
   content.gsub('VANCO_XML', xml_url[1])
 
   end
