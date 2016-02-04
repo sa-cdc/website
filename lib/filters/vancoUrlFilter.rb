@@ -12,9 +12,12 @@ class VancoURLFilter < Nanoc::Filter
     
     if nvp_url != nil
       content.gsub('VANCO_WSNVP', nvp_url[1])
+    end
     if xml_url != nil
       content.gsub('VANCO_XML', xml_url[1])
+    end
     if dev_mode != nil
       content.gsub('VANCO_DEV_MODE', dev_mode[1])
+    end
   end
 end
