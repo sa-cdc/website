@@ -179,8 +179,11 @@ footer {
 
 .carousel-caption a:visited { color: #C0C0C0; }
 
+h3.carousel {
+	padding-top: 100px;
+}
+
 .captionright {
-	top: 25%;
    right: 10px;
    left: auto;
    max-width: 150px;
@@ -190,7 +193,6 @@ footer {
 }
 
 .captionleft {
-	top: 25%;
   left: 10px;
   right: auto;
   max-width: 150px;
