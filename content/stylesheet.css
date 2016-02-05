@@ -534,14 +534,14 @@ h3.carousel {
 @media (min-width: 1200px) {
   .captionleft {
     max-width: 450px;
-    top: 1000px;
+    top: 25%;
     bottom: 300px;
     right: 650px;
     left: auto;
   }
   .captionright {
     max-width: 450px;
-    top: 1000px;
+    top: 25%;
     bottom: 300px;
     right: auto;
     left: 650px;
