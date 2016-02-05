@@ -173,15 +173,15 @@ footer {
     background-color: #0074B2;
 }
 
+.carousel-caption {
+	padding-top: 1000px;
+}
+
 .carousel-caption a:link { color: #FFFFFF; }
 
 .carousel-caption a:active { color: #5AC1FF; }
 
 .carousel-caption a:visited { color: #C0C0C0; }
-
-h3.carousel {
-	padding-top: 1000px;
-}
 
 .captionright {
    right: 10px;
