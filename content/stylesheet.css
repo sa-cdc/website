@@ -180,6 +180,7 @@ footer {
 .carousel-caption a:visited { color: #C0C0C0; }
 
 .captionright {
+   top: 100px;
    right: 10px;
    left: auto;
    max-width: 150px;
@@ -189,6 +190,7 @@ footer {
 }
 
 .captionleft {
+	top: 100px;
   left: 10px;
   right: auto;
   max-width: 150px;
