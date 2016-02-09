@@ -173,10 +173,6 @@ footer {
     background-color: #0074B2;
 }
 
-.carousel-caption {
-	padding-top: 1000px;
-}
-
 .carousel-caption a:link { color: #FFFFFF; }
 
 .carousel-caption a:active { color: #5AC1FF; }
@@ -535,16 +531,14 @@ h3.carousel {
   .captionleft {
     max-width: 450px;
     top: auto;
-    border-top: 1000px;
-    bottom: 300px;
+    bottom: 100px;
     right: 650px;
     left: auto;
   }
   .captionright {
     max-width: 450px;
     top: auto;
-    border-top: 1000px;
-    bottom: 300px;
+    bottom: 100px;
     right: auto;
     left: 650px;
   }
