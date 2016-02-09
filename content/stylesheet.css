@@ -450,14 +450,14 @@ h3.carousel {
   .captionleft {
     max-width: 250px;
     top: auto;
-    bottom: 125px;
+    bottom: 10px;
     right: 400px;
     left: auto;
   }
   .captionright {
     max-width: 250px;
     top: auto;
-    bottom: 125px;
+    bottom: 10px;
     right: auto;
     left: 400px;
   }
@@ -506,14 +506,14 @@ h3.carousel {
   .captionleft {
     max-width: 450px;
     top: auto;
-    bottom: 50px;
+    bottom: 10px;
     right: 550px;
     left: 25px;
   }
   .captionright {
     max-width: 450px;
     top: auto;
-    bottom: 50px;
+    bottom: 10px;
     right: 25px;
     left: 550px;
   }
