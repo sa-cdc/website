@@ -184,7 +184,7 @@ $().ready(function() {
 var checkingVancoService = encrypto(fakeData, function(data) {
   $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
 };
-
+alert(checkingVancoService.status());
 checkingVancoService.then(function(){
         $('#donationApp').removeClass("hidden");
       },
