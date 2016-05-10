@@ -213,7 +213,7 @@ wsNVP = function callWSNVP(a, b) {
                     alert("test");
 var checkingVancoService = getNVP(fakeData, function(data) {
   $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
-)};
+});
 alert('past');
 /*
 alert(checkingVancoService.status());
