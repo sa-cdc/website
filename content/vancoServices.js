@@ -168,7 +168,6 @@ function notifyAdmin() {
 
 
 $().ready(function() {
-  alert('Test');
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
   $('.vanco_xml').attr('action', 'VANCO_XML');
   if('DEV_MODE'=="yes") {
@@ -178,11 +177,40 @@ $().ready(function() {
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
+    
+    encrypto = function getNVP(a, b) {
+  return $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/nvpEncrypt.php',
+    crossDomain: false,
+    data: a,
+    dataType: 'jsonp',
+    success: function(data){ b(data); },
+    error: function (jqXHR, textStatus, errorThrown, data) {
+      //TODO do something useful
+      alert('Local: '+errorThrown);
+    }
+  });
+}
+
+wsNVP = function callWSNVP(a, b) {
+  $.ajax({
+    type: 'GET',
+    url: 'VANCO_WSNVP',
+    crossDomain: true,
+    data: a,
+    dataType: 'jsonp',
+    success: function(data){ b(data); },
+    error: function (jqXHR, textStatus, errorThrown, data) {
+      alert('Vanco: '+errorThrown);
+    }
+  });
+}
+    
     var fakeData = {'requesttype': 'efttransparentredirect',
                     'isdebitcardonly': 'No',
                     'amount': '0'};
-
-/*var checkingVancoService = encrypto(fakeData, function(data) {
+var checkingVancoService = encrypto(fakeData, function(data) {
   $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
 };
 
@@ -196,7 +224,7 @@ checkingVancoService.then(function(){
       function() {
         $("#loading_init").addClass("hidden");
       }
-});*/
+});
 
     /*encrypto(fakeData, function(data) {
       $.ajax({
@@ -319,35 +347,6 @@ $( "input[name=accounttype]" ).change(function() {
       $( "#transaction-CC-block" ).css("display", "none");
   }
 });
-
-encrypto = function getNVP(a, b) {
-  return $.ajax({
-    type: 'GET',
-    url: '/static/scripts/vanco/nvpEncrypt.php',
-    crossDomain: false,
-    data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      //TODO do something useful
-      alert('Local: '+errorThrown);
-    }
-  });
-}
-
-wsNVP = function callWSNVP(a, b) {
-  $.ajax({
-    type: 'GET',
-    url: 'VANCO_WSNVP',
-    crossDomain: true,
-    data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      alert('Vanco: '+errorThrown);
-    }
-  });
-}
 
 function submitPayment(event, me) {
   event.preventDefault(); //End the form submission event now!
