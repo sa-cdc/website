@@ -178,11 +178,11 @@ $().ready(function() {
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
-    /*var fakeData = {'requesttype': 'efttransparentredirect',
+    var fakeData = {'requesttype': 'efttransparentredirect',
                     'isdebitcardonly': 'No',
                     'amount': '0'};
 
-var checkingVancoService = encrypto(fakeData, function(data) {
+/*var checkingVancoService = encrypto(fakeData, function(data) {
   $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
 };
 
