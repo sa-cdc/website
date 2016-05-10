@@ -225,7 +225,7 @@ checkingVancoService.then(function(){
       function() {
         $("#loading_init").addClass("hidden");
       }
-});*/
+);
 
     /*encrypto(fakeData, function(data) {
       $.ajax({
