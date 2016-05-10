@@ -181,7 +181,22 @@ $().ready(function() {
                     'isdebitcardonly': 'No',
                     'amount': '0'};
 
-    encrypto(fakeData, function(data) {
+var checkingVancoService = encrypto(fakeData, function(data) {
+  $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
+};
+    
+checkingService.then(function(){
+        $('#donationApp').removeClass("hidden");
+      },
+      function () {
+        $('#failedToLoad').removeClass("hidden");
+      },
+      function() {
+        $("#loading_init").addClass("hidden");
+      }
+});
+
+    /*encrypto(fakeData, function(data) {
       $.ajax({
         type: 'GET',
         url: 'VANCO_WSNVP',
@@ -198,7 +213,7 @@ $().ready(function() {
           $('#failedToLoad').removeClass("hidden");
         }
       });
-    });
+    });*/
 
 
 
@@ -331,20 +346,6 @@ wsNVP = function callWSNVP(a, b) {
     }
   });
 }
-
-var checkingVancoService = $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, dataType: 'jsonp'});
-    
-checkingService.then(function(){
-        $('#donationApp').removeClass("hidden");
-      },
-      function () {
-        $('#failedToLoad').removeClass("hidden");
-      },
-      function() {
-        $("#loading_init").addClass("hidden");
-      }
-});
-  
 
 function submitPayment(event, me) {
   event.preventDefault(); //End the form submission event now!
