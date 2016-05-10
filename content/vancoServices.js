@@ -319,7 +319,7 @@ $( "input[name=accounttype]" ).change(function() {
 });
 
 encrypto = function getNVP(a, b) {
-  $.ajax({
+  return $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     crossDomain: false,
