@@ -178,8 +178,8 @@ $().ready(function() {
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
     
-    encrypto = function getNVP(a, b) {
-  return $.ajax({
+encrypto = function getNVP(a, b) {
+  $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     crossDomain: false,
@@ -207,13 +207,13 @@ wsNVP = function callWSNVP(a, b) {
   });
 }
     
-    var fakeData = {'requesttype': 'efttransparentredirect',
-                    'isdebitcardonly': 'No',
-                    'amount': '0'};
-
-var checkingVancoService = encrypto(fakeData, function(data) {
-  $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
-});
+var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+var signingFakeData = encrypto(fakeData, function(data) {});
+var checkingVancoService = signingFakeData.pipe(
+  function(){
+    return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
+  }
+);
 
 checkingVancoService.resolve;
 checkingVancoService.then(function(){
