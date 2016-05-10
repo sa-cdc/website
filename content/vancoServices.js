@@ -178,7 +178,7 @@ $().ready(function() {
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
-    var fakeData = {'requesttype': 'efttransparentredirect',
+    /*var fakeData = {'requesttype': 'efttransparentredirect',
                     'isdebitcardonly': 'No',
                     'amount': '0'};
 
@@ -196,7 +196,7 @@ checkingVancoService.then(function(){
       function() {
         $("#loading_init").addClass("hidden");
       }
-});
+});*/
 
     /*encrypto(fakeData, function(data) {
       $.ajax({
