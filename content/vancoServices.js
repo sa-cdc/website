@@ -150,6 +150,21 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
+function notifyAdmin() {
+  $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/email.php',
+    crossDomain: false,
+    data: a,
+    dataType: 'jsonp',
+    success: function(data){ b(data); },
+    error: function (jqXHR, textStatus, errorThrown, data) {
+      //TODO do something useful
+      alert('Local: '+errorThrown);
+    }
+  });
+}
+
 
 
 $().ready(function() {
@@ -292,7 +307,7 @@ encrypto = function getNVP(a, b) {
   $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
-    crossDomain: true,
+    crossDomain: false,
     data: a,
     dataType: 'jsonp',
     success: function(data){ b(data); },
@@ -316,6 +331,20 @@ wsNVP = function callWSNVP(a, b) {
     }
   });
 }
+
+var checkingVancoService = $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, dataType: 'jsonp'});
+    
+checkingService.then(function(){
+        $('#donationApp').removeClass("hidden");
+      },
+      function () {
+        $('#failedToLoad').removeClass("hidden");
+      },
+      function() {
+        $("#loading_init").addClass("hidden");
+      }
+});
+  
 
 function submitPayment(event, me) {
   event.preventDefault(); //End the form submission event now!
