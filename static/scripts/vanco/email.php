@@ -14,7 +14,9 @@ if(!in_array($ref,$files)) {
   //TODO: Send exception json
   header('Content-Type: application/json'); 
   $array = ["status" => "invalid data"]; 
-  echo $_GET['callback'] . '('.json_encode($array).')'; 
+  echo $_GET['callback'] . '('.json_encode($array).')';
+  
+  unlink("../../../../$ref");
   return;
 }
 
