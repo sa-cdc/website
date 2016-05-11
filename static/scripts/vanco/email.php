@@ -8,5 +8,5 @@ $message = "$avail";
 $message = wordwrap($message, 70, "\r\n");
 
 // Send
-//mail('mfsairpwr@gmail.com', 'My Subject', $message);
+mail('mfsairpwr@gmail.com', 'My Subject', $message);
 ?>
