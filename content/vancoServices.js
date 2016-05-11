@@ -223,8 +223,10 @@ var checkingVancoService = signingFakeData.then(function(data){
     return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
   }
 );
-
-//checkingVancoService.resolve;
+checkingVancoService.done(function() {
+        alert('IN done():'+checkingVancoService.state());
+        $("#loading_init").addClass("hidden");
+      });
 checkingVancoService.then(function(){
         $('#donationApp').removeClass("hidden");
       },
