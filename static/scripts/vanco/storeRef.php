@@ -13,7 +13,7 @@ if($ref <= 0) {
   echo $_GET['callback'] . '('.json_encode($array).')';
 }
 
-$handle = fopen("$ref", "w");
+$handle = fopen("../../../../$ref", "w");
 fclose($handle);
 $array = ["status" => "invalid data"];
 header('Content-Type: application/json');
