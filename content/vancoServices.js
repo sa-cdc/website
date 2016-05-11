@@ -367,7 +367,7 @@ function submitPayment(event, me) {
     
     //Send email
   };//End submitPayment()
-}// End $
+
 
 /* EXAMPLES ...
  *
