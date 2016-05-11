@@ -232,13 +232,14 @@ checkingVancoService.then(function(){
         $('#failedToLoad').removeClass("hidden");
       },
       function() {
+        alert('IN then-always():'+checkingVancoService.state());
         $("#loading_init").addClass("hidden");
       }
 );
-alert(checkingVancoService.state());
+
 checkingVancoService.resolve;
-alert(checkingVancoService.state());
-checkingVancoService.then(function(){
+checkingVancoService.always(function(){
+  alert('IN always():'+checkingVancoService.state());
   $("#loading_init").addClass("hidden");
 });
 
