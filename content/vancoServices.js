@@ -169,11 +169,9 @@ function signNVP(insecureData) {
   });
 }
 
-
-
 function sendWSNVP(secureData, timeout) {
-  timeout = typeof timeout !== 'undefined' ? timeout : 4000;
-  $.ajax({
+  timeout = typeof timeout !== 'undefined' ? timeout : 0;
+  return $.ajax({
     type: 'GET',
     url: 'VANCO_WSNVP',
     crossDomain: true,
