@@ -187,89 +187,6 @@ function sendWSNVP(secureData) {
   });
 }
 
-
-$().ready(function() {
-  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
-  $('.vanco_xml').attr('action', 'VANCO_XML');
-  if('DEV_MODE'=="yes") {
-    $("#dev-warning").removeClass('hidden');
-  }
-
-  //AJAX request to test Vanco connection
-  //$("element[id$='txtTitle']")
-    $("div[id$='_init']").css("display", "block");
-    
-  var checkingVanocReachability = testWSNVP();
-  checkingVancoReachability.always(function(){
-    $("#loading_init").addClass("hidden");
-  });
-  
-  checkingVancoReachability.then(
-    function(){
-      $('#donationApp').removeClass("hidden");
-    },
-    function() {
-      $('#failedToLoad').removeClass("hidden");
-    }
-  );
-
-  jQuery.validator.setDefaults({
-    highlight: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-      $(glyph_e).removeClass('glyphicon-ok').addClass('glyphicon-remove');
-    },
-    unhighlight: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    },
-    success: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    },
-    errorContainer: "#errors",
-    errorLabelContainer: "#errors"
-  });
-
-  $("input").not("#billing-email").focusout(function() {
-      var cp_value= ucwords($(this).val(),true);
-      $(this).val(cp_value);
-  });
-
-  $("#amount-form").validate();
-  $("#who-form").validate();
-  $("#CC-form").validate();
-  $("#C-form").validate();
-  $("#S-form").validate();
-
-   //Amount Form
-   $("#enteredAmount").rules("add", {
-     minlength: 1,
-     maxlength: 5
-   });
-   //Billing Information (Who Block)
-   $("#billing-first").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-last").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-city").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-email").rules("add", {
-     required: true,
-     email: true
-   });
-   $("#billing-phone").rules("add", {
-     phoneUS: true
-   });
-
 function submitWho(event) {
     event.preventDefault(); //End the form submission event now!
 
@@ -465,3 +382,85 @@ function submitPayment(event, me) {
 */
 
 
+$().ready(function() {
+  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
+  $('.vanco_xml').attr('action', 'VANCO_XML');
+  if('DEV_MODE'=="yes") {
+    $("#dev-warning").removeClass('hidden');
+  }
+
+  //AJAX request to test Vanco connection
+  //$("element[id$='txtTitle']")
+    $("div[id$='_init']").css("display", "block");
+    
+  var checkingVanocReachability = testWSNVP();
+  checkingVancoReachability.always(function(){
+    $("#loading_init").addClass("hidden");
+  });
+  
+  checkingVancoReachability.then(
+    function(){
+      $('#donationApp').removeClass("hidden");
+    },
+    function() {
+      $('#failedToLoad').removeClass("hidden");
+    }
+  );
+
+  jQuery.validator.setDefaults({
+    highlight: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+      $(glyph_e).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+    },
+    unhighlight: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+    },
+    success: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+    },
+    errorContainer: "#errors",
+    errorLabelContainer: "#errors"
+  });
+
+  $("input").not("#billing-email").focusout(function() {
+      var cp_value= ucwords($(this).val(),true);
+      $(this).val(cp_value);
+  });
+
+  $("#amount-form").validate();
+  $("#who-form").validate();
+  $("#CC-form").validate();
+  $("#C-form").validate();
+  $("#S-form").validate();
+
+   //Amount Form
+   $("#enteredAmount").rules("add", {
+     minlength: 1,
+     maxlength: 5
+   });
+   //Billing Information (Who Block)
+   $("#billing-first").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-last").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-city").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-email").rules("add", {
+     required: true,
+     email: true
+   });
+   $("#billing-phone").rules("add", {
+     phoneUS: true
+   });
+});
