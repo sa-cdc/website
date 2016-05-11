@@ -165,16 +165,33 @@ function notifyAdmin() {
   });
 }
 
-function signNVP(a) {
+function testWSNVP() {
+  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
+  var checkingVancoService = signingFakeData.then(function(data){
+      return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
+    }
+  );
+}
+
+function signNVP(insecureData) {
   return $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
-    crossDomain: false,
-    data: a,
+    data: insecureData,
     dataType: 'jsonp'
   });
 }
 
+function sendWSNVP(secureData) {
+  $.ajax({
+    type: 'GET',
+    url: 'VANCO_WSNVP',
+    crossDomain: true,
+    data: secureData,
+    dataType: 'jsonp'
+  });
+}
 
 
 $().ready(function() {
@@ -188,55 +205,17 @@ $().ready(function() {
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
     
-encrypto = function getNVP(a, b) {
-  $.ajax({
-    type: 'GET',
-    url: '/static/scripts/vanco/nvpEncrypt.php',
-    crossDomain: false,
-    data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      //TODO do something useful
-      alert('Local: '+errorThrown);
-    }
+  var checkingVanocReachability = testWSNVP();
+  checkingVancoReachability.always(function(){
+    $("#loading_init").addClass("hidden");
   });
-}
-
-wsNVP = function callWSNVP(a, b) {
-  $.ajax({
-    type: 'GET',
-    url: 'VANCO_WSNVP',
-    crossDomain: true,
-    data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      alert('Vanco: '+errorThrown);
+  checkingVancoReachability.then(function(){
+      $('#donationApp').removeClass("hidden");
+    },
+    function () {
+      $('#failedToLoad').removeClass("hidden");
     }
-  });
-}
-    
-var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-var signingFakeData = signNVP(fakeData);
-var checkingVancoService = signingFakeData.then(function(data){
-    return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
-  }
-);
-
-checkingVancoService.always(function(){
-  $("#loading_init").addClass("hidden");
-});
-checkingVancoService.then(function(){
-        $('#donationApp').removeClass("hidden");
-      },
-      function () {
-        $('#failedToLoad').removeClass("hidden");
-      }
-);
-
-
-
+  );
 
   jQuery.validator.setDefaults({
     highlight: function (element) {
@@ -373,7 +352,9 @@ function submitPayment(event, me) {
   toggleDisplay($('#transaction-loading'));
 
   //Adds nvp to the 'data' sent to the anonymous function
-  encrypto(paymentData, function(data) {
+  var signingPaymentData = signNVP(paymentData);
+  
+  var sendingTransaction = signingPaymentData.then(function(data) {
     //Data to be handed over to VANCO only
     data['accountnumber'] = transaction['accountnumber'];
     data['accounttype'] = transaction['accounttype'];
@@ -407,7 +388,10 @@ function submitPayment(event, me) {
     data['startdate'] = '0000-00-00';
     data['transactiontypecode'] = 'WEB';
 
-    wsNVP(data, function(result) {
+    return sendWSNVP(data);
+  });
+  
+  sendingTransaction.then(function(result) {
       /*
       {
         "ccavsresp":"Y",
@@ -468,9 +452,10 @@ function submitPayment(event, me) {
         });
       }
     });
-  });
-
-}
+    
+    //sendingTransaction.then(/*Send email alert*/);
+  });//End submitPayment()
+}// End $
 
 /* EXAMPLES ...
  *
