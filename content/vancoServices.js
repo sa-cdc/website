@@ -173,16 +173,17 @@ function testWSNVP() {
   var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
   var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
   var sendingTestData = signingFakeData.then(function(data){
-      return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
+      return sendWSNVP(data, 4000);
   });
   return sendingTestData;
 }
 
-function sendWSNVP(secureData) {
+function sendWSNVP(secureData, timeout = 0) {
   $.ajax({
     type: 'GET',
     url: 'VANCO_WSNVP',
     crossDomain: true,
+    timeout: timeout,
     data: secureData,
     dataType: 'jsonp'
   });
