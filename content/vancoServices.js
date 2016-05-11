@@ -165,6 +165,16 @@ function notifyAdmin() {
   });
 }
 
+function signNVP(a) {
+  return $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/nvpEncrypt.php',
+    crossDomain: false,
+    data: a,
+    dataType: 'jsonp'
+  });
+}
+
 
 
 $().ready(function() {
@@ -193,16 +203,6 @@ encrypto = function getNVP(a, b) {
   });
 }
 
-signingData = function signNVP(a) {
-  return $.ajax({
-    type: 'GET',
-    url: '/static/scripts/vanco/nvpEncrypt.php',
-    crossDomain: false,
-    data: a,
-    dataType: 'jsonp'
-  });
-}
-
 wsNVP = function callWSNVP(a, b) {
   $.ajax({
     type: 'GET',
@@ -218,32 +218,25 @@ wsNVP = function callWSNVP(a, b) {
 }
     
 var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-var signingFakeData = signingData(fakeData);
+var signingFakeData = signNVP(fakeData);
 var checkingVancoService = signingFakeData.then(function(data){
     return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
   }
 );
-checkingVancoService.done(function() {
-        alert('IN done():'+checkingVancoService.state());
-        $("#loading_init").addClass("hidden");
-      });
+
+checkingVancoService.always(function(){
+  $("#loading_init").addClass("hidden");
+});
 checkingVancoService.then(function(){
         $('#donationApp').removeClass("hidden");
       },
       function () {
         $('#failedToLoad').removeClass("hidden");
-      },
-      function() {
-        alert('IN then-always():'+checkingVancoService.state());
-        $("#loading_init").addClass("hidden");
       }
 );
 
 
-checkingVancoService.always(function(){
-  alert('IN always():'+checkingVancoService.state());
-  $("#loading_init").addClass("hidden");
-});
+
 
   jQuery.validator.setDefaults({
     highlight: function (element) {
