@@ -156,12 +156,7 @@ function notifyAdmin() {
     url: '/static/scripts/vanco/email.php',
     crossDomain: false,
     data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      //TODO do something useful
-      alert('Local: '+errorThrown);
-    }
+    dataType: 'jsonp'
   });
 }
 
@@ -170,8 +165,7 @@ function testWSNVP() {
   var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
   var checkingVancoService = signingFakeData.then(function(data){
       return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
-    }
-  );
+  });
 }
 
 function signNVP(insecureData) {
@@ -209,10 +203,12 @@ $().ready(function() {
   checkingVancoReachability.always(function(){
     $("#loading_init").addClass("hidden");
   });
-  checkingVancoReachability.then(function(){
+  
+  checkingVancoReachability.then(
+    function(){
       $('#donationApp').removeClass("hidden");
     },
-    function () {
+    function() {
       $('#failedToLoad').removeClass("hidden");
     }
   );
@@ -238,8 +234,8 @@ $().ready(function() {
   });
 
   $("input").not("#billing-email").focusout(function() {
-        var cp_value= ucwords($(this).val(),true) ;
-            $(this).val(cp_value );
+      var cp_value= ucwords($(this).val(),true);
+      $(this).val(cp_value);
   });
 
   $("#amount-form").validate();
@@ -391,68 +387,68 @@ function submitPayment(event, me) {
   });
   
   sendingTransaction.then(function(result) {
-      /*
-      {
-        "ccavsresp":"Y",
-        "paymentmethodref":15751344,
-        "cccvvresp":"M",
-        "startdate":"2014-11-22",
-        "clientid":"ES15816",
-        "isdebitcardonly":"No",
-        "ccauthcode":"60439C",
-        "cardtype":"debit",
-        "requestid":"7056993710100",
-        "transactionref":16121072,
-        "last4":"1111",
-        "visamctype":"visa",
-        "customerref":14940770,
-        "customerid":"14940770"
-      }
-      */
-      // This is where we trigger the writing of the receipt!
-      $("#transaction-loading").css('block','none');
-      $("#status-bar").addClass("hidden");
-      //console.log('confirm: '+JSON.stringify(result));
-      if(result['transactionref']) {
-        var id = transaction['fundid'];
-        funds = {
-          "0001" : "General Operations",
-          "0002" : "Direct Patient Care",
-          "0003" : "Endowment Fund" };
-        if(id == '0001' || id == '0002' || id == '0003') {
-          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
-          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
-        } else {
-          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
-          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
-        }
-
-        $('.amount').text(transaction['amount']);
-
-        toggleConfirm();
-        var proc = runSubset(P, transaction['amount']);
-        for(var i=0; i<proc.length; i++ ) {
-          $('#purchased').append('<p><span class="badge">'+proc[i]['label']+' ('+proc[i]['freq']+')</span></p>');
-        }
-        $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
-        $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
-        if(result['cardtype']) {
-          $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
-        }
-        $('#confirm').append('<p>Account Last Four: '+result['last4']+'</p>');
+    /*
+    {
+      "ccavsresp":"Y",
+      "paymentmethodref":15751344,
+      "cccvvresp":"M",
+      "startdate":"2014-11-22",
+      "clientid":"ES15816",
+      "isdebitcardonly":"No",
+      "ccauthcode":"60439C",
+      "cardtype":"debit",
+      "requestid":"7056993710100",
+      "transactionref":16121072,
+      "last4":"1111",
+      "visamctype":"visa",
+      "customerref":14940770,
+      "customerid":"14940770"
+    }
+    */
+    // This is where we trigger the writing of the receipt!
+    $("#transaction-loading").css('block','none');
+    $("#status-bar").addClass("hidden");
+    //console.log('confirm: '+JSON.stringify(result));
+    if(result['transactionref']) {
+      var id = transaction['fundid'];
+      funds = {
+        "0001" : "General Operations",
+        "0002" : "Direct Patient Care",
+        "0003" : "Endowment Fund"
+      };
+      if(id == '0001' || id == '0002' || id == '0003') {
+        $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
+        $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
+      } else {
+        $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
+        $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
       }
 
-      if(result['errorlist']) {
-        toggleError();
-        errors = result['errorlist'].split(',');
-        //Assumes errorCodes.json is loaded...
-        errors.forEach(function(e) {
-          $('#error').append('<li>' + errorCodes[e] + '</li>\n');
-        });
+      $('.amount').text(transaction['amount']);
+      toggleConfirm();
+      var proc = runSubset(P, transaction['amount']);
+      for(var i=0; i<proc.length; i++ ) {
+        $('#purchased').append('<p><span class="badge">'+proc[i]['label']+' ('+proc[i]['freq']+')</span></p>');
       }
-    });
+      $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
+      $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
+      if(result['cardtype']) {
+        $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
+      }
+      $('#confirm').append('<p>Account Last Four: '+result['last4']+'</p>');
+    }
+
+    if(result['errorlist']) {
+      toggleError();
+      errors = result['errorlist'].split(',');
+      //Assumes errorCodes.json is loaded...
+      errors.forEach(function(e) {
+        $('#error').append('<li>' + errorCodes[e] + '</li>\n');
+      });
+    }
+  });
     
-    //sendingTransaction.then(/*Send email alert*/);
+    //Send email
   };//End submitPayment()
 }// End $
 
