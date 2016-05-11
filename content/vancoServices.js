@@ -150,13 +150,22 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
-//TODO Code PHP logic (use transaction ref as key stored to filesystem, php will then delete the key when email is sent)
-function notifyAdmin() {
+function storeRef(ref) {
+  $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/storeRef.php',
+    crossDomain: false,
+    data: {"ref":ref},
+    dataType: 'jsonp'
+  });
+}
+
+function notifyAdmin(data) {
   $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/email.php',
     crossDomain: false,
-    data: a,
+    data: data,
     dataType: 'jsonp'
   });
 }
@@ -369,7 +378,17 @@ function submitPayment(event, me) {
     }
   });
     
-    //TODO: Register Send email function
+  sendingTransaction.then(function(result){
+    var storingRef = storeRef(result['transactionref']);
+    storingRef.then(function(){
+      adminData['name'] = data['customername'];
+      adminData['amount'] = transaction['amount'];
+      adminData['phone'] = data['customerphone'];
+      adminData['email'] = data['customeremail'];
+      adminData['ref'] = result['transactionref'];
+      notifyAdmin(adminData);
+    });
+  });
   };//End submitPayment()
 
 
