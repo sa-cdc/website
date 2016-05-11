@@ -169,14 +169,7 @@ function signNVP(insecureData) {
   });
 }
 
-function testWSNVP() {
-  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
-  var sendingTestData = signingFakeData.then(function(data){
-      return sendWSNVP(data, 4000);
-  });
-  return sendingTestData;
-}
+
 
 function sendWSNVP(secureData, timeout = 0) {
   $.ajax({
@@ -187,6 +180,15 @@ function sendWSNVP(secureData, timeout = 0) {
     data: secureData,
     dataType: 'jsonp'
   });
+}
+
+function testWSNVP() {
+  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
+  var sendingTestData = signingFakeData.then(function(data){
+      return sendWSNVP(data, 4000);
+  });
+  return sendingTestData;
 }
 
 function submitWho(event) {
