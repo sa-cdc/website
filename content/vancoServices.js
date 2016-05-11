@@ -160,20 +160,20 @@ function notifyAdmin() {
   });
 }
 
-function testWSNVP() {
-  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
-  return signingFakeData.then(function(data){
-      return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
-  });
-}
-
 function signNVP(insecureData) {
   return $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     data: insecureData,
     dataType: 'jsonp'
+  });
+}
+
+function testWSNVP() {
+  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
+  return signingFakeData.then(function(data){
+      return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
   });
 }
 
