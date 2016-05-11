@@ -273,7 +273,6 @@ $().ready(function() {
    $("#billing-phone").rules("add", {
      phoneUS: true
    });
-});
 
 function submitWho(event) {
     event.preventDefault(); //End the form submission event now!
