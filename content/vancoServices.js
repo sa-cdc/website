@@ -172,9 +172,10 @@ function signNVP(insecureData) {
 function testWSNVP() {
   var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
   var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
-  return signingFakeData.then(function(data){
+  var sendingTestData = signingFakeData.then(function(data){
       return $.ajax({ type: 'GET', url: 'VANCO_WSNVP', timeout: 4000, crossDomain: true, data: data, dataType: 'jsonp'});
   });
+  return sendingTestData;
 }
 
 function sendWSNVP(secureData) {
@@ -393,7 +394,7 @@ $().ready(function() {
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
     
-  var checkingVanocReachability = testWSNVP();
+  var checkingVancoReachability = testWSNVP();
   checkingVancoReachability.always(function(){
     $("#loading_init").addClass("hidden");
   });
