@@ -1,6 +1,6 @@
 <?php
 // The message
-$files = scandir('./');
+$files = scandir('../../../');
 $avail = var_export($files, true);
 $message = "$avail";
 
