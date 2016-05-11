@@ -454,7 +454,7 @@ function submitPayment(event, me) {
     });
     
     //sendingTransaction.then(/*Send email alert*/);
-  });//End submitPayment()
+  };//End submitPayment()
 }// End $
 
 /* EXAMPLES ...
