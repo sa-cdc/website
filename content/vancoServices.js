@@ -150,6 +150,7 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
+//TODO Code PHP logic (use transaction ref as key stored to filesystem, php will then delete the key when email is sent)
 function notifyAdmin() {
   $.ajax({
     type: 'GET',
@@ -368,7 +369,7 @@ function submitPayment(event, me) {
     }
   });
     
-    //Send email
+    //TODO: Register Send email function
   };//End submitPayment()
 
 
@@ -396,12 +397,11 @@ $().ready(function() {
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
     
-  var checkingVancoReachability = testWSNVP();
-  checkingVancoReachability.always(function(){
+  var checkingVanco = testWSNVP();
+  checkingVanco.always(function(){
     $("#loading_init").addClass("hidden");
   });
-  
-  checkingVancoReachability.then(
+  checkingVanco.then(
     function(){
       $('#donationApp').removeClass("hidden");
     },
