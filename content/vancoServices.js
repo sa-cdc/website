@@ -238,27 +238,9 @@ checkingVancoService.then(function(){
 alert(checkingVancoService.state());
 checkingVancoService.resolve;
 alert(checkingVancoService.state());
-
-    /*encrypto(fakeData, function(data) {
-      $.ajax({
-        type: 'GET',
-        url: 'VANCO_WSNVP',
-        timeout: 4000,
-        crossDomain: true,
-        data: data,
-        dataType: 'jsonp',
-        success: function(data){
-          $('#donationApp').removeClass("hidden");
-          $("#loading_init").addClass("hidden");
-        },
-        error: function (jqXHR, textStatus, errorThrown, data) {
-          $("#loading_init").addClass("hidden");
-          $('#failedToLoad').removeClass("hidden");
-        }
-      });
-    });*/
-
-
+checkingVancoService.then(function(){
+  $("#loading_init").addClass("hidden");
+});
 
   jQuery.validator.setDefaults({
     highlight: function (element) {
