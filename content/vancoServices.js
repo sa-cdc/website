@@ -171,7 +171,7 @@ function signNVP(insecureData) {
 
 
 
-function sendWSNVP(secureData, timeout = 0) {
+function sendWSNVP(secureData, timeout) {
   $.ajax({
     type: 'GET',
     url: 'VANCO_WSNVP',
