@@ -224,7 +224,7 @@ var checkingVancoService = signingFakeData.then(function(data){
   }
 );
 
-checkingVancoService.resolve;
+//checkingVancoService.resolve;
 checkingVancoService.then(function(){
         $('#donationApp').removeClass("hidden");
       },
