@@ -15,8 +15,6 @@ if(!in_array($ref,$files)) {
   header('Content-Type: application/json'); 
   $array = ["status" => "invalid data"]; 
   echo $_GET['callback'] . '('.json_encode($array).')';
-  
-  unlink("../../../../$ref");
   return;
 }
 
@@ -29,5 +27,5 @@ mail('mfsairpwr@gmail.com', 'Donation', $message);
 header('Content-Type: application/json'); 
 $array = ["status" => "success"]; 
 echo $_GET['callback'] . '('.json_encode($array).')'; 
-  
+unlink("../../../../$ref");
 ?>
