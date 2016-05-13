@@ -1,9 +1,4 @@
-//Testing: https://stripe.com/docs/testing
-//http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
-//http://www.getcreditcardnumbers.com/
-//http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
-var P = {Dentures: 50, Pulling: 100, "Root Canal": 500, GoldTooth: 20, Cavity: 30, Nicegrill: 1000, Cleaning: 5};
 
 function ucwords(str,force){
   str=force ? str.toLowerCase() : str;
@@ -317,24 +312,6 @@ function submitPayment(event, me) {
   });
   
   sendingTransaction.then(function(result) {
-    /*
-    {
-      "ccavsresp":"Y",
-      "paymentmethodref":15751344,
-      "cccvvresp":"M",
-      "startdate":"2014-11-22",
-      "clientid":"ES15816",
-      "isdebitcardonly":"No",
-      "ccauthcode":"60439C",
-      "cardtype":"debit",
-      "requestid":"7056993710100",
-      "transactionref":16121072,
-      "last4":"1111",
-      "visamctype":"visa",
-      "customerref":14940770,
-      "customerid":"14940770"
-    }
-    */
     // This is where we trigger the writing of the receipt!
     $("#transaction-loading").css('block','none');
     $("#status-bar").addClass("hidden");
@@ -390,20 +367,6 @@ function submitPayment(event, me) {
     });
   });
   };//End submitPayment()
-
-
-/* EXAMPLES ...
- *
- * confirm: //Credit
- * {"requestid":"3962297830100","&ccavsresp":"Y","paymentmethodref":"15750739","cccvvresp":"M","ccauthcode":"60439C","startdate":"2014-10-16","clientid":"ES15816","customerid":"14940186","last4":"1111","cardtype":"debit","visamctype":"visa","transactionref":"16117740","customerref":"14940186","isdebitcardonly":"No"}
- *
- * confirm: //Checking
- * {"requestid":"1646117130100","&startdate":"2014-10-21","paymentmethodref":"15750740","clientid":"ES15816","customerid":"14940187","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117741","customerref":"14940187","isdebitcardonly":"No"}
- *
- * confirm: //Saving
- * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"}
-*/
-
 
 $().ready(function() {
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
@@ -486,3 +449,43 @@ $().ready(function() {
      phoneUS: true
    });
 });
+
+/**
+ * Testing Notes:
+ * Testing: https://stripe.com/docs/testing
+ * http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
+ * http://www.getcreditcardnumbers.com/
+ * http://www.darkcoding.net/credit-card-numbers/
+ * 
+ * EXAMPLES ...
+ *
+ * confirm: //Credit
+ * {"requestid":"3962297830100","&ccavsresp":"Y","paymentmethodref":"15750739","cccvvresp":"M","ccauthcode":"60439C","startdate":"2014-10-16","clientid":"ES15816","customerid":"14940186","last4":"1111","cardtype":"debit","visamctype":"visa","transactionref":"16117740","customerref":"14940186","isdebitcardonly":"No"}
+ *
+ * confirm: //Checking
+ * {"requestid":"1646117130100","&startdate":"2014-10-21","paymentmethodref":"15750740","clientid":"ES15816","customerid":"14940187","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117741","customerref":"14940187","isdebitcardonly":"No"}
+ *
+ * confirm: //Saving
+ * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"}
+ * 
+ * 
+ * 
+ *   
+     {
+      "ccavsresp":"Y",
+      "paymentmethodref":15751344,
+      "cccvvresp":"M",
+      "startdate":"2014-11-22",
+      "clientid":"ES15816",
+      "isdebitcardonly":"No",
+      "ccauthcode":"60439C",
+      "cardtype":"debit",
+      "requestid":"7056993710100",
+      "transactionref":16121072,
+      "last4":"1111",
+      "visamctype":"visa",
+      "customerref":14940770,
+      "customerid":"14940770"
+    }
+ **/
+ 
