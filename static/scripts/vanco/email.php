@@ -19,9 +19,9 @@ if(!in_array($ref,$files)) {
 $message = wordwrap($message, 70, "\r\n");
 
 // Send
-mail('mfsairpwr@gmail.com', 'Donation', $message);
+$mailed = mail('mfsairpwr@gmail.com', 'Donation', $message);
 header('Content-Type: application/json'); 
-$array = ["status" => "success"]; 
+$array = $mailed?["status" => "success"]:["status" => "failed to email"];
 echo $_GET['callback'] . '('.json_encode($array).')'; 
 unlink("../../../../$ref");
 ?>
