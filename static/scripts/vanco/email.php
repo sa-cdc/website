@@ -1,9 +1,5 @@
 <?php
-$ref = $_GET['ref'];
-$name = $_GET['name'];
-$amount = $_GET['amount'];
-$email = $_GET['email'];
-$phone = $_GET['phone'];
+$message = $_GET['message'];
 //TODO: Validate this data - never trust user input
 
 //----
@@ -18,7 +14,6 @@ if(!in_array($ref,$files)) {
   return;
 }
 
-$message = "$name is contributing $amount. Phone: $phone. Email: $email";
 // In case any of our lines are larger than 70 characters, we should use wordwrap()
 $message = wordwrap($message, 70, "\r\n");
 
