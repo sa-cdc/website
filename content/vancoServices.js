@@ -146,7 +146,7 @@ function submitAmount(event, obj) {
 }
 
 function storeRef(ref) {
-  $.ajax({
+  return $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/storeRef.php',
     crossDomain: false,
@@ -156,7 +156,7 @@ function storeRef(ref) {
 }
 
 function notifyAdmin(data) {
-  $.ajax({
+  return $.ajax({
     type: 'GET',
     url: '/static/scripts/vanco/email.php',
     crossDomain: false,
