@@ -357,7 +357,7 @@ function submitPayment(event, me) {
     var storingRef = storeRef(result['transactionref']);
     storingRef.then(function(){
       var adminData = {};
-      adminData['message'] = transaction['name]+' has donated to the clinic.\r\n\r\nAmount: '+transaction['amount']+'\r\n'+transaction['accounttype']+'\r\nConfirmation Number: '+result['transactionref']+'\r\nAddress: '+transaction['address']+'\nPhone: '+transaction['phone']+'\r\nEmail: '+transaction['email'];
+      adminData['message'] = transaction['name']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+result['transactionref']+'Address: '+transaction['address']+'Phone: '+transaction['phone']+'Email: '+transaction['email'];
       notifyAdmin(adminData);
     });
   });
