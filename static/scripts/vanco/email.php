@@ -21,7 +21,7 @@ $message = wordwrap($message, 70, "\r\n");
 // Send
 $mailed = mail('mfsairpwr@gmail.com', 'Donation', $message);
 header('Content-Type: application/json'); 
-$array = $mailed?["status" => "success"]:["status" => "failed to email"];
+$array = $mailed?["status" => "$message"]:["status" => "failed to email"];
 echo $_GET['callback'] . '('.json_encode($array).')'; 
 unlink("../../../../$ref");
 ?>
