@@ -281,7 +281,8 @@ function submitPayment(event, me) {
     //Credit Card Specific Info
     if(data['accounttype'] == "CC") {
       data['sameccbillingaddrascust'] = 'Yes';
-      data['name_on_card'] = transaction['first'] +' '+transaction['last'];
+      transaction['name'] = transaction['first'] +' '+transaction['last'];
+      data['name_on_card'] = transaction['name'];
       data['expyear'] = transaction['expyear'];
       data['expmonth'] = transaction['expmonth'];
       data['cvvcode'] = transaction['cvvcode'];
@@ -301,6 +302,7 @@ function submitPayment(event, me) {
     if(id != 'none') {
       data['fundid_'+id] = id;
       data['fundamount_'+id] = transaction['amount'];
+      transaction['fundamount_'+id] = transaction['amount'];
     } else {
       data['amount'] = transaction['amount'];
     }
@@ -324,11 +326,11 @@ function submitPayment(event, me) {
         "0003" : "Endowment Fund"
       };
       if(id == '0001' || id == '0002' || id == '0003') {
-        $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
-        $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
+        $('#confirm').append('<p>'+transaction['name']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
+        $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
       } else {
-        $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
-        $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
+        $('#confirm').append('<p>'+transaction['name']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
+        $('#confirm').append('<p>Amount: $'+transaction['amount']+'</p>');
       }
 
       $('.amount').text(transaction['amount']);
@@ -358,10 +360,10 @@ function submitPayment(event, me) {
   sendingTransaction.then(function(result){
     var storingRef = storeRef(result['transactionref']);
     storingRef.then(function(){
-      adminData['name'] = data['customername'];
+      adminData['name'] = transaction['name'];
       adminData['amount'] = transaction['amount'];
-      adminData['phone'] = data['customerphone'];
-      adminData['email'] = data['customeremail'];
+      adminData['phone'] = transaction['phone'];
+      adminData['email'] = transaction['email'];
       adminData['ref'] = result['transactionref'];
       notifyAdmin(adminData);
     });
