@@ -357,6 +357,7 @@ function submitPayment(event, me) {
     var storingRef = storeRef(result['transactionref']);
     storingRef.then(function(){
       var adminData = {};
+      adminData['ref'] = result['transactionref'];
       adminData['message'] = transaction['name']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+result['transactionref']+'Address: '+transaction['address']+'Phone: '+transaction['phone']+'Email: '+transaction['email'];
       notifyAdmin(adminData);
     });

@@ -1,5 +1,6 @@
 <?php
 $message = $_GET['message'];
+$ref = $_GET['ref'];
 //TODO: Validate this data - never trust user input
 
 //----
