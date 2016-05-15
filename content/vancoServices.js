@@ -335,10 +335,6 @@ function submitPayment(event, me) {
 
       $('.amount').text(transaction['amount']);
       toggleConfirm();
-      var proc = runSubset(P, transaction['amount']);
-      for(var i=0; i<proc.length; i++ ) {
-        $('#purchased').append('<p><span class="badge">'+proc[i]['label']+' ('+proc[i]['freq']+')</span></p>');
-      }
       $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
       $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
       if(result['cardtype']) {
