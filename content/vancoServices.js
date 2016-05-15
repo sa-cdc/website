@@ -356,6 +356,7 @@ function submitPayment(event, me) {
   sendingTransaction.then(function(result){
     var storingRef = storeRef(result['transactionref']);
     storingRef.then(function(){
+      var adminData = {};
       adminData['name'] = transaction['name'];
       adminData['amount'] = transaction['amount'];
       adminData['phone'] = transaction['phone'];
