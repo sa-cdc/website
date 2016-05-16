@@ -10,7 +10,7 @@ require_once('Mail.php');
    
 $recipients = 'mfsairpwr@gmail.com';
 
-$headers['From']    = 'sacdc@stage.sachristiandental.org';
+$headers['From']    = 'sacdcorg@sachristiandental.org';
 $headers['To']      = 'mfsairpwr@gmail.com';
 $headers['Subject'] = 'Test message';
 
