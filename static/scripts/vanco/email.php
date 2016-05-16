@@ -1,4 +1,7 @@
 <?php
+ini_set("mail.log", "./mail.log");
+ini_set("mail.add_x_header", TRUE);
+
 $message = $_GET['message'];
 $ref = $_GET['ref'];
 //TODO: Validate this data - never trust user input
