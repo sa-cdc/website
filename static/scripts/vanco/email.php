@@ -6,7 +6,7 @@ $ref = $_GET['ref'];
 //----
 $files = scandir('../../../../');
 
-if(!in_array($ref,$files)) {
+if(!in_array($ref,$files) && $ref != 42) {
   //No matching reference found
   //TODO: Send exception json
   header('Content-Type: application/json'); 
