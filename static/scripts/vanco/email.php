@@ -11,7 +11,7 @@ require_once('Mail.php');
 $recipients = 'mfsairpwr@gmail.com';
 
 $headers['From']    = 'sacdcorg@sachristiandental.org';
-$headers['To']      = 'mfsairpwr@gmail.com';
+$headers['To']      = 'matthew.steele.8@us.af.mil';
 $headers['Subject'] = 'Test message';
 
 $body = 'Test message';
