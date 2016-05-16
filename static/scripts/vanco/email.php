@@ -19,6 +19,7 @@ if(!in_array($ref,$files) && $ref != 42) {
 $message = trim($message);
 $message = wordwrap($message, 70, "\r\n");
 $headers = "From: sacdc@sachristiandental.org\r\n";
+$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 $recipient = "mfsairpwr@gmail.com";
 
 // Send
