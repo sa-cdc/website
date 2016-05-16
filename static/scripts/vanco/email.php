@@ -26,6 +26,8 @@ $headers = 'From: sacdc@sachristiandental.org' . "\r\n" .
 $mailed = mail($recipient, 'Donation', $message, $headers);
 header('Content-Type: application/json'); 
 $array = $mailed?["status" => "$message"]:["status" => "failed to email"];
-echo $_GET['callback'] . '('.json_encode($array).')'; 
-unlink("../../../../$ref");
+echo $_GET['callback'] . '('.json_encode($array).')';
+if($ref != 42) {
+  unlink("../../../../$ref");
+}
 ?>
