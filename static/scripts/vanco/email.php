@@ -7,23 +7,21 @@ ini_set("mail.log", "./mail.log");
 ini_set("mail.add_x_header", TRUE);
 
 require_once('Mail.php');
-    $from = "<sacdc@sachristiandental.org>";
-    $to = "<mfsairpwr@gmail.com>";
-    $subject = "Hi!";
-    $body = "Hi,\n\nHow are you?";
+   
+$recipients = 'mfsairpwr@gmail.com';
 
-    $headers = array ('From' => $from,
-      'To' => $to,
-      'Subject' => $subject);
-    $mailer = Mail::factory('sendmail');
+$headers['From']    = 'sacdc@stage.sachristiandental.org';
+$headers['To']      = 'mfsairpwr@gmail.com';
+$headers['Subject'] = 'Test message';
 
-    $mail = $mailer->send($to, $headers, $body);
+$body = 'Test message';
 
-    if (PEAR::isError($mail)) {
-      echo("<p>" . $mail->getMessage() . "</p>");
-    } else {
-      echo("<p>Message successfully sent!</p>");
-    }
+$params['sendmail_path'] = '/usr/lib/sendmail';
+
+// Create the mail object using the Mail::factory method
+$mail_object =& Mail::factory('sendmail', $params);
+
+$mail_object->send($recipients, $headers, $body);
 
 $message = $_GET['message'];
 $ref = $_GET['ref'];
