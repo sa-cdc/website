@@ -1,9 +1,12 @@
 <?php
+
 error_reporting(-1);
 ini_set('display_errors', 'On');
 set_error_handler("var_dump");
 ini_set("mail.log", "./mail.log");
 ini_set("mail.add_x_header", TRUE);
+
+require_once('Mail.php');
 
 $message = $_GET['message'];
 $ref = $_GET['ref'];
