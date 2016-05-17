@@ -275,21 +275,21 @@ function submitPayment(event, me) {
   var signingPaymentData = signNVP(paymentData);
   
   var sendingTransaction = signingPaymentData.then(function(data) {
+    //TODO:  put data into transaction...
+    /*
+  jQuery.each(data, function() {
+    transaction[this.name] = this.value || '';
+  });
+    */
     //Credit Card Specific Info
     transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
-    if(data['accounttype'] == "CC") {
-      data['sameccbillingaddrascust'] = 'Yes';
+    if(transaction['accounttype'] == "CC") {
+      transaction['sameccbillingaddrascust'] = 'Yes';
     }
     //Customer Parameters
     transaction['customername'] = transaction['last']+', '+transaction['first'];
-    transaction['customeraddress1'] = transaction['addr1'];
-    //data['customeraddress2'] = transaction['addr2'];
-    transaction['customercity'] = transaction['city'];
-    transaction['customerstate'] = transaction['state'];
-    transaction['customerzip'] = transaction['zip'];
-    transaction['customerphone'] = transaction['phone'];
     var id = transaction['fundid'];
-    //console.log(id);
+    
     if(id != 'none') {
       transaction['fundid_'+id] = id;
       transaction['fundamount_'+id] = transaction['amount'];
@@ -298,7 +298,7 @@ function submitPayment(event, me) {
     transaction['startdate'] = '0000-00-00';
     transaction['transactiontypecode'] = 'WEB';
 
-    return sendWSNVP(data);
+    return sendWSNVP(transaction);
   });
   
   sendingTransaction.then(function(result) {
