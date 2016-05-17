@@ -275,41 +275,28 @@ function submitPayment(event, me) {
   var signingPaymentData = signNVP(paymentData);
   
   var sendingTransaction = signingPaymentData.then(function(data) {
-    //Data to be handed over to VANCO only
-    data['accountnumber'] = transaction['accountnumber'];
-    data['accounttype'] = transaction['accounttype'];
     //Credit Card Specific Info
+    transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
     if(data['accounttype'] == "CC") {
       data['sameccbillingaddrascust'] = 'Yes';
-      transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
-      data['name_on_card'] = transaction['name_on_card'];
-      data['expyear'] = transaction['expyear'];
-      data['expmonth'] = transaction['expmonth'];
-      data['cvvcode'] = transaction['cvvcode'];
-    } else { //Checking or Saving type
-      data['routingnumber'] = transaction['routingnumber'];
     }
     //Customer Parameters
     transaction['customername'] = transaction['last']+', '+transaction['first'];
-    data['customername'] = transaction['customername'];
-    data['customeraddress1'] = transaction['addr1'];
+    transaction['customeraddress1'] = transaction['addr1'];
     //data['customeraddress2'] = transaction['addr2'];
-    data['customercity'] = transaction['city'];
-    data['customerstate'] = transaction['state'];
-    data['customerzip'] = transaction['zip'];
-    data['customerphone'] = transaction['phone'];
+    transaction['customercity'] = transaction['city'];
+    transaction['customerstate'] = transaction['state'];
+    transaction['customerzip'] = transaction['zip'];
+    transaction['customerphone'] = transaction['phone'];
     var id = transaction['fundid'];
     //console.log(id);
     if(id != 'none') {
-      data['fundid_'+id] = id;
-      data['fundamount_'+id] = transaction['amount'];
+      transaction['fundid_'+id] = id;
       transaction['fundamount_'+id] = transaction['amount'];
-    } else {
-      data['amount'] = transaction['amount'];
     }
     //Transaction Parameters
-    data['startdate'] = '0000-00-00';
-    data['transactiontypecode'] = 'WEB';
+    transaction['startdate'] = '0000-00-00';
+    transaction['transactiontypecode'] = 'WEB';
 
     return sendWSNVP(data);
   });
