@@ -281,8 +281,8 @@ function submitPayment(event, me) {
     //Credit Card Specific Info
     if(data['accounttype'] == "CC") {
       data['sameccbillingaddrascust'] = 'Yes';
-      transaction['name'] = transaction['first'] +' '+transaction['last'];
-      data['name_on_card'] = transaction['name'];
+      transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
+      data['name_on_card'] = transaction['name_on_card'];
       data['expyear'] = transaction['expyear'];
       data['expmonth'] = transaction['expmonth'];
       data['cvvcode'] = transaction['cvvcode'];
@@ -290,7 +290,8 @@ function submitPayment(event, me) {
       data['routingnumber'] = transaction['routingnumber'];
     }
     //Customer Parameters
-    data['customername'] = transaction['last']+', '+transaction['first'];
+    transaction['customername'] = transaction['last']+', '+transaction['first'];
+    data['customername'] = transaction['customername'];
     data['customeraddress1'] = transaction['addr1'];
     //data['customeraddress2'] = transaction['addr2'];
     data['customercity'] = transaction['city'];
@@ -326,12 +327,12 @@ function submitPayment(event, me) {
         "0003" : "Endowment Fund"
       };
       if(id == '0001' || id == '0002' || id == '0003') {
-        $('#confirm').append('<p>'+transaction['name']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
         $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
       } else {
-        $('#confirm').append('<p>'+transaction['name']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
         $('#confirm').append('<p>Amount: $'+transaction['amount']+'</p>');
       }
+      fund_spt = funds[id]+' at'
+      $('#confirm').append('<p>'+transaction['name_on_card']+', thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
 
       $('.amount').text(transaction['amount']);
       toggleConfirm();
@@ -358,7 +359,7 @@ function submitPayment(event, me) {
     storingRef.then(function(){
       var adminData = {};
       adminData['ref'] = result['transactionref'];
-      adminData['message'] = transaction['name']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+result['transactionref']+'Address: '+transaction['address']+'Phone: '+transaction['phone']+'Email: '+transaction['email'];
+      adminData['message'] = transaction['name_on_card']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+result['transactionref']+'Address: '+transaction['address']+'Phone: '+transaction['phone']+'Email: '+transaction['email'];
       notifyAdmin(adminData);
     });
   });
