@@ -1,3 +1,20 @@
+angular.module('app', ['ui.bootstrap'])
+.controller('mainController', function($scope) {
+  
+  // BUTTONS ======================
+  
+  // define some random object and button values
+  $scope.bigData = {};
+  
+  $scope.bigData.breakfast = false;
+  $scope.bigData.lunch = false;
+  $scope.bigData.dinner = false;
+  
+  // COLLAPSE =====================
+  $scope.isCollapsed = false;
+  
+});
+
 var transaction = {}; //Create the global to store all data
 
 function ucwords(str,force){
