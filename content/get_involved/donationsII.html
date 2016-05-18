@@ -37,7 +37,7 @@ tags:
 
 <div ng-app="" class="hidden donate row text-center" id="donationApp">
   <div class="hidden col-md-8 col-md-offset-2 alert alert-danger" id="dev-warning" role="alert">
-    In Development Environment -- Use only test values, you been warned. {{ first }}
+    In Development Environment -- Use only test values, you been warned.
   </div>
   <div class="col-md-8 col-md-offset-2 well" id="donation-central" style="padding: 19px 0px;">
     <div class="row" id="status-bar">
@@ -154,7 +154,7 @@ tags:
             <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-last">Last Name</label>
-                <input class="form-control" id="billing-last" type="text" name="last" required>
+                <input class="form-control" id="billing-last" type="text" ng-model="last" name="last" required>
                 <span id="billing-last_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -162,21 +162,21 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-addr1">Address Line 1</label>
                 <input class="form-control" id="billing-addr1" type="text"
-                name="customeraddress1" pattern="^\d+ .*$" required>
+                ng-model="client.customeraddress1" name="customeraddress1" pattern="^\d+ .*$" required>
                 <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-7">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-city">City</label>
-                <input class="form-control" id="billing-city" type="text" name="customercity" required>
+                <input class="form-control" id="billing-city" type="text" ng-model="client.customercity" name="customercity" required>
                 <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group">
                 <label class="control-label" for="billing-state">State</label>
-                <select class="form-control" name="customerstate" id="billing-state">
+                <select class="form-control" ng-model="client.customerstate" name="customerstate" id="billing-state">
                   <option value="">State</option>
                   <%= state_helper %>
                 </select>
@@ -185,7 +185,7 @@ tags:
             <div class="col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="billing-zip">Zip Code</label>
-                <input class="form-control" id="billing-zip" type="text" name="customerzip"
+                <input class="form-control" id="billing-zip" type="text" ng-model="client.customerzip" name="customerzip"
                 pattern="^[0-9]{5}(?:-[0-9]{4}){0,1}$" required>
                 <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
               </div>
@@ -194,14 +194,14 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-email">Email Address</label>
                 <input class="form-control" id="billing-email" type="text"
-                name="customeremail" required>
+                ng-model="client.customeremail" name="customeremail" required>
                 <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-phone">Phone Number</label>
-                <input class="form-control" id="billing-phone" type="text" name="customerphone" maxlength="14">
+                <input class="form-control" id="billing-phone" type="text" ng-model="client.customerphone" name="customerphone" maxlength="14">
                 <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
