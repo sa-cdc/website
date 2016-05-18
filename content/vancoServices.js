@@ -78,10 +78,10 @@ function togglePayment() {
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
   invalidWho = !transaction['last']  ||
                !transaction['first'] ||
-               !transaction['addr1'] ||
-               !transaction['city']  ||
-               !transaction['state'] ||
-               !transaction['zip'];
+               !transaction['customeraddress1'] ||
+               !transaction['customercity']  ||
+               !transaction['customerstate'] ||
+               !transaction['customperzip'];
 
   if(invalidAmount && invalidWho) {
     alert('Please choose an amount to donate and input your billing address.');
