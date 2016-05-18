@@ -31,6 +31,14 @@ route '/vancoServices/' do
   '/static/scripts/vancoServices.js'
 end
 
+compile '/donation-app/' do
+  filter :vanco_url
+end
+
+route '/donation-app/' do
+  '/static/scripts/donation-app.js'
+end
+
 passthrough '/static/*'
 
 compile '/stylesheet/' do
