@@ -361,7 +361,8 @@ $().ready(function() {
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
     $("div[id$='_init']").css("display", "block");
-    
+  
+  /* - Commented for testing off-net  
   var checkingVanco = testWSNVP();
   checkingVanco.always(function(){
     $("#loading_init").addClass("hidden");
@@ -374,6 +375,8 @@ $().ready(function() {
       $('#failedToLoad').removeClass("hidden");
     }
   );
+  - Remove following line when on net*/
+  $('#donationApp').removeClass("hidden");
 /*
   jQuery.validator.setDefaults({
     highlight: function (element) {
