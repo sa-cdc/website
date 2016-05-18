@@ -3,7 +3,9 @@ angular.module('app', ['ui.bootstrap'])
   
   $scope.payment = {};
   $scope.client = {};
-  
+  $scope.whoForm = function(isValid) {
+    alert('submited who: '+$scope.client.first);
+  }
 });
 
 var transaction = {}; //Create the global to store all data
