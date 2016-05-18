@@ -275,12 +275,11 @@ function submitPayment(event, me) {
   var signingPaymentData = signNVP(paymentData);
   
   var sendingTransaction = signingPaymentData.then(function(data) {
-    //TODO:  put data into transaction...
-    /*
-  jQuery.each(data, function() {
-    transaction[this.name] = this.value || '';
-  });
-    */
+    
+    //Only two variables needed from data[]
+    transaction['sessionid'] = data['sessionid'];
+    transaction['nvpvar'] = data['nvpvar'];
+
     //Credit Card Specific Info
     transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
     if(transaction['accounttype'] == "CC") {
