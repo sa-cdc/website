@@ -375,8 +375,9 @@ $().ready(function() {
       $('#failedToLoad').removeClass("hidden");
     }
   );
-  - Remove following line when on net*/
+  - Remove following 2 lines when on net*/
   $('#donationApp').removeClass("hidden");
+  $("#loading_init").addClass("hidden");
 /*
   jQuery.validator.setDefaults({
     highlight: function (element) {
