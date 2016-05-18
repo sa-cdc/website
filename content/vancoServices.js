@@ -274,11 +274,11 @@ function submitPayment(event, me) {
   //Adds nvp to the 'data' sent to the anonymous function
   var signingPaymentData = signNVP(paymentData);
   
-  var sendingTransaction = signingPaymentData.then(function(data) {
+  var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
     
     //Only two variables needed from data[]
-    transaction['sessionid'] = data['sessionid'];
-    transaction['nvpvar'] = data['nvpvar'];
+    transaction['sessionid'] = my_nvp_data['sessionid'];
+    transaction['nvpvar'] = my_nvp_data['nvpvar'];
 
     //Credit Card Specific Info
     transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
@@ -300,12 +300,12 @@ function submitPayment(event, me) {
     return sendWSNVP(transaction);
   });
   
-  sendingTransaction.then(function(result) {
+  sendingTransaction.then(function(vanco_result) {
     // This is where we trigger the writing of the receipt!
     $("#transaction-loading").css('block','none');
     $("#status-bar").addClass("hidden");
-    //console.log('confirm: '+JSON.stringify(result));
-    if(result['transactionref']) {
+    //console.log('confirm: '+JSON.stringify(vanco_result));
+    if(vanco_result['transactionref']) {
       var id = transaction['fundid'];
       funds = {
         "0001" : "General Operations",
@@ -322,17 +322,17 @@ function submitPayment(event, me) {
 
       $('.amount').text(transaction['amount']);
       toggleConfirm();
-      $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
-      $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
-      if(result['cardtype']) {
-        $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
+      $('#confirm').append('<p>Donation Date: '+vanco_result['startdate']+'</p>');
+      $('#confirm').append('<p>Confirmation: '+vanco_result['transactionref']+'</p>');
+      if(vanco_result['cardtype']) {
+        $('#confirm').append('<p>Payment Type: '+vanco_result['visamctype']+' '+vanco_result['cardtype']+'</p>');
       }
-      $('#confirm').append('<p>Account Last Four: '+result['last4']+'</p>');
+      $('#confirm').append('<p>Account Last Four: '+vanco_result['last4']+'</p>');
     }
 
-    if(result['errorlist']) {
+    if(vanco_result['errorlist']) {
       toggleError();
-      errors = result['errorlist'].split(',');
+      errors = vanco_result['errorlist'].split(',');
       //Assumes errorCodes.json is loaded...
       errors.forEach(function(e) {
         $('#error').append('<li>' + errorCodes[e] + '</li>\n');
@@ -340,12 +340,12 @@ function submitPayment(event, me) {
     }
   });
     
-  sendingTransaction.then(function(result){
-    var storingRef = storeRef(result['transactionref']);
-    storingRef.then(function(){
+  sendingTransaction.then(function(vanco_result){
+    storeRef(vanco_result['transactionref'])
+    .then(function(){
       var adminData = {};
-      adminData['ref'] = result['transactionref'];
-      adminData['message'] = transaction['name_on_card']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+result['transactionref']+'Address: '+transaction['address']+'Phone: '+transaction['phone']+'Email: '+transaction['email'];
+      adminData['ref'] = vanco_result['transactionref'];
+      adminData['message'] = transaction['name_on_card']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+vanco_result['transactionref']+'Address: '+transaction['customeraddress1']+'Phone: '+transaction['customerphone']+'Email: '+transaction['customeremail'];
       notifyAdmin(adminData);
     });
   });
