@@ -207,7 +207,7 @@ function testWSNVP() {
 
 function submitWho(event) {
     event.preventDefault(); //End the form submission event now!
-
+/*
     var form = $("#who-form");
     if(form.valid()) {
       var who = form.serializeArray();
@@ -216,6 +216,7 @@ function submitWho(event) {
       });
       togglePayment();
     }
+    */
 }
 
 $('#tx-one').click(function() { toggleAmount(); });
