@@ -81,7 +81,7 @@ function togglePayment() {
                !transaction['customeraddress1'] ||
                !transaction['customercity']  ||
                !transaction['customerstate'] ||
-               !transaction['customperzip'];
+               !transaction['customerzip'];
 
   if(invalidAmount && invalidWho) {
     alert('Please choose an amount to donate and input your billing address.');
