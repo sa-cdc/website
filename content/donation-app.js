@@ -205,8 +205,8 @@ function testWSNVP() {
   return sendingTestData;
 }
 
-function submitWho(event) {
-    event.preventDefault(); //End the form submission event now!
+//function submitWho(event) {
+    //event.preventDefault(); //End the form submission event now!
 /*
     var form = $("#who-form");
     if(form.valid()) {
@@ -217,7 +217,7 @@ function submitWho(event) {
       togglePayment();
     }
     */
-}
+//}
 
 $('#tx-one').click(function() { toggleAmount(); });
 $('#tx-two').click(function() { toggleWho(); });
