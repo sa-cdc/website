@@ -162,7 +162,7 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-addr1">Address Line 1</label>
                 <input class="form-control" id="billing-addr1" type="text"
-                ng-model="client.customeraddress1" name="customeraddress1" ng-pattern="^\d+ .*$" required>
+                ng-model="client.customeraddress1" name="customeraddress1" ng-pattern="/^\d+ .*$/" required>
                 <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -186,7 +186,7 @@ tags:
               <div class="form-group">
                 <label class="control-label" for="billing-zip">Zip Code</label>
                 <input class="form-control" id="billing-zip" type="text" ng-model="client.customerzip" name="customerzip"
-                ng-pattern="^[0-9]{5}(?:-[0-9]{4}){0,1}$" required>
+                ng-pattern="/^[0-9]{5}(?:-[0-9]{4}){0,1}$/" required>
                 <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -254,7 +254,7 @@ tags:
             <div class="col-sm-offset-4 col-xs-12 col-sm-4">
               <div class="form-group has-feedback">
                 <label class="control-label" for="acctnumber">Credit Card Number</label>
-                <input class="form-control" id="acctnumber" name="accountnumber" type="text" size="16" x-autocompletetype="cc-number" pattern="^[0-9]{15,16}$" required>
+                <input class="form-control" id="acctnumber" name="accountnumber" type="text" size="16" x-autocompletetype="cc-number" ng-pattern="/^[0-9]{15,16}$/" required>
                 <span id="acctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -263,8 +263,7 @@ tags:
             </div>
             <div class="col-sm-offset-4 col-xs-12 col-sm-2">
               <div class="form-group has-feedback">
-                <input class="form-control" type="text" id="cvv" name="cvvcode" 
-                pattern="^[0-9]{3,4}$" required>
+                <input class="form-control" type="text" id="cvv" name="cvvcode" pattern="/^[0-9]{3,4}$/" required>
                 <span id="cvv_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -306,7 +305,7 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="cacctnumber">Checking Account Number</label>
                 <input class="form-control" type="text" id="cacctnumber"
-                name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
+                name="accountnumber" ng-pattern="/^[0-9]{1,17}$/" required> <!-- Always -->
                 <span id="cacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -316,7 +315,7 @@ tags:
                   for="routingNumber">Routing Number</label>-->
                 <label class="control-label" for="rtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="rtgnumber"
-                name="routingnumber" pattern="^[0-9]{9}$" required> <!-- Type=C or Type=S -->
+                name="routingnumber" ng-pattern="/^[0-9]{9}$/" required> <!-- Type=C or Type=S -->
                 <span id="rtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -335,7 +334,7 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="sacctnumber">Savings Account Number</label>
                 <input class="form-control" type="text" id="sacctnumber"
-                name="accountnumber" pattern="^[0-9]{1,17}$" required> <!-- Always -->
+                name="accountnumber" ng-pattern="/^[0-9]{1,17}$/" required> <!-- Always -->
                 <span id="sacctnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
@@ -343,7 +342,7 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="srtgnumber">Routing Number</label>
                 <input class="form-control" type="text" id="srtgnumber"
-                name="routingnumber" pattern="^[0-9]{9}$" required> <!-- Type=C or Type=S -->
+                name="routingnumber" ng-pattern="/^[0-9]{9}$/" required> <!-- Type=C or Type=S -->
                 <span id="srtgnumber_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
