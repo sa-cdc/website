@@ -345,7 +345,7 @@ function submitPayment(event, me) {
     .then(function(){
       var adminData = {};
       adminData['ref'] = vanco_result['transactionref'];
-      adminData['message'] = transaction['name_on_card']+' has donated to the clinic. Amount: '+transaction['amount']+''+transaction['accounttype']+'Confirmation Number: '+vanco_result['transactionref']+'Address: '+transaction['customeraddress1']+'Phone: '+transaction['customerphone']+'Email: '+transaction['customeremail'];
+      adminData['message'] = transaction['name_on_card']+' has donated to the clinic.\r\nAmount: '+transaction['amount']+'\r\n'+transaction['visamctype']+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+transaction['customeraddress1']+'\r\nPhone: '+transaction['customerphone']+'\r\nEmail: '+transaction['customeremail'];
       notifyAdmin(adminData);
     });
   });
