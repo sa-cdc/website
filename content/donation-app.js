@@ -433,9 +433,9 @@ $().ready(function() {
    });
    $("#billing-phone").rules("add", {
      phoneUS: true
-   });
+   });*/
 });
-*/
+
 /**
  * Testing Notes:
  * Testing: https://stripe.com/docs/testing
