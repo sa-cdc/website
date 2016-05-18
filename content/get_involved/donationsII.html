@@ -37,7 +37,7 @@ tags:
 
 <div class="hidden donate row text-center" id="donationApp">
   <div class="hidden col-md-8 col-md-offset-2 alert alert-danger" id="dev-warning" role="alert">
-    In Development Environment -- Use only test values, you been warned.
+    In Development Environment -- Use only test values, you been warned. {{ first }}
   </div>
   <div class="col-md-8 col-md-offset-2 well" id="donation-central" style="padding: 19px 0px;">
     <div class="row" id="status-bar">
@@ -147,7 +147,7 @@ tags:
             <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-first">First Name</label>
-                <input class="form-control" id="billing-first" type="text" name="first" required>
+                <input class="form-control" id="billing-first" type="text" ng-model="first" name="first" required>
                 <span id="billing-first_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
