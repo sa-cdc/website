@@ -4,6 +4,7 @@ angular.module('app', ['ui.bootstrap'])
   $scope.payment = {};
   $scope.client = {};
   $scope.whoFormSubmit = function(isValid) {
+    alert('Test');
     if(isValid) {
       alert('submited who: '+$scope.client.first);
     }
