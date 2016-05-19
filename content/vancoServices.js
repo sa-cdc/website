@@ -209,7 +209,7 @@ function submitWho(event) {
 }
 
 function fundTranslator(id) {
-  funds = {
+  var funds = {
         "0001" : "General Operations",
         "0002" : "Direct Patient Care",
         "0003" : "Endowment Fund"
