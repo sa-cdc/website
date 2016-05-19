@@ -140,7 +140,7 @@ tags:
     <!-- Give somewhere for jQuery.validate to put errors for now... -->
     <span class="hidden" id="errors"></span>
     <div id="transaction-who-block" style="display:none;">
-      <form class="form" role="form" name="whoForm" id="who-form" ng-submit="submitForm(whoForm.$valid)" novalidate>
+      <form class="form" role="form" name="whoForm" id="who-form" ng-submit="whoFormSubmit(whoForm.$valid)" novalidate>
         <fieldset>
           <legend>Billing Information</legend>
           <div class="row text-left">
