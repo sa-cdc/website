@@ -238,6 +238,15 @@ $( "input[name=accounttype]" ).change(function() {
   }
 });
 
+function fundTranslator(id) {
+  funds = {
+        "0001" : "General Operations",
+        "0002" : "Direct Patient Care",
+        "0003" : "Endowment Fund"
+      };
+  return funds[id];
+}
+
 function submitPayment(event, me) {
   event.preventDefault(); //End the form submission event now!
 
@@ -306,19 +315,14 @@ function submitPayment(event, me) {
     $("#status-bar").addClass("hidden");
     //console.log('confirm: '+JSON.stringify(vanco_result));
     if(vanco_result['transactionref']) {
-      var id = transaction['fundid'];
-      funds = {
-        "0001" : "General Operations",
-        "0002" : "Direct Patient Care",
-        "0003" : "Endowment Fund"
-      };
-      if(id == '0001' || id == '0002' || id == '0003') {
+      var fund = fundTranslator(transaction['fundid']);
+      if(fund) {
         $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
       } else {
         $('#confirm').append('<p>Amount: $'+transaction['amount']+'</p>');
       }
-      fund_spt = funds[id]+' at'
-      $('#confirm').append('<p>'+transaction['name_on_card']+', thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
+      fund = fund+' at'
+      $('#confirm').append('<p>'+transaction['name_on_card']+', thanks for supporting '+fund+' the San Antonio Christian Dental Clinic.</p>');
 
       $('.amount').text(transaction['amount']);
       toggleConfirm();
@@ -345,7 +349,15 @@ function submitPayment(event, me) {
     .then(function(){
       var adminData = {};
       adminData['ref'] = vanco_result['transactionref'];
-      adminData['message'] = transaction['name_on_card']+' has donated to the clinic.\r\nAmount: '+transaction['amount']+'\r\n'+transaction['visamctype']+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+transaction['customeraddress1']+'\r\nPhone: '+transaction['customerphone']+'\r\nEmail: '+transaction['customeremail'];
+      adminData['message'] = transaction['name_on_card']+' has donated to the clinic.\r\n'
+                              +'Total Amount: $'+transaction['amount']+'\r\n'
+                              +fundTranslator(transaction['fundid'])+' $'+transaction['amount']+'\r\n'
+                              +'Card Provider: '+vanco_result['visamctype']+'\r\n'
+                              +'Confirmation Number: '+vanco_result['transactionref']+'\r\n'
+                              +'Address: '+transaction['customeraddress1']+'\r\n'
+                              +'Phone: '+transaction['customerphone']+'\r\n'
+                              +'Email: '+transaction['customeremail']+'\r\n'
+                              +'Start Date: '+vanco_result['startdate']+'\r\n';
       notifyAdmin(adminData);
     });
   });
