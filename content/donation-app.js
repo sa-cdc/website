@@ -221,11 +221,11 @@ function testWSNVP() {
 
 $('#tx-one').click(function() { toggleAmount(); });
 $('#tx-two').click(function() { toggleWho(); });
-$('#tx-three').click(function() { togglePayment(); });
+//$('#tx-three').click(function() { togglePayment(); });
 $('#tx-four').click(function() { /*toggleConfirm();*/ });
 
 $('#amount-form :submit').click(function(event) {submitAmount(event, this); });
-$('#who-form').submit(          function(event) {submitWho(event);          });
+//$('#who-form').submit(          function(event) {submitWho(event);          });
 $('#CC-form').submit(           function(event) {submitPayment(event, this);});
 $('#C-form').submit(            function(event) {submitPayment(event, this);});
 $('#S-form').submit(            function(event) {submitPayment(event, this);});
