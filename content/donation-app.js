@@ -219,10 +219,10 @@ function testWSNVP() {
     */
 //}
 
-$('#tx-one').click(function() { toggleAmount(); });
-$('#tx-two').click(function() { toggleWho(); });
+//$('#tx-one').click(function() { toggleAmount(); });
+//$('#tx-two').click(function() { toggleWho(); });
 //$('#tx-three').click(function() { togglePayment(); });
-$('#tx-four').click(function() { /*toggleConfirm();*/ });
+//$('#tx-four').click(function() { /*toggleConfirm();*/ });
 
 $('#amount-form :submit').click(function(event) {submitAmount(event, this); });
 //$('#who-form').submit(          function(event) {submitWho(event);          });
