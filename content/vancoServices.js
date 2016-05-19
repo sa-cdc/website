@@ -208,42 +208,12 @@ function submitWho(event) {
     }
 }
 
-$('#tx-one').click(function() { toggleAmount(); });
-$('#tx-two').click(function() { toggleWho(); });
-$('#tx-three').click(function() { togglePayment(); });
-$('#tx-four').click(function() { /*toggleConfirm();*/ });
-
-$('#amount-form :submit').click(function(event) {submitAmount(event, this); });
-$('#who-form').submit(          function(event) {submitWho(event);          });
-$('#CC-form').submit(           function(event) {submitPayment(event, this);});
-$('#C-form').submit(            function(event) {submitPayment(event, this);});
-$('#S-form').submit(            function(event) {submitPayment(event, this);});
-
-$( "input[name=accounttype]" ).change(function() {
-  type = $( "input:radio[name=accounttype]:checked" ).val();
-  if(type == "T") {
-    $( "#transaction-CC-block" ).css("display", "block");
-    $( "#transaction-C-block" ).css("display", "none");
-    $( "#transaction-S-block" ).css("display", "none");
-  } else if(type == "C") {
-      $('#accounttype').val('C');
-      $( "#transaction-C-block" ).css("display", "block");
-      $( "#transaction-S-block" ).css("display", "none");
-      $( "#transaction-CC-block" ).css("display", "none");
-  } else if(type == "S") {
-      $('#accounttype').val('S');
-      $( "#transaction-C-block" ).css("display", "none");
-      $( "#transaction-S-block" ).css("display", "block");
-      $( "#transaction-CC-block" ).css("display", "none");
-  }
-});
-
 function fundTranslator(id) {
   funds = {
         "0001" : "General Operations",
         "0002" : "Direct Patient Care",
         "0003" : "Endowment Fund"
-      };
+  };
   return funds[id];
 }
 
@@ -318,10 +288,10 @@ function submitPayment(event, me) {
       var fund = fundTranslator(transaction['fundid']);
       if(fund) {
         $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
+        fund = fund+' at';
       } else {
         $('#confirm').append('<p>Amount: $'+transaction['amount']+'</p>');
       }
-      fund = fund+' at'
       $('#confirm').append('<p>'+transaction['name_on_card']+', thanks for supporting '+fund+' the San Antonio Christian Dental Clinic.</p>');
 
       $('.amount').text(transaction['amount']);
@@ -362,6 +332,41 @@ function submitPayment(event, me) {
     });
   });
   };//End submitPayment()
+
+
+/**
+ * Setup handlers for all possible actions.
+ **/
+
+$('#tx-one').click(function() { toggleAmount(); });
+$('#tx-two').click(function() { toggleWho(); });
+$('#tx-three').click(function() { togglePayment(); });
+$('#tx-four').click(function() { /*toggleConfirm();*/ });
+
+$('#amount-form :submit').click(function(event) {submitAmount(event, this); });
+$('#who-form').submit(          function(event) {submitWho(event);          });
+$('#CC-form').submit(           function(event) {submitPayment(event, this);});
+$('#C-form').submit(            function(event) {submitPayment(event, this);});
+$('#S-form').submit(            function(event) {submitPayment(event, this);});
+
+$( "input[name=accounttype]" ).change(function() {
+  type = $( "input:radio[name=accounttype]:checked" ).val();
+  if(type == "T") {
+    $( "#transaction-CC-block" ).css("display", "block");
+    $( "#transaction-C-block" ).css("display", "none");
+    $( "#transaction-S-block" ).css("display", "none");
+  } else if(type == "C") {
+      $('#accounttype').val('C');
+      $( "#transaction-C-block" ).css("display", "block");
+      $( "#transaction-S-block" ).css("display", "none");
+      $( "#transaction-CC-block" ).css("display", "none");
+  } else if(type == "S") {
+      $('#accounttype').val('S');
+      $( "#transaction-C-block" ).css("display", "none");
+      $( "#transaction-S-block" ).css("display", "block");
+      $( "#transaction-CC-block" ).css("display", "none");
+  }
+});
 
 $().ready(function() {
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
