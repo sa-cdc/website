@@ -1,6 +1,16 @@
 angular.module('app', ['ui.bootstrap'])
 .controller('mainController', function($scope) {
   
+  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
+  $('.vanco_xml').attr('action', 'VANCO_XML');
+  if('DEV_MODE'=="yes") {
+    $("#dev-warning").removeClass('hidden');
+  }
+  
+  $("div[id$='_init']").css("display", "block");
+  $('#donationApp').removeClass("hidden");
+  $("#loading_init").addClass("hidden");
+  
   $scope.payment = {};
   $scope.client = {};
   $scope.whoFormSubmit = function(isValid) {
@@ -365,16 +375,17 @@ function submitPayment(event, me) {
   });
   };//End submitPayment()
 
-$().ready(function() {
+/*$().ready(function() {
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
   $('.vanco_xml').attr('action', 'VANCO_XML');
   if('DEV_MODE'=="yes") {
     $("#dev-warning").removeClass('hidden');
   }
+  */
 
   //AJAX request to test Vanco connection
   //$("element[id$='txtTitle']")
-    $("div[id$='_init']").css("display", "block");
+    //$("div[id$='_init']").css("display", "block");
   
   /* - Commented for testing off-net  
   var checkingVanco = testWSNVP();
@@ -390,8 +401,8 @@ $().ready(function() {
     }
   );
   - Remove following 2 lines when on net*/
-  $('#donationApp').removeClass("hidden");
-  $("#loading_init").addClass("hidden");
+//  $('#donationApp').removeClass("hidden");
+//  $("#loading_init").addClass("hidden");
 /*
   jQuery.validator.setDefaults({
     highlight: function (element) {
@@ -449,7 +460,7 @@ $().ready(function() {
    $("#billing-phone").rules("add", {
      phoneUS: true
    });*/
-});
+//});
 
 /**
  * Testing Notes:
