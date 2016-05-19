@@ -14,9 +14,8 @@ angular.module('donation-app', [])
   $scope.payment = {};
   $scope.client = {};
   $scope.whoFormSubmit = function(isValid) {
-    alert('Test');
     if(isValid) {
-      alert('submited who: '+$scope.client.first);
+      togglePayment();
     }
   };
 });
@@ -217,20 +216,6 @@ function testWSNVP() {
   });
   return sendingTestData;
 }
-
-//function submitWho(event) {
-    //event.preventDefault(); //End the form submission event now!
-/*
-    var form = $("#who-form");
-    if(form.valid()) {
-      var who = form.serializeArray();
-      $.each(who, function() {
-        transaction[this.name] = this.value || '';
-      });
-      togglePayment();
-    }
-    */
-//}
 
 //$('#tx-one').click(function() { toggleAmount(); });
 //$('#tx-two').click(function() { toggleWho(); });
