@@ -285,7 +285,8 @@ function submitPayment(event, me) {
     $("#status-bar").addClass("hidden");
     //console.log('confirm: '+JSON.stringify(vanco_result));
     if(vanco_result['transactionref']) {
-      var fund = fundTranslator(transaction['fundid']);
+      var id = transaction['fundid'];
+      var fund = fundTranslator(id);
       if(fund) {
         $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
         fund = fund+' at';
