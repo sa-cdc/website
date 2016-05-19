@@ -1,4 +1,4 @@
-angular.module('app', ['ui.bootstrap'])
+angular.module('donation-app', ['ui.bootstrap'])
 .controller('mainController', function($scope) {
   
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
