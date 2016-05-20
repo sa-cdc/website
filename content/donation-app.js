@@ -15,7 +15,7 @@ angular.module('donation-app', [])
   $scope.client = {};
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
-      togglePayment($scope.client);
+      togglePayment($scope.client, $scope.vanco);
     }
   };
   $scope.paymentFormSubmit = function(type, isValid) {
