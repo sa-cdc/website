@@ -13,6 +13,11 @@ angular.module('donation-app', [])
   
   $scope.vanco = {};
   $scope.client = {};
+  $scope.amountFormSubmit = function(isValid) {
+    if(isValid) {
+      toggleWho();
+    }
+  };
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
       togglePayment($scope.client, $scope.vanco);
@@ -24,8 +29,6 @@ angular.module('donation-app', [])
     }
   };
 });
-
-var transaction = {}; //Create the global to store all data
 
 function ucwords(str,force){
   str=force ? str.toLowerCase() : str;
@@ -91,40 +94,17 @@ function toggleAmount() {
 }
 
 function toggleWho() {
-  if(transaction['amount']) {
-    toggleDisplay( $('#transaction-who-block') );
-    toggleBreadCrumb( $('#tx-two'));
-  } else {
-    alert('Please choose an amount to donate.');
-  }
+  toggleDisplay( $('#transaction-who-block') );
+  toggleBreadCrumb( $('#tx-two'));
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function togglePayment(client, vanco) {
-
-  invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
-  invalidWho = !client.last  ||
-               !client.first ||
-               !vanco.customeraddress1 ||
-               !vanco.customercity  ||
-               !vanco.customerstate ||
-               !vanco.customerzip;
-
-  if(invalidAmount && invalidWho) {
-    alert('Please choose an amount to donate and input your billing address.');
-  } else if(invalidWho) {
-    alert('Please input billing address.');
-  } else if(invalidAmount) {
-    alert('Please choose an amount to donate.');
-  }
-
-  if(!invalidWho && !invalidAmount) {
-    toggleDisplay( $('#transaction-payment-block') );
-    $('#paymentCC').prop('checked', false);
-    $('#paymentC').prop('checked', false);
-    $('#paymentS').prop('checked', false);
-    toggleBreadCrumb( $('#tx-three'));
-  }
+  toggleDisplay( $('#transaction-payment-block') );
+  $('#paymentCC').prop('checked', false);
+  $('#paymentC').prop('checked', false);
+  $('#paymentS').prop('checked', false);
+  toggleBreadCrumb( $('#tx-three'));
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
@@ -153,23 +133,6 @@ function toggleError() {
   $('#tx-one').removeClass('click');
   $('#tx-two').removeClass('click');
   $('#tx-three').removeClass('click');
-}
-
-function submitAmount(event, obj) {
-    event.preventDefault(); //End the form submission event now!
-    var amount = $(obj).attr("value");
-    if(amount == "custom") {
-      amount = document.getElementById('enteredAmount').value;
-    }
-    $('.amount').text(amount);
-
-    var fund = $("input:radio[name=fundid]:checked").val();
-    transaction['amount'] = amount;
-    if(fund != 'none') {
-      transaction['fundid'] = fund;
-    }
-
-    toggleWho();
 }
 
 function storeRef(ref) {
@@ -226,8 +189,6 @@ function testWSNVP() {
 //$('#tx-two').click(function() { toggleWho(); });
 //$('#tx-three').click(function() { togglePayment(); });
 //$('#tx-four').click(function() { /*toggleConfirm();*/ });
-
-$('#amount-form :submit').click(function(event) {submitAmount(event, this); });
 
 $( "input[name=accounttype]" ).change(function() {
   type = $( "input:radio[name=accounttype]:checked" ).val();
