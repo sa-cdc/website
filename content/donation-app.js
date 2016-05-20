@@ -11,7 +11,7 @@ angular.module('donation-app', [])
   $('#donationApp').removeClass("hidden");
   $("#loading_init").addClass("hidden");
   
-  $scope.payment = {};
+  $scope.vanco = {};
   $scope.client = {};
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
@@ -105,10 +105,10 @@ function togglePayment(client) {
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
   invalidWho = !client.last  ||
                !client.first ||
-               !client.customeraddress1 ||
-               !client.customercity  ||
-               !client.customerstate ||
-               !client.customerzip;
+               !vanco.customeraddress1 ||
+               !vanco.customercity  ||
+               !vanco.customerstate ||
+               !vanco.customerzip;
 
   if(invalidAmount && invalidWho) {
     alert('Please choose an amount to donate and input your billing address.');
@@ -228,10 +228,6 @@ function testWSNVP() {
 //$('#tx-four').click(function() { /*toggleConfirm();*/ });
 
 $('#amount-form :submit').click(function(event) {submitAmount(event, this); });
-//$('#who-form').submit(          function(event) {submitWho(event);          });
-$('#CC-form').submit(           function(event) {submitPayment(event, this);});
-$('#C-form').submit(            function(event) {submitPayment(event, this);});
-$('#S-form').submit(            function(event) {submitPayment(event, this);});
 
 $( "input[name=accounttype]" ).change(function() {
   type = $( "input:radio[name=accounttype]:checked" ).val();
@@ -267,30 +263,30 @@ function submitPayment(type) {
   var signingPaymentData = signNVP(nvpVars);
   
   var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
-    alert(JSON.stringify(my_nvp_data));
-    return;
+
     //Only two variables needed from data[]
-    transaction['sessionid'] = my_nvp_data['sessionid'];
-    transaction['nvpvar'] = my_nvp_data['nvpvar'];
+    vanco.sessionid = my_nvp_data['sessionid'];
+    vanco.nvpvar = my_nvp_data['nvpvar'];
 
     //Credit Card Specific Info
-    transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
+    
     if(type == "CC") {
-      payment.sameccbillingaddrascust = 'Yes';
+      vanco['name_on_card'] = client.first +' '+client.last;
+      vanco.sameccbillingaddrascust = 'Yes';
     }
     //Customer Parameters
-    client.customername = client.last+', '+client.first;
-    var id = transaction['fundid'];
+    vanco.customername = client.last+', '+client.first;
+    var id = client.fundid;
     
     if(id != 'none') {
-      transaction['fundid_'+id] = id;
-      transaction['fundamount_'+id] = transaction['amount'];
+      vanco['fundid_'+id] = id;
+      vanco['fundamount_'+id] = transaction['amount'];
     }
     //Transaction Parameters
-    payment.startdate = '0000-00-00';
-    payment.transactiontypecode = 'WEB';
+    vanco.startdate = '0000-00-00';
+    vacno.transactiontypecode = 'WEB';
 
-    return sendWSNVP(transaction);
+    return sendWSNVP(vanco);
   });
   
   sendingTransaction.then(function(vanco_result) {
