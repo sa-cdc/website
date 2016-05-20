@@ -248,18 +248,16 @@ $( "input[name=accounttype]" ).change(function() {
   }
 });
 
-function submitPayment(type) {
+function submitPayment(type, client, vanco) {
   //UI Stuff
   toggleDisplay($('#transaction-loading'));
   
-  //Data to encrypt locally
-  nvpVars = {};
+  
+  nvpVars = {};//Data to encrypt on my server
   nvpVars.requesttype = 'eftaddonetimecompletetransaction';
   nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
   nvpVars.isdebitcardonly = 'No';
   
-
-  //Adds nvp to the 'data' sent to the anonymous function
   var signingPaymentData = signNVP(nvpVars);
   
   var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
@@ -269,23 +267,22 @@ function submitPayment(type) {
     vanco.nvpvar = my_nvp_data['nvpvar'];
 
     //Credit Card Specific Info
-    
     if(type == "CC") {
-      vanco['name_on_card'] = client.first +' '+client.last;
+      vanco.name_on_card = client.first +' '+client.last;
       vanco.sameccbillingaddrascust = 'Yes';
     }
     //Customer Parameters
     vanco.customername = client.last+', '+client.first;
-    var id = client.fundid;
     
     if(id != 'none') {
-      vanco['fundid_'+id] = id;
-      vanco['fundamount_'+id] = transaction['amount'];
+      vanco['fundid_'+client.fundid] = client.fundid;
+      vanco['fundamount_'+client.fundid] = vanco.amount;
     }
     //Transaction Parameters
     vanco.startdate = '0000-00-00';
     vacno.transactiontypecode = 'WEB';
-
+alert(JSON.stringify(vanco));
+return;
     return sendWSNVP(vanco);
   });
   
