@@ -280,7 +280,7 @@ function submitPayment(type, client, vanco) {
     }
     //Transaction Parameters
     vanco.startdate = '0000-00-00';
-    vacno.transactiontypecode = 'WEB';
+    vanco.transactiontypecode = 'WEB';
 alert(JSON.stringify(vanco));
 return;
     return sendWSNVP(vanco);
