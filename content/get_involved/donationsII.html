@@ -162,21 +162,21 @@ tags:
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-addr1">Address Line 1</label>
                 <input class="form-control" id="billing-addr1" type="text"
-                ng-model="client.customeraddress1" name="customeraddress1" ng-pattern="/^\d+ .*$/" required>
+                ng-model="vanco.customeraddress1" name="customeraddress1" ng-pattern="/^\d+ .*$/" required>
                 <span id="billing-addr1_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-7">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-city">City</label>
-                <input class="form-control" id="billing-city" type="text" ng-model="client.customercity" name="customercity" required>
+                <input class="form-control" id="billing-city" type="text" ng-model="vanco.customercity" name="customercity" required>
                 <span id="billing-city_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-3">
               <div class="form-group">
                 <label class="control-label" for="billing-state">State</label>
-                <select class="form-control" ng-model="client.customerstate" name="customerstate" id="billing-state">
+                <select class="form-control" ng-model="vanco.customerstate" name="customerstate" id="billing-state">
                   <option value="">State</option>
                   <%= state_helper %>
                 </select>
@@ -185,7 +185,7 @@ tags:
             <div class="col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="billing-zip">Zip Code</label>
-                <input class="form-control" id="billing-zip" type="number" pattern="[0-9]*" ng-model="client.customerzip" name="customerzip"
+                <input class="form-control" id="billing-zip" type="number" pattern="[0-9]*" ng-model="vanco.customerzip" name="customerzip"
                 ng-pattern="/^[0-9]{5}(?:-[0-9]{4}){0,1}$/" required>
                 <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
               </div>
@@ -193,14 +193,14 @@ tags:
             <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-email">Email Address</label>
-                <input class="form-control" id="billing-email" type="email" ng-model="client.customeremail" name="customeremail" required>
+                <input class="form-control" id="billing-email" type="email" ng-model="vanco.customeremail" name="customeremail" required>
                 <span id="billing-email_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
             <div class="col-sm-6">
               <div class="form-group has-feedback">
                 <label class="control-label" for="billing-phone">Phone Number</label>
-                <input class="form-control" id="billing-phone" type="tel" ng-model="client.customerphone" name="customerphone" ng-maxlength="14">
+                <input class="form-control" id="billing-phone" type="tel" ng-model="vanco.customerphone" name="customerphone" ng-maxlength="14">
                 <span id="billing-phone_glyph" class="glyphicon form-control-feedback"></span>
               </div>
             </div>
