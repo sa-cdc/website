@@ -18,6 +18,11 @@ angular.module('donation-app', [])
       togglePayment($scope.client);
     }
   };
+  $scope.paymentFormSubmit = function(type, isValid) {
+    if(isValid) {
+      //Do some magic to get the variables put together...  client.* payment.*
+    }
+  };
 });
 
 var transaction = {}; //Create the global to store all data
@@ -247,55 +252,34 @@ $( "input[name=accounttype]" ).change(function() {
   }
 });
 
-function submitPayment(event, me) {
-  event.preventDefault(); //End the form submission event now!
-
-  var form = $( me );
-  if(!form.valid()) {
-    return;
-  }
-
-  var acct = $( me ).serializeArray();
-  jQuery.each(acct, function() {
-    transaction[this.name] = this.value || '';
-  });
-  //console.log('transaction[]: '+JSON.stringify(transaction));
-
-  //Data to encrypt locally
-  var paymentData = {};
-  paymentData['requesttype'] = 'eftaddonetimecompletetransaction';
-  paymentData['urltoredirect'] = '/static/scripts/vanco/confirm.php';
-  /*
-   * 26 March 2015:  Seems that Vanco is not setup to handle debit cards;
-   * removing debit option for users;
-  if( 'isdebitcardonly' in transaction && transaction['isdebitcardonly'].toLowerCase() == 'debit'.toLowerCase() ) {
-    paymentData['isdebitcardonly'] = 'Yes';
-  } else {
-    paymentData['isdebitcardonly'] = 'No';
-  }
-  */
-  paymentData['isdebitcardonly'] = 'No';
-
-  //console.log('paymentData[]: '+JSON.stringify(paymentData));
-  //$( "#transaction-loading").css('display', 'block');
+function submitPayment(type) {
+  //UI Stuff
   toggleDisplay($('#transaction-loading'));
+  
+  //Data to encrypt locally
+  nvpVars = {};
+  nvpVars.requesttype = 'eftaddonetimecompletetransaction';
+  nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
+  nvpVars.isdebitcardonly = 'No';
+  
 
   //Adds nvp to the 'data' sent to the anonymous function
-  var signingPaymentData = signNVP(paymentData);
+  var signingPaymentData = signNVP(nvpVars);
   
   var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
-    
+    alert(JSON.stringify(my_nvp_data));
+    return;
     //Only two variables needed from data[]
     transaction['sessionid'] = my_nvp_data['sessionid'];
     transaction['nvpvar'] = my_nvp_data['nvpvar'];
 
     //Credit Card Specific Info
     transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
-    if(transaction['accounttype'] == "CC") {
-      transaction['sameccbillingaddrascust'] = 'Yes';
+    if(type == "CC") {
+      payment.sameccbillingaddrascust = 'Yes';
     }
     //Customer Parameters
-    transaction['customername'] = transaction['last']+', '+transaction['first'];
+    client.customername = client.last+', '+client.first;
     var id = transaction['fundid'];
     
     if(id != 'none') {
@@ -303,8 +287,8 @@ function submitPayment(event, me) {
       transaction['fundamount_'+id] = transaction['amount'];
     }
     //Transaction Parameters
-    transaction['startdate'] = '0000-00-00';
-    transaction['transactiontypecode'] = 'WEB';
+    payment.startdate = '0000-00-00';
+    payment.transactiontypecode = 'WEB';
 
     return sendWSNVP(transaction);
   });
