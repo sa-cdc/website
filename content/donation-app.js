@@ -20,7 +20,7 @@ angular.module('donation-app', [])
   };
   $scope.paymentFormSubmit = function(type, isValid) {
     if(isValid) {
-      //Do some magic to get the variables put together...  client.* payment.*
+      submitPayment(type, $scope.client, $scope.vanco);
     }
   };
 });
@@ -100,7 +100,7 @@ function toggleWho() {
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
-function togglePayment(client) {
+function togglePayment(client, vanco) {
 
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
   invalidWho = !client.last  ||
