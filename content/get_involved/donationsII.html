@@ -185,7 +185,7 @@ tags:
             <div class="col-sm-2">
               <div class="form-group">
                 <label class="control-label" for="billing-zip">Zip Code</label>
-                <input class="form-control" id="billing-zip" type="text" ng-model="client.customerzip" name="customerzip"
+                <input class="form-control" id="billing-zip" type="number" pattern="[0-9]*" ng-model="client.customerzip" name="customerzip"
                 ng-pattern="/^[0-9]{5}(?:-[0-9]{4}){0,1}$/" required>
                 <span id="billing-zip_glyph" class="glyphicon form-control-feedback"></span>
               </div>
