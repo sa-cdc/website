@@ -15,7 +15,7 @@ angular.module('donation-app', [])
   $scope.client = {};
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
-      togglePayment();
+      togglePayment($scope.client);
     }
   };
 });
@@ -98,12 +98,12 @@ function toggleWho() {
 function togglePayment(user) {
 
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
-  invalidWho = !client['last']  ||
-               !client['first'] ||
-               !client['customeraddress1'] ||
-               !client['customercity']  ||
-               !client['customerstate'] ||
-               !client['customerzip'];
+  invalidWho = !client.last  ||
+               !client.first ||
+               !client.customeraddress1 ||
+               !client.customercity  ||
+               !client.customerstate ||
+               !client.customerzip;
 
   if(invalidAmount && invalidWho) {
     alert('Please choose an amount to donate and input your billing address.');
