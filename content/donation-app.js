@@ -95,15 +95,15 @@ function toggleWho() {
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
-function togglePayment() {
+function togglePayment(user) {
 
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
-  invalidWho = !transaction['last']  ||
-               !transaction['first'] ||
-               !transaction['customeraddress1'] ||
-               !transaction['customercity']  ||
-               !transaction['customerstate'] ||
-               !transaction['customerzip'];
+  invalidWho = !client['last']  ||
+               !client['first'] ||
+               !client['customeraddress1'] ||
+               !client['customercity']  ||
+               !client['customerstate'] ||
+               !client['customerzip'];
 
   if(invalidAmount && invalidWho) {
     alert('Please choose an amount to donate and input your billing address.');
