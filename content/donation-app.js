@@ -95,7 +95,7 @@ function toggleWho() {
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
-function togglePayment(user) {
+function togglePayment(client) {
 
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
   invalidWho = !client.last  ||
