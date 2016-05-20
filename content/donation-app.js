@@ -274,7 +274,7 @@ function submitPayment(type, client, vanco) {
     //Customer Parameters
     vanco.customername = client.last+', '+client.first;
     
-    if(id != 'none') {
+    if(client.fundid != 'none') {
       vanco['fundid_'+client.fundid] = client.fundid;
       vanco['fundamount_'+client.fundid] = vanco.amount;
     }
