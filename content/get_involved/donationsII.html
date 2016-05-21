@@ -102,35 +102,35 @@ tags:
 
           <h3> Select an amount to donate. </h3>
           <div class="row">
-            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-submit="submitAmount(50)">
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 50">
               $50
             </button>
-            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" ng-submit="submitAmount(75)">
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 75">
               $75
             </button>
-            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" ng-submit="submitAmount(100)">
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 100">
               $100
             </button>
-            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-submit="submitAmount(150)">
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 150">
               $150
             </button>
-            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" ng-submit="submitAmount(250)">
+            <button class="col-md-3 col-xs-6 btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 250">
               $250
             </button>
-            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-submit="submitAmount(500)">
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 500">
               $500
             </button>
-            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-submit="submitAmount(1000)">
+            <button class="col-md-3 hidden-xs hidden-sm btn btn-default btn-lg" type="submit" ng-click="vanco.amount = 1000">
               $1,000
             </button>
             <div class="col-md-3 input-group">
               <input class="form-control input-lg" type="number" pattern="[0-9]*" name="enteredAmount" id="enteredAmount" placeholder="Other" ng-model="vanco.amount">
               <span class="input-group-btn">
-                <button class="btn btn-default btn-lg" type="submit" id="customAmt" ng-submit="submitAmount({{vanco.amount}})">Go</button>
+                <button class="btn btn-default btn-lg" type="submit" id="customAmt" ng-disabled="amountForm.$invalid">Go</button>
               </span>
             </div>
           </div>
-          <button class="btn btn-default" type="submit" style="width: 90%; align-content: center;">Next</button>
+          <button class="btn btn-default" type="submit" style="width: 90%; align-content: center;" ng-disabled="amountForm.$invalid">Next</button>
         </fieldset>
       </form>
     </div>
