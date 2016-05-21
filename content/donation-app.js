@@ -243,8 +243,6 @@ function submitPayment(type, client, vanco) {
     //Transaction Parameters
     vanco.startdate = '0000-00-00';
     vanco.transactiontypecode = 'WEB';
-alert(JSON.stringify(vanco));
-return;
     return sendWSNVP(vanco);
   });
   
@@ -254,7 +252,7 @@ return;
     $("#status-bar").addClass("hidden");
     //console.log('confirm: '+JSON.stringify(vanco_result));
     if(vanco_result['transactionref']) {
-      var id = transaction['fundid'];
+      var id = client.fundid;
       funds = {
         "0001" : "General Operations",
         "0002" : "Direct Patient Care",
