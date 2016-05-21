@@ -64,7 +64,7 @@ tags:
       <div class="col-xs-12 amount">{{vanco.amount}}</div>
     </div>
 
-    <div id="transaction-amount-block">
+    <div id="transaction-amount-block" ng-show="breadcrumb == 1">
       <form class="form" role="form" id="amount-form" method="post" name="amountForm" ng-submit="amountFormSubmit(amountForm.$valid)">
         <fieldset>
           <h3>Tell us how to use your donation (choose one)</h3>
@@ -137,7 +137,7 @@ tags:
 
     <!-- Give somewhere for jQuery.validate to put errors for now... -->
     <span class="hidden" id="errors"></span>
-    <div id="transaction-who-block" style="display:none;">
+    <div id="transaction-who-block" ng-show="breadcrumb == 2">
       <form class="form" role="form" name="whoForm" ng-submit="whoFormSubmit(whoForm.$valid)" novalidate>
         <fieldset>
           <legend>Billing Information</legend>
@@ -210,7 +210,7 @@ tags:
       </form>
     </div>
 
-    <div id="transaction-payment-block" style="display:none;">
+    <div id="transaction-payment-block" ng-show="breadcrumb == 3">
       <form class="form form-horizontal" role="form" id="type-form" method="post">
         <fieldset>
           <legend>Select Payment Method</legend>
@@ -289,7 +289,6 @@ tags:
             </div>
           </div>
           <span id="fields"></span>
-          <input type="hidden" name="accounttype" value="CC">
           <button class="amount btn btn-default" type="submit" id="submitCC" ng-disabled="ccForm.$invalid">{{vanco.amount}}</button>
         </fieldset>
       </form>
@@ -318,7 +317,6 @@ tags:
               </div>
             </div>
           </div>
-          <input type="hidden" name="accounttype" value="C">
           <button class="amount btn btn-default" type="submit" id="submitC">{{vanco.amount}}</button>
         </fieldset>
       </form>
@@ -345,7 +343,6 @@ tags:
               </div>
             </div>
           </div>
-          <input type="hidden" name="accounttype" value="S">
           <button class="amount btn btn-default" type="submit" id="submitS">{{vanco.amount}}</button>
         </fieldset>
       </form>
