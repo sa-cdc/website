@@ -15,16 +15,15 @@ angular.module('donation-app', [])
   $scope.vanco.amount = 0;
   $scope.client = {};
   $scope.breadcrumb = 1;
+  $('html, body').animate({ scrollTop: 0 }, 'fast');
   $scope.amountFormSubmit = function(isValid) {
     if(isValid) {
       $scope.breadcrumb = 2;
-      toggleWho();
     }
   };
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
       $scope.breadcrumb = 3;
-      togglePayment($scope.client, $scope.vanco);
     }
   };
   $scope.paymentFormSubmit = function(type, isValid) {
@@ -33,6 +32,7 @@ angular.module('donation-app', [])
       submitPayment(type, $scope.client, $scope.vanco);
     }
   };
+  //toggleDisplay( $('#transaction-error-block') );
 });
 
 function ucwords(str,force){
@@ -80,58 +80,6 @@ function parseURLParams(url) {
         parms[n].push(nv.length === 2 ? v : null);
     }
     return parms;
-}
-
-function toggleBreadCrumb(a) {
-  $('[id^=tx-]').removeClass('active');
-  a.addClass('active');
-}
-
-function toggleDisplay(a) {
-  $( "[id^=transaction-]" ).css("display", "none");
-  a.css("display", "block");
-}
-
-function toggleAmount() {
-  toggleDisplay( $('#transaction-amount-block') );
-  $('html, body').animate({ scrollTop: 0 }, 'fast');
-}
-
-function toggleWho() {
-  toggleDisplay( $('#transaction-who-block') );
-  $('html, body').animate({ scrollTop: 0 }, 'fast');
-}
-
-function togglePayment(client, vanco) {
-  toggleDisplay( $('#transaction-payment-block') );
-  $('html, body').animate({ scrollTop: 0 }, 'fast');
-}
-
-function toggleConfirm() {
-
-  $('#tx-one').unbind('click');
-  $('#tx-two').unbind('click');
-  $('#tx-three').unbind('click');
-
-  $('#tx-one').removeClass('click');
-  $('#tx-two').removeClass('click');
-  $('#tx-three').removeClass('click');
-
-  toggleDisplay( $('#transaction-confirm-block') );
-  toggleBreadCrumb( $('#tx-four'));
-
-  $('html, body').animate({ scrollTop: 0 }, 'fast');
-}
-
-function toggleError() {
-  $('#tx-one').unbind('click');
-  $('#tx-two').unbind('click');
-  $('#tx-three').unbind('click');
-  toggleDisplay( $('#transaction-error-block') );
-
-  $('#tx-one').removeClass('click');
-  $('#tx-two').removeClass('click');
-  $('#tx-three').removeClass('click');
 }
 
 function storeRef(ref) {
@@ -189,29 +137,9 @@ function testWSNVP() {
 //$('#tx-three').click(function() { togglePayment(); });
 //$('#tx-four').click(function() { /*toggleConfirm();*/ });
 
-$( "input[name=accounttype]" ).change(function() {
-  type = $( "input:radio[name=accounttype]:checked" ).val();
-  if(type == "T") {
-    $( "#transaction-CC-block" ).css("display", "block");
-    $( "#transaction-C-block" ).css("display", "none");
-    $( "#transaction-S-block" ).css("display", "none");
-  } else if(type == "C") {
-      $('#accounttype').val('C');
-      $( "#transaction-C-block" ).css("display", "block");
-      $( "#transaction-S-block" ).css("display", "none");
-      $( "#transaction-CC-block" ).css("display", "none");
-  } else if(type == "S") {
-      $('#accounttype').val('S');
-      $( "#transaction-C-block" ).css("display", "none");
-      $( "#transaction-S-block" ).css("display", "block");
-      $( "#transaction-CC-block" ).css("display", "none");
-  }
-});
-
 function submitPayment(type, client, vanco) {
   //UI Stuff
   toggleDisplay($('#transaction-loading'));
-  
   
   nvpVars = {};//Data to encrypt on my server
   nvpVars.requesttype = 'eftaddonetimecompletetransaction';
@@ -273,7 +201,6 @@ function submitPayment(type, client, vanco) {
     }
 
     if(vanco_result['errorlist']) {
-      toggleError();
       errors = vanco_result['errorlist'].split(',');
       //Assumes errorCodes.json is loaded...
       errors.forEach(function(e) {
