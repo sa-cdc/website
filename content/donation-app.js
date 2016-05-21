@@ -293,7 +293,7 @@ return;
     .then(function(){
       var adminData = {};
       adminData['ref'] = vanco_result['transactionref'];
-      adminData['message'] = vanco.name_on_card has donated to the clinic.\r\nAmount: '+vanco.amount+'\r\n'+vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+vanco.customeraddress1+'\r\nPhone: '+vanco.customerphone+'\r\nEmail: '+vanco.customeremail;
+      adminData['message'] = vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+vanco.amount+'\r\n'+vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+vanco.customeraddress1+'\r\nPhone: '+vanco.customerphone+'\r\nEmail: '+vanco.customeremail;
       notifyAdmin(adminData);
     });
   });
