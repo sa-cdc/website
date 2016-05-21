@@ -12,6 +12,7 @@ angular.module('donation-app', [])
   $("#loading_init").addClass("hidden");
   
   $scope.vanco = {};
+  $scope.vanco.amount = 0;
   $scope.client = {};
   $scope.amountFormSubmit = function(isValid) {
     if(isValid) {
@@ -260,14 +261,14 @@ return;
         "0003" : "Endowment Fund"
       };
       if(id == '0001' || id == '0002' || id == '0003') {
-        $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
+        $('#confirm').append('<p>Amount: $'+vanco['fundamount_'+id]+'</p>');
       } else {
-        $('#confirm').append('<p>Amount: $'+transaction['amount']+'</p>');
+        $('#confirm').append('<p>Amount: $'+vanco['amount']+'</p>');
       }
       fund_spt = funds[id]+' at'
-      $('#confirm').append('<p>'+transaction['name_on_card']+', thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
+      $('#confirm').append('<p>{{vanco.name_on_card}}, thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
 
-      $('.amount').text(transaction['amount']);
+      $('.amount').text(vanco.amount);
       toggleConfirm();
       $('#confirm').append('<p>Donation Date: '+vanco_result['startdate']+'</p>');
       $('#confirm').append('<p>Confirmation: '+vanco_result['transactionref']+'</p>');
@@ -292,7 +293,7 @@ return;
     .then(function(){
       var adminData = {};
       adminData['ref'] = vanco_result['transactionref'];
-      adminData['message'] = transaction['name_on_card']+' has donated to the clinic.\r\nAmount: '+transaction['amount']+'\r\n'+transaction['visamctype']+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+transaction['customeraddress1']+'\r\nPhone: '+transaction['customerphone']+'\r\nEmail: '+transaction['customeremail'];
+      adminData['message'] = vanco.name_on_card has donated to the clinic.\r\nAmount: '+vanco.amount+'\r\n'+vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+vanco.customeraddress1+'\r\nPhone: '+vanco.customerphone+'\r\nEmail: '+vanco.customeremail;
       notifyAdmin(adminData);
     });
   });
