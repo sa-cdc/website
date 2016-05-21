@@ -7,6 +7,22 @@ angular.module('donation-app', [])
     $("#dev-warning").removeClass('hidden');
   }
   
+  $scope.loading = true;
+  $scope.vancoReachable = false;
+  
+  var checkingVanco = testWSNVP();
+  checkingVanco.always(function(){
+    $scope.loading = false;
+  });
+  checkingVanco.then(
+    function(){
+      $scope.vancoReachable = true;
+    },
+    function() {
+      $scope.vancoReachable = false;
+    }
+  );
+  
   $("div[id$='_init']").css("display", "block");
   $('#donationApp').removeClass("hidden");
   $("#loading_init").addClass("hidden");
@@ -53,7 +69,6 @@ function getQueryParams(qs) {
     params[decodeURIComponent(tokens[1])]
       = decodeURIComponent(tokens[2]);
   }
-
   return params;
 }
 
@@ -131,11 +146,6 @@ function testWSNVP() {
   });
   return sendingTestData;
 }
-
-//$('#tx-one').click(function() { toggleAmount(); });
-//$('#tx-two').click(function() { toggleWho(); });
-//$('#tx-three').click(function() { togglePayment(); });
-//$('#tx-four').click(function() { /*toggleConfirm();*/ });
 
 function submitPayment(type, client, vanco) {
   //UI Stuff
@@ -220,93 +230,6 @@ function submitPayment(type, client, vanco) {
   });
   };//End submitPayment()
 
-/*$().ready(function() {
-  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
-  $('.vanco_xml').attr('action', 'VANCO_XML');
-  if('DEV_MODE'=="yes") {
-    $("#dev-warning").removeClass('hidden');
-  }
-  */
-
-  //AJAX request to test Vanco connection
-  //$("element[id$='txtTitle']")
-    //$("div[id$='_init']").css("display", "block");
-  
-  /* - Commented for testing off-net  
-  var checkingVanco = testWSNVP();
-  checkingVanco.always(function(){
-    $("#loading_init").addClass("hidden");
-  });
-  checkingVanco.then(
-    function(){
-      $('#donationApp').removeClass("hidden");
-    },
-    function() {
-      $('#failedToLoad').removeClass("hidden");
-    }
-  );
-  - Remove following 2 lines when on net*/
-//  $('#donationApp').removeClass("hidden");
-//  $("#loading_init").addClass("hidden");
-/*
-  jQuery.validator.setDefaults({
-    highlight: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-      $(glyph_e).removeClass('glyphicon-ok').addClass('glyphicon-remove');
-    },
-    unhighlight: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    },
-    success: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    },
-    errorContainer: "#errors",
-    errorLabelContainer: "#errors"
-  });
-
-  $("input").not("#billing-email").focusout(function() {
-      var cp_value= ucwords($(this).val(),true);
-      $(this).val(cp_value);
-  });
-
-  $("#amount-form").validate();
-  $("#who-form").validate();
-  $("#CC-form").validate();
-  $("#C-form").validate();
-  $("#S-form").validate();
-
-   //Amount Form
-   $("#enteredAmount").rules("add", {
-     minlength: 1,
-     maxlength: 5
-   });
-   //Billing Information (Who Block)
-   $("#billing-first").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-last").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-city").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-email").rules("add", {
-     required: true,
-     email: true
-   });
-   $("#billing-phone").rules("add", {
-     phoneUS: true
-   });*/
-//});
-
 /**
  * Testing Notes:
  * Testing: https://stripe.com/docs/testing
@@ -324,8 +247,6 @@ function submitPayment(type, client, vanco) {
  *
  * confirm: //Saving
  * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"}
- * 
- * 
  * 
  *   
      {
@@ -345,4 +266,3 @@ function submitPayment(type, client, vanco) {
       "customerid":"14940770"
     }
  **/
- 
