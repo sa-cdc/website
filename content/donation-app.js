@@ -267,8 +267,6 @@ return;
       }
       fund_spt = funds[id]+' at'
       $('#confirm').append('<p>{{vanco.name_on_card}}, thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
-
-      $('.amount').text(vanco.amount);
       toggleConfirm();
       $('#confirm').append('<p>Donation Date: '+vanco_result['startdate']+'</p>');
       $('#confirm').append('<p>Confirmation: '+vanco_result['transactionref']+'</p>');
