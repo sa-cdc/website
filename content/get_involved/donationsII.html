@@ -219,7 +219,7 @@ tags:
               <div class="form-group">
                 <label class="control-label">
                   Credit Card
-                  <input type="radio" value="T" name="accounttype" id="paymentCC">
+                  <input type="radio" value="CC" ng-model="vanco.accountype" name="accounttype" id="paymentCC">
                 </label>
               </div>
             </div>
@@ -227,7 +227,7 @@ tags:
               <div class="form-group">
                 <label class="control-label">
                   Checking
-                  <input type="radio" value="C" name="accounttype" id="paymentC">
+                  <input type="radio" value="C" ng-model="vanco.accountype" name="accounttype" id="paymentC">
                 </label>
               </div>
             </div>
@@ -235,7 +235,7 @@ tags:
               <div class="form-group">
                 <label class="control-label">
                   Savings
-                  <input type="radio" value="S" name="accounttype" id="paymentS">
+                  <input type="radio" value="S" ng-model="vanco.accountype" name="accounttype" id="paymentS">
                 </label>
               </div>
             </div>
@@ -245,7 +245,7 @@ tags:
       <div class="full-rule"></div>
     </div>
 
-    <div id="transaction-CC-block" style="display: none;">
+    <div id="transaction-CC-block" style="display: none;" ng-show="vanco.accounttype == 'CC'">
       <form class="CC form vanco_nvp" role="form" id="CC-form" method="get" name="ccForm" ng-submit="paymentFormSubmit('cc',ccForm.$valid)" novalidate>
         <fieldset>
           <div class="row text-left">
@@ -295,7 +295,7 @@ tags:
       </form>
     </div>
 
-    <div id="transaction-C-block" style="display: none;">
+    <div id="transaction-C-block"  ng-show="vanco.accounttype == 'C'">
       <form class="CS form vanco_nvp" role="form" id="C-form" method="get">
         <fieldset>
           <div class="row text-left">
@@ -324,7 +324,7 @@ tags:
       </form>
     </div>
 
-    <div id="transaction-S-block" style="display: none;">
+    <div id="transaction-S-block" ng-show="vanco.accounttype == 'S'">
       <form class="CS form vanco_nvp" role="form" id="S-form" method="get">
         <fieldset>
           <div class="row text-left">
