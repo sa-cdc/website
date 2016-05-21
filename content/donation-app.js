@@ -3,9 +3,7 @@ angular.module('donation-app', [])
   
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
   $('.vanco_xml').attr('action', 'VANCO_XML');
-  if('DEV_MODE'=="yes") {
-    $("#dev-warning").removeClass('hidden');
-  }
+  $scope.devMode = 'DEV_MODE'=="yes";
   
   $scope.loading = true;
   $scope.vancoReachable = false;
@@ -23,18 +21,15 @@ angular.module('donation-app', [])
     }
   );
   
-  $("div[id$='_init']").css("display", "block");
-  $('#donationApp').removeClass("hidden");
-  $("#loading_init").addClass("hidden");
-  
   $scope.vanco = {};
   $scope.vanco.amount = 0;
   $scope.client = {};
   $scope.breadcrumb = 1;
-  $('html, body').animate({ scrollTop: 0 }, 'fast');
+
   $scope.amountFormSubmit = function(isValid) {
     if(isValid) {
       $scope.breadcrumb = 2;
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
   };
   $scope.whoFormSubmit = function(isValid) {
@@ -48,7 +43,6 @@ angular.module('donation-app', [])
       submitPayment(type, $scope.client, $scope.vanco);
     }
   };
-  //toggleDisplay( $('#transaction-error-block') );
 });
 
 function ucwords(str,force){
