@@ -20,7 +20,7 @@ tags:
   <span id="alertfield"></span>
 </div>
 
-<div class="row text-center" id="loading_init">
+<div class="row text-center" id="loading_init" ng-show="loading">
   <div class="col-sm-6 col-sm-offset-3">
     <div class="alert alert-info" role="alert">
       <p>Loading donation form</p>
@@ -348,7 +348,7 @@ tags:
       </form>
     </div>
 
-    <div id="transaction-loading" ng-show="loading">
+    <div id="transaction-loading">
       <div class="row">
         <div class="col-xs-2 col-xs-offset-5">
           <img src="/static/imgs/ajax-loader.gif" class="img-responsive">
