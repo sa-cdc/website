@@ -14,6 +14,7 @@ angular.module('donation-app', [])
   $scope.vanco = {};
   $scope.vanco.amount = 0;
   $scope.client = {};
+  $scope.breadcrumb = 1;
   $scope.amountFormSubmit = function(isValid) {
     if(isValid) {
       toggleWho();
@@ -90,22 +91,16 @@ function toggleDisplay(a) {
 
 function toggleAmount() {
   toggleDisplay( $('#transaction-amount-block') );
-  toggleBreadCrumb( $('#tx-one'));
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function toggleWho() {
   toggleDisplay( $('#transaction-who-block') );
-  toggleBreadCrumb( $('#tx-two'));
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
 function togglePayment(client, vanco) {
   toggleDisplay( $('#transaction-payment-block') );
-  $('#paymentCC').prop('checked', false);
-  $('#paymentC').prop('checked', false);
-  $('#paymentS').prop('checked', false);
-  toggleBreadCrumb( $('#tx-three'));
   $('html, body').animate({ scrollTop: 0 }, 'fast');
 }
 
