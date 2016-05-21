@@ -17,7 +17,7 @@ angular.module('donation-app', [])
   $scope.breadcrumb = 1;
   $scope.amountFormSubmit = function(isValid) {
     if(isValid) {
-      $scope.breadcumb = 2;
+      $scope.breadcrumb = 2;
       toggleWho();
     }
   };
