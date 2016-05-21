@@ -17,18 +17,19 @@ angular.module('donation-app', [])
   $scope.breadcrumb = 1;
   $scope.amountFormSubmit = function(isValid) {
     if(isValid) {
-      breadrumb = 2;
+      $scope.breadcumb = 2;
       toggleWho();
     }
   };
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
-      breadcrumb = 3;
+      $scope.breadcrumb = 3;
       togglePayment($scope.client, $scope.vanco);
     }
   };
   $scope.paymentFormSubmit = function(type, isValid) {
     if(isValid) {
+      $scope.breadcrumb = 4;
       submitPayment(type, $scope.client, $scope.vanco);
     }
   };
