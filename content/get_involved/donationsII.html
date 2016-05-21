@@ -5,7 +5,7 @@ precedence: 1
 tags:
   - service 
 ---
-<div class="bs-docs-featurette">
+<div class="bs-docs-featurette" ng-app="donation-app" ng-controller="mainController">
   <h2 class="bs-docs-featurette-title">Help our Mission by Making a Donation</h2>
   <p class="lead">As a nonprofit dental health provider, we rely
   heavily on individual monetary donations to provide services to those in
@@ -29,13 +29,13 @@ tags:
   </div>
 </div>
 
-<div class="row text-left hidden" id="failedToLoad">
+<div class="row text-left hidden" id="failedToLoad" ng-show="!vancoReachable">
   <div class="col-sm-8 col-sm-offset-1">
       <iframe seamless width="1000" height="900" src="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=Fi1giPL8kwX_Oe1AO50jRr_5EY00pUXvBEVaNoq9qEBEOVZpPcIw91FrYieK2rA42EvVVAEjqawDomKT1pbouVk0gddPaqI8aWBIbUwUpP0="></iframe>
   </div>
 </div>
 
-<div ng-app="donation-app" ng-controller="mainController" class="hidden donate row text-center" id="donationApp">
+<div class="hidden donate row text-center" id="donationApp" ng-show="vancoReachable">
   <div class="hidden col-md-8 col-md-offset-2 alert alert-danger" id="dev-warning" role="alert">
     In Development Environment -- Use only test values, you been warned.
   </div>
@@ -348,7 +348,7 @@ tags:
       </form>
     </div>
 
-    <div id="transaction-loading" style="display: none;">
+    <div id="transaction-loading" ng-show="loading">
       <div class="row">
         <div class="col-xs-2 col-xs-offset-5">
           <img src="/static/imgs/ajax-loader.gif" class="img-responsive">
