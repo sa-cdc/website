@@ -61,7 +61,7 @@ tags:
           4
         </div>
       </div>
-      <div class="col-xs-12 amount">{{vanco.amount}}</div>
+      <div class="col-xs-12 amount">{{vanco.amount}} {{vanco.accounttype}}</div>
     </div>
 
     <div id="transaction-amount-block">
@@ -219,7 +219,7 @@ tags:
               <div class="form-group">
                 <label class="control-label">
                   Credit Card
-                  <input type="radio" value="CC" ng-model="vanco.accountype" name="accounttype" id="paymentCC">
+                  <input type="radio" value="CC" ng-model="vanco.accounttype" name="accounttype" id="paymentCC">
                 </label>
               </div>
             </div>
@@ -227,7 +227,7 @@ tags:
               <div class="form-group">
                 <label class="control-label">
                   Checking
-                  <input type="radio" value="C" ng-model="vanco.accountype" name="accounttype" id="paymentC">
+                  <input type="radio" value="C" ng-model="vanco.accounttype" name="accounttype" id="paymentC">
                 </label>
               </div>
             </div>
@@ -235,7 +235,7 @@ tags:
               <div class="form-group">
                 <label class="control-label">
                   Savings
-                  <input type="radio" value="S" ng-model="vanco.accountype" name="accounttype" id="paymentS">
+                  <input type="radio" value="S" ng-model="vanco.accounttype" name="accounttype" id="paymentS">
                 </label>
               </div>
             </div>
