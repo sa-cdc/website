@@ -8,7 +8,7 @@ angular.module('donation-app', [])
   $scope.loading = true;
   $scope.vancoReachable = false;
   
-  var checkingVanco = testWSNVP();
+  $scope.checkingVanco = testWSNVP();
   checkingVanco.always(function(){
     $scope.loading = false;
     console.log('always ran');
