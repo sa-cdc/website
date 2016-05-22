@@ -12,13 +12,16 @@ angular.module('donation-app', [])
   $scope.checkingVanco.always(function(){
     $scope.loading = false;
     console.log('always ran: '+$scope.loading);
+    $scope.$apply();
   });
   $scope.checkingVanco.then(
     function(){
       $scope.vancoReachable = true;
+      $scope.$apply();
     },
     function() {
       $scope.vancoReachable = false;
+      $scope.$apply();
     }
   );
   
