@@ -136,15 +136,13 @@ function testWSNVP() {
   var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
   var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
   var sendingTestData = signingFakeData.then(function(data){
-      return sendWSNVP(data, 4000);
+    console.log('test: '+JSON.stringify(data));
+    return sendWSNVP(data, 4000);
   });
   return sendingTestData;
 }
 
 function submitPayment(type, client, vanco) {
-  //UI Stuff
-  toggleDisplay($('#transaction-loading'));
-  
   nvpVars = {};//Data to encrypt on my server
   nvpVars.requesttype = 'eftaddonetimecompletetransaction';
   nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
@@ -195,7 +193,6 @@ function submitPayment(type, client, vanco) {
       }
       fund_spt = funds[id]+' at'
       $('#confirm').append('<p>{{vanco.name_on_card}}, thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
-      toggleConfirm();
       $('#confirm').append('<p>Donation Date: '+vanco_result['startdate']+'</p>');
       $('#confirm').append('<p>Confirmation: '+vanco_result['transactionref']+'</p>');
       if(vanco_result['cardtype']) {
