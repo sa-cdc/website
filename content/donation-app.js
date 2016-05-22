@@ -11,6 +11,7 @@ angular.module('donation-app', [])
   var checkingVanco = testWSNVP();
   checkingVanco.always(function(){
     $scope.loading = false;
+    console.log('always ran);
   });
   checkingVanco.then(
     function(){
@@ -122,6 +123,7 @@ function signNVP(insecureData) {
 
 function sendWSNVP(secureData, timeout) {
   timeout = typeof timeout !== 'undefined' ? timeout : 0;
+  console.log('sending: '+JSON.stringify(secureData));
   return $.ajax({
     type: 'GET',
     url: 'VANCO_WSNVP',
