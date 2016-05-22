@@ -11,7 +11,7 @@ angular.module('donation-app', [])
   var checkingVanco = testWSNVP();
   checkingVanco.always(function(){
     $scope.loading = false;
-    console.log('always ran);
+    console.log('always ran');
   });
   checkingVanco.then(
     function(){
