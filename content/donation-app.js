@@ -9,11 +9,11 @@ angular.module('donation-app', [])
   $scope.vancoReachable = false;
   
   $scope.checkingVanco = testWSNVP();
-  checkingVanco.always(function(){
+  $scope.checkingVanco.always(function(){
     $scope.loading = false;
     console.log('always ran');
   });
-  checkingVanco.then(
+  $scope.checkingVanco.then(
     function(){
       $scope.vancoReachable = true;
     },
