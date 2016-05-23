@@ -1,4 +1,4 @@
-var donationApp = angular.module('donation-app', [];
+var donationApp = angular.module('donation-app', [];)
 
 donationApp.factory('storeRef',['$http',function($http){
   return function(ref) {
