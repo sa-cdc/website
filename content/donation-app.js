@@ -104,52 +104,6 @@ service.testWSNVP = function() {
   return service;
 });
 
-function ucwords(str,force){
-  str=force ? str.toLowerCase() : str;
-  return str.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
-      function(firstLetter){
-        return firstLetter.toUpperCase();
-      });
-}
-
-function getQueryParams(qs) {
-  qs = qs.split("+").join(" ");
-  var params = {},
-      tokens,
-      re = /[?&]?([^=]+)=([^&]*)/g;
-
-  while (tokens = re.exec(qs)) {
-    params[decodeURIComponent(tokens[1])]
-      = decodeURIComponent(tokens[2]);
-  }
-  return params;
-}
-
-function parseURLParams(url) {
-    var queryStart = url.indexOf("?") + 1,
-        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
-        query = url.slice(queryStart, queryEnd - 1),
-        pairs = query.replace(/\+/g, " ").split("&"),
-        parms = {}, i, n, v, nv;
-
-    if (query === url || query === "") {
-        return;
-    }
-
-    for (i = 0; i < pairs.length; i++) {
-        nv = pairs[i].split("=");
-        n = decodeURIComponent(nv[0]);
-        v = decodeURIComponent(nv[1]);
-
-        if (!parms.hasOwnProperty(n)) {
-            parms[n] = [];
-        }
-
-        parms[n].push(nv.length === 2 ? v : null);
-    }
-    return parms;
-}
-
 function submitPayment(type, client, vanco) {
   nvpVars = {};//Data to encrypt on my server
   nvpVars.requesttype = 'eftaddonetimecompletetransaction';
@@ -227,7 +181,7 @@ function submitPayment(type, client, vanco) {
       notifyAdmin(adminData);
     });
   });
-  };//End submitPayment()
+  }//End submitPayment()
 
 
 /**
