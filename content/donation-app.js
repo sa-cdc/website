@@ -1,5 +1,52 @@
 var donationApp = angular.module('donation-app', []);
 
+donationApp.controller('mainController', function($scope, vancoAPI) {
+  
+  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
+  $('.vanco_xml').attr('action', 'VANCO_XML');
+  $scope.devMode = 'DEV_MODE'=="yes";
+  
+  $scope.loading = true;
+  $scope.vancoReachable = false;
+  
+  $scope.checkingVanco = vancoAPI.testWSNVP();
+  $scope.checkingVanco.always(function(){
+    $scope.loading = false;
+    console.log('always ran: '+$scope.loading);
+  });
+  $scope.checkingVanco.then(
+    function(){
+      $scope.vancoReachable = true;
+    },
+    function() {
+      $scope.vancoReachable = false;
+    }
+  );
+  
+  $scope.vanco = {};
+  $scope.vanco.amount = 0;
+  $scope.client = {};
+  $scope.breadcrumb = 1;
+
+  $scope.amountFormSubmit = function(isValid) {
+    if(isValid) {
+      $scope.breadcrumb = 2;
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
+    }
+  };
+  $scope.whoFormSubmit = function(isValid) {
+    if(isValid) {
+      $scope.breadcrumb = 3;
+    }
+  };
+  $scope.paymentFormSubmit = function(type, isValid) {
+    if(isValid) {
+      $scope.breadcrumb = 4;
+      submitPayment(type, $scope.client, $scope.vanco);
+    }
+  };
+});
+
 donationApp.factory('vancoAPI', function($http){
   var service = {};
   
@@ -54,53 +101,6 @@ service.testWSNVP = function() {
     return sendingTestData;
   }
 });
-
-
-donationApp.controller('mainController', function($scope, vancoAPI) {
-  
-  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
-  $('.vanco_xml').attr('action', 'VANCO_XML');
-  $scope.devMode = 'DEV_MODE'=="yes";
-  
-  $scope.loading = true;
-  $scope.vancoReachable = false;
-  
-  $scope.checkingVanco = vancoAPI.testWSNVP();
-  $scope.checkingVanco.always(function(){
-    $scope.loading = false;
-    console.log('always ran: '+$scope.loading);
-  });
-  $scope.checkingVanco.then(
-    function(){
-      $scope.vancoReachable = true;
-    },
-    function() {
-      $scope.vancoReachable = false;
-    }
-  );
-  
-  $scope.vanco = {};
-  $scope.vanco.amount = 0;
-  $scope.client = {};
-  $scope.breadcrumb = 1;
-
-  $scope.amountFormSubmit = function(isValid) {
-    if(isValid) {
-      $scope.breadcrumb = 2;
-      $('html, body').animate({ scrollTop: 0 }, 'fast');
-    }
-  };
-  $scope.whoFormSubmit = function(isValid) {
-    if(isValid) {
-      $scope.breadcrumb = 3;
-    }
-  };
-  $scope.paymentFormSubmit = function(type, isValid) {
-    if(isValid) {
-      $scope.breadcrumb = 4;
-      submitPayment(type, $scope.client, $scope.vanco);
-    }
-  };
 
 function ucwords(str,force){
   str=force ? str.toLowerCase() : str;
@@ -226,7 +226,7 @@ function submitPayment(type, client, vanco) {
     });
   });
   };//End submitPayment()
-});
+
 
 /**
  * Testing Notes:
