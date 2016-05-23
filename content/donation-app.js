@@ -1,5 +1,5 @@
 angular.module('donation-app', [])
-.controller('mainController', function($scope) {
+.controller('mainController', function($scope, $http) {
   
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
   $('.vanco_xml').attr('action', 'VANCO_XML');
