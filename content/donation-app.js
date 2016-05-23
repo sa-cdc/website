@@ -56,7 +56,7 @@ service.testWSNVP = function() {
 });
 
 
-donationApp.controller('mainController', function($scope, testWSNVP) {
+donationApp.controller('mainController', function($scope, vancoAPI) {
   
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
   $('.vanco_xml').attr('action', 'VANCO_XML');
@@ -65,7 +65,7 @@ donationApp.controller('mainController', function($scope, testWSNVP) {
   $scope.loading = true;
   $scope.vancoReachable = false;
   
-  $scope.checkingVanco = testWSNVP();
+  $scope.checkingVanco = vancoAPI.testWSNVP();
   $scope.checkingVanco.always(function(){
     $scope.loading = false;
     console.log('always ran: '+$scope.loading);
