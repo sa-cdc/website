@@ -1,7 +1,9 @@
 var donationApp = angular.module('donation-app', []);
 
-donationApp.factory('storeRef',['$http',function($http){
-  return function(ref) {
+donationApp.factory('vancoAPI', function($http){
+  var service = {};
+  
+  service.storeRef = function(ref) {
    return $http({
       type: 'GET',
       url: '/static/scripts/vanco/storeRef.php',
@@ -10,12 +12,8 @@ donationApp.factory('storeRef',['$http',function($http){
       dataType: 'jsonp'
     });
   }
-}
-]);
 
-
-donationApp.factory('notifyAdmin',['$http',function($http){
-  return function(data) {
+  service.notifyAdmin = function(data) {
     return $http({
       type: 'GET',
       url: '/static/scripts/vanco/email.php',
@@ -24,11 +22,8 @@ donationApp.factory('notifyAdmin',['$http',function($http){
       dataType: 'jsonp'
     });
   }
-}
-]);
 
-donationApp.factory('signNVP',['$http',function($http){
-  function(insecureData) {
+  service.signNVP = function(insecureData) {
     return $http({
       type: 'GET',
       url: '/static/scripts/vanco/nvpEncrypt.php',
@@ -36,11 +31,8 @@ donationApp.factory('signNVP',['$http',function($http){
       dataType: 'jsonp'
     });
   }
-}
-]);
 
-donationApp.factory('sendWSNVP',['$http',function($http){
-  function(secureData, timeout) {
+  service.sendWSNVP = function(secureData, timeout) {
     timeout = typeof timeout !== 'undefined' ? timeout : 0;
     return $http({
       type: 'GET',
@@ -51,11 +43,8 @@ donationApp.factory('sendWSNVP',['$http',function($http){
       dataType: 'jsonp'
     });
   }
-}
-]);
 
-donationApp.factory('testWSNVP',['$http', 'signNVP', 'sendNVP',function($http, signNVP, sendNVP){
-  return function() {
+service.testWSNVP = function() {
     var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
     var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
     var sendingTestData = signingFakeData.then(function(data){
@@ -64,8 +53,6 @@ donationApp.factory('testWSNVP',['$http', 'signNVP', 'sendNVP',function($http, s
     });
     return sendingTestData;
   }
-}
-]);
 
 
 donationApp.controller('mainController', function($scope, testWSNVP) {
