@@ -39,72 +39,8 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       $scope.breadcrumb = 3;
     }
   };
-  $scope.paymentFormSubmit = function(type, isValid) {
-    if(isValid) {
-      $scope.breadcrumb = 4;
-      submitPayment(type, $scope.client, $scope.vanco);
-    }
-  };
-});
-
-donationApp.factory('vancoAPI', function($http){
-  var service = {};
   
-  service.storeRef = function(ref) {
-   return $http({
-      type: 'GET',
-      url: '/static/scripts/vanco/storeRef.php',
-      crossDomain: false,
-      data: {"ref":ref},
-      dataType: 'jsonp'
-    });
-  }
-
-  service.notifyAdmin = function(data) {
-    return $http({
-      type: 'GET',
-      url: '/static/scripts/vanco/email.php',
-      crossDomain: false,
-      data: data,
-      dataType: 'jsonp'
-    });
-  }
-
-  service.signNVP = function(insecureData) {
-    return $http({
-      type: 'GET',
-      url: '/static/scripts/vanco/nvpEncrypt.php',
-      data: insecureData,
-      dataType: 'jsonp'
-    });
-  }
-
-  service.sendWSNVP = function(secureData, timeout) {
-    timeout = typeof timeout !== 'undefined' ? timeout : 0;
-    return $http({
-      type: 'GET',
-      url: 'VANCO_WSNVP',
-      crossDomain: true,
-      timeout: timeout,
-      data: secureData,
-      dataType: 'jsonp'
-    });
-  }
-
-service.testWSNVP = function() {
-    var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-    var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
-    var sendingTestData = signingFakeData.then(function(data){
-      console.log('test: '+JSON.stringify(data));
-      return service.sendWSNVP(data, 4000);
-    });
-    return sendingTestData;
-  }
-  
-  return service;
-});
-
-function submitPayment(type, client, vanco) {
+  submitPayment = function(type, client, vanco) {
   nvpVars = {};//Data to encrypt on my server
   nvpVars.requesttype = 'eftaddonetimecompletetransaction';
   nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
@@ -181,8 +117,74 @@ function submitPayment(type, client, vanco) {
       notifyAdmin(adminData);
     });
   });
-  }//End submitPayment()
+  };//End submitPayment()
+  $scope.paymentFormSubmit = function(type, isValid) {
+    if(isValid) {
+      $scope.breadcrumb = 4;
+      submitPayment(type, $scope.client, $scope.vanco);
+    }
+  };  
+});
 
+
+
+
+donationApp.factory('vancoAPI', function($http){
+  var service = {};
+  
+  service.storeRef = function(ref) {
+   return $http({
+      type: 'GET',
+      url: '/static/scripts/vanco/storeRef.php',
+      crossDomain: false,
+      data: {"ref":ref},
+      dataType: 'jsonp'
+    });
+  }
+
+  service.notifyAdmin = function(data) {
+    return $http({
+      type: 'GET',
+      url: '/static/scripts/vanco/email.php',
+      crossDomain: false,
+      data: data,
+      dataType: 'jsonp'
+    });
+  }
+
+  service.signNVP = function(insecureData) {
+    return $http({
+      type: 'GET',
+      url: '/static/scripts/vanco/nvpEncrypt.php',
+      data: insecureData,
+      dataType: 'jsonp'
+    });
+  }
+
+  service.sendWSNVP = function(secureData, timeout) {
+    timeout = typeof timeout !== 'undefined' ? timeout : 0;
+    return $http({
+      type: 'GET',
+      url: 'VANCO_WSNVP',
+      crossDomain: true,
+      timeout: timeout,
+      data: secureData,
+      dataType: 'jsonp'
+    });
+  }
+
+service.testWSNVP = function() {
+    var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+    var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
+    var sendingTestData = signingFakeData.then(function(data){
+      console.log('test: '+JSON.stringify(data));
+      return service.sendWSNVP(data, 4000);
+    });
+    return sendingTestData;
+  }
+  
+  return service;
+});
 
 /**
  * Testing Notes:
