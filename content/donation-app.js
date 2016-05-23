@@ -181,6 +181,10 @@ service.testWSNVP = function() {
     var sendingTestData = signingFakeData.then(function(data){
       console.log('test: '+JSON.stringify(data));
       return service.sendWSNVP(data, 4000);
+    },
+    function(data){
+      console.log('FAILED: '+JSON.stringify(data));
+      return null;
     });
     return sendingTestData;
   }
