@@ -1,5 +1,74 @@
-angular.module('donation-app', [])
-.controller('mainController', function($scope, $http) {
+var donationApp = angular.module('donation-app', [];
+
+donationApp.factory('storeRef',['$http',function($http){
+  return function(ref) {
+   return $http({
+      type: 'GET',
+      url: '/static/scripts/vanco/storeRef.php',
+      crossDomain: false,
+      data: {"ref":ref},
+      dataType: 'jsonp'
+    });
+  }
+}
+]);
+
+
+donationApp.factory('notifyAdmin',['$http',function($http){
+  return function(data) {
+    return $http({
+      type: 'GET',
+      url: '/static/scripts/vanco/email.php',
+      crossDomain: false,
+      data: data,
+      dataType: 'jsonp'
+    });
+  }
+}
+]);
+
+donationApp.factory('signNVP',['$http',function($http){
+  function(insecureData) {
+    return $http({
+      type: 'GET',
+      url: '/static/scripts/vanco/nvpEncrypt.php',
+      data: insecureData,
+      dataType: 'jsonp'
+    });
+  }
+}
+]);
+
+donationApp.factory('sendWSNVP',['$http',function($http){
+  function(secureData, timeout) {
+    timeout = typeof timeout !== 'undefined' ? timeout : 0;
+    return $http({
+      type: 'GET',
+      url: 'VANCO_WSNVP',
+      crossDomain: true,
+      timeout: timeout,
+      data: secureData,
+      dataType: 'jsonp'
+    });
+  }
+}
+]);
+
+donationApp.factory('testWSNVP',['$http', 'signNVP', 'sendNVP',function($http, signNVP, sendNVP){
+  return function() {
+    var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+    var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
+    var sendingTestData = signingFakeData.then(function(data){
+      console.log('test: '+JSON.stringify(data));
+      return sendWSNVP(data, 4000);
+    });
+    return sendingTestData;
+  }
+}
+]);
+
+
+donationApp.controller('mainController', function($scope, testWSNVP) {
   
   $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
   $('.vanco_xml').attr('action', 'VANCO_XML');
@@ -89,58 +158,6 @@ function parseURLParams(url) {
         parms[n].push(nv.length === 2 ? v : null);
     }
     return parms;
-}
-
-function storeRef(ref) {
-  return $http({
-    type: 'GET',
-    url: '/static/scripts/vanco/storeRef.php',
-    crossDomain: false,
-    data: {"ref":ref},
-    dataType: 'jsonp'
-  });
-}
-
-function notifyAdmin(data) {
-  return $http({
-    type: 'GET',
-    url: '/static/scripts/vanco/email.php',
-    crossDomain: false,
-    data: data,
-    dataType: 'jsonp'
-  });
-}
-
-function signNVP(insecureData) {
-  return $http({
-    type: 'GET',
-    url: '/static/scripts/vanco/nvpEncrypt.php',
-    data: insecureData,
-    dataType: 'jsonp'
-  });
-}
-
-function sendWSNVP(secureData, timeout) {
-  timeout = typeof timeout !== 'undefined' ? timeout : 0;
-  console.log('sending: '+JSON.stringify(secureData));
-  return $http({
-    type: 'GET',
-    url: 'VANCO_WSNVP',
-    crossDomain: true,
-    timeout: timeout,
-    data: secureData,
-    dataType: 'jsonp'
-  });
-}
-
-function testWSNVP() {
-  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
-  var sendingTestData = signingFakeData.then(function(data){
-    console.log('test: '+JSON.stringify(data));
-    return sendWSNVP(data, 4000);
-  });
-  return sendingTestData;
 }
 
 function submitPayment(type, client, vanco) {
