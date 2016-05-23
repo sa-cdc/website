@@ -44,7 +44,6 @@ angular.module('donation-app', [])
       submitPayment(type, $scope.client, $scope.vanco);
     }
   };
-});
 
 function ucwords(str,force){
   str=force ? str.toLowerCase() : str;
@@ -222,6 +221,7 @@ function submitPayment(type, client, vanco) {
     });
   });
   };//End submitPayment()
+});
 
 /**
  * Testing Notes:
