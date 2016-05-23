@@ -17,9 +17,11 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.checkingVanco.then(
     function(){
       $scope.vancoReachable = true;
+      console.log('reachable');
     },
     function() {
       $scope.vancoReachable = false;
+      console.log('UNreachable');
     }
   );
   
@@ -137,7 +139,7 @@ donationApp.factory('vancoAPI', function($http){
       type: 'GET',
       url: '/static/scripts/vanco/storeRef.php',
       crossDomain: false,
-      data: {"ref":ref},
+      data: {'ref':ref},
       dataType: 'jsonp'
     });
   }
@@ -182,7 +184,6 @@ service.testWSNVP = function() {
     });
     return sendingTestData;
   }
-  
   return service;
 });
 
