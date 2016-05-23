@@ -100,6 +100,8 @@ service.testWSNVP = function() {
     });
     return sendingTestData;
   }
+  
+  return service;
 });
 
 function ucwords(str,force){
