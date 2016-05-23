@@ -12,16 +12,13 @@ angular.module('donation-app', [])
   $scope.checkingVanco.always(function(){
     $scope.loading = false;
     console.log('always ran: '+$scope.loading);
-    $scope.$apply();
   });
   $scope.checkingVanco.then(
     function(){
       $scope.vancoReachable = true;
-      $scope.$apply();
     },
     function() {
       $scope.vancoReachable = false;
-      $scope.$apply();
     }
   );
   
@@ -96,7 +93,7 @@ function parseURLParams(url) {
 }
 
 function storeRef(ref) {
-  return $.ajax({
+  return $http({
     type: 'GET',
     url: '/static/scripts/vanco/storeRef.php',
     crossDomain: false,
@@ -106,7 +103,7 @@ function storeRef(ref) {
 }
 
 function notifyAdmin(data) {
-  return $.ajax({
+  return $http({
     type: 'GET',
     url: '/static/scripts/vanco/email.php',
     crossDomain: false,
@@ -116,7 +113,7 @@ function notifyAdmin(data) {
 }
 
 function signNVP(insecureData) {
-  return $.ajax({
+  return $http({
     type: 'GET',
     url: '/static/scripts/vanco/nvpEncrypt.php',
     data: insecureData,
@@ -127,7 +124,7 @@ function signNVP(insecureData) {
 function sendWSNVP(secureData, timeout) {
   timeout = typeof timeout !== 'undefined' ? timeout : 0;
   console.log('sending: '+JSON.stringify(secureData));
-  return $.ajax({
+  return $http({
     type: 'GET',
     url: 'VANCO_WSNVP',
     crossDomain: true,
