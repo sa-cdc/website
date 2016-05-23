@@ -53,6 +53,7 @@ service.testWSNVP = function() {
     });
     return sendingTestData;
   }
+});
 
 
 donationApp.controller('mainController', function($scope, testWSNVP) {
