@@ -10,7 +10,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.vancoReachable = false;
   
   $scope.checkingVanco = vancoAPI.testWSNVP();
-  $scope.checkingVanco.always(function(){
+  $scope.checkingVanco.finally(function(){
     $scope.loading = false;
     console.log('always ran: '+$scope.loading);
   });
