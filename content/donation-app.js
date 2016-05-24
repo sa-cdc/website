@@ -188,7 +188,7 @@ service.testWSNVP = function() {
       console.log('FAILED: '+JSON.stringify(data));
       return null;
     });
-    return sendingTestData;*/
+    return sendingTestData;
   }
   return service;
 });
