@@ -8,7 +8,7 @@ ini_set("mail.add_x_header", TRUE);*/
 
 require_once('Mail.php');
    
-$recipients = 'mfsairpwr@gmail.com';
+$recipients = 'susan@sachristiandental.org,matthewfsteele@gmail.com';
 
 $message = $_GET['message'];
 $ref = $_GET['ref'];
