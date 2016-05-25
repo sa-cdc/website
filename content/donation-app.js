@@ -180,7 +180,7 @@ service.testWSNVP = function() {
     var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
     
     var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
-    console.log('parse: '+JSON.parse('({"sessionid":"55e2f5b3c41a0a2b86770c77d7ddfcda18241268","nvpvar":"fUlFUSXmGl2UkjdIDw-VEQv1JJsh5OQdrJs9KAy96L1BgUlsxbyEr5hxOw-aTsnCKuV1gUghY2cDovds-48Pug=="})'));
+    console.log('parse: '+JSON.parse('{"sessionid":"55e2f5b3c41a0a2b86770c77d7ddfcda18241268","nvpvar":"fUlFUSXmGl2UkjdIDw-VEQv1JJsh5OQdrJs9KAy96L1BgUlsxbyEr5hxOw-aTsnCKuV1gUghY2cDovds-48Pug=="}'));
     var sendingTestData = signingFakeData.then(function(data){
       console.log('test: '+JSON.stringify(data));
       return service.sendWSNVP(data, 4000);
