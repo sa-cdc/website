@@ -181,7 +181,6 @@ service.testWSNVP = function() {
     
     var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
     console.log('signingFakeData: '+JSON.stringify(signingFakeData));
-    console.log(JSON.parse(fakeData));
     var sendingTestData = signingFakeData.then(function(data){
       console.log('test: '+JSON.stringify(data));
       return service.sendWSNVP(data, 4000);
