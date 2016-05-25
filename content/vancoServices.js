@@ -1,9 +1,4 @@
-//Testing: https://stripe.com/docs/testing
-//http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
-//http://www.getcreditcardnumbers.com/
-//http://www.darkcoding.net/credit-card-numbers/
 var transaction = {}; //Create the global to store all data
-var P = {Dentures: 50, Pulling: 100, "Root Canal": 500, GoldTooth: 20, Cavity: 30, Nicegrill: 1000, Cleaning: 5};
 
 function ucwords(str,force){
   str=force ? str.toLowerCase() : str;
@@ -83,10 +78,10 @@ function togglePayment() {
   invalidAmount = !transaction['amount'] || transaction['amount'] <= 0;
   invalidWho = !transaction['last']  ||
                !transaction['first'] ||
-               !transaction['addr1'] ||
-               !transaction['city']  ||
-               !transaction['state'] ||
-               !transaction['zip'];
+               !transaction['customeraddress1'] ||
+               !transaction['customercity']  ||
+               !transaction['customerstate'] ||
+               !transaction['customerzip'];
 
   if(invalidAmount && invalidWho) {
     alert('Please choose an amount to donate and input your billing address.');
@@ -150,100 +145,55 @@ function submitAmount(event, obj) {
     toggleWho();
 }
 
-
-
-$().ready(function() {
-  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
-  $('.vanco_xml').attr('action', 'VANCO_XML');
-  if('DEV_MODE'=="yes") {
-    $("#dev-warning").removeClass('hidden');
-  }
-
-  //AJAX request to test Vanco connection
-  //$("element[id$='txtTitle']")
-    $("div[id$='_init']").css("display", "block");
-    var fakeData = {'requesttype': 'efttransparentredirect',
-                    'isdebitcardonly': 'No',
-                    'amount': '0'};
-
-    encrypto(fakeData, function(data) {
-      $.ajax({
-        type: 'GET',
-        url: 'VANCO_WSNVP',
-        timeout: 4000,
-        crossDomain: true,
-        data: data,
-        dataType: 'jsonp',
-        success: function(data){
-          $('#donationApp').removeClass("hidden");
-          $("#loading_init").addClass("hidden");
-        },
-        error: function (jqXHR, textStatus, errorThrown, data) {
-          $("#loading_init").addClass("hidden");
-          $('#failedToLoad').removeClass("hidden");
-        }
-      });
-    });
-
-
-
-  jQuery.validator.setDefaults({
-    highlight: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-      $(glyph_e).removeClass('glyphicon-ok').addClass('glyphicon-remove');
-    },
-    unhighlight: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    },
-    success: function (element) {
-      var glyph_e = "#"+$(element).attr("id")+"_glyph";
-      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
-    },
-    errorContainer: "#errors",
-    errorLabelContainer: "#errors"
+function storeRef(ref) {
+  return $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/storeRef.php',
+    crossDomain: false,
+    data: {"ref":ref},
+    dataType: 'jsonp'
   });
+}
 
-  $("input").not("#billing-email").focusout(function() {
-        var cp_value= ucwords($(this).val(),true) ;
-            $(this).val(cp_value );
+function notifyAdmin(data) {
+  return $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/email.php',
+    crossDomain: false,
+    data: data,
+    dataType: 'jsonp'
   });
+}
 
-  $("#amount-form").validate();
-  $("#who-form").validate();
-  $("#CC-form").validate();
-  $("#C-form").validate();
-  $("#S-form").validate();
+function signNVP(insecureData) {
+  return $.ajax({
+    type: 'GET',
+    url: '/static/scripts/vanco/nvpEncrypt.php',
+    data: insecureData,
+    dataType: 'jsonp'
+  });
+}
 
-   //Amount Form
-   $("#enteredAmount").rules("add", {
-     minlength: 1,
-     maxlength: 5
-   });
-   //Billing Information (Who Block)
-   $("#billing-first").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-last").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-city").rules("add", {
-     required: true,
-     minlength: 1
-   });
-   $("#billing-email").rules("add", {
-     required: true,
-     email: true
-   });
-   $("#billing-phone").rules("add", {
-     phoneUS: true
-   });
-});
+function sendWSNVP(secureData, timeout) {
+  timeout = typeof timeout !== 'undefined' ? timeout : 0;
+  return $.ajax({
+    type: 'GET',
+    url: 'VANCO_WSNVP',
+    crossDomain: true,
+    timeout: timeout,
+    data: secureData,
+    dataType: 'jsonp'
+  });
+}
+
+function testWSNVP() {
+  var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+  var signingFakeData = signNVP(fakeData); //Expected to always succeed - its on my server
+  var sendingTestData = signingFakeData.then(function(data){
+      return sendWSNVP(data, 4000);
+  });
+  return sendingTestData;
+}
 
 function submitWho(event) {
     event.preventDefault(); //End the form submission event now!
@@ -258,63 +208,13 @@ function submitWho(event) {
     }
 }
 
-$('#tx-one').click(function() { toggleAmount(); });
-$('#tx-two').click(function() { toggleWho(); });
-$('#tx-three').click(function() { togglePayment(); });
-$('#tx-four').click(function() { /*toggleConfirm();*/ });
-
-$('#amount-form :submit').click(function(event) {submitAmount(event, this); });
-$('#who-form').submit(          function(event) {submitWho(event);          });
-$('#CC-form').submit(           function(event) {submitPayment(event, this);});
-$('#C-form').submit(            function(event) {submitPayment(event, this);});
-$('#S-form').submit(            function(event) {submitPayment(event, this);});
-
-$( "input[name=accounttype]" ).change(function() {
-  type = $( "input:radio[name=accounttype]:checked" ).val();
-  if(type == "T") {
-    $( "#transaction-CC-block" ).css("display", "block");
-    $( "#transaction-C-block" ).css("display", "none");
-    $( "#transaction-S-block" ).css("display", "none");
-  } else if(type == "C") {
-      $('#accounttype').val('C');
-      $( "#transaction-C-block" ).css("display", "block");
-      $( "#transaction-S-block" ).css("display", "none");
-      $( "#transaction-CC-block" ).css("display", "none");
-  } else if(type == "S") {
-      $('#accounttype').val('S');
-      $( "#transaction-C-block" ).css("display", "none");
-      $( "#transaction-S-block" ).css("display", "block");
-      $( "#transaction-CC-block" ).css("display", "none");
-  }
-});
-
-encrypto = function getNVP(a, b) {
-  $.ajax({
-    type: 'GET',
-    url: '/static/scripts/vanco/nvpEncrypt.php',
-    crossDomain: true,
-    data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      //TODO do something useful
-      alert('Local: '+errorThrown);
-    }
-  });
-}
-
-wsNVP = function callWSNVP(a, b) {
-  $.ajax({
-    type: 'GET',
-    url: 'VANCO_WSNVP',
-    crossDomain: true,
-    data: a,
-    dataType: 'jsonp',
-    success: function(data){ b(data); },
-    error: function (jqXHR, textStatus, errorThrown, data) {
-      alert('Vanco: '+errorThrown);
-    }
-  });
+function fundTranslator(id) {
+  var funds = {
+        "0001" : "General Operations",
+        "0002" : "Direct Patient Care",
+        "0003" : "Endowment Fund"
+  };
+  return funds[id];
 }
 
 function submitPayment(event, me) {
@@ -351,106 +251,214 @@ function submitPayment(event, me) {
   toggleDisplay($('#transaction-loading'));
 
   //Adds nvp to the 'data' sent to the anonymous function
-  encrypto(paymentData, function(data) {
-    //Data to be handed over to VANCO only
-    data['accountnumber'] = transaction['accountnumber'];
-    data['accounttype'] = transaction['accounttype'];
+  var signingPaymentData = signNVP(paymentData);
+  
+  var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
+    
+    //Only two variables needed from data[]
+    transaction['sessionid'] = my_nvp_data['sessionid'];
+    transaction['nvpvar'] = my_nvp_data['nvpvar'];
+
     //Credit Card Specific Info
-    if(data['accounttype'] == "CC") {
-      data['sameccbillingaddrascust'] = 'Yes';
-      data['name_on_card'] = transaction['first'] +' '+transaction['last'];
-      data['expyear'] = transaction['expyear'];
-      data['expmonth'] = transaction['expmonth'];
-      data['cvvcode'] = transaction['cvvcode'];
-    } else { //Checking or Saving type
-      data['routingnumber'] = transaction['routingnumber'];
+    transaction['name_on_card'] = transaction['first'] +' '+transaction['last'];
+    if(transaction['accounttype'] == "CC") {
+      transaction['sameccbillingaddrascust'] = 'Yes';
     }
     //Customer Parameters
-    data['customername'] = transaction['last']+', '+transaction['first'];
-    data['customeraddress1'] = transaction['addr1'];
-    //data['customeraddress2'] = transaction['addr2'];
-    data['customercity'] = transaction['city'];
-    data['customerstate'] = transaction['state'];
-    data['customerzip'] = transaction['zip'];
-    data['customerphone'] = transaction['phone'];
+    transaction['customername'] = transaction['last']+', '+transaction['first'];
     var id = transaction['fundid'];
-    //console.log(id);
+    
     if(id != 'none') {
-      data['fundid_'+id] = id;
-      data['fundamount_'+id] = transaction['amount'];
-    } else {
-      data['amount'] = transaction['amount'];
+      transaction['fundid_'+id] = id;
+      transaction['fundamount_'+id] = transaction['amount'];
     }
     //Transaction Parameters
-    data['startdate'] = '0000-00-00';
-    data['transactiontypecode'] = 'WEB';
+    transaction['startdate'] = '0000-00-00';
+    transaction['transactiontypecode'] = 'WEB';
 
-    wsNVP(data, function(result) {
-      /*
-      {
-        "ccavsresp":"Y",
-        "paymentmethodref":15751344,
-        "cccvvresp":"M",
-        "startdate":"2014-11-22",
-        "clientid":"ES15816",
-        "isdebitcardonly":"No",
-        "ccauthcode":"60439C",
-        "cardtype":"debit",
-        "requestid":"7056993710100",
-        "transactionref":16121072,
-        "last4":"1111",
-        "visamctype":"visa",
-        "customerref":14940770,
-        "customerid":"14940770"
+    return sendWSNVP(transaction);
+  });
+  
+  sendingTransaction.then(function(vanco_result) {
+    // This is where we trigger the writing of the receipt!
+    $("#transaction-loading").css('block','none');
+    $("#status-bar").addClass("hidden");
+    //console.log('confirm: '+JSON.stringify(vanco_result));
+    if(vanco_result['transactionref']) {
+      var id = transaction['fundid'];
+      var fund = fundTranslator(id);
+      if(fund) {
+        $('#confirm').append('<p>Amount: $'+transaction['fundamount_'+id]+'</p>');
+        fund = fund+' at';
+      } else {
+        $('#confirm').append('<p>Amount: $'+transaction['amount']+'</p>');
       }
-      */
-      // This is where we trigger the writing of the receipt!
-      $("#transaction-loading").css('block','none');
-      $("#status-bar").addClass("hidden");
-      //console.log('confirm: '+JSON.stringify(result));
-      if(result['transactionref']) {
-        var id = transaction['fundid'];
-        funds = {
-          "0001" : "General Operations",
-          "0002" : "Direct Patient Care",
-          "0003" : "Endowment Fund" };
-        if(id == '0001' || id == '0002' || id == '0003') {
-          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting '+funds[id]+' at the San Antonio Christian Dental Clinic.</p>');
-          $('#confirm').append('<p>Amount: $'+data['fundamount_'+id]+'</p>');
-        } else {
-          $('#confirm').append('<p>'+transaction['first'] +' '+transaction['last']+', thanks for supporting the San Antonio Christian Dental Clinic.</p>');
-          $('#confirm').append('<p>Amount: $'+data['amount']+'</p>');
-        }
+      $('#confirm').append('<p>'+transaction['name_on_card']+', thanks for supporting '+fund+' the San Antonio Christian Dental Clinic.</p>');
 
-        $('.amount').text(transaction['amount']);
-
-        toggleConfirm();
-        var proc = runSubset(P, transaction['amount']);
-        for(var i=0; i<proc.length; i++ ) {
-          $('#purchased').append('<p><span class="badge">'+proc[i]['label']+' ('+proc[i]['freq']+')</span></p>');
-        }
-        $('#confirm').append('<p>Donation Date: '+result['startdate']+'</p>');
-        $('#confirm').append('<p>Confirmation: '+result['transactionref']+'</p>');
-        if(result['cardtype']) {
-          $('#confirm').append('<p>Payment Type: '+result['visamctype']+' '+result['cardtype']+'</p>');
-        }
-        $('#confirm').append('<p>Account Last Four: '+result['last4']+'</p>');
+      $('.amount').text(transaction['amount']);
+      toggleConfirm();
+      $('#confirm').append('<p>Donation Date: '+vanco_result['startdate']+'</p>');
+      $('#confirm').append('<p>Confirmation: '+vanco_result['transactionref']+'</p>');
+      if(vanco_result['cardtype']) {
+        $('#confirm').append('<p>Payment Type: '+vanco_result['visamctype']+' '+vanco_result['cardtype']+'</p>');
       }
+      $('#confirm').append('<p>Account Last Four: '+vanco_result['last4']+'</p>');
+    }
 
-      if(result['errorlist']) {
-        toggleError();
-        errors = result['errorlist'].split(',');
-        //Assumes errorCodes.json is loaded...
-        errors.forEach(function(e) {
-          $('#error').append('<li>' + errorCodes[e] + '</li>\n');
-        });
-      }
+    if(vanco_result['errorlist']) {
+      toggleError();
+      errors = vanco_result['errorlist'].split(',');
+      //Assumes errorCodes.json is loaded...
+      errors.forEach(function(e) {
+        $('#error').append('<li>' + errorCodes[e] + '</li>\n');
+      });
+    }
+  });
+    
+  sendingTransaction.then(function(vanco_result){
+    storeRef(vanco_result['transactionref'])
+    .then(function(){
+      var adminData = {};
+      adminData['ref'] = vanco_result['transactionref'];
+      adminData['message'] = transaction['name_on_card']+' has donated to the clinic.\r\n'
+                              +'Total Amount: $'+transaction['amount']+'\r\n'
+                              +fundTranslator(transaction['fundid'])+' $'+transaction['amount']+'\r\n'
+                              +'Card Provider: '+vanco_result['visamctype']+'\r\n'
+                              +'Confirmation Number: '+vanco_result['transactionref']+'\r\n'
+                              +'Address: '+transaction['customeraddress1']+'\r\n'
+                              +'Phone: '+transaction['customerphone']+'\r\n'
+                              +'Email: '+transaction['customeremail']+'\r\n'
+                              +'Start Date: '+vanco_result['startdate']+'\r\n';
+      notifyAdmin(adminData);
     });
   });
+  };//End submitPayment()
 
-}
 
-/* EXAMPLES ...
+/**
+ * Setup handlers for all possible actions.
+ **/
+
+$('#tx-one').click(function() { toggleAmount(); });
+$('#tx-two').click(function() { toggleWho(); });
+$('#tx-three').click(function() { togglePayment(); });
+$('#tx-four').click(function() { /*toggleConfirm();*/ });
+
+$('#amount-form :submit').click(function(event) {submitAmount(event, this); });
+$('#who-form').submit(          function(event) {submitWho(event);          });
+$('#CC-form').submit(           function(event) {submitPayment(event, this);});
+$('#C-form').submit(            function(event) {submitPayment(event, this);});
+$('#S-form').submit(            function(event) {submitPayment(event, this);});
+
+$( "input[name=accounttype]" ).change(function() {
+  type = $( "input:radio[name=accounttype]:checked" ).val();
+  if(type == "T") {
+    $( "#transaction-CC-block" ).css("display", "block");
+    $( "#transaction-C-block" ).css("display", "none");
+    $( "#transaction-S-block" ).css("display", "none");
+  } else if(type == "C") {
+      $('#accounttype').val('C');
+      $( "#transaction-C-block" ).css("display", "block");
+      $( "#transaction-S-block" ).css("display", "none");
+      $( "#transaction-CC-block" ).css("display", "none");
+  } else if(type == "S") {
+      $('#accounttype').val('S');
+      $( "#transaction-C-block" ).css("display", "none");
+      $( "#transaction-S-block" ).css("display", "block");
+      $( "#transaction-CC-block" ).css("display", "none");
+  }
+});
+
+$().ready(function() {
+  $('.vanco_nvp').attr('action', 'VANCO_WSNVP');
+  $('.vanco_xml').attr('action', 'VANCO_XML');
+  if('DEV_MODE'=="yes") {
+    $("#dev-warning").removeClass('hidden');
+  }
+
+  //AJAX request to test Vanco connection
+  //$("element[id$='txtTitle']")
+    $("div[id$='_init']").css("display", "block");
+    
+  var checkingVanco = testWSNVP();
+  checkingVanco.always(function(){
+    $("#loading_init").addClass("hidden");
+  });
+  checkingVanco.then(
+    function(){
+      $('#donationApp').removeClass("hidden");
+    },
+    function() {
+      $('#failedToLoad').removeClass("hidden");
+    }
+  );
+
+  jQuery.validator.setDefaults({
+    highlight: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+      $(glyph_e).removeClass('glyphicon-ok').addClass('glyphicon-remove');
+    },
+    unhighlight: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+    },
+    success: function (element) {
+      var glyph_e = "#"+$(element).attr("id")+"_glyph";
+      $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+      $(glyph_e).removeClass('glyphicon-remove').addClass('glyphicon-ok');
+    },
+    errorContainer: "#errors",
+    errorLabelContainer: "#errors"
+  });
+
+  $("input").not("#billing-email").focusout(function() {
+      var cp_value= ucwords($(this).val(),true);
+      $(this).val(cp_value);
+  });
+
+  $("#amount-form").validate();
+  $("#who-form").validate();
+  $("#CC-form").validate();
+  $("#C-form").validate();
+  $("#S-form").validate();
+
+   //Amount Form
+   $("#enteredAmount").rules("add", {
+     minlength: 1,
+     maxlength: 5
+   });
+   //Billing Information (Who Block)
+   $("#billing-first").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-last").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-city").rules("add", {
+     required: true,
+     minlength: 1
+   });
+   $("#billing-email").rules("add", {
+     required: true,
+     email: true
+   });
+   $("#billing-phone").rules("add", {
+     phoneUS: true
+   });
+});
+
+/**
+ * Testing Notes:
+ * Testing: https://stripe.com/docs/testing
+ * http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
+ * http://www.getcreditcardnumbers.com/
+ * http://www.darkcoding.net/credit-card-numbers/
+ * 
+ * EXAMPLES ...
  *
  * confirm: //Credit
  * {"requestid":"3962297830100","&ccavsresp":"Y","paymentmethodref":"15750739","cccvvresp":"M","ccauthcode":"60439C","startdate":"2014-10-16","clientid":"ES15816","customerid":"14940186","last4":"1111","cardtype":"debit","visamctype":"visa","transactionref":"16117740","customerref":"14940186","isdebitcardonly":"No"}
@@ -460,6 +468,26 @@ function submitPayment(event, me) {
  *
  * confirm: //Saving
  * {"requestid":"3043488850100","&startdate":"2014-10-21","paymentmethodref":"15750741","clientid":"ES15816","customerid":"14940188","last4":"1111","cardtype":"","visamctype":"","transactionref":"16117742","customerref":"14940188","isdebitcardonly":"No"}
-*/
-
+ * 
+ * 
+ * 
+ *   
+     {
+      "ccavsresp":"Y",
+      "paymentmethodref":15751344,
+      "cccvvresp":"M",
+      "startdate":"2014-11-22",
+      "clientid":"ES15816",
+      "isdebitcardonly":"No",
+      "ccauthcode":"60439C",
+      "cardtype":"debit",
+      "requestid":"7056993710100",
+      "transactionref":16121072,
+      "last4":"1111",
+      "visamctype":"visa",
+      "customerref":14940770,
+      "customerid":"14940770"
+    }
+ **/
+ 
 
