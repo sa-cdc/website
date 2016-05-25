@@ -157,6 +157,10 @@ donationApp.factory('vancoAPI', function($http, $location){
   service.signNVP = function(insecureData) {
     console.log('INSECURE DATA: '+JSON.stringify(insecureData));
     return $http({
+      transformResponse: function(data, headersGetter) {
+        console.log("Transform: "+data);
+        return '{"a":"b"}';
+      },
       type: 'GET',
       url: 'http://'+$location.host()+'/static/scripts/vanco/nvpEncrypt.php',
       data: insecureData
