@@ -159,8 +159,7 @@ donationApp.factory('vancoAPI', function($http, $location){
     return $http({
       type: 'GET',
       url: 'http://'+$location.host()+'/static/scripts/vanco/nvpEncrypt.php',
-      data: insecureData,
-      dataType: 'jsonp'
+      data: insecureData
     });
   }
 
