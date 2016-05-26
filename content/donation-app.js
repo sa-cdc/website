@@ -12,16 +12,13 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.checkingVanco = vancoAPI.testWSNVP();
   $scope.checkingVanco.finally(function(){
     $scope.loading = false;
-    console.log('always ran: '+$scope.loading);
   });
   $scope.checkingVanco.then(
     function(){
       $scope.vancoReachable = true;
-      console.log('reachable');
     },
     function() {
       $scope.vancoReachable = false;
-      console.log('UNreachable');
     }
   );
   
@@ -78,7 +75,6 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
     // This is where we trigger the writing of the receipt!
     $("#transaction-loading").css('block','none');
     $("#status-bar").addClass("hidden");
-    //console.log('confirm: '+JSON.stringify(vanco_result));
     if(vanco_result['transactionref']) {
       var id = client.fundid;
       funds = {
@@ -155,14 +151,9 @@ donationApp.factory('vancoAPI', function($http, $location){
   }
 
   service.signNVP = function(insecureData) {
-    console.log('INSECURE DATA: '+JSON.stringify(insecureData));
     return $http({
-      transformResponse: function(data, headersGetter) {
-        console.log("Transform: "+data);
-        return '{"a":"b"}';
-      },
       type: 'GET',
-      url: 'http://'+$location.host()+'/static/scripts/vanco/nvpEncrypt.php',
+      url: '/static/scripts/vanco/nvpEncrypt.php',
       data: insecureData
     });
   }
@@ -183,17 +174,12 @@ service.testWSNVP = function() {
     var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
     
     var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
-    console.log('parse: '+JSON.parse('{"sessionid":"55e2f5b3c41a0a2b86770c77d7ddfcda18241268","nvpvar":"fUlFUSXmGl2UkjdIDw-VEQv1JJsh5OQdrJs9KAy96L1BgUlsxbyEr5hxOw-aTsnCKuV1gUghY2cDovds-48Pug=="}'));
-    var sendingTestData = signingFakeData.then(function(data){
-      console.log('test: '+JSON.stringify(data));
+    
+    return signingFakeData.then(function(data){
       return service.sendWSNVP(data, 4000);
-    },
-    function(data){
-      console.log('FAILED: '+JSON.stringify(data));
-      return null;
-    });
-    return sendingTestData;
+    }); //Otherwise something went really wrong
   }
+  
   return service;
 });
 
