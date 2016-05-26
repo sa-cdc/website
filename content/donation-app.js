@@ -12,13 +12,15 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.checkingVanco = vancoAPI.testWSNVP();
   $scope.checkingVanco.finally(function(){
     $scope.loading = false;
-    console.log('test');
+    
   });
   $scope.checkingVanco.then(
     function(){
+      console.log('reach');
       $scope.vancoReachable = true;
     },
     function() {
+      console.log('unreach');
       $scope.vancoReachable = false;
     }
   );
