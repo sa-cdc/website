@@ -11,13 +11,8 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   
   $scope.checkingVanco = vancoAPI.testWSNVP();
   $scope.checkingVanco.then(
-    function(){
-      $scope.vancoReachable = true;
-    },
-    function(error) {
-      console.log(JSON.stringify(error));
-      $scope.vancoReachable = false;
-    }
+    function(){ $scope.vancoReachable = true; },
+    function(error) { $scope.vancoReachable = false; }
   );
   $scope.checkingVanco.finally(function(){
     $scope.loading = false;
