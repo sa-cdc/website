@@ -32,90 +32,69 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.whoFormSubmit = function(isValid) {
     if(isValid) {
       $scope.breadcrumb = 3;
+      $('html, body').animate({ scrollTop: 0 }, 'fast');
     }
   };
-  
-  submitPayment = function(type, client, vanco) {
-  nvpVars = {};//Data to encrypt on my server
-  nvpVars.requesttype = 'eftaddonetimecompletetransaction';
-  nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
-  nvpVars.isdebitcardonly = 'No';
-  
-  var signingPaymentData = signNVP(nvpVars);
-  
-  var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
-    //Only two variables needed from data[]
-    vanco.sessionid = my_nvp_data['sessionid'];
-    vanco.nvpvar = my_nvp_data['nvpvar'];
+  $scope.paymentFormSubmit = function(type, isValid) {
+    if(isValid) {
+      $scope.breadcrumb = 4;
+      nvpVars = {};//Data to encrypt on my server
+      nvpVars.requesttype = 'eftaddonetimecompletetransaction';
+      nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
+      nvpVars.isdebitcardonly = 'No';
+  
+      var signingPaymentData = signNVP(nvpVars);
+  
+      var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
-    //Credit Card Specific Info
-    if(type == "CC") {
-      vanco.name_on_card = client.first +' '+client.last;
-      vanco.sameccbillingaddrascust = 'Yes';
-    }
+        //Only two variables needed from data[]
+        vanco.sessionid = my_nvp_data['sessionid'];
+        vanco.nvpvar = my_nvp_data['nvpvar'];
+
+        //Credit Card Specific Info
+        if(type == "CC") {
+          $scope.vanco.name_on_card = $scope.client.first +' '+$scope.client.last;
+          vanco.sameccbillingaddrascust = 'Yes';
+        }
     //Customer Parameters
-    vanco.customername = client.last+', '+client.first;
+    $scope.vanco.customername = $scope.client.last+', '+$scope.client.first;
     
-    if(client.fundid != 'none') {
-      vanco['fundid_'+client.fundid] = client.fundid;
-      vanco['fundamount_'+client.fundid] = vanco.amount;
+    if($scope.client.fundid != 'none') {
+      vanco['fundid_'+$scope.client.fundid] = $scope.client.fundid;
+      vanco['fundamount_'+$scope.client.fundid] = $scope.vanco.amount;
     }
     //Transaction Parameters
-    vanco.startdate = '0000-00-00';
-    vanco.transactiontypecode = 'WEB';
-    return sendWSNVP(vanco);
+    $scope.vanco.startdate = '0000-00-00';
+    $scope.vanco.transactiontypecode = 'WEB';
+    return sendWSNVP($scope.vanco);
   });
   
   sendingTransaction.then(function(vanco_result) {
     // This is where we trigger the writing of the receipt!
-    $("#transaction-loading").css('block','none');
-    $("#status-bar").addClass("hidden");
-    if(vanco_result['transactionref']) {
-      var id = client.fundid;
-      funds = {
-        "0001" : "General Operations",
-        "0002" : "Direct Patient Care",
-        "0003" : "Endowment Fund"
-      };
-      if(id == '0001' || id == '0002' || id == '0003') {
-        $('#confirm').append('<p>Amount: $'+vanco['fundamount_'+id]+'</p>');
-      } else {
-        $('#confirm').append('<p>Amount: $'+vanco['amount']+'</p>');
-      }
-      fund_spt = funds[id]+' at'
-      $('#confirm').append('<p>{{vanco.name_on_card}}, thanks for supporting '+fund_spt+' the San Antonio Christian Dental Clinic.</p>');
-      $('#confirm').append('<p>Donation Date: '+vanco_result['startdate']+'</p>');
-      $('#confirm').append('<p>Confirmation: '+vanco_result['transactionref']+'</p>');
-      if(vanco_result['cardtype']) {
-        $('#confirm').append('<p>Payment Type: '+vanco_result['visamctype']+' '+vanco_result['cardtype']+'</p>');
-      }
-      $('#confirm').append('<p>Account Last Four: '+vanco_result['last4']+'</p>');
-    }
+    
+        //"0001" : "General Operations",
+        //"0002" : "Direct Patient Care",
+        //"0003" : "Endowment Fund"-->
+        $scope.vanco.errorlist = vanco_result.errorlist;
+        $scope.vanco.startdate = vanco_result.startdate;
+        $scope.vanco.transactionref = vanco_result.transactionref;
+        $scope.vanco.visamctype = vanco_result.visamctype;
+        $scope.vanco.cardtype = vanco_result.cardtype;
+        $scope.vanco.last4 = vanco_result.last4;
+  };    
+      
 
-    if(vanco_result['errorlist']) {
-      errors = vanco_result['errorlist'].split(',');
-      //Assumes errorCodes.json is loaded...
-      errors.forEach(function(e) {
-        $('#error').append('<li>' + errorCodes[e] + '</li>\n');
-      });
-    }
-  });
     
   sendingTransaction.then(function(vanco_result){
     storeRef(vanco_result['transactionref'])
     .then(function(){
       var adminData = {};
       adminData['ref'] = vanco_result['transactionref'];
-      adminData['message'] = vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+vanco.amount+'\r\n'+vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+vanco.customeraddress1+'\r\nPhone: '+vanco.customerphone+'\r\nEmail: '+vanco.customeremail;
+      adminData['message'] = $scope.$scope.$scope.vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+$scope.$scope.vanco.amount+'\r\n'+$scope.vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+$scope.vanco.customeraddress1+'\r\nPhone: '+$scope.vanco.customerphone+'\r\nEmail: '+$scope.vanco.customeremail;
       notifyAdmin(adminData);
     });
   });
-  };//End submitPayment()
-  $scope.paymentFormSubmit = function(type, isValid) {
-    if(isValid) {
-      $scope.breadcrumb = 4;
-      submitPayment(type, $scope.client, $scope.vanco);
     }
   };  
 });
