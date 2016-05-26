@@ -161,14 +161,7 @@ donationApp.factory('vancoAPI', function($http, $location){
 
   service.sendWSNVP = function(secureData, timeout) {
     timeout = typeof timeout !== 'undefined' ? timeout : 0;
-    return $http({
-      type: 'GET',
-      url: 'VANCO_WSNVP',
-      crossDomain: true,
-      timeout: timeout,
-      data: secureData,
-      dataType: 'jsonp'
-    });
+    return $http.jsonp('VANCO_WSNVP'+'?callback=JSON_CALLBACK', {timeout: timeout, data: secureData});
   }
 
 service.testWSNVP = function() {
