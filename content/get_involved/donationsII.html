@@ -355,11 +355,11 @@ tags:
         </div>
       </div>
       <p> Keep this smile for your records.</p>
-            <p>Amount: {{ vanco.amount }} </p>
+      <p>Amount: {{ vanco.amount }} </p>
       <p>{{vanco.name_on_card}}, thanks for supporting {{ client.fundid }} the San Antonio Christian Dental Clinic.</p>
       <p>Donation Date: {{ vanco.startdate }}</p>
       <p>Confirmation: {{ vanco.transactionref }}</p>
-      <p nf-if="vanco.cardtype">Payment Type: {{ vanco.cardtype }} {{vanco.cardtype}}</p>
+      <p nf-if="vanco.cardtype">Payment Type: {{ vanco.visamctype }} {{vanco.cardtype}}</p>
       <p>Account Last Four: {{ last4 }}</p>
     
 
