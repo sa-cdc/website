@@ -152,7 +152,6 @@ donationApp.factory('vancoAPI', function($http, $location){
   }
 
   service.signNVP = function(insecureData) {
-    console.log('test');
     return $http({
       type: 'GET',
       url: '/static/scripts/vanco/nvpEncrypt.php',
@@ -178,6 +177,7 @@ service.testWSNVP = function() {
     var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
     
     return signingFakeData.then(function(data){
+      console.log('test');
       return service.sendWSNVP(data, 4000);
     }); //Otherwise something went really wrong
   }
