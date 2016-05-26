@@ -16,11 +16,9 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   });
   $scope.checkingVanco.then(
     function(){
-      console.log('reach');
       $scope.vancoReachable = true;
     },
     function() {
-      console.log('unreach');
       $scope.vancoReachable = false;
     }
   );
@@ -154,6 +152,7 @@ donationApp.factory('vancoAPI', function($http, $location){
   }
 
   service.signNVP = function(insecureData) {
+    console.log('test');
     return $http({
       type: 'GET',
       url: '/static/scripts/vanco/nvpEncrypt.php',
