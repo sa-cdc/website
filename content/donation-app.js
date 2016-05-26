@@ -12,13 +12,13 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.checkingVanco = vancoAPI.testWSNVP();
   $scope.checkingVanco.finally(function(){
     $scope.loading = false;
-    
   });
   $scope.checkingVanco.then(
     function(){
       $scope.vancoReachable = true;
     },
-    function() {
+    function(error) {
+      console.log(JSON.stringify(error));
       $scope.vancoReachable = false;
     }
   );
@@ -177,7 +177,6 @@ service.testWSNVP = function() {
     var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
     
     return signingFakeData.then(function(data){
-      console.log('test');
       return service.sendWSNVP(data, 4000);
     }); //Otherwise something went really wrong
   }
