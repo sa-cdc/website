@@ -16,7 +16,8 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
   $request['nvpvar'] = my_pack($data);
   
   header('Content-Type: application/json');
-  echo $_GET['callback'] . '('.json_encode($request).')';
+  //echo $_GET['callback'] . '('.json_encode($request).')';
+  echo json_encode($request);
   
 } elseif(isset($_GET['test']) && $_GET['test'] == 'decrypt') {
 
