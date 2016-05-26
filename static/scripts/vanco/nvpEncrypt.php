@@ -40,7 +40,8 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
   preg_match('/nvpvar=(.*)">/', $data, $matches);
   $result = my_unpack($matches[1]);
   header('Content-Type: application/json');
-  echo $_GET['callback'] . '('.json_encode($result).')';
+  //echo $_GET['callback'] . '('.json_encode($result).')';
+  echo json_encode($result);
   
 } elseif(isset($_GET['url'])) {
   $urls = array();
