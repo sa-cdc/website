@@ -91,7 +91,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
     .then(function(){
       var adminData = {};
       adminData['ref'] = vanco_result['transactionref'];
-      adminData['message'] = $scope.$scope.$scope.vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+$scope.$scope.vanco.amount+'\r\n'+$scope.vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+$scope.vanco.customeraddress1+'\r\nPhone: '+$scope.vanco.customerphone+'\r\nEmail: '+$scope.vanco.customeremail;
+      adminData['message'] = $scope.vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+$scope.vanco.amount+'\r\n'+vanco_result.visamctype+'\r\nConfirmation Number: '+vanco_result['transactionref']+'\r\nAddress: '+$scope.vanco.customeraddress1+'\r\nPhone: '+$scope.vanco.customerphone+'\r\nEmail: '+$scope.vanco.customeremail;
       notifyAdmin(adminData);
     });
   });
