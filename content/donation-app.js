@@ -82,7 +82,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
         $scope.vanco.visamctype = vanco_result.visamctype;
         $scope.vanco.cardtype = vanco_result.cardtype;
         $scope.vanco.last4 = vanco_result.last4;
-  };    
+  });    
       
 
     
