@@ -135,9 +135,9 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
 
   service.sendWSNVP = function(secureData, timeout) {
     timeout = typeof timeout !== 'undefined' ? timeout : 0;
-    var qs = $httpParamSerializer(secureData);
+    var qs = $httpParamSerializer(JSON.stringify(secureData));
     qs += '&callback=JSON_CALLBACK';
-    console.log(qs);
+    console.log(JSON.stringify(secureData));
     return $http.jsonp('VANCO_WSNVP', {timeout: timeout, params: qs});
   }
 
