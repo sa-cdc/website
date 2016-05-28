@@ -102,7 +102,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
 
 
 
-donationApp.factory('vancoAPI', function($http, $location){
+donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   var service = {};
   
   service.storeRef = function(ref) {
