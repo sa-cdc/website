@@ -144,7 +144,7 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   }
 
 service.testWSNVP = function() {
-    var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
+    var fakeData = {'requesttype': 'eftonetimecompletetransaction', 'isdebitcardonly': 'No', 'amount': '0'};
     
     var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
     
