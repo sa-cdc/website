@@ -9,15 +9,19 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.loading = true;
   $scope.vancoReachable = false;
   
+  console.log('before');
   $scope.checkingVanco = vancoAPI.testWSNVP();
+  console.log('a little before');
   $scope.checkingVanco.then(
-    function(){ $scope.vancoReachable = true; console.log('test');},
-    function() { $scope.vancoReachable = !false; }
+    function(){ $scope.vancoReachable = true; console.log('success');},
+    function() { $scope.vancoReachable = !false; console.log('error');}
   );
   
   $scope.checkingVanco.finally(function(){
+    console.log('finally');
     $scope.loading = false;
   });
+  console.log('later');
   
   $scope.vanco = {};
   $scope.vanco.amount = 0;
