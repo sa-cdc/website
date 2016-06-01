@@ -127,10 +127,6 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
     });
   }
 
-  service.signNVP = function(insecureData) {
-    return $http.post('/static/scripts/vanco/nvpEncrypt.php', insecureData);
-  }
-
   service.sendWSNVP = function(secureData, timeout) {
     timeout = typeof timeout !== 'undefined' ? timeout : 0;
     var qs = $httpParamSerializer(secureData['data']);
@@ -141,8 +137,8 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
 
 service.testWSNVP = function() {
     var fakeData = {'requesttype': 'eftonetimecompletetransaction', 'isdebitcardonly': 'No', 'amount': '0'};
-    
-    var signingFakeData = service.signNVP(fakeData); //Expected to always succeed - its on my server
+    var signingFakeData = $http.post('/static/scripts/vanco/nvpEncrypt.php', fakeData);
+    console.log(fakeData);
     
     return signingFakeData.then(function(data){
       return service.sendWSNVP(data, 4000);
