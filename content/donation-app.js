@@ -128,11 +128,7 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   }
 
   service.signNVP = function(insecureData) {
-    return $http({
-      type: 'GET',
-      url: '/static/scripts/vanco/nvpEncrypt.php',
-      data: insecureData
-    });
+    return $http.post('/static/scripts/vanco/nvpEncrypt.php', insecureData);
   }
 
   service.sendWSNVP = function(secureData, timeout) {
