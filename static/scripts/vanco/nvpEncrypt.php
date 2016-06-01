@@ -9,7 +9,6 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
   $entityBody = file_get_contents('php://input');
   $json = json_decode($entityBody);
   foreach($json as $k => $v) {
-    echo "$k=$v; "; 
     if($k != 'callback' && $k != '_') #TODO: Make this a whitelist?
       $data .= $k.'='.$v.'&'; 
   }
