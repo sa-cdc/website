@@ -7,8 +7,8 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
   $data  = "requestid=".generateRequestID()."&";
   $data .= "clientid=".VANCO_CLIENT_ID."&";
   $entityBody = file_get_contents('php://input');
-  print_r($entityBody);
-  foreach($_POST as $k => $v) {
+  $json = json_decode($entityBody);
+  foreach($json as $k => $v) {
     echo "$k=$v; "; 
     if($k != 'callback' && $k != '_') #TODO: Make this a whitelist?
       $data .= $k.'='.$v.'&'; 
