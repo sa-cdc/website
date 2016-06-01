@@ -7,6 +7,7 @@ if(!isset($_GET['test']) && !isset($_GET['tovanco']) && !isset($_GET['url'])) {
   $data  = "requestid=".generateRequestID()."&";
   $data .= "clientid=".VANCO_CLIENT_ID."&";
   foreach($_POST as $k => $v) {
+    echo "$k=$v; "; 
     if($k != 'callback' && $k != '_') #TODO: Make this a whitelist?
       $data .= $k.'='.$v.'&'; 
   }
