@@ -46,7 +46,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
       nvpVars.isdebitcardonly = 'No';
   
-      var signingPaymentData = signNVP(nvpVars);
+      var signingPaymentData = $http.post('/static/scripts/vanco/nvpEncrypt.php', nvpVars);
   
       var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
