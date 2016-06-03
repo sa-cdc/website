@@ -46,7 +46,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
       nvpVars.isdebitcardonly = 'No';
   
-      var signingPaymentData = vancoAPI.signNVP1(nvpVars);
+      var signingPaymentData = vancoAPI.signNVP(nvpVars);
   
       var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
@@ -129,16 +129,16 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
 
   service.sendWSNVP = function(secureData, timeout) {
     timeout = typeof timeout !== 'undefined' ? timeout : 0;
-    var qs = $httpParamSerializer(secureData['data']);
+    var qs = null;
+    if(secureData['data'])
+      qs = $httpParamSerializer(secureData['data']);
+    else
+      qs = $httpParamSerializer(secureData);
     qs = '?callback=JSON_CALLBACK&'+qs;
     console.log(qs);
     return $http.jsonp('VANCO_WSNVP'+qs);
   }
 
-  service.signNVP1 = function(data){
-    console.log("From NVP1: "+JSON.stringify(data));
-    return $http.post('/static/scripts/vanco/nvpEncrypt.php', data);
-  }
   service.signNVP = function(data){
     return $http.post('/static/scripts/vanco/nvpEncrypt.php', data);
   }
