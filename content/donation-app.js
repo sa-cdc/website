@@ -46,16 +46,16 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
       nvpVars.isdebitcardonly = 'No';
   
-      var signingPaymentData = vancoAPI.signNVP(nvpVars);
+      var signingPaymentData = vancoAPI.signNVP1(nvpVars);
   
       var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
         //Only two variables needed from data[]
-        $scope.vanco.sessionid = my_nvp_data['sessionid'];
-        $scope.vanco.nvpvar = my_nvp_data['nvpvar'];
+        $scope.vanco.sessionid = my_nvp_data.sessionid;
+        $scope.vanco.nvpvar = my_nvp_data.nvpvar;
 
         //Credit Card Specific Info
-        if(type == "CC") {
+        if($scope.vanco.accounttype == "CC") {
           $scope.vanco.name_on_card = $scope.client.first +' '+$scope.client.last;
           $scope.vanco.sameccbillingaddrascust = 'Yes';
         }
@@ -135,6 +135,9 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
     return $http.jsonp('VANCO_WSNVP'+qs);
   }
 
+  service.signNVP1 = function(data){
+    return $http.post('/static/scripts/vanco/nvpEncrypt.php', data);
+  }
   service.signNVP = function(data){
     return $http.post('/static/scripts/vanco/nvpEncrypt.php', data);
   }
