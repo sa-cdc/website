@@ -46,7 +46,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       nvpVars.urltoredirect = '/static/scripts/vanco/confirm.php';
       nvpVars.isdebitcardonly = 'No';
   
-      var signingPaymentData = $http.post('/static/scripts/vanco/nvpEncrypt.php', nvpVars);
+      var signingPaymentData = signNVP(nvpVars);
   
       var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
@@ -135,9 +135,13 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
     return $http.jsonp('VANCO_WSNVP'+qs);
   }
 
+  service.signNVP = function(data){
+    return $http.post('/static/scripts/vanco/nvpEncrypt.php', data);
+  }
+
 service.testWSNVP = function() {
     var fakeData = {'requesttype': 'efttransparentredirect', 'isdebitcardonly': 'No', 'amount': '0'};
-    var signingFakeData = $http.post('/static/scripts/vanco/nvpEncrypt.php', fakeData);
+    var signingFakeData = signNVP(fakeData);
     console.log(fakeData);
     
     return signingFakeData.then(function(data){
