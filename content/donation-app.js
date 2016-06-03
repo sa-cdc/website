@@ -136,7 +136,7 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   }
 
   service.signNVP1 = function(data){
-    console.log("From NVP1: "+data);
+    console.log("From NVP1: "+JSON.stringify(data));
     return $http.post('/static/scripts/vanco/nvpEncrypt.php', data);
   }
   service.signNVP = function(data){
