@@ -69,7 +69,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
     //Transaction Parameters
     $scope.vanco.startdate = '0000-00-00';
     $scope.vanco.transactiontypecode = 'WEB';
-    return sendWSNVP($scope.vanco);
+    return vancoAPI.sendWSNVP($scope.vanco);
   });
   
   sendingTransaction.then(function(vanco_result) {
