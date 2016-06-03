@@ -51,20 +51,20 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
         //Only two variables needed from data[]
-        vanco.sessionid = my_nvp_data['sessionid'];
-        vanco.nvpvar = my_nvp_data['nvpvar'];
+        $scope.vanco.sessionid = my_nvp_data['sessionid'];
+        $scope.vanco.nvpvar = my_nvp_data['nvpvar'];
 
         //Credit Card Specific Info
         if(type == "CC") {
           $scope.vanco.name_on_card = $scope.client.first +' '+$scope.client.last;
-          vanco.sameccbillingaddrascust = 'Yes';
+          $scope.vanco.sameccbillingaddrascust = 'Yes';
         }
     //Customer Parameters
     $scope.vanco.customername = $scope.client.last+', '+$scope.client.first;
     
     if($scope.client.fundid != 'none') {
-      vanco['fundid_'+$scope.client.fundid] = $scope.client.fundid;
-      vanco['fundamount_'+$scope.client.fundid] = $scope.vanco.amount;
+      $scope.vanco['fundid_'+$scope.client.fundid] = $scope.client.fundid;
+      $scope.vanco['fundamount_'+$scope.client.fundid] = $scope.vanco.amount;
     }
     //Transaction Parameters
     $scope.vanco.startdate = '0000-00-00';
