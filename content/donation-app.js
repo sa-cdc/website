@@ -12,7 +12,11 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.checkingVanco = vancoAPI.testWSNVP();
   $scope.checkingVanco.then(
     function(data){ $scope.vancoReachable = true; console.log('success: '+data);},
-    function(error) { $scope.vancoReachable = !false; console.log('error: '+JSON.stringify(error));}
+    function(error) {
+      $scope.vancoReachable = !false;
+      console.log('error: '+JSON.stringify(error));
+      //TODO Add logic to display unreachable page option
+    }
   );
   
   $scope.checkingVanco.finally(function(){
