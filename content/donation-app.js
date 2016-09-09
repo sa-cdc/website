@@ -13,9 +13,9 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
   $scope.checkingVanco.then(
     function(data){ $scope.vancoReachable = true; console.log('success: '+data);},
     function(error) {
-      $scope.vancoReachable = false;
+      //TODO Remove ! from false when debug complete
+      $scope.vancoReachable = !false;
       console.log('error: '+JSON.stringify(error));
-      //TODO Add logic to display unreachable page option
     }
   );
   
