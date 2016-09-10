@@ -116,13 +116,14 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   
   service.storeRef = function(ref) {
     console.log(ref);
-   return $http({
+    return $http.post('/static/scripts/vanco/storeRef.php', data);
+   /*return $http({
       type: 'GET',
       url: '/static/scripts/vanco/storeRef.php',
       crossDomain: false,
       data: {'ref':ref},
       dataType: 'jsonp'
-    });
+    });*/
   }
 
   service.notifyAdmin = function(data) {
