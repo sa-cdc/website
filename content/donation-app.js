@@ -57,24 +57,28 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
         //Only two variables needed from data[]
         $scope.vanco.sessionid = my_nvp_data.sessionid;
         $scope.vanco.nvpvar = my_nvp_data.nvpvar;
+        console.log(my_nvp_data.nvpvar);
+        console.log(my_nvp_data.sessionid);
 
         //Credit Card Specific Info
         if($scope.vanco.accounttype == "CC") {
           $scope.vanco.name_on_card = $scope.client.first +' '+$scope.client.last;
           $scope.vanco.sameccbillingaddrascust = 'Yes';
         }
-    //Customer Parameters
-    $scope.vanco.customername = $scope.client.last+', '+$scope.client.first;
+        
+        //Customer Parameters
+        $scope.vanco.customername = $scope.client.last+', '+$scope.client.first;
     
-    if($scope.client.fundid != 'none') {
-      $scope.vanco['fundid_'+$scope.client.fundid] = $scope.client.fundid;
-      $scope.vanco['fundamount_'+$scope.client.fundid] = $scope.vanco.amount;
-    }
-    //Transaction Parameters
-    $scope.vanco.startdate = '0000-00-00';
-    $scope.vanco.transactiontypecode = 'WEB';
-    return vancoAPI.sendWSNVP($scope.vanco);
-  });
+        if($scope.client.fundid != 'none') {
+          $scope.vanco['fundid_'+$scope.client.fundid] = $scope.client.fundid;
+          $scope.vanco['fundamount_'+$scope.client.fundid] = $scope.vanco.amount;
+        }
+        
+        //Transaction Parameters
+        $scope.vanco.startdate = '0000-00-00';
+        $scope.vanco.transactiontypecode = 'WEB';
+        return vancoAPI.sendWSNVP($scope.vanco);
+      });
   
   sendingTransaction.then(function(vanco_result) {
     // This is where we trigger the writing of the receipt!
