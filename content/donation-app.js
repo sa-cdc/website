@@ -55,11 +55,9 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
       var sendingTransaction = signingPaymentData.then(function(my_nvp_data) {
 
         //Only two variables needed from data[]
-        $scope.vanco.sessionid = my_nvp_data.sessionid;
-        $scope.vanco.nvpvar = my_nvp_data.nvpvar;
-        console.log(my_nvp_data);
-        console.log(my_nvp_data.sessionid);
-
+        $scope.vanco.sessionid = my_nvp_data.data.sessionid;
+        $scope.vanco.nvpvar = my_nvp_data.data.nvpvar;
+        
         //Credit Card Specific Info
         if($scope.vanco.accounttype == "CC") {
           $scope.vanco.name_on_card = $scope.client.first +' '+$scope.client.last;
