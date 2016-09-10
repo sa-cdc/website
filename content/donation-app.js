@@ -57,7 +57,7 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
         //Only two variables needed from data[]
         $scope.vanco.sessionid = my_nvp_data.sessionid;
         $scope.vanco.nvpvar = my_nvp_data.nvpvar;
-        console.log(my_nvp_data.nvpvar);
+        console.log(my_nvp_data);
         console.log(my_nvp_data.sessionid);
 
         //Credit Card Specific Info
