@@ -95,9 +95,9 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
 
     
   sendingTransaction.then(function(vanco_result){
+    console.log(vanco_result);
     vancoAPI.storeRef(vanco_result.data.transactionref)
     .then(function(){
-      console.log(vanco_result);
       var adminData = {};
       adminData['ref'] = vanco_result.data.transactionref;
       adminData['message'] = $scope.vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+$scope.vanco.amount+'\r\n'+vanco_result.data.visamctype+'\r\nConfirmation Number: '+vanco_result.data.transactionref+'\r\nAddress: '+$scope.vanco.customeraddress1+'\r\nPhone: '+$scope.vanco.customerphone+'\r\nEmail: '+$scope.vanco.customeremail;
@@ -115,6 +115,7 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   var service = {};
   
   service.storeRef = function(ref) {
+    console.log(ref);
    return $http({
       type: 'GET',
       url: '/static/scripts/vanco/storeRef.php',
