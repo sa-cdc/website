@@ -84,25 +84,25 @@ donationApp.controller('mainController', function($scope, vancoAPI) {
         //"0001" : "General Operations",
         //"0002" : "Direct Patient Care",
         //"0003" : "Endowment Fund"-->
-        $scope.vanco.errorlist = vanco_result.errorlist;
-        $scope.vanco.startdate = vanco_result.startdate;
-        $scope.vanco.transactionref = vanco_result.transactionref;
-        $scope.vanco.visamctype = vanco_result.visamctype;
-        $scope.vanco.cardtype = vanco_result.cardtype;
-        $scope.vanco.last4 = vanco_result.last4;
+        $scope.vanco.errorlist = vanco_result.data.errorlist;
+        $scope.vanco.startdate = vanco_result.data.startdate;
+        $scope.vanco.transactionref = vanco_result.data.transactionref;
+        $scope.vanco.visamctype = vanco_result.data.visamctype;
+        $scope.vanco.cardtype = vanco_result.data.cardtype;
+        $scope.vanco.last4 = vanco_result.data.last4;
   });    
       
 
     
   sendingTransaction.then(function(vanco_result){
-    //vancoAPI.storeRef(vanco_result.data.transactionref)
-    //.then(function(){
+    vancoAPI.storeRef(vanco_result.data.transactionref)
+    .then(function(){
       console.log(vanco_result);
-    //  var adminData = {};
-    //  adminData['ref'] = vanco_result.data.transactionref;
-    //  adminData['message'] = $scope.vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+$scope.vanco.amount+'\r\n'+vanco_result.data.visamctype+'\r\nConfirmation Number: '+vanco_result.data.transactionref+'\r\nAddress: '+$scope.vanco.customeraddress1+'\r\nPhone: '+$scope.vanco.customerphone+'\r\nEmail: '+$scope.vanco.customeremail;
-    //  vancoAPI.notifyAdmin(adminData);
-    //});
+      var adminData = {};
+      adminData['ref'] = vanco_result.data.transactionref;
+      adminData['message'] = $scope.vanco.name_on_card+' has donated to the clinic.\r\nAmount: '+$scope.vanco.amount+'\r\n'+vanco_result.data.visamctype+'\r\nConfirmation Number: '+vanco_result.data.transactionref+'\r\nAddress: '+$scope.vanco.customeraddress1+'\r\nPhone: '+$scope.vanco.customerphone+'\r\nEmail: '+$scope.vanco.customeremail;
+      vancoAPI.notifyAdmin(adminData);
+    });
   });
     }
   };  
