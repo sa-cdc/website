@@ -116,7 +116,7 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   
   service.storeRef = function(ref) {
     console.log(ref);
-    return $http.post('/static/scripts/vanco/storeRef.php', data);
+    return $http.post('/static/scripts/vanco/storeRef.php', ref);
    /*return $http({
       type: 'GET',
       url: '/static/scripts/vanco/storeRef.php',
@@ -127,13 +127,14 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   }
 
   service.notifyAdmin = function(data) {
-    return $http({
+    return $http.post('/static/scripts/vanco/email.php', data);
+    /*return $http({
       type: 'GET',
       url: '/static/scripts/vanco/email.php',
       crossDomain: false,
       data: data,
       dataType: 'jsonp'
-    });
+    });*/
   }
 
   service.sendWSNVP = function(secureData, timeout) {
