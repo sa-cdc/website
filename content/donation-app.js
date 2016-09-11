@@ -115,8 +115,8 @@ donationApp.factory('vancoAPI', function($http, $httpParamSerializer){
   var service = {};
   
   service.storeRef = function(ref) {
-    console.log(ref);
-    return $http.post('/static/scripts/vanco/storeRef.php', ref);
+    console.log({ref: ref});
+    return $http.post('/static/scripts/vanco/storeRef.php', {ref: ref});
    /*return $http({
       type: 'GET',
       url: '/static/scripts/vanco/storeRef.php',
