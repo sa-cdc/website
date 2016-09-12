@@ -1,7 +1,10 @@
 <?php
+
+$post = file_get_contents('php://input');
+
 if(!ctype_digit($_POST['ref'])) {
   header('Content-Type: application/json');
-  $array = ["status" => "invalid data wrong", "ref" => $_POST['ref']];
+  $array = ["status" => "invalid data wrong", "ref" => $post;
   echo $_POST['callback'] . '('.json_encode($array).')';
   return;
 }
