@@ -1,10 +1,11 @@
 <?php
 
 $post = file_get_contents('php://input');
-$post = json_decode($post);
+//$post = json_decode($post);
 
 header('Content-Type: application/json');
-
+echo $post;
+/*
 if($post['ref'] == null) {
   echo json_encode(["status" => "no data"]);
   return;
@@ -30,5 +31,5 @@ $handle = fopen("../../../../$ref", "w");
 fclose($handle);
 echo json_encode(["status" => "success"]);
 return;
-
+*/
 ?>
