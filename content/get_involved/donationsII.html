@@ -360,10 +360,10 @@ tags:
       <p>Donation Date: {{ vanco.startdate }}</p>
       <p>Confirmation: {{ vanco.transactionref }}</p>
       <p nf-if="vanco.cardtype">Payment Type: {{ vanco.visamctype }} {{vanco.cardtype}}</p>
-      <p>Account Last Four: {{ last4 }}</p>
+      <p>Account Last Four: {{ vanco.last4 }}</p>
     
 
-    <div>
+    <div ng-show="vanco.errorlist">
       <p ng-repeat="error in vanco.errorlist">
         <li> errorCodes[{{error}}] </li>
       </p>
