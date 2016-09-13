@@ -1,20 +1,29 @@
 <?php
 
 $post = file_get_contents('php://input');
-
-if(!ctype_digit($_POST['ref'])) {
+$post = json_decode($post);
+if($post['ref'] == null) {
   header('Content-Type: application/json');
-  $array = ["status" => "invalid data wrong", "ref" => $post];
-  echo $_POST['callback'] . '('.json_encode($array).')';
+  $array = ["status" => "no data"];
+  echo json_encode($array);
+  return;
+} else {
+  $ref = $post['ref'];
+}
+
+if(!ctype_digit($ref)) {
+  header('Content-Type: application/json');
+  $array = ["status" => "invalid data", "ref" => $ref];
+  echo json_encode($array);
   return;
 }
 
-$ref = (int)$_POST['ref'];
+$ref = (int)$ref;
 
 if($ref <= 0) {
   header('Content-Type: application/json'); 
-  $array = ["status" => "invalid < 0", "ref" => $_POST['ref']];
-  echo $_POST['callback'] . '('.json_encode($array).')'.$_POST['ref'];
+  $array = ["status" => "reference < 0", "ref" => $ref];
+  echo json_encode($array);
   return;
 }
 
@@ -22,6 +31,6 @@ $handle = fopen("../../../../$ref", "w");
 fclose($handle);
 $array = ["status" => "success"];
 header('Content-Type: application/json');
-echo $_POST['callback'] . '('.json_encode($array).')';
+echo json_encode($array);
 return;
 ?> 
