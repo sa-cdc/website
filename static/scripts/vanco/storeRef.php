@@ -4,8 +4,8 @@ $post = file_get_contents('php://input');
 $post = json_decode($post);
 
 header('Content-Type: application/json');
-echo json_encode($post);
-/*
+
+
 if($post['ref'] == null) {
   echo json_encode(["status" => "no data"]);
   return;
@@ -14,7 +14,7 @@ if($post['ref'] == null) {
   echo json_encode($post);
   return;
 }
-
+/*
 if(!ctype_digit($ref)) {
   echo json_encode(["status" => "invalid data", "ref" => $ref]);
   return;
