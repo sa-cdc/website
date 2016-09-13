@@ -11,10 +11,8 @@ if($data == null) {
   return;
 } else {
   $ref = $data['ref'];
-  echo json_encode(["status" => $ref]);
-  return;
 }
-/*
+
 if(!ctype_digit($ref)) {
   echo json_encode(["status" => "invalid data", "ref" => $ref]);
   return;
@@ -31,5 +29,5 @@ $handle = fopen("../../../../$ref", "w");
 fclose($handle);
 echo json_encode(["status" => "success"]);
 return;
-*/
+
 ?>
