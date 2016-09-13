@@ -6,12 +6,12 @@ $post = json_decode($post);
 header('Content-Type: application/json');
 
 
-if($post['ref'] == null) {
+if($post == null) {
   echo json_encode(["status" => "no data"]);
   return;
 } else {
-  $ref = $post['ref'];
-  echo json_encode($post);
+  //$ref = $post['ref'];
+  echo json_encode(["status" => "data"]);
   return;
 }
 /*
