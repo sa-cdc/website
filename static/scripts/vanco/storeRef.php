@@ -1,17 +1,17 @@
 <?php
 
 $post = file_get_contents('php://input');
-$post = json_decode($post);
+$data = json_decode($post, true);
 
 header('Content-Type: application/json');
 
 
-if($post == null) {
+if($data == null) {
   echo json_encode(["status" => "no data"]);
   return;
 } else {
-  //$ref = $post['ref'];
-  echo json_encode(["status" => $post]);
+  //$ref = $data['ref'];
+  echo json_encode(["status" => $data]);
   return;
 }
 /*
