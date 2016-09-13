@@ -10,8 +10,11 @@ require_once('Mail.php');
    
 $recipients = 'mfsairpwr@gmail.com';
 
-$message = $_GET['message'];
-$ref = $_GET['ref'];
+$post = file_get_contents('php://input');
+$data = json_decode($post, true);
+
+$message = $data['message'];
+$ref = $data['ref'];
 //TODO: Validate this data - never trust user input
 
 //----
