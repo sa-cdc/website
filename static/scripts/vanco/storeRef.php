@@ -10,8 +10,8 @@ if($data == null) {
   echo json_encode(["status" => "no data"]);
   return;
 } else {
-  //$ref = $data['ref'];
-  echo json_encode(["status" => $data]);
+  $ref = $data['ref'];
+  echo json_encode(["status" => $ref]);
   return;
 }
 /*
