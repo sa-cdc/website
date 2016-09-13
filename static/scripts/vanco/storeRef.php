@@ -2,35 +2,38 @@
 
 $post = file_get_contents('php://input');
 $post = json_decode($post);
+
 if($post['ref'] == null) {
+  $array = json_encode(["status" => "no data"]);
   header('Content-Type: application/json');
-  $array = ["status" => "no data"];
-  echo json_encode($array);
+  echo $array;
   return;
 } else {
   $ref = $post['ref'];
+  echo $ref;
 }
 
 if(!ctype_digit($ref)) {
   header('Content-Type: application/json');
-  $array = ["status" => "invalid data", "ref" => $ref];
-  echo json_encode($array);
+  $array = json_encode(["status" => "invalid data", "ref" => $ref]);
+  echo $array;
   return;
 }
 
 $ref = (int)$ref;
 
 if($ref <= 0) {
+  $array = json_encode(["status" => "reference < 0", "ref" => $ref]);
   header('Content-Type: application/json'); 
-  $array = ["status" => "reference < 0", "ref" => $ref];
-  echo json_encode($array);
+  echo $array;
   return;
 }
 
 $handle = fopen("../../../../$ref", "w");
 fclose($handle);
-$array = ["status" => "success"];
+$array = json_encode(["status" => "success"]);
 header('Content-Type: application/json');
-echo json_encode($array);
+echo $array;
 return;
+
 ?> 
