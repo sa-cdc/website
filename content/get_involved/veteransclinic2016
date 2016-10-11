@@ -1,1 +1,12 @@
-PLace holder
+---
+title: 2016 Veterans Clinic
+group: none
+precedence: 1
+tags:
+    - no-link
+---
+
+<div class="bs-docs-featurette">
+  <iframe src="https://www.picatic.com/events/widget/92933?utm_source=promotion&utm_medium=widget&utm_campaign=92933&event_title=true&event_time=true&event_location=true&event_image=true&ticket_description=true&width=std" frameborder="0" style="display:block;height:417px;max-width:none;width:100%;"></iframe>
+</div>
+
