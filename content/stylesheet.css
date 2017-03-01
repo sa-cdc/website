@@ -456,9 +456,9 @@ h3.carousel {
   }
   .captionright {
     max-width: 250px;
-    top: 55px;
     right: auto;
     left: 400px;
+    bottom: 5px;
   }
   .captionsmallleft {
     opacity: 0;
@@ -511,9 +511,9 @@ h3.carousel {
   }
   .captionright {
     max-width: 450px;
-    top: 55px;
     right: 25px;
     left: 550px;
+    bottom: 5px;
   }
 
   .tinted {
@@ -535,8 +535,8 @@ h3.carousel {
   }
   .captionright {
     max-width: 450px;
-    top: 55px;
     right: auto;
     left: 650px;
+    bottom: 5px;
   }
 }
