@@ -458,7 +458,7 @@ h3.carousel {
     max-width: 250px;
     right: auto;
     left: 400px;
-    bottom: 5px;
+    bottom: 20%;
   }
   .captionsmallleft {
     opacity: 0;
