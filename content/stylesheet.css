@@ -182,7 +182,7 @@ footer {
 .captionright {
    right: 10px;
    left: auto;
-   top: auto;
+   top: 10px;
    max-width: 150px;
    border-radius: 5px;
    padding-bottom: 0px;
