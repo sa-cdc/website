@@ -182,7 +182,6 @@ footer {
 .captionright {
    right: 10px;
    left: auto;
-   top: 10px;
    max-width: 150px;
    border-radius: 5px;
    padding-bottom: 0px;
@@ -457,7 +456,7 @@ h3.carousel {
   }
   .captionright {
     max-width: 250px;
-    top: auto;
+    top: 55px;
     bottom: 20%;
     right: auto;
     left: 400px;
@@ -513,7 +512,7 @@ h3.carousel {
   }
   .captionright {
     max-width: 450px;
-    top: auto;
+    top: 55px;
     bottom: 20%;
     right: 25px;
     left: 550px;
